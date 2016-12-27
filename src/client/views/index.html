@@ -1,1 +1,33 @@
-<h1>Hello World!!</h1>
+<!DOCTYPE html>
+<html lang="en" data-ng-app="olh-config-bcbsa-shell">
+<head>
+    <meta charset="UTF-8">
+    <title>BCBSA Shell</title>
+
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.min.css" />
+    <!-- endbower -->
+
+    <!-- bower:js -->
+    <script src="../lib/jquery/dist/jquery.js"></script>
+    <script src="../lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../lib/angular/angular.js"></script>
+    <!-- endbower -->
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- endinject -->
+
+    <!-- inject:js -->
+    <script src="/js/app.js"></script>
+    <!-- endinject -->
+</head>
+<body>
+<div class="container-fluid" data-ng-init="hide = true">
+    <h1>Hello World!!</h1>
+    <section data-ng-show="hide">Hi</section>
+    <section data-ng-hide="hide">Hello</section>
+</div>
+</body>
+</html>

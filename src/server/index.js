@@ -17,7 +17,7 @@
 
 
     app.get('/', function (request, response) {
-        response.send('Hello World from BCBSA!!');
+        response.sendFile('index.html', {root: 'src/client/views/'});
     });
 
     app.listen(port, function (error) {
