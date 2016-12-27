@@ -1,7 +1,16 @@
 (function () {
     'use strict';
 
+    var cfg = require('config');
+
+    var build = {
+        root: '.build',
+        transpiled: '.transpiled'
+    };
+
+
     module.exports = {
+        module: cfg.app,
         files: {
             js: ['*.js', 'src/**/*.js']
         },
@@ -23,6 +32,26 @@
                 options: {
                     ignorePath: '/public/'
                 }
+            }
+        },
+        paths: {
+            test: './test',
+            src: {
+                js: './src/client/js/**/*.js',
+                templates: './src/client/views/**/*.html',
+                browserify: {
+                    entry: './' + build.transpiled + '/app.js'
+                }
+            },
+            dest: {
+                root: build.root,
+                js: build.root + '/' + cfg.app + '/js',
+                templates: build.root + '/templates',
+                transpiled: build.transpiled
+            },
+            publish: {
+                src: build.root + '**/*',
+                dest: '.publish'
             }
         }
     };

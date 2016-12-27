@@ -1,5 +1,9 @@
 .idea
 
+.build
+
+.transpiled
+
 public/lib
 
 node_modules
