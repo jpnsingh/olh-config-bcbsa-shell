@@ -1,0 +1,22 @@
+{
+  "name": "olh-config-bcbsa-shell",
+  "version": "1.0.0",
+  "description": "Configuration Service for BCBSA Shell Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpnsingh/olh-config-bcbsa-shell.git"
+  },
+  "keywords": [
+    "bcbsa"
+  ],
+  "author": "jpnsingh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpnsingh/olh-config-bcbsa-shell/issues"
+  },
+  "homepage": "https://github.com/jpnsingh/olh-config-bcbsa-shell#readme"
+}
