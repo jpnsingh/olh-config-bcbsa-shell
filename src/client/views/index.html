@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="olh-config-bcbsa-shell">
+<html lang="en" data-ng-app="bcbsa-shell">
 <head>
     <meta charset="UTF-8">
     <title>BCBSA Shell</title>
@@ -20,14 +20,14 @@
     <!-- endinject -->
 
     <!-- inject:js -->
-    <script src="/js/app.js"></script>
+    <script src="/bcbsa-shell/js/bcbsa-shell.js"></script>
+    <script src="/bcbsa-shell/js/bcbsa-shell.tpl.js"></script>
     <!-- endinject -->
 </head>
 <body>
-<div class="container-fluid" data-ng-init="hide = true">
+<section class="container-fluid" data-ng-controller="HelloWorldCtrl as helloWorldCtrl">
     <h1>Hello World!!</h1>
-    <section data-ng-show="hide">Hi</section>
-    <section data-ng-hide="hide">Hello</section>
-</div>
+    <strong>{{helloWorldCtrl.message}}</strong>
+</section>
 </body>
 </html>

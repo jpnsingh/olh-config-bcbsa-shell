@@ -1,5 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('olh-config-bcbsa-shell', []);
+    module.exports = angular.module('bcbsa-shell', [
+        require('./shared').name
+    ]);
 })();
