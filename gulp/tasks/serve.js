@@ -5,7 +5,7 @@
         nodemon = require('gulp-nodemon'),
         config = require('../config');
 
-    gulp.task('serve', ['lint', 'inject'], function () {
+    gulp.task('serve', ['inject', 'build'], function () {
         var options = {
             script: './src/server/index.js',
             delayTime: 1,
