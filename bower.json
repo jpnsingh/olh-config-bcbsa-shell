@@ -1,0 +1,20 @@
+{
+  "name": "olh-config-bcbsa-shell",
+  "description": "Configuration Service for BCBSA Shell Application",
+  "main": "app.js",
+  "authors": [
+    "jpnsingh"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "bcbsa"
+  ],
+  "homepage": "https://github.com/jpnsingh/olh-config-bcbsa-shell",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
