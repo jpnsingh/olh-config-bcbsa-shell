@@ -26,7 +26,7 @@
 
             $urlRouterProvider.when('', '/');
 
-            $locationProvider.html5Mode(true).hashPrefix('!');
+            $locationProvider.hashPrefix('');
 
             $stateProvider
                 .state(root)
