@@ -1,8 +1,6 @@
 (function () {
     'use strict';
 
-    'use strict';
-
     var config = require('../config'),
         gulp = require('gulp'),
         templateCache = require('gulp-angular-templatecache'),

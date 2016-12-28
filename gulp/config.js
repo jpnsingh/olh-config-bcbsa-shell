@@ -2,10 +2,10 @@
     'use strict';
 
     var cfg = require('config');
-    var build = {
-        root: '.build',
-        transpiled: '.transpiled'
-    };
+    var build = {};
+    build.root = '.build';
+    build.webPath = build.root + '/web';
+    build.transpiled = '.transpiled';
 
     module.exports = {
         module: cfg.app,
@@ -25,10 +25,10 @@
             gulp: {
                 src: {
                     css: './public/css/*.css',
-                    js: './.build/' + cfg.app + '/js/*.js'
+                    js: './' + build.webPath + '/js/*.js'
                 },
                 options: {
-                    ignorePath: ['/public/', '/.build/']
+                    ignorePath: ['/public/', '/.build/web']
                 }
             }
         },
@@ -43,8 +43,8 @@
             },
             dest: {
                 root: build.root,
-                js: build.root + '/' + cfg.app + '/js',
-                templates: build.root + '/templates',
+                js: build.webPath + '/js',
+                templates: build.webPath + '/templates',
                 transpiled: build.transpiled
             },
             publish: {
