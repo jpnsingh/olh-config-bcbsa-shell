@@ -29,6 +29,10 @@ Install instructions
 7. run `gulp serve` or `gulp` to start the server and you'll see following in the terminal
 
     'Server running on port: 5000'
+    
+8. Open browser and launch the application by going to
+
+    `http://localhost:5000`
 
 
     
