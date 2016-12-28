@@ -14,7 +14,7 @@
                 .pipe(minifyHTML({empty: true, spare: true, quotes: true}))
                 .pipe(templateCache(config.module + '.tpl.js', {
                     standalone: true,
-                    root: 'templates/' + config.module + '/',
+                    root: 'templates/',
                     //moduleSystem: 'Browserify',
                     module: config.module + '-templates'
                 }))

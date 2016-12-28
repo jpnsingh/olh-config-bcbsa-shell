@@ -9,7 +9,7 @@
             httpBackend;
 
         beforeEach(function () {
-            injector = angular.injector(['bcbsa-shell', 'ngMockE2E']);
+            injector = angular.injector(['bcbsa-shell', 'bcbsa-shell-templates']);
 
             injector.invoke(function ($rootScope, $compile, $httpBackend) {
                 scope = $rootScope.$new();
@@ -19,8 +19,6 @@
         });
 
         xit('should render the generic navigational bar for the application', function () {
-            httpBackend.whenGET('templates/partials/navbar.html').passThrough();
-
             element = compiler('<data-bcbsa-nav></data-bcbsa-nav>')(scope);
             scope.$apply();
         });

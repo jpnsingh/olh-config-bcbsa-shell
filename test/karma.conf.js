@@ -28,14 +28,27 @@
                 // Tests
                 'test/client/spec/js/**/*.js',
 
-                {pattern: 'src/client/views/**/*.html', included: false, served: true}
+                'src/client/views/**/*.html',
+
+                // {pattern: 'src/client/views/**/*.html', included: false, served: true}
             ],
 
             exclude: [],
 
             preprocessors: {
                 'src/client/js/**/*.js': ['browserify'],
-                'test/client/spec/js/**/*.js': ['browserify']
+                'test/client/spec/js/**/*.js': ['browserify'],
+                'src/client/views/**/*.html': ['ng-html2js']
+            },
+
+            ngHtml2JsPreprocessor: {
+                // If your build process changes the path to your templates,
+                // use stripPrefix and prependPrefix to adjust it.
+                // stripPrefix: ".build/web/",
+                // prependPrefix: ".build/web/",
+
+                // the name of the Angular module to create
+                moduleName: "bcbsa-shell-templates"
             },
 
             reporters: [
@@ -52,11 +65,10 @@
 
             autoWatch: false,
 
-            // browsers: ['Chrome'],
             browsers: ['PhantomJS'],
 
             proxies: {
-                '/olh-config-bcbsa-shell': 'http://localhost:8084/base'
+                '/.build': 'http://localhost:8084/base'
             },
 
             browserNoActivityTimeout: 10000,
