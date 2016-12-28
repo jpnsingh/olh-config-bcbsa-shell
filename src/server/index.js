@@ -7,7 +7,6 @@
         app = express(),
         port = 5000;
 
-    app.use(express.static('public'));
     app.use(express.static('.build/web'));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
