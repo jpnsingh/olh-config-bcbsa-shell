@@ -8,14 +8,13 @@
         port = 5000;
 
     app.use(express.static('public'));
-    app.use(express.static('.build'));
+    app.use(express.static('.build/web'));
     app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded());
+    app.use(bodyParser.urlencoded({extended: true}));
     app.use(cookieParser());
 
     app.set('views', './src/client/views');
     app.set('view engine', 'html');
-
 
     app.get('/', function (request, response) {
         response.sendFile('index.html', {root: 'src/client/views/'});

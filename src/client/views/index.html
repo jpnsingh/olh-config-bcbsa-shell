@@ -13,6 +13,7 @@
     <script src="../lib/jquery/dist/jquery.js"></script>
     <script src="../lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="../lib/angular/angular.js"></script>
+    <script src="../lib/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
 
     <!-- inject:css -->
@@ -20,14 +21,15 @@
     <!-- endinject -->
 
     <!-- inject:js -->
-    <script src="/bcbsa-shell/js/bcbsa-shell.js"></script>
-    <script src="/bcbsa-shell/js/bcbsa-shell.tpl.js"></script>
+    <script src="/js/bcbsa-shell.js"></script>
+    <script src="/js/bcbsa-shell.tpl.js"></script>
     <!-- endinject -->
 </head>
 <body>
-<section class="container-fluid" data-ng-controller="HelloWorldCtrl as helloWorldCtrl">
-    <h1>Hello World!!</h1>
-    <strong>{{helloWorldCtrl.message}}</strong>
-</section>
+<data-bcbsa-nav></data-bcbsa-nav>
+
+<div class="container">
+    <data-ui-view></data-ui-view>
+</div>
 </body>
 </html>

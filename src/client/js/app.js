@@ -2,6 +2,9 @@
     'use strict';
 
     module.exports = angular.module('bcbsa-shell', [
-        require('./shared').name
+        'ui.router',
+        require('./shared').name,
+        require('./nav').name,
+        require('./states').name
     ]);
 })();
