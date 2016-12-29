@@ -4,11 +4,11 @@
     var gulp = require('gulp'),
         jshint = require('gulp-jshint'),
         jscs = require('gulp-jscs'),
-        config = require('../config');
+        gulpConfig = require('../config');
 
     gulp.task('lint', function () {
         return gulp
-            .src(config.files.js)
+            .src(gulpConfig.files.js)
             .pipe(jshint())
             .pipe(jshint.reporter('jshint-stylish', {verbose: true}))
             .pipe(jscs());

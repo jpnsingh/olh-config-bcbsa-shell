@@ -3,11 +3,11 @@
 
     var gulp = require('gulp'),
         open = require('gulp-open'),
-        config = require('../config');
+        config = require('config');
 
     gulp.task('open', function () {
         gulp
             .src('src/client/views/index.html')
-            .pipe(open({uri: 'http://localhost:5000'}));
+            .pipe(open({uri: config.webUrl}));
     });
 })();

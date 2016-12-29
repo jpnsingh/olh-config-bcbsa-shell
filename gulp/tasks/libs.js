@@ -2,12 +2,12 @@
     'use strict';
 
     var gulp = require('gulp'),
-        config = require('../config'),
+        gulpConfig = require('../config'),
         changed = require('gulp-changed');
 
     module.exports = gulp.task('libs', function () {
-        return gulp.src(config.paths.src.libs)
-            .pipe(changed(config.paths.dest.libs))
-            .pipe(gulp.dest(config.paths.dest.libs));
+        return gulp.src(gulpConfig.paths.src.libs)
+            .pipe(changed(gulpConfig.paths.dest.libs))
+            .pipe(gulp.dest(gulpConfig.paths.dest.libs));
     });
 })();

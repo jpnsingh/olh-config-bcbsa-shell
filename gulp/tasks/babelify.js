@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    var config = require('../config'),
+    var gulpConfig = require('../config'),
         gulp = require('gulp'),
         babel = require('gulp-babel');
 
     module.exports = gulp.task('babelify', function () {
-        return gulp.src(config.paths.src.js)
+        return gulp.src(gulpConfig.paths.src.js)
             .pipe(babel())
-            .pipe(gulp.dest(config.paths.dest.transpiled));
+            .pipe(gulp.dest(gulpConfig.paths.dest.transpiled));
     });
 })();

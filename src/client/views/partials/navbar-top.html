@@ -1,20 +1,28 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
-        <section class="navbar-header">
+        <header class="navbar-header">
             <a class="navbar-brand" data-ui-sref="root">
                 <strong>BCBSA</strong>
             </a>
-        </section>
-        <section class="navbar-right" data-ng-if="navBarCtrl.signedIn">
+        </header>
+
+        <section class="navbar-left" data-ng-if="navBarCtrl.signedIn">
             <ul class="nav navbar-nav">
                 <li><a data-ui-sref="configuration">Configuration</a></li>
             </ul>
-            <p class="navbar-text">Signed in as JPN</p>
         </section>
+
+        <section class="navbar-right" data-ng-if="navBarCtrl.signedIn">
+            <p class="navbar-text">Signed in as JPN</p>
+            <ul class="nav navbar-nav">
+                <li><a data-ui-sref="about">About</a></li>
+                <li><a data-ui-sref="help">Help</a></li>
+            </ul>
+        </section>
+
         <button type="button"
-                class="btn btn-primary btn-xs navbar-btn navbar-right"
-                data-ng-if="!navBarCtrl.signedIn">
-            Sign In
+                class="btn btn-primary btn-sm navbar-btn navbar-right"
+                data-ng-if="!navBarCtrl.signedIn">Sign In
         </button>
     </div>
 </nav>
