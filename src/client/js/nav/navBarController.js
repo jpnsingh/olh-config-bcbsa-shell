@@ -6,5 +6,7 @@
             var vm = this;
 
             vm.signedIn = true;
+
+            vm.copyrightYear = new Date().getFullYear();
         });
 })();
