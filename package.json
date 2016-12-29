@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "gulp test",
-    "start": "gulp serve"
+    "start": "gulp serve",
+    "postinstall": "bower install && gulp build"
   },
   "repository": {
     "type": "git",
