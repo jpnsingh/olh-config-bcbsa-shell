@@ -8,11 +8,6 @@
                     url: '/',
                     templateUrl: 'templates/partials/root.html'
                 },
-                home = {
-                    name: 'home',
-                    url: '/home',
-                    templateUrl: 'templates/partials/home.html'
-                },
                 about = {
                     name: 'about',
                     url: '/about',
@@ -24,6 +19,11 @@
                     templateUrl: 'templates/partials/configuration.html',
                     controller: 'ConfigCtrl',
                     controllerAs: 'configCtrl'
+                },
+                help = {
+                    name: 'help',
+                    url: '/help',
+                    templateUrl: 'templates/partials/help.html'
                 },
                 notFound = {
                     name: 'notFound',
@@ -37,8 +37,8 @@
 
             $stateProvider
                 .state(root)
-                .state(home)
                 .state(about)
-                .state(configuration);
+                .state(configuration)
+                .state(help);
         });
 })();

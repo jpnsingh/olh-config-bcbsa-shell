@@ -4,13 +4,13 @@
     var gulp = require('gulp'),
         wiredep = require('wiredep').stream,
         gulpInject = require('gulp-inject'),
-        config = require('../config');
+        gulpConfig = require('../config');
 
     gulp.task('inject', function () {
-        return gulp.src(config.inject.src)
-            .pipe(wiredep(config.inject.wiredep.options))
-            .pipe(gulpInject(gulp.src([config.inject.gulp.src.css, config.inject.gulp.src.js], {read: false}),
-                config.inject.gulp.options))
-            .pipe(gulp.dest(config.inject.dest));
+        return gulp.src(gulpConfig.inject.src)
+            .pipe(wiredep(gulpConfig.inject.wiredep.options))
+            .pipe(gulpInject(gulp.src([gulpConfig.inject.gulp.src.css, gulpConfig.inject.gulp.src.js], {read: false}),
+                gulpConfig.inject.gulp.options))
+            .pipe(gulp.dest(gulpConfig.inject.dest));
     });
 })();

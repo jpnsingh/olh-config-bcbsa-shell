@@ -5,7 +5,7 @@
         bodyParser = require('body-parser'),
         cookieParser = require('cookie-parser'),
         app = express(),
-        port = 5000;
+        port = process.env.PORT || 3000;
 
     app.use(express.static('.build/web'));
     app.use(bodyParser.json());

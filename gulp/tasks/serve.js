@@ -3,16 +3,17 @@
 
     var gulp = require('gulp'),
         nodemon = require('gulp-nodemon'),
-        config = require('../config');
+        config = require('config'),
+        gulpConfig = require('../config');
 
     gulp.task('serve', ['build', 'inject', 'open'], function () {
         var options = {
             script: './src/server/index.js',
             delayTime: 1,
             env: {
-                'PORT': 3000
+                'PORT': config.port
             },
-            watch: config.files.js
+            watch: [gulpConfig.files.js, 'src/**/*.html']
         };
 
         return nodemon(options).on('restart', function () {

@@ -1,14 +1,14 @@
 (function () {
     'use strict';
 
-    var cfg = require('config');
+    var config = require('config');
     var build = {};
     build.root = '.build';
     build.webPath = build.root + '/web';
     build.transpiled = '.transpiled';
 
     module.exports = {
-        module: cfg.app,
+        module: config.app,
         files: {
             js: ['src/**/*.js']
         },
