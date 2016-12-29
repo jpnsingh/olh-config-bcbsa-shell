@@ -9,9 +9,12 @@
     "public/lib",
     "libs"
   ],
+  "engines": {
+    "node": "6.3.0"
+  },
   "scripts": {
     "test": "gulp test",
-    "start": "gulp serve",
+    "start": "node ./src/server/index.js",
     "postinstall": "bower install && gulp build"
   },
   "repository": {
@@ -19,7 +22,11 @@
     "url": "git+https://github.com/jpnsingh/olh-config-bcbsa-shell.git"
   },
   "keywords": [
-    "bcbsa"
+    "bcbsa",
+    "node",
+    "bower",
+    "express",
+    "heroku"
   ],
   "author": "jpnsingh",
   "license": "ISC",
