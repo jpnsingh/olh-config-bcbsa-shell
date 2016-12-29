@@ -3,6 +3,7 @@
 
     module.exports = angular.module('bcbsa-shell.navigation', [
         require('./navBarController').name,
-        require('./bcbsaNavDirective').name
+        require('./navbarTopDirective').name,
+        require('./navbarBottomDirective').name
     ]);
 })();
