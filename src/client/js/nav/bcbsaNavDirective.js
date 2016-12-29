@@ -7,9 +7,8 @@
                 restrict: 'E',
                 replace: true,
                 templateUrl: 'templates/partials/navbar.html',
-                link: function (scope) {
-                    scope.state = true;
-                }
+                controller: 'NavBarCtrl',
+                controllerAs: 'navBarCtrl'
             };
         });
 })();

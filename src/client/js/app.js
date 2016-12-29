@@ -5,6 +5,7 @@
         'ui.router',
         require('./shared').name,
         require('./nav').name,
+        require('./configuration').name,
         require('./states').name
     ]);
 })();

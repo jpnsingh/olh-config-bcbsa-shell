@@ -1,0 +1,26 @@
+<section>
+    <header>
+        <h2>Shell Configuration</h2>
+    </header>
+
+    <main>
+        <div class="row">
+            <div class="col-xs-12">
+                Plan Setup
+                <div class="text-center" data-ng-if="configCtrl.loading">
+                    <strong><i class="fa fa-spinner fa-pulse fa-lg"></i> Loading... </strong>
+                </div>
+                <div data-ng-if="!configCtrl.loading">
+                    {{configCtrl.config.planSetup.branding.header}}
+                    <label class="">
+                        <input type="text" class="form-control" data-ng-model="configCtrl.config.planSetup.branding.planInfo.title">
+                    </label>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <strong>Footer</strong>
+    </footer>
+</section>

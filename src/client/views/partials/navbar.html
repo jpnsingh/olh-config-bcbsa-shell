@@ -5,12 +5,18 @@
                 <strong>BCBSA</strong>
             </a>
         </section>
-        <section class="navbar-right">
+        <section class="navbar-right" data-ng-if="navBarCtrl.signedIn">
             <ul class="nav navbar-nav">
                 <li><a data-ui-sref="home">Home</a></li>
                 <li><a data-ui-sref="about">About</a></li>
+                <li><a data-ui-sref="configuration">Configuration</a></li>
             </ul>
-            <button type="button" class="btn btn-primary btn-xs navbar-btn">Sign in</button>
+            <p class="navbar-text">Signed in as JPN</p>
         </section>
+        <button type="button"
+                class="btn btn-primary btn-xs navbar-btn navbar-right"
+                data-ng-if="!navBarCtrl.signedIn">
+            Sign In
+        </button>
     </div>
 </nav>

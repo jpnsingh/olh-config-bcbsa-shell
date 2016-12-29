@@ -18,6 +18,13 @@
                     url: '/about',
                     templateUrl: 'templates/partials/about.html'
                 },
+                configuration = {
+                    name: 'configuration',
+                    url: '/configuration',
+                    templateUrl: 'templates/partials/configuration.html',
+                    controller: 'ConfigCtrl',
+                    controllerAs: 'configCtrl'
+                },
                 notFound = {
                     name: 'notFound',
                     url: '/404',
@@ -31,6 +38,7 @@
             $stateProvider
                 .state(root)
                 .state(home)
-                .state(about);
+                .state(about)
+                .state(configuration);
         });
 })();
