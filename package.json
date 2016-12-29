@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "Configuration Service for BCBSA Shell Application",
   "main": "app.js",
+  "cacheDirectories": [
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "libs"
+  ],
   "scripts": {
     "test": "gulp test",
     "start": "gulp serve",
