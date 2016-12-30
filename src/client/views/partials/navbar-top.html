@@ -1,14 +1,14 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <header class="navbar-header">
-            <a class="navbar-brand" data-ui-sref="{{navBarCtrl.nav.header.stateRef}}" data-ui-sref-active="active">
-                <strong>{{navBarCtrl.nav.header.label}}</strong>
+            <a class="navbar-brand" data-ui-sref="{{navBarCtrl.nav.top.header.stateRef}}" data-ui-sref-active="active">
+                <strong>{{navBarCtrl.nav.top.header.label}}</strong>
             </a>
         </header>
 
         <section class="navbar-left" data-ng-if="navBarCtrl.signedIn">
             <ul class="nav navbar-nav">
-                <li data-ng-repeat="link in navBarCtrl.nav.links.left" data-ui-sref-active="active">
+                <li data-ng-repeat="link in navBarCtrl.nav.top.links.left" data-ui-sref-active="active">
                     <a data-ui-sref="{{link.stateRef}}" title="{{link.label}}">{{link.label}}</a>
                 </li>
             </ul>
@@ -17,7 +17,7 @@
         <section class="navbar-right" data-ng-if="navBarCtrl.signedIn">
             <p class="navbar-text">Signed in as Admin</p>
             <ul class="nav navbar-nav">
-                <li data-ng-repeat="link in navBarCtrl.nav.links.right" data-ui-sref-active="active">
+                <li data-ng-repeat="link in navBarCtrl.nav.top.links.right" data-ui-sref-active="active">
                     <a data-ui-sref="{{link.stateRef}}" title="{{link.label}}">
                         <span data-ng-if="!link.icon">{{link.label}}</span>
                         <i data-ng-if="link.icon" data-ng-class="link.icon.cls"></i>
