@@ -1,5 +1,5 @@
 {
   "app": "bcbsa-shell",
   "port": 3000,
-  "webUrl": "http://localhost:3000"
+  "webUrl": "https://bcbsa-shell.herokuapp.com"
 }
