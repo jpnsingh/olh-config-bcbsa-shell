@@ -16,7 +16,7 @@
                 configuration = {
                     name: 'configuration',
                     url: '/configuration',
-                    templateUrl: 'templates/partials/configuration.html',
+                    templateUrl: 'templates/partials/configuration/configuration.html',
                     controller: 'ConfigCtrl',
                     controllerAs: 'configCtrl'
                 },

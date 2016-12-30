@@ -6,7 +6,7 @@
             return {
                 restrict: 'E',
                 replace: true,
-                templateUrl: 'templates/partials/navbar-top.html',
+                templateUrl: 'templates/partials/nav/navbar-top.html',
                 controller: 'NavBarCtrl',
                 controllerAs: 'navBarCtrl'
             };
