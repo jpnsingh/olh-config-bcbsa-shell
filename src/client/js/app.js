@@ -6,6 +6,7 @@
         require('./shared').name,
         require('./nav').name,
         require('./configuration').name,
+        require('./settings').name,
         require('./states').name
     ]);
 })();
