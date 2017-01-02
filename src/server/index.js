@@ -4,6 +4,8 @@
     var express = require('express'),
         bodyParser = require('body-parser'),
         cookieParser = require('cookie-parser'),
+        passport = require('passport'),
+        session = require('express-session'),
         app = express(),
         port = process.env.PORT || 3000;
 
@@ -11,15 +13,16 @@
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(cookieParser());
+    app.use(session({secret: 'bcbsa-shell'}));
+
+    require('./config/passport')(app);
 
     app.set('views', './src/client/views');
     app.set('view engine', 'html');
 
-    app.get('/', function (request, response) {
-        response.sendFile('index.html', {root: 'src/client/views/'});
-    });
+    require('./routes')(app);
 
     app.listen(port, function (error) {
-        console.log('Server running on port: ' + port);
+        console.log('App now running on port: ' + port);
     });
 })();

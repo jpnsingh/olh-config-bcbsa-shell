@@ -3,10 +3,17 @@
 
     module.exports = angular.module('bcbsa-shell.states', [])
         .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+            var resolveFn = {
+                signedIn: function () {
+                    return console.log('test');
+                }
+            };
+
             var root = {
                     name: 'root',
                     url: '/',
-                    templateUrl: 'templates/partials/root.html'
+                    templateUrl: 'templates/partials/root.html',
+                    resolve: resolveFn
                 },
                 about = {
                     name: 'about',
@@ -40,5 +47,8 @@
                 .state(about)
                 .state(configuration)
                 .state(help);
+        }).run(function (AuthService) {
+            console.log('App run');
+            console.log(AuthService.getSignedIn());
         });
 })();
