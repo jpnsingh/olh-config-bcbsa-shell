@@ -4,6 +4,11 @@
     describe('NavBarCtrl', function () {
         var injector,
             scope,
+            state = {
+                go: function () {
+
+                }
+            },
             controller;
 
         beforeEach(function () {
@@ -11,12 +16,12 @@
 
             injector.invoke(function ($rootScope, $controller) {
                 scope = $rootScope.$new();
-                controller = $controller('NavBarCtrl as vm', {$scope: scope});
+                controller = $controller('NavBarCtrl as vm', {$scope: scope, $state: state});
             });
         });
 
-        it('should initialize the controller and set loggedIn accordingly', function () {
-            assert.equal(controller.loggedIn, true);
+        it('should initialize the controller and set loggedIn accordingly with no sessionStorage', function () {
+            assert.equal(controller.loggedIn, false);
         });
 
         it('should initialize the top nav accordingly', function () {

@@ -3,8 +3,8 @@
 
     module.exports = angular.module('bcbsa-shell.navigation.controllers.navBarController', [])
         .controller('NavBarCtrl', [
-            '$rootScope', '$state', 'AuthService',
-            function ($rootScope, $state, AuthService) {
+            '$rootScope', '$state',
+            function ($rootScope, $state) {
                 var vm = this;
 
                 vm.user = sessionStorage.user ? JSON.parse(sessionStorage.user) : false;

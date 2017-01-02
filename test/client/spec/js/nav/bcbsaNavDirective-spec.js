@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    describe('BCSB Nav Directive', function () {
+    xdescribe('BCSB Nav Directive', function () {
         var injector,
             element,
             scope,
@@ -18,7 +18,7 @@
             });
         });
 
-        xit('should render the generic navigational bar for the application', function () {
+        it('should render the generic navigational bar for the application', function () {
             element = compiler('<data-bcbsa-nav></data-bcbsa-nav>')(scope);
             scope.$apply();
         });
