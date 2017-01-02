@@ -19,7 +19,7 @@
         </section>
 
         <section class="navbar-right" data-ng-if="navBarCtrl.loggedIn">
-            <p class="navbar-text">Signed in as Admin</p>
+            <p class="navbar-text">Signed in as {{navBarCtrl.user.username}}</p>
             <ul class="nav navbar-nav">
                 <li data-ng-repeat="link in navBarCtrl.nav.top.links.right" data-ui-sref-active="active">
                     <a data-ui-sref="{{link.stateRef}}" title="{{link.label}}">
