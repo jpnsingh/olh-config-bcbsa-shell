@@ -5,7 +5,9 @@
         var nav = {
                 name: 'nav',
                 abstract: true,
-                templateUrl: 'templates/partials/nav/navbar.html'
+                templateUrl: 'templates/partials/nav/navbar.html',
+                controller: 'NavBarCtrl',
+                controllerAs: 'navBarCtrl'
             },
             nonav = {
                 name: 'nonav',

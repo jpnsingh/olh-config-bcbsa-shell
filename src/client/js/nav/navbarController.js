@@ -7,7 +7,8 @@
             function ($rootScope, $state, AuthService) {
                 var vm = this;
 
-                vm.loggedIn = !!$rootScope.user;
+                vm.user = sessionStorage.user ? JSON.parse(sessionStorage.user) : false;
+                vm.loggedIn = !!vm.user;
 
                 vm.nav = {
                     top: {
@@ -22,7 +23,7 @@
                             right: [
                                 {label: 'About', stateRef: 'about'},
                                 {label: 'Help', stateRef: 'help'},
-                                {label: 'Settings', stateRef: 'settings', icon: {cls: 'fa fa-cogs fa-lg'}},
+                                {label: 'Settings', stateRef: 'settings.profile', icon: {cls: 'fa fa-cogs fa-lg'}},
                                 {label: 'Logout', stateRef: 'logout', icon: {cls: 'fa fa-sign-out fa-lg'}}
                             ]
                         }
@@ -31,6 +32,10 @@
                         copyrightYear: new Date().getFullYear()
                     }
                 };
+
+                if (!vm.loggedIn) {
+                    $state.go('logout');
+                }
             }
         ]);
 })();

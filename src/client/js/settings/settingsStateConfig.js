@@ -5,9 +5,9 @@
         var settings = {
                 name: 'settings',
                 url: '/settings',
-                templateUrl: 'templates/partials/settings/settings.html',
-                controller: 'SettingsCtrl',
-                controllerAs: 'settingsCtrl'
+                parent: 'nav',
+                abstract: true,
+                template: '<data-ui-view></data-ui-view>'
             },
             settingsProfile = {
                 name: 'settings.profile',

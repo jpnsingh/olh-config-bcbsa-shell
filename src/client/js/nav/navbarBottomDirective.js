@@ -6,9 +6,7 @@
             return {
                 restrict: 'E',
                 replace: true,
-                templateUrl: 'templates/partials/nav/navbar-bottom.html',
-                controller: 'NavBarCtrl',
-                controllerAs: 'navBarCtrl'
+                templateUrl: 'templates/partials/nav/navbar-bottom.html'
             };
         });
 })();

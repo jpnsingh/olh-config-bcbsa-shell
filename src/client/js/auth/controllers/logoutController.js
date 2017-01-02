@@ -6,9 +6,7 @@
             function ($state, AuthService) {
                 var vm = this;
 
-                AuthService.setLoggedIn(false);
-
-                $state.go('login');
+                AuthService.logout();
             }
         ]);
 })();
