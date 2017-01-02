@@ -6,7 +6,7 @@
         dbConfig = require('../config/dbConfig')();
 
     module.exports = function (authService, nav) {
-        var signUp = function (request, response) {
+        var register = function (request, response) {
             var user = request.body;
 
             var url = dbConfig.dbConnectionUrl();
@@ -27,7 +27,7 @@
         });
 
 
-        var signIn = function (request, response) {
+        var login = function (request, response) {
             response.json({user: request.user});
         };
 
@@ -45,11 +45,11 @@
         };
 
         return {
-            signUp: signUp,
             authenticate: authenticate,
-            signIn: signIn,
+            login: login,
             middleware: middleware,
-            profile: profile
+            profile: profile,
+            register: register
         };
     };
 })();

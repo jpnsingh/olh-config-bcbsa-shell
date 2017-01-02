@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+        <form name="loginForm" data-ng-submit="loginCtrl.login()">
+            <fieldset class="form-group col-xs-10">
+                <legend><strong>Login</strong></legend>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text"
+                           class="form-control"
+                           id="username"
+                           name="username"
+                           data-ng-model="loginCtrl.username"
+                           placeholder="User Name"
+                           required
+                           autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password"
+                           class="form-control"
+                           id="password"
+                           name="password"
+                           data-ng-model="loginCtrl.password"
+                           placeholder="Password"
+                           required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit"
+                            class="btn btn-primary"
+                            data-ng-disabled="loginForm.$invalid || loginCtrl.loggingIn">
+                        <span data-ng-if="!loginCtrl.loggingIn">Login</span>
+                        <span data-ng-if="loginCtrl.loggingIn">
+                        <i class="fa fa-spinner fa-pulse"></i> Logging In...
+                    </span>
+                    </button>
+                    <a class="btn btn-link" data-ui-sref="register">Register</a>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -5,23 +5,31 @@
         require('./services').name,
         require('./controllers').name
     ]).config(function ($stateProvider, $urlRouterProvider) {
-        var signIn = {
-                name: 'signIn',
-                url: '/signIn',
-                templateUrl: 'templates/partials/auth/sign-in.html',
-                controller: 'SignInCtrl',
-                controllerAs: 'signInCtrl'
+        var login = {
+                name: 'login',
+                url: '/login',
+                templateUrl: 'templates/partials/auth/login.html',
+                controller: 'LoginCtrl',
+                controllerAs: 'loginCtrl'
             },
-            signOut = {
-                name: 'signOut',
-                url: '/signOut',
-                templateUrl: 'templates/partials/auth/sign-out.html',
-                controller: 'SignOutCtrl',
-                controllerAs: 'signOutCtrl'
+            logout = {
+                name: 'logout',
+                url: '/logout',
+                templateUrl: 'templates/partials/auth/logout.html',
+                controller: 'LogoutCtrl',
+                controllerAs: 'logoutCtrl'
+            },
+            register = {
+                name: 'register',
+                url: '/register',
+                templateUrl: 'templates/partials/auth/register.html',
+                controller: 'RegisterCtrl',
+                controllerAs: 'registerCtrl'
             };
 
         $stateProvider
-            .state(signIn)
-            .state(signOut);
+            .state(login)
+            .state(logout)
+            .state(register);
     });
 })();

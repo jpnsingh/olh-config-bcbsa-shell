@@ -15,8 +15,8 @@
             });
         });
 
-        it('should initialize the controller and set signedIn accordingly', function () {
-            assert.equal(controller.signedIn, true);
+        it('should initialize the controller and set loggedIn accordingly', function () {
+            assert.equal(controller.loggedIn, true);
         });
 
         it('should initialize the top nav accordingly', function () {

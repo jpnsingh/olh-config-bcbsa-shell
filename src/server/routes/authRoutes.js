@@ -6,12 +6,12 @@
 
     module.exports = function () {
         authRouter
-            .route('/signUp')
-            .post(authController.signUp);
+            .route('/register')
+            .post(authController.register);
 
         authRouter
-            .route('/signIn')
-            .post(authController.authenticate, authController.signIn);
+            .route('/login')
+            .post(authController.authenticate, authController.login);
 
         authRouter
             .route('/profile')
