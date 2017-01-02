@@ -3,5 +3,9 @@
     "protocol": "https",
     "host": "bcbsa-shell.herokuapp.com",
     "port": ""
+  },
+  "db": {
+    "host": "prod.db.url",
+    "dbName": "bcbsa-shell"
   }
 }

@@ -15,9 +15,7 @@
                     <div class="row">
                         <div class="form-group col-xs-4">
                             <input type="text"
-                                   id="username"
-                                   name="username"
-                                   data-ng-model="username"
+                                   data-ng-model="signIn.username"
                                    class="form-control"
                                    placeholder="User Name"
                                    autofocus>
@@ -27,9 +25,7 @@
                     <div class="row">
                         <div class="form-group col-xs-4">
                             <input type="password"
-                                   id="password"
-                                   name="password"
-                                   data-ng-model="password"
+                                   data-ng-model="signIn.password"
                                    class="form-control"
                                    placeholder="Password">
                         </div>
@@ -39,8 +35,8 @@
                         <div class="form-group col-xs-4">
                             <button type="submit"
                                     class="btn btn-primary form-control"
-                                    data-ng-disabled="!username || !password"
-                                    data-ng-click="signInCtrl.signIn(username, password)">
+                                    data-ng-disabled="!signIn.username || !signIn.password || signInCtrl.signingIn"
+                                    data-ng-click="signInCtrl.signIn(signIn.username, signIn.password)">
                                 <span data-ng-if="!signInCtrl.signingIn">Sign In</span>
                                 <span data-ng-if="signInCtrl.signingIn">
                                     <i class="fa fa-spinner fa-pulse"></i> Signing In...
@@ -53,12 +49,11 @@
         </div>
         <div id="signUp" role="tabpanel" class="tab-pane">
             <div class="col-xs-12">
-                <form name="signUpForm" action="/auth/signUp" method="post">
+                <form name="signUpForm">
                     <div class="row">
                         <div class="form-group col-xs-4">
                             <input type="text"
-                                   id="username"
-                                   name="username"
+                                   data-ng-model="signUp.username"
                                    class="form-control"
                                    placeholder="User Name">
                         </div>
@@ -67,8 +62,7 @@
                     <div class="row">
                         <div class="form-group col-xs-4">
                             <input type="password"
-                                   id="password"
-                                   name="password"
+                                   data-ng-model="signUp.password"
                                    class="form-control"
                                    placeholder="Password">
                         </div>
@@ -76,9 +70,15 @@
 
                     <div class="row">
                         <div class="form-group col-xs-4">
-                            <input type="submit"
-                                   class="btn btn-primary form-control"
-                                   value="Sign Up">
+                            <button type="submit"
+                                    class="btn btn-primary form-control"
+                                    data-ng-disabled="!signUp.username || !signUp.password || signInCtrl.signingUp"
+                                    data-ng-click="signInCtrl.signUp(signUp.username, signUp.password)">
+                                <span data-ng-if="!signInCtrl.signingUp">Sign Up</span>
+                                <span data-ng-if="signInCtrl.signingUp">
+                                    <i class="fa fa-spinner fa-pulse"></i> Signing Up...
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </form>

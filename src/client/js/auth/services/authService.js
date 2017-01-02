@@ -39,10 +39,35 @@
                             username: username,
                             password: password
                         }
-                    }).then(function (user) {
+                    }).then(function (response) {
                         // success - user logged in
-                        store(user);
-                        $rootScope.$broadcast('signInEvent', user);
+                        store(response.data.user);
+                        $rootScope.$broadcast('signInEvent', response.data.user);
+                        return response.data.user;
+                    }, function (data) {
+                        console.log('Failed to log in');
+                        self.clear();
+                        $rootScope.$broadcast('authenticationFailed');
+                    });
+                };
+
+                self.signUp = function (username, password) {
+                    return $injector.get('$http')({
+                        method: 'POST',
+                        url: '/auth/signUp',
+                        headers: {
+                            //'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        data: {
+                            grant_type: 'password',
+                            username: username,
+                            password: password
+                        }
+                    }).then(function (response) {
+                        // success - user logged in
+                        store(response.data.user);
+                        $rootScope.$broadcast('signInEvent', response.data.user);
+                        return response.data.user;
                     }, function (data) {
                         console.log('Failed to log in');
                         self.clear();
