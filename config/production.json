@@ -1,5 +1,7 @@
 {
-  "app": "bcbsa-shell",
-  "port": 3000,
-  "webUrl": "https://bcbsa-shell.herokuapp.com"
+  "web": {
+    "protocol": "https",
+    "host": "bcbsa-shell.herokuapp.com",
+    "port": ""
+  }
 }

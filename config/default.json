@@ -1,4 +1,5 @@
 {
+  "app": "bcbsa-shell",
   "web": {
     "protocol": "http",
     "host": "localhost",

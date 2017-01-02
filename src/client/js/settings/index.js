@@ -30,7 +30,5 @@
             .state(settings)
             .state(settingsProfile)
             .state(settingsAccount);
-
-        $urlRouterProvider.otherwise('/settings/account');
     });
 })();

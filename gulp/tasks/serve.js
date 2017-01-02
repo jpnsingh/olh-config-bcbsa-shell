@@ -11,9 +11,9 @@
             script: './src/server/index.js',
             delayTime: 1,
             env: {
-                'PORT': config.port
+                'PORT': config.web.port
             },
-            watch: [gulpConfig.files.js, 'src/**/*.html']
+            watch: gulpConfig.files.js
         };
 
         return nodemon(options).on('restart', function () {
