@@ -5,7 +5,7 @@
     "port": ""
   },
   "db": {
-    "host": "prod.db.url",
+    "hostUrl": "mongodb://prod.db.url:27017",
     "dbName": "bcbsa-shell"
   }
 }
