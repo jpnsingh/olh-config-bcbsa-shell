@@ -15,6 +15,22 @@
                         .signIn(usename, password)
                         .then(function (data) {
                             vm.signingIn = false;
+                            console.log(data);
+                            $state.go('root');
+                        }, function (data) {
+                            vm.signingIn = false;
+                            vm.error = data.error;
+                        });
+                };
+
+                vm.signUp = function (usename, password) {
+                    vm.signingUp = true;
+
+                    AuthService
+                        .signUp(usename, password)
+                        .then(function (data) {
+                            vm.signingUp = false;
+                            console.log(data);
                             $state.go('root');
                         }, function (data) {
                             vm.signingIn = false;

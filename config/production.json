@@ -3,5 +3,9 @@
     "protocol": "https",
     "host": "bcbsa-shell.herokuapp.com",
     "port": ""
+  },
+  "db": {
+    "hostUrl": "mongodb://prod.db.url:27017",
+    "dbName": "bcbsa-shell"
   }
 }

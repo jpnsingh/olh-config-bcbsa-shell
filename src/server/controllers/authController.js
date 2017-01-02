@@ -2,21 +2,21 @@
     'use strict';
 
     var mongodb = require('mongodb').MongoClient,
-        passport = require('passport');
+        passport = require('passport'),
+        dbConfig = require('../config/dbConfig')();
 
     module.exports = function (authService, nav) {
         var signUp = function (request, response) {
             var user = request.body;
-            console.log(user);
 
-            var url = 'mongodb://localhost:27017/bcbsa-shell-dev';
+            var url = dbConfig.dbConnectionUrl();
 
             mongodb.connect(url, function (error, db) {
                 var usersCollection = db.collection('users');
 
                 usersCollection.insert(user, function (error, results) {
                     request.login(results.ops[0], function () {
-                        response.redirect('/');
+                        response.json({user: results.ops[0]});
                     });
                 });
             });
@@ -28,7 +28,7 @@
 
 
         var signIn = function (request, response) {
-            response.json(request.user);
+            response.json({user: request.user});
         };
 
         var middleware = function (request, response, next) {
@@ -41,7 +41,7 @@
 
         var profile = function (request, response) {
             console.log(request.user);
-            response.json(request.user);
+            response.json({user: request.user});
         };
 
         return {

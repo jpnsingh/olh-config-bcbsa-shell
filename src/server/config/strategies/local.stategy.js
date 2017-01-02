@@ -3,7 +3,8 @@
 
     var passport = require('passport'),
         LocalStrategy = require('passport-local').Strategy,
-        mongodb = require('mongodb').MongoClient;
+        mongodb = require('mongodb').MongoClient,
+        dbConfig = require('../dbConfig')();
 
     module.exports = function () {
         passport.use(new LocalStrategy(
@@ -12,7 +13,7 @@
                 passwordField: 'password'
             },
             function (username, password, done) {
-                var url = 'mongodb://localhost:27017/bcbsa-shell-dev';
+                var url = dbConfig.dbConnectionUrl();
 
                 mongodb.connect(url, function (error, db) {
                     var usersCollection = db.collection('users');
