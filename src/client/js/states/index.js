@@ -4,7 +4,7 @@
     module.exports = angular.module('bcbsa-shell.states', [])
         .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
             var resolveFn = {
-                signedIn: function () {
+                loggedIn: function () {
                     return console.log('test');
                 }
             };
@@ -49,6 +49,6 @@
                 .state(help);
         }).run(function (AuthService) {
             console.log('App run');
-            console.log(AuthService.getSignedIn());
+            console.log(AuthService.getLoggedIn());
         });
 })();

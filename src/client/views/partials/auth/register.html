@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+        <form name="registerForm" data-ng-submit="registerCtrl.register()">
+            <fieldset class="form-group col-xs-10">
+                <legend><strong>Register</strong></legend>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text"
+                           class="form-control"
+                           id="username"
+                           name="username"
+                           data-ng-model="registerCtrl.username"
+                           placeholder="User Name"
+                           required
+                           autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password"
+                           class="form-control"
+                           id="password"
+                           name="password"
+                           data-ng-model="registerCtrl.password"
+                           placeholder="Password"
+                           required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit"
+                            class="btn btn-primary"
+                            data-ng-disabled="registerForm.$invalid || registerCtrl.registering">
+                        <span data-ng-if="!registerCtrl.registering">Register</span>
+                        <span data-ng-if="registerCtrl.registering">
+                        <i class="fa fa-spinner fa-pulse"></i> Registering...
+                    </span>
+                    </button>
+                    <a class="btn btn-link" data-ui-sref="login">Cancel</a>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

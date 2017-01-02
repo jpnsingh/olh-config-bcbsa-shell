@@ -10,7 +10,7 @@
             </ul>
         </header>
 
-        <section class="navbar-left" data-ng-if="navBarCtrl.signedIn">
+        <section class="navbar-left" data-ng-if="navBarCtrl.loggedIn">
             <ul class="nav navbar-nav">
                 <li data-ng-repeat="link in navBarCtrl.nav.top.links.left" data-ui-sref-active="active">
                     <a data-ui-sref="{{link.stateRef}}" title="{{link.label}}">{{link.label}}</a>
@@ -18,7 +18,7 @@
             </ul>
         </section>
 
-        <section class="navbar-right" data-ng-if="navBarCtrl.signedIn">
+        <section class="navbar-right" data-ng-if="navBarCtrl.loggedIn">
             <p class="navbar-text">Signed in as Admin</p>
             <ul class="nav navbar-nav">
                 <li data-ng-repeat="link in navBarCtrl.nav.top.links.right" data-ui-sref-active="active">
@@ -30,7 +30,7 @@
             </ul>
         </section>
 
-        <a class="btn btn-primary btn-sm navbar-btn navbar-right" data-ng-if="!navBarCtrl.signedIn"
-           data-ui-sref="signIn">Sign In</a>
+        <a class="btn btn-primary btn-sm navbar-btn navbar-right" data-ng-if="!navBarCtrl.loggedIn"
+           data-ui-sref="login">Login</a>
     </div>
 </nav>

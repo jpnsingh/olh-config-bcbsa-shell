@@ -10,6 +10,6 @@
 
         return {
             dbConnectionUrl: dbConnectionUrl
-        }
+        };
     };
 })();

@@ -7,7 +7,7 @@
             function ($rootScope, $state, AuthService) {
                 var vm = this;
 
-                vm.signedIn = !!$rootScope.user;
+                vm.loggedIn = !!$rootScope.user;
 
                 vm.nav = {
                     top: {
@@ -23,7 +23,7 @@
                                 {label: 'About', stateRef: 'about'},
                                 {label: 'Help', stateRef: 'help'},
                                 {label: 'Settings', stateRef: 'settings', icon: {cls: 'fa fa-cogs fa-lg'}},
-                                {label: 'Sign out', stateRef: 'signOut', icon: {cls: 'fa fa-sign-out fa-lg'}}
+                                {label: 'Logout', stateRef: 'logout', icon: {cls: 'fa fa-sign-out fa-lg'}}
                             ]
                         }
                     },

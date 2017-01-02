@@ -10,39 +10,39 @@
                 function store(user) {
                     $rootScope.user = user;
                     localStorage.user = user;
-                    self.setSignedIn(true);
+                    self.setLoggedIn(true);
                 }
 
                 self.clear = function () {
-                    $rootScope.user = user;
+                    $rootScope.user = '';
                     localStorage.user = '';
-                    self.setSignedIn(false);
+                    self.setLoggedIn(false);
                 };
 
-                self.getSignedIn = function () {
-                    return self.signedIn;
+                self.getLoggedIn = function () {
+                    return self.loggedIn;
                 };
 
-                self.setSignedIn = function (signedIn) {
-                    self.signedIn = signedIn;
+                self.setLoggedIn = function (loggedIn) {
+                    self.loggedIn = loggedIn;
                 };
 
-                self.signIn = function (username, password) {
+                self.login = function (username, password) {
                     return $injector.get('$http')({
                         method: 'POST',
-                        url: '/auth/signIn',
+                        url: '/auth/login',
                         headers: {
                             //'Content-Type': 'application/x-www-form-urlencoded',
                         },
                         data: {
-                            grant_type: 'password',
+                            grantType: 'password',
                             username: username,
                             password: password
                         }
                     }).then(function (response) {
                         // success - user logged in
                         store(response.data.user);
-                        $rootScope.$broadcast('signInEvent', response.data.user);
+                        $rootScope.$broadcast('loginEvent', response.data.user);
                         return response.data.user;
                     }, function (data) {
                         console.log('Failed to log in');
@@ -51,25 +51,25 @@
                     });
                 };
 
-                self.signUp = function (username, password) {
+                self.register = function (username, password) {
                     return $injector.get('$http')({
                         method: 'POST',
-                        url: '/auth/signUp',
+                        url: '/auth/register',
                         headers: {
                             //'Content-Type': 'application/x-www-form-urlencoded',
                         },
                         data: {
-                            grant_type: 'password',
+                            grantType: 'password',
                             username: username,
                             password: password
                         }
                     }).then(function (response) {
                         // success - user logged in
                         store(response.data.user);
-                        $rootScope.$broadcast('signInEvent', response.data.user);
+                        $rootScope.$broadcast('loginEvent', response.data.user);
                         return response.data.user;
                     }, function (data) {
-                        console.log('Failed to log in');
+                        console.log('Failed to register');
                         self.clear();
                         $rootScope.$broadcast('authenticationFailed');
                     });
