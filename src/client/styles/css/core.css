@@ -16,3 +16,8 @@ body {
 form[name="loginForm"], form[name="registerForm"] {
     margin-top: 64px;
 }
+
+form .fieldset .legend {
+    width: auto;
+    border-bottom: none;
+}

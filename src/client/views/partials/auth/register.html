@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-xs-4 col-xs-offset-4">
         <form name="registerForm" data-ng-submit="registerCtrl.register()">
-            <fieldset class="form-group col-xs-10">
-                <legend><strong>Register</strong></legend>
+            <fieldset class="well fieldset form-group col-xs-10">
+                <legend class="legend"><strong>Register</strong></legend>
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text"
@@ -26,7 +26,7 @@
                            required>
                 </div>
 
-                <div class="form-actions">
+                <div class="form-group">
                     <button type="submit"
                             class="btn btn-primary"
                             data-ng-disabled="registerForm.$invalid || registerCtrl.registering">
