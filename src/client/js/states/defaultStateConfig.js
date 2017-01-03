@@ -23,21 +23,24 @@
                 parent: 'nonav',
                 templateUrl: 'templates/404.html'
             },
-            root = {
-                name: 'root',
+            dashboard = {
+                name: 'dashboard',
                 url: '/',
+                docTitle: 'Dashboard',
                 parent: 'nav',
-                templateUrl: 'templates/partials/root.html'
+                templateUrl: 'templates/partials/dashboard.html'
             },
             about = {
                 name: 'about',
                 url: '/about',
+                docTitle: 'About',
                 parent: 'nav',
                 templateUrl: 'templates/partials/about.html'
             },
             help = {
                 name: 'help',
                 url: '/help',
+                docTitle: 'Help',
                 parent: 'nav',
                 templateUrl: 'templates/partials/help.html'
             };
@@ -50,7 +53,7 @@
             .state(nav)
             .state(nonav)
             .state(notFound)
-            .state(root)
+            .state(dashboard)
             .state(about)
             .state(help);
     }

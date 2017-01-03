@@ -16,8 +16,7 @@
                 .register(vm.username, vm.password)
                 .then(function (data) {
                     vm.registering = false;
-                    console.log(data);
-                    $state.go('root');
+                    $state.go('dashboard');
                 }, function (data) {
                     vm.registering = false;
                     vm.error = data.error;

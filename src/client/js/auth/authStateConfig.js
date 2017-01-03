@@ -7,6 +7,7 @@
         var login = {
                 name: 'login',
                 url: '/login',
+                docTitle: 'Login',
                 parent: 'nonav',
                 templateUrl: 'templates/partials/auth/login.html',
                 controller: 'LoginCtrl',
@@ -15,6 +16,7 @@
             logout = {
                 name: 'logout',
                 url: '/logout',
+                docTitle: 'Logout',
                 parent: 'nonav',
                 templateUrl: 'templates/partials/auth/logout.html',
                 controller: 'LogoutCtrl',
@@ -23,6 +25,7 @@
             register = {
                 name: 'register',
                 url: '/register',
+                docTitle: 'Register',
                 parent: 'nonav',
                 templateUrl: 'templates/partials/auth/register.html',
                 controller: 'RegisterCtrl',
