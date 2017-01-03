@@ -8,6 +8,7 @@
         var configuration = {
             name: 'configuration',
             url: '/configuration',
+            docTitle: 'Configuration',
             parent: 'nav',
             templateUrl: 'templates/partials/configuration/configuration.html',
             controller: 'ConfigCtrl',

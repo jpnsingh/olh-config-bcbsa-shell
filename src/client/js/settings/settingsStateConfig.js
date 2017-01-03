@@ -15,6 +15,7 @@
             settingsProfile = {
                 name: 'settings.profile',
                 url: '/profile',
+                docTitle: 'Settings | Profile',
                 templateUrl: 'templates/partials/settings/profile.html',
                 controller: 'ProfileCtrl',
                 controllerAs: 'profileCtrl'
@@ -22,6 +23,7 @@
             settingsAccount = {
                 name: 'settings.account',
                 url: '/account',
+                docTitle: 'Settings | Account',
                 templateUrl: 'templates/partials/settings/account.html',
                 controller: 'AccountsCtrl',
                 controllerAs: 'accountsCtrl'

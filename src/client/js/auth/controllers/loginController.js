@@ -17,8 +17,7 @@
                 .login(vm.username, vm.password)
                 .then(function (data) {
                     vm.loggingIn = false;
-                    console.log(data);
-                    $state.go('root');
+                    $state.go('dashboard');
                 }, function (data) {
                     vm.loggingIn = false;
                     vm.error = data.error;

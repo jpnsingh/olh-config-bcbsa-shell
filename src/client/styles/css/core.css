@@ -21,3 +21,7 @@ form .fieldset .legend {
     width: auto;
     border-bottom: none;
 }
+
+fieldset.well {
+    border-radius: 8px;
+}

@@ -15,7 +15,7 @@
             top: {
                 header: {
                     label: 'BCBSA',
-                    stateRef: 'root'
+                    stateRef: 'dashboard'
                 },
                 links: {
                     left: [
