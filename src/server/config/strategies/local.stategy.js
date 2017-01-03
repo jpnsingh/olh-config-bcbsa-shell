@@ -19,11 +19,10 @@
                     var usersCollection = db.collection('users');
 
                     usersCollection.findOne({username: username}, function (error, results) {
-                        if (results.password === password) {
+                        if (results && results.password === password) {
                             done(null, results);
                         } else {
-                            // done('Bad Password!!!', null);
-                            done(null, false, {message: 'Bad Password!!!'});
+                            done(null, false, {message: 'Username or password entered is incorrect!'});
                         }
                     });
                 });
