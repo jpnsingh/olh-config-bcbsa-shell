@@ -19,18 +19,38 @@
         </section>
 
         <section class="navbar-right" data-ng-if="navBarCtrl.loggedIn">
-            <p class="navbar-text">Signed in as <strong>{{navBarCtrl.user.username}}</strong></p>
             <ul class="nav navbar-nav">
-                <li data-ng-repeat="link in navBarCtrl.nav.top.links.right" data-ui-sref-active="active">
+                <li data-ng-if="!link.list"
+                    data-ng-repeat="link in navBarCtrl.nav.top.links.right" data-ui-sref-active="active">
                     <a data-ui-sref="{{link.stateRef}}" title="{{link.label}}">
                         <span data-ng-if="!link.icon">{{link.label}}</span>
                         <i data-ng-if="link.icon" data-ng-class="link.icon.cls"></i>
                     </a>
                 </li>
+
+                <li data-ng-if="link.list" data-ng-repeat="link in navBarCtrl.nav.top.links.right">
+                    <a href="javascript:void(0);"
+                       class="dropdown-toggle"
+                       data-toggle="dropdown"
+                       role="button"
+                       aria-haspopup="true"
+                       aria-expanded="false"
+                       title="{{link.label}}">
+                        <i data-ng-if="link.icon" data-ng-class="link.icon.cls"></i>
+                        <span data-ng-if="link.userMenu">{{navBarCtrl.user.username}}</span> <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li data-ng-repeat="menu in link.list" data-ui-sref-active="active"
+                            data-ng-class="{divider: menu.divider}">
+                            <a data-ng-if="!menu.divider" data-ui-sref="{{menu.stateRef}}" title="{{menu.label}}">
+                                <i data-ng-if="menu.icon" data-ng-class="menu.icon.cls"></i>
+                                <span>{{menu.label}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </section>
-
-        <a class="btn btn-primary btn-sm navbar-btn navbar-right" data-ng-if="!navBarCtrl.loggedIn"
-           data-ui-sref="login">Login</a>
     </div>
 </nav>
