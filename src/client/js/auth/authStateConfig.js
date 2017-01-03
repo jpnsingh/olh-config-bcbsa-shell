@@ -1,6 +1,9 @@
 (function () {
     'use strict';
-    module.exports = function ($stateProvider, $urlRouterProvider) {
+    module.exports = authStateConfig;
+
+    authStateConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+    function authStateConfig($stateProvider, $urlRouterProvider) {
         var login = {
                 name: 'login',
                 url: '/login',
@@ -30,5 +33,5 @@
             .state(login)
             .state(logout)
             .state(register);
-    };
+    }
 })();
