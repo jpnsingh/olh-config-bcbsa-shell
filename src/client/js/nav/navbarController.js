@@ -21,10 +21,34 @@
                                 {label: 'Configuration', stateRef: 'configuration'}
                             ],
                             right: [
-                                {label: 'About', stateRef: 'about'},
-                                {label: 'Help', stateRef: 'help'},
-                                {label: 'Settings', stateRef: 'settings.profile', icon: {cls: 'fa fa-cogs fa-lg'}},
-                                {label: 'Logout', stateRef: 'logout', icon: {cls: 'fa fa-sign-out fa-lg'}}
+                                {
+                                    label: 'User profile and more',
+                                    icon: {cls: 'fa fa-user fa-lg'},
+                                    userMenu: true,
+                                    list: [
+                                        {
+                                            label: 'About',
+                                            stateRef: 'about'
+                                        },
+                                        {
+                                            label: 'Help',
+                                            stateRef: 'help'
+                                        },
+                                        {
+                                            divider: true
+                                        },
+                                        {
+                                            label: 'Settings',
+                                            stateRef: 'settings.profile',
+                                            icon: {cls: 'fa fa-cogs fa-lg'}
+                                        },
+                                        {
+                                            label: 'Logout',
+                                            stateRef: 'logout',
+                                            icon: {cls: 'fa fa-sign-out fa-lg'}
+                                        }
+                                    ]
+                                }
                             ]
                         }
                     },
