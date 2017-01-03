@@ -5,6 +5,7 @@
     "port": ""
   },
   "db": {
+    "shellCmd": "mongo ds151068.mlab.com:51068/heroku_m87zl4rl -u heroku_m87zl4rl -p t863gtkmrv2bks58g132sgj2ot",
     "hostUrl": "mongodb://heroku_m87zl4rl:t863gtkmrv2bks58g132sgj2ot@ds151068.mlab.com:51068",
     "dbName": "heroku_m87zl4rl"
   }
