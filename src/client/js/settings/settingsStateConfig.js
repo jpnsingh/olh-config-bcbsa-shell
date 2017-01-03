@@ -1,7 +1,10 @@
 (function () {
     'use strict';
 
-    module.exports = function ($stateProvider) {
+    module.exports = settingsStateConfig;
+
+    settingsStateConfig.$inject = ['$stateProvider'];
+    function settingsStateConfig($stateProvider) {
         var settings = {
                 name: 'settings',
                 url: '/settings',
@@ -28,5 +31,5 @@
             .state(settings)
             .state(settingsProfile)
             .state(settingsAccount);
-    };
+    }
 })();

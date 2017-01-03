@@ -1,6 +1,8 @@
 (function () {
     'use strict';
 
-    module.exports = function () {
-    };
+    module.exports = defaultStateRun;
+
+    function defaultStateRun() {
+    }
 })();

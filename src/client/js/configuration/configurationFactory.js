@@ -2,10 +2,16 @@
     'use strict';
 
     module.exports = angular.module('bcbsa-shell.configuration.services.configurationFactory', [])
-        .factory('ConfigFactory', [
-            '$q', '$timeout',
-            function ($q, $timeout) {
-                var defaultConfig = {
+        .factory('ConfigFactory', ConfigFactory);
+
+    ConfigFactory.$inject = ['$q', '$timeout'];
+    function ConfigFactory($q, $timeout) {
+        return {
+            getDefaultConfig: getDefaultConfig
+        };
+
+        function getDefaultConfig() {
+            var defaultConfig = {
                     planSetup: {
                         name: 'Plan Setup',
                         branding: {
@@ -34,21 +40,14 @@
                             configurable: false
                         }
                     }
-                };
+                },
+                deferredPromise = $q.defer();
 
-                function getDefaultConfig() {
-                    var deferredPromise = $q.defer();
+            $timeout(function () {
+                return deferredPromise.resolve(defaultConfig);
+            }, 1000);
 
-                    $timeout(function () {
-                        return deferredPromise.resolve(defaultConfig);
-                    }, 1000);
-
-                    return deferredPromise.promise;
-                }
-
-                return {
-                    getDefaultConfig: getDefaultConfig
-                };
-            }
-        ]);
+            return deferredPromise.promise;
+        }
+    }
 })();

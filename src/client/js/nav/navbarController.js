@@ -2,64 +2,64 @@
     'use strict';
 
     module.exports = angular.module('bcbsa-shell.navigation.controllers.navBarController', [])
-        .controller('NavBarCtrl', [
-            '$rootScope', '$state',
-            function ($rootScope, $state) {
-                var vm = this;
+        .controller('NavBarCtrl', NavBarCtrl);
 
-                vm.user = sessionStorage.user ? JSON.parse(sessionStorage.user) : false;
-                vm.loggedIn = !!vm.user;
+    NavBarCtrl.$inject = ['$rootScope', '$state'];
+    function NavBarCtrl($rootScope, $state) {
+        var vm = this;
 
-                vm.nav = {
-                    top: {
-                        header: {
-                            label: 'BCBSA',
-                            stateRef: 'root'
-                        },
-                        links: {
-                            left: [
-                                {label: 'Configuration', stateRef: 'configuration'}
-                            ],
-                            right: [
+        vm.user = sessionStorage.user ? JSON.parse(sessionStorage.user) : false;
+        vm.loggedIn = !!vm.user;
+
+        vm.nav = {
+            top: {
+                header: {
+                    label: 'BCBSA',
+                    stateRef: 'root'
+                },
+                links: {
+                    left: [
+                        {label: 'Configuration', stateRef: 'configuration'}
+                    ],
+                    right: [
+                        {
+                            label: 'User profile and more',
+                            icon: {cls: 'fa fa-user fa-lg'},
+                            userMenu: true,
+                            list: [
                                 {
-                                    label: 'User profile and more',
-                                    icon: {cls: 'fa fa-user fa-lg'},
-                                    userMenu: true,
-                                    list: [
-                                        {
-                                            label: 'About',
-                                            stateRef: 'about'
-                                        },
-                                        {
-                                            label: 'Help',
-                                            stateRef: 'help'
-                                        },
-                                        {
-                                            divider: true
-                                        },
-                                        {
-                                            label: 'Settings',
-                                            stateRef: 'settings.profile',
-                                            icon: {cls: 'fa fa-cogs fa-lg'}
-                                        },
-                                        {
-                                            label: 'Logout',
-                                            stateRef: 'logout',
-                                            icon: {cls: 'fa fa-sign-out fa-lg'}
-                                        }
-                                    ]
+                                    label: 'About',
+                                    stateRef: 'about'
+                                },
+                                {
+                                    label: 'Help',
+                                    stateRef: 'help'
+                                },
+                                {
+                                    divider: true
+                                },
+                                {
+                                    label: 'Settings',
+                                    stateRef: 'settings.profile',
+                                    icon: {cls: 'fa fa-cogs fa-lg'}
+                                },
+                                {
+                                    label: 'Logout',
+                                    stateRef: 'logout',
+                                    icon: {cls: 'fa fa-sign-out fa-lg'}
                                 }
                             ]
                         }
-                    },
-                    bottom: {
-                        copyrightYear: new Date().getFullYear()
-                    }
-                };
-
-                if (!vm.loggedIn) {
-                    $state.go('logout');
+                    ]
                 }
+            },
+            bottom: {
+                copyrightYear: new Date().getFullYear()
             }
-        ]);
+        };
+
+        if (!vm.loggedIn) {
+            $state.go('logout');
+        }
+    }
 })();

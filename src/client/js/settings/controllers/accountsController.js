@@ -2,9 +2,11 @@
     'use strict';
 
     module.exports = angular.module('bsbsa-shell.settings.controllers.accountsController', [])
-        .controller('AccountsCtrl', function () {
-            var vm = this;
+        .controller('AccountsCtrl', AccountsCtrl);
 
-            vm.header = 'Account Settings';
-        });
+    function AccountsCtrl() {
+        var vm = this;
+
+        vm.header = 'Account Settings';
+    }
 })();

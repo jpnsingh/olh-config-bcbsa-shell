@@ -2,9 +2,11 @@
     'use strict';
 
     module.exports = angular.module('bcbsa-shell.shared.controllers.helloWorldController', [])
-        .controller('HelloWorldCtrl', function () {
-            var vm = this;
+        .controller('HelloWorldCtrl', HelloWorldCtrl);
 
-            vm.message = 'Hello World from Angular Controller';
-        });
+    function HelloWorldCtrl() {
+        var vm = this;
+
+        vm.message = 'Hello World from Angular Controller';
+    }
 })();

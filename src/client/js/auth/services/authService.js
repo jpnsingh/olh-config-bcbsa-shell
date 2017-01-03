@@ -2,83 +2,92 @@
     'use strict';
 
     module.exports = angular.module('bcbsa-shell.auth.services.authService', [])
-        .service('AuthService', [
-            '$rootScope', '$injector', '$http', '$state',
-            function ($rootScope, $injector, $http, $state) {
-                var self = this;
+        .factory('AuthService', AuthService);
 
-                function store(user) {
-                    $rootScope.user = user;
-                    sessionStorage.user = JSON.stringify(user);
-                    self.setLoggedIn(true);
+    AuthService.$inject = ['$rootScope', '$injector', '$http', '$state'];
+    function AuthService($rootScope, $injector, $http, $state) {
+        var service = {};
+
+        service.clear = clear;
+        service.getLoggedIn = getLoggedIn;
+        service.setLoggedIn = setLoggedIn;
+        service.register = register;
+        service.login = login;
+        service.logout = logout;
+
+        return service;
+
+        function store(user) {
+            $rootScope.user = user;
+            sessionStorage.user = JSON.stringify(user);
+            setLoggedIn(true);
+        }
+
+        function clear() {
+            $rootScope.user = '';
+            sessionStorage.user = '';
+            setLoggedIn(false);
+        }
+
+        function getLoggedIn() {
+            return service.loggedIn;
+        }
+
+        function setLoggedIn(loggedIn) {
+            service.loggedIn = loggedIn;
+        }
+
+        function register(username, password) {
+            return $injector.get('$http')({
+                method: 'POST',
+                url: '/auth/register',
+                headers: {
+                    //'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                data: {
+                    grantType: 'password',
+                    username: username,
+                    password: password
                 }
+            }).then(function (response) {
+                // success - user logged in
+                store(response.data.user);
+                $rootScope.$broadcast('loginEvent', response.data.user);
+                return response.data.user;
+            }, function (data) {
+                console.log('Failed to register');
+                clear();
+                $rootScope.$broadcast('authenticationFailed');
+            });
+        }
 
-                self.clear = function () {
-                    $rootScope.user = '';
-                    sessionStorage.user = '';
-                    self.setLoggedIn(false);
-                };
+        function login(username, password) {
+            return $injector.get('$http')({
+                method: 'POST',
+                url: '/auth/login',
+                headers: {
+                    //'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                data: {
+                    grantType: 'password',
+                    username: username,
+                    password: password
+                }
+            }).then(function (response) {
+                // success - user logged in
+                store(response.data.user);
+                $rootScope.$broadcast('loginEvent', response.data.user);
+                return response.data.user;
+            }, function (data) {
+                console.log('Failed to log in');
+                clear();
+                $rootScope.$broadcast('authenticationFailed');
+            });
+        }
 
-                self.getLoggedIn = function () {
-                    return self.loggedIn;
-                };
-
-                self.setLoggedIn = function (loggedIn) {
-                    self.loggedIn = loggedIn;
-                };
-
-                self.register = function (username, password) {
-                    return $injector.get('$http')({
-                        method: 'POST',
-                        url: '/auth/register',
-                        headers: {
-                            //'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        data: {
-                            grantType: 'password',
-                            username: username,
-                            password: password
-                        }
-                    }).then(function (response) {
-                        // success - user logged in
-                        store(response.data.user);
-                        $rootScope.$broadcast('loginEvent', response.data.user);
-                        return response.data.user;
-                    }, function (data) {
-                        console.log('Failed to register');
-                        self.clear();
-                        $rootScope.$broadcast('authenticationFailed');
-                    });
-                };
-
-                self.login = function (username, password) {
-                    return $injector.get('$http')({
-                        method: 'POST',
-                        url: '/auth/login',
-                        headers: {
-                            //'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        data: {
-                            grantType: 'password',
-                            username: username,
-                            password: password
-                        }
-                    }).then(function (response) {
-                        // success - user logged in
-                        store(response.data.user);
-                        $rootScope.$broadcast('loginEvent', response.data.user);
-                        return response.data.user;
-                    }, function (data) {
-                        console.log('Failed to log in');
-                        self.clear();
-                        $rootScope.$broadcast('authenticationFailed');
-                    });
-                };
-
-                self.logout = function () {
-                    self.clear();
-                    $state.go('login');
-                };
-            }
-        ]);
+        function logout() {
+            clear();
+            $state.go('login');
+        }
+    }
 })();

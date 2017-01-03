@@ -1,7 +1,10 @@
 (function () {
     'use strict';
 
-    module.exports = function ($stateProvider, $urlRouterProvider, $locationProvider) {
+    module.exports = defaultStateConfig;
+
+    defaultStateConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+    function defaultStateConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         var nav = {
                 name: 'nav',
                 abstract: true,
@@ -50,5 +53,5 @@
             .state(root)
             .state(about)
             .state(help);
-    };
+    }
 })();

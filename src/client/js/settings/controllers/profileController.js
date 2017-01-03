@@ -2,9 +2,11 @@
     'use strict';
 
     module.exports = angular.module('bsbsa-shell.settings.controllers.profileController', [])
-        .controller('ProfileCtrl', function () {
-            var vm = this;
+        .controller('ProfileCtrl', ProfileCtrl);
 
-            vm.header = 'Profile Settings';
-        });
+    function ProfileCtrl() {
+        var vm = this;
+
+        vm.header = 'Profile Settings';
+    }
 })();
