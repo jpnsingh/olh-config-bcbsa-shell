@@ -3,8 +3,8 @@
     module.exports = angular.module('bcbsa-shell.auth.controllers.logoutController', [])
         .controller('LogoutCtrl', LogoutCtrl);
 
-    LogoutCtrl.$inject = ['$state', 'AuthService'];
-    function LogoutCtrl($state, AuthService) {
+    LogoutCtrl.$inject = ['AuthService'];
+    function LogoutCtrl(AuthService) {
         var vm = this;
 
         AuthService.logout();

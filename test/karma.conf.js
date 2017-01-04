@@ -7,8 +7,8 @@
 
             frameworks: [
                 'browserify',
-                'mocha',
-                'chai'
+                'jasmine',
+                'sinon'
             ],
 
             files: [
@@ -19,7 +19,7 @@
                 'libs/angular-mocks.js',
                 'libs/angular-strap.min.js',
                 'libs/angular-ui-router.min.js',
-                // 'libs/jasmine-mox-matchers.min.js',
+                'libs/jasmine-mox-matchers.min.js',
                 'node_modules/bardjs/dist/bard.js',
 
                 // Sources
@@ -68,8 +68,10 @@
             browsers: ['PhantomJS'],
 
             proxies: {
-                '/.build': 'http://localhost:8084/base'
+                '/': 'http://localhost:8084/'
             },
+
+            urlRoot: '/_karma_/',
 
             browserNoActivityTimeout: 10000,
 

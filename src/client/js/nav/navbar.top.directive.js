@@ -8,7 +8,7 @@
         return {
             restrict: 'E',
             replace: true,
-            templateUrl: 'templates/partials/nav/navbar-top.html'
+            templateUrl: 'templates/partials/nav/navbar.top.html'
         };
     }
 })();
