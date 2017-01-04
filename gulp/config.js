@@ -37,7 +37,7 @@
             src: {
                 js: './src/client/js/**/*.js',
                 libs: ['public/lib/**/*', 'libs/**/*'],
-                styles: './src/client/styles/**/*',
+                styles: ['./src/client/styles/**/*', '!src/client/styles/{less,less/**}'],
                 less: './src/client/styles/less/**/*.less',
                 templates: './src/client/views/**/*.html',
                 browserify: {
