@@ -14,7 +14,7 @@
         vm.nav = {
             top: {
                 header: {
-                    label: 'BCBSA',
+                    label: 'Blue Cross Blue Shield',
                     stateRef: 'dashboard'
                 },
                 links: {
