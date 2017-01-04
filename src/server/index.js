@@ -5,8 +5,12 @@
         bodyParser = require('body-parser'),
         cookieParser = require('cookie-parser'),
         session = require('express-session'),
+        favicon = require('serve-favicon'),
         app = express(),
+        router = express.Router(),
         port = process.env.PORT || 3000;
+
+    router.use(favicon('.build/web/images/favicon.png'));
 
     app.use(express.static('.build/web'));
     app.use(bodyParser.json());

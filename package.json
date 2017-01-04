@@ -82,6 +82,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "run-sequence": "^1.2.2",
+    "serve-favicon": "^2.3.2",
     "sinon": "^1.17.7",
     "superagent": "2.3.0",
     "underscore": "1.8.3",

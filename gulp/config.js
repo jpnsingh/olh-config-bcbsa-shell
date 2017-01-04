@@ -37,6 +37,7 @@
             src: {
                 js: './src/client/js/**/*.js',
                 libs: ['public/lib/**/*', 'libs/**/*'],
+                images: 'images/**/*',
                 styles: ['./src/client/styles/**/*', '!src/client/styles/{less,less/**}'],
                 less: './src/client/styles/less/**/*.less',
                 templates: './src/client/views/**/*.html',
@@ -48,6 +49,7 @@
                 root: build.root,
                 js: build.webPath + '/js',
                 libs: build.webPath + '/libs',
+                images: build.webPath + '/images',
                 styles: build.webPath + '/styles',
                 css: build.webPath + '/styles/css',
                 templates: build.webPath + '/templates',
