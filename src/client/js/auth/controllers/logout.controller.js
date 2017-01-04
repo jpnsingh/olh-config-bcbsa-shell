@@ -5,8 +5,6 @@
 
     LogoutCtrl.$inject = ['auth'];
     function LogoutCtrl(auth) {
-        var vm = this;
-
         auth.logout();
     }
 })();

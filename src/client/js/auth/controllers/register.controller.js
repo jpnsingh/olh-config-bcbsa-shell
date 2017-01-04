@@ -14,7 +14,7 @@
 
             auth
                 .register(vm.username, vm.password)
-                .then(function (data) {
+                .then(function () {
                     vm.registering = false;
                     $state.go('dashboard');
                 }, function (data) {

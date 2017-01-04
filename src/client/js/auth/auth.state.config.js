@@ -2,8 +2,8 @@
     'use strict';
     module.exports = authStateConfig;
 
-    authStateConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
-    function authStateConfig($stateProvider, $urlRouterProvider) {
+    authStateConfig.$inject = ['$stateProvider'];
+    function authStateConfig($stateProvider) {
         var login = {
                 name: 'login',
                 url: '/login',

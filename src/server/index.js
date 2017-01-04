@@ -4,7 +4,6 @@
     var express = require('express'),
         bodyParser = require('body-parser'),
         cookieParser = require('cookie-parser'),
-        passport = require('passport'),
         session = require('express-session'),
         app = express(),
         port = process.env.PORT || 3000;
@@ -22,7 +21,7 @@
 
     require('./routes')(app);
 
-    app.listen(port, function (error) {
+    app.listen(port, function () {
         console.log('App now running on port: ' + port);
     });
 })();
