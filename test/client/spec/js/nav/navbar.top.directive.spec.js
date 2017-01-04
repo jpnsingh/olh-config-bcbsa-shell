@@ -2,8 +2,7 @@
     'use strict';
 
     describe('BCSBA Nav Directive', function () {
-        var injector,
-            element,
+        var element,
             scope,
             compiler,
             httpBackend;

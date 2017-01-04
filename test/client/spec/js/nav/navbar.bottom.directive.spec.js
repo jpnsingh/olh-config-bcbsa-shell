@@ -2,8 +2,7 @@
     'use strict';
 
     describe('navbarBottom Directive', function () {
-        var injector,
-            element,
+        var element,
             scope,
             compiler,
             httpBackend;
