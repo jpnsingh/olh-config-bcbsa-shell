@@ -6,6 +6,6 @@
             response.sendFile('index.html', {root: 'src/client/views/'});
         });
 
-        app.use('/auth', require('./authRoutes')());
+        app.use('/auth', require('./auth.routes')());
     };
 })();

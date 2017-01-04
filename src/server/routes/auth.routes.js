@@ -2,7 +2,7 @@
     'use strict';
 
     var authRouter = require('express').Router(),
-        authController = require('../controllers/authController')(null, {});
+        authController = require('../controllers/auth.controller')(null, {});
 
     module.exports = function () {
         authRouter
