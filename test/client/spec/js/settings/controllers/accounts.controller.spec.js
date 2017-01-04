@@ -2,8 +2,7 @@
     'use strict';
 
     describe('AccountsCtrl', function () {
-        var injector,
-            scope,
+        var scope,
             controller;
 
         beforeEach(angular.mock.module('bcbsa-shell'));

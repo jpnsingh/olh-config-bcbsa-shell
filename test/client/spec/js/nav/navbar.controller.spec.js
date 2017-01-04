@@ -2,8 +2,7 @@
     'use strict';
 
     describe('NavBarCtrl', function () {
-        var injector,
-            scope,
+        var scope,
             state = {
                 go: function () {
 
