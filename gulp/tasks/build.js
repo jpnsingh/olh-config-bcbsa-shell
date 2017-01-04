@@ -8,7 +8,7 @@
         runSequence(
             'lint',
             'clean',
-            ['styles', 'libs', 'templates'],
+            ['less', 'styles', 'libs', 'templates'],
             'babelify',
             'browserify',
             callback

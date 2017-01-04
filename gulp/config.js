@@ -38,6 +38,7 @@
                 js: './src/client/js/**/*.js',
                 libs: ['public/lib/**/*', 'libs/**/*'],
                 styles: './src/client/styles/**/*',
+                less: './src/client/styles/less/**/*.less',
                 templates: './src/client/views/**/*.html',
                 browserify: {
                     entry: './' + build.transpiled + '/app.js'
@@ -48,6 +49,7 @@
                 js: build.webPath + '/js',
                 libs: build.webPath + '/libs',
                 styles: build.webPath + '/styles',
+                css: build.webPath + '/styles/css',
                 templates: build.webPath + '/templates',
                 transpiled: build.transpiled
             },
