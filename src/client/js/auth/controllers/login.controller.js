@@ -15,7 +15,7 @@
 
             auth
                 .login(vm.username, vm.password)
-                .then(function (data) {
+                .then(function () {
                     vm.loggingIn = false;
                     $state.go('dashboard');
                 }, function (data) {

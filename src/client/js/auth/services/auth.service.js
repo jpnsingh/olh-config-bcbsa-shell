@@ -54,7 +54,7 @@
                 store(response.data.user);
                 $rootScope.$broadcast('loginEvent', response.data.user);
                 return response.data.user;
-            }, function (data) {
+            }, function () {
                 console.log('Failed to register');
                 clear();
                 $rootScope.$broadcast('authenticationFailed');
@@ -78,7 +78,7 @@
                 store(response.data.user);
                 $rootScope.$broadcast('loginEvent', response.data.user);
                 return response.data.user;
-            }, function (data) {
+            }, function () {
                 console.log('Failed to log in');
                 clear();
                 $rootScope.$broadcast('authenticationFailed');

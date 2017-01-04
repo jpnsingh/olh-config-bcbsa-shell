@@ -5,7 +5,7 @@
         passport = require('passport'),
         dbConfig = require('../config/dbConfig')();
 
-    module.exports = function (authService, nav) {
+    module.exports = function () {
         var register = function (request, response) {
             var user = request.body;
 
