@@ -19,7 +19,7 @@
                 },
                 links: {
                     left: [
-                        {label: 'Configuration', stateRef: 'configuration'}
+                        {label: 'Configuration', stateRef: 'configuration.planSetup'}
                     ],
                     right: [
                         {
