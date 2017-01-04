@@ -2,9 +2,8 @@
     'use strict';
 
     describe('LogoutCtrl', function () {
-        var _injector,
-            _scope,
-            _authService,
+        var _scope,
+            _auth,
             _controller;
 
         beforeEach(angular.mock.module('bcbsa-shell'));
@@ -12,15 +11,15 @@
         beforeEach(inject(function ($rootScope, $controller) {
             _scope = $rootScope.$new();
 
-            _authService = jasmine.createSpyObj('AuthService', ['logout']);
+            _auth = jasmine.createSpyObj('auth', ['logout']);
             _controller = $controller('LogoutCtrl as logoutCtrl', {
                 $scope: _scope,
-                AuthService: _authService
+                auth: _auth
             });
         }));
 
-        it('should invoke AuthService logout', function () {
-            expect(_authService.logout).toHaveBeenCalled();
+        it('should invoke auth logout', function () {
+            expect(_auth.logout).toHaveBeenCalled();
         });
     });
 })();

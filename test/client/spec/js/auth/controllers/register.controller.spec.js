@@ -2,10 +2,9 @@
     'use strict';
 
     describe('RegisterCtrl', function () {
-        var _injector,
-            _scope,
+        var _scope,
             _state,
-            _authService,
+            _auth,
             _controller;
 
         beforeEach(angular.mock.module('bcbsa-shell'));
@@ -14,16 +13,16 @@
             _scope = $rootScope.$new();
 
             _state = jasmine.createSpyObj('$state', ['go']);
-            _authService = jasmine.createSpyObj('AuthService', ['register']);
+            _auth = jasmine.createSpyObj('auth', ['register']);
 
             _controller = $controller('RegisterCtrl as registerCtrl', {
                 $scope: _scope,
                 $state: _state,
-                AuthService: _authService
+                auth: _auth
             });
         }));
 
-        it('should invoke AuthService register upon registering', function () {
+        it('should invoke auth register upon registering', function () {
             _controller.username = 'admin';
             _controller.password = 'admin';
 
