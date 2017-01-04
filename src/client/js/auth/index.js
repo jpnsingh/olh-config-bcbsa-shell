@@ -4,5 +4,5 @@
     module.exports = angular.module('bcbsa-shell.auth', [
         require('./services').name,
         require('./controllers').name
-    ]).config(require('./authStateConfig'));
+    ]).config(require('./auth.state.config'));
 })();

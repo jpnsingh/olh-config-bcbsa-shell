@@ -3,5 +3,5 @@
 
     module.exports = angular.module('bsbsa-shell.settings', [
         require('./controllers').name
-    ]).config(require('./settingsStateConfig'));
+    ]).config(require('./settings.state.config'));
 })();

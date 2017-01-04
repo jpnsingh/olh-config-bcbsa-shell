@@ -2,7 +2,7 @@
     'use strict';
 
     module.exports = angular.module('bcbsa-shell.configuration', [
-        require('./configurationFactory').name,
-        require('./configurationController').name
-    ]).config(require('./configStateConfig'));
+        require('./configuration.factory').name,
+        require('./configuration.controller').name
+    ]).config(require('./config.state.config'));
 })();
