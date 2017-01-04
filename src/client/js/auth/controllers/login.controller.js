@@ -3,8 +3,8 @@
     module.exports = angular.module('bcbsa-shell.auth.controllers.loginController', [])
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$state', 'AuthService'];
-    function LoginCtrl($state, AuthService) {
+    LoginCtrl.$inject = ['$state', 'auth'];
+    function LoginCtrl($state, auth) {
         var vm = this;
 
         vm.loggedIn = false;
@@ -13,7 +13,7 @@
         function login() {
             vm.loggingIn = true;
 
-            AuthService
+            auth
                 .login(vm.username, vm.password)
                 .then(function (data) {
                     vm.loggingIn = false;

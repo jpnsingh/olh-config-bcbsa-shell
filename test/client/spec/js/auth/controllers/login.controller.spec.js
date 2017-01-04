@@ -4,7 +4,7 @@
     describe('LoginCtrl', function () {
         var _scope,
             _state,
-            _authService,
+            _auth,
             _controller;
 
         beforeEach(angular.mock.module('bcbsa-shell'));
@@ -13,12 +13,12 @@
             _scope = $rootScope.$new();
 
             _state = jasmine.createSpyObj('$state', ['go']);
-            _authService = jasmine.createSpyObj('AuthService', ['login']);
+            _auth = jasmine.createSpyObj('auth', ['login']);
 
             _controller = $controller('LoginCtrl as loginCtrl', {
                 $scope: _scope,
                 $state: _state,
-                AuthService: _authService
+                auth: _auth
             });
         }));
 
@@ -26,11 +26,11 @@
             expect(_controller.loggedIn).toBeFalsy();
         });
 
-        it('should invoke AuthService when login function is called', function () {
+        it('should invoke auth when login function is called', function () {
             _controller.username = 'admin';
             _controller.password = 'admin';
 
-            expect(_authService.login).toBeDefined();
+            expect(_auth.login).toBeDefined();
         });
     });
 })();

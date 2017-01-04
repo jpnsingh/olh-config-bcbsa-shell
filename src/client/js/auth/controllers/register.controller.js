@@ -3,8 +3,8 @@
     module.exports = angular.module('bcbsa-shell.auth.controllers.registerController', [])
         .controller('RegisterCtrl', RegisterCtrl);
 
-    RegisterCtrl.$inject = ['$state', 'AuthService'];
-    function RegisterCtrl($state, AuthService) {
+    RegisterCtrl.$inject = ['$state', 'auth'];
+    function RegisterCtrl($state, auth) {
         var vm = this;
 
         vm.register = register;
@@ -12,7 +12,7 @@
         function register() {
             vm.registering = true;
 
-            AuthService
+            auth
                 .register(vm.username, vm.password)
                 .then(function (data) {
                     vm.registering = false;

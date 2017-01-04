@@ -2,10 +2,10 @@
     'use strict';
 
     module.exports = angular.module('bcbsa-shell.auth.services.authService', [])
-        .factory('AuthService', AuthService);
+        .factory('auth', auth);
 
-    AuthService.$inject = ['$rootScope', '$injector', '$http', '$state'];
-    function AuthService($rootScope, $injector, $http, $state) {
+    auth.$inject = ['$rootScope', '$injector', '$http', '$state'];
+    function auth($rootScope, $injector, $http, $state) {
         var service = {};
 
         service.clear = clear;
