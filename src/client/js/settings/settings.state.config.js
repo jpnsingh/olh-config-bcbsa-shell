@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    module.exports = settingsStateConfig;
+    module.exports = SettingsStateConfig;
 
-    settingsStateConfig.$inject = ['$stateProvider'];
-    function settingsStateConfig($stateProvider) {
+    SettingsStateConfig.$inject = ['$stateProvider'];
+    function SettingsStateConfig($stateProvider) {
         $stateProvider
             .state(states().settings)
             .state(states().settingsProfile)

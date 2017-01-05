@@ -1,9 +1,9 @@
 (function () {
     'use strict';
-    module.exports = authStateConfig;
+    module.exports = AuthStateConfig;
 
-    authStateConfig.$inject = ['$stateProvider'];
-    function authStateConfig($stateProvider) {
+    AuthStateConfig.$inject = ['$stateProvider'];
+    function AuthStateConfig($stateProvider) {
         $stateProvider
             .state(states().login)
             .state(states().logout)
