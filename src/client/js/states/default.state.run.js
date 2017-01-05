@@ -3,8 +3,8 @@
 
     module.exports = defaultStateRun;
 
-    defaultStateRun.$inject = ['$rootScope', 'auth'];
-    function defaultStateRun($rootScope, auth) {
+    defaultStateRun.$inject = ['$rootScope', '$state', 'auth'];
+    function defaultStateRun($rootScope, $state, auth) {
         $rootScope.$on('$stateChangeStart', function (event, toState/*, toParams, fromState, fromParams*/) {
             if (toState.name === 'login' || toState.name === 'register') return;
 
@@ -19,5 +19,9 @@
         });
 
         $rootScope.$on('$stateChangeError', console.log.bind(console));
+
+        $rootScope.$on('$stateNotFound', function (/*event, unfoundState, fromState, fromParams*/) {
+            $state.go('404');
+        });
     }
 })();
