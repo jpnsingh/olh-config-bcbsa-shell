@@ -26,14 +26,10 @@ Install instructions
 
 6. run `gulp build` to build the application and serve the content via web path
 
-7. run `gulp serve` or `gulp` to start the server and you'll see following in the terminal
+7. run `gulp` to start the server and launch the application in your default browser for you...
 
-    'Server running on port: 5000'
+    By default port 8090 would be used, however, that can be changed in ./config/default.json
     
-8. Open browser and launch the application by going to
-
-    `http://localhost:5000`
-
-
-    
-
+    `web: {
+        port: 8090 // change it accordingly if needed
+    }`
