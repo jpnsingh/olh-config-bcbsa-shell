@@ -25,7 +25,7 @@
             },
             dashboard = {
                 name: 'dashboard',
-                url: '/',
+                url: '/dashboard',
                 docTitle: 'Dashboard',
                 parent: 'nav',
                 templateUrl: 'templates/partials/dashboard.html'
@@ -48,10 +48,10 @@
         $urlMatcherFactoryProvider.caseInsensitive(true);
         $urlMatcherFactoryProvider.strictMode(false);
 
-        $urlRouterProvider.when('', '/');
+        $urlRouterProvider.when('', '/dashboard');
         $urlRouterProvider.otherwise('/404');
 
-        $locationProvider.hashPrefix('');
+        $locationProvider.html5Mode(true);
 
         $stateProvider
             .state(nav)
