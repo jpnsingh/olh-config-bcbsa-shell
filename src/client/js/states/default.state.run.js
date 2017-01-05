@@ -17,5 +17,7 @@
         $rootScope.$on('$stateChangeSuccess', function (event, toState/*, toParams, fromState, fromParams*/) {
             $rootScope.title = 'BCBSA Shell | ' + toState.docTitle;
         });
+
+        $rootScope.$on('$stateChangeError', console.log.bind(console));
     }
 })();
