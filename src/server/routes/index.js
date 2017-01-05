@@ -2,10 +2,10 @@
     'use strict';
 
     module.exports = function (app) {
-        app.get('/', function (request, response) {
+        app.use('/auth', require('./auth.routes')());
+
+        app.all('/*', function (request, response) {
             response.sendFile('index.html', {root: 'src/client/views/'});
         });
-
-        app.use('/auth', require('./auth.routes')());
     };
 })();
