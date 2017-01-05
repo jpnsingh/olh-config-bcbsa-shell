@@ -1,16 +1,16 @@
 (function () {
     'use strict';
 
-    module.exports = configStateConfig;
+    module.exports = ConfigStateConfig;
 
-    configStateConfig.$inject = ['$stateProvider'];
-    function configStateConfig($stateProvider) {
+    ConfigStateConfig.$inject = ['$stateProvider'];
+    function ConfigStateConfig($stateProvider) {
         $stateProvider
+            .state(states().configuration)
             .state(states().planSetup)
             .state(states().planAdditional)
             .state(states().featurePool)
-            .state(states().featureAssignment)
-            .state(states().configuration);
+            .state(states().featureAssignment);
 
         function states() {
             return {
