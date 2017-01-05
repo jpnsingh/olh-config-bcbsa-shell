@@ -1,8 +1,6 @@
-Configuration Service for BCBSA Shell Application
--
+# Configuration Service for Blue Cross Blue Shield Association Shell Application
 
-Install instructions
--
+## Installation
 
 1. install [node](https://nodejs.org/en/)
 
@@ -20,7 +18,7 @@ Install instructions
 
     `npm install`
 
-    The above commands will install all the client and server side dependencies for the application
+    ###### The above commands will install all the client and server side dependencies for the application
 
 5. run `gulp test` to run the unit tests
 
@@ -28,8 +26,10 @@ Install instructions
 
 7. run `gulp` to start the server and launch the application in your default browser for you...
 
-    By default port 8090 would be used, however, that can be changed in ./config/default.json
+    ###### By default port 8090 would be used, however, that can be changed in ./config/default.json
     
-    `web: {
-        port: 8090 // change it accordingly if needed
-    }`
+    ```
+    web: {
+        port: 8090 # change it accordingly if needed
+    }
+    ```
