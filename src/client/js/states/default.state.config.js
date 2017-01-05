@@ -3,8 +3,8 @@
 
     module.exports = defaultStateConfig;
 
-    defaultStateConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
-    function defaultStateConfig($stateProvider, $urlRouterProvider, $locationProvider) {
+    defaultStateConfig.$inject = ['$urlMatcherFactoryProvider', '$urlRouterProvider', '$locationProvider', '$stateProvider'];
+    function defaultStateConfig($urlMatcherFactoryProvider, $urlRouterProvider, $locationProvider, $stateProvider) {
         var nav = {
                 name: 'nav',
                 abstract: true,
@@ -44,6 +44,9 @@
                 parent: 'nav',
                 templateUrl: 'templates/partials/help.html'
             };
+
+        $urlMatcherFactoryProvider.caseInsensitive(true);
+        $urlMatcherFactoryProvider.strictMode(false);
 
         $urlRouterProvider.when('', '/');
         $urlRouterProvider.otherwise('/404');
