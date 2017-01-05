@@ -3,23 +3,35 @@
 
     describe('NavBarCtrl', function () {
         var scope,
-            state = {
-                go: function () {
-
-                }
-            },
+            state,
+            _window,
             controller;
 
         beforeEach(angular.mock.module('bcbsa-shell'));
 
-        beforeEach(inject(function ($rootScope, $controller) {
+        beforeEach(inject(function ($rootScope, $controller, $window) {
             scope = $rootScope.$new();
-            controller = $controller('NavBarCtrl as vm', {$scope: scope, $state: state});
+            state = jasmine.createSpyObj('state', ['go']);
+            _window = $window;
+            controller = $controller('NavBarCtrl', {$scope: scope, $state: state, $window: _window});
         }));
 
-        it('should initialize the controller and set loggedIn accordingly with no sessionStorage', function () {
-            expect(controller.loggedIn).toBeFalsy();
+        // Keep this test first as controller get initialized with sessionStorage after this...
+        it('should invoke auth logout when user is not logged in', function () {
+            expect(state.go).toHaveBeenCalled();
+            expect(state.go).toHaveBeenCalledWith('logout');
         });
+
+        it('should initialize the controller and set loggedIn accordingly with sessionStorage', inject(function ($controller) {
+            _window.sessionStorage.user = JSON.stringify({
+                lastname: 'last',
+                firstname: 'first',
+                username: 'username'
+            });
+            controller = $controller('NavBarCtrl', {$scope: scope, $state: state, $window: _window});
+
+            expect(controller.loggedIn).toBeTruthy();
+        }));
 
         it('should initialize the top nav accordingly', function () {
             expect(controller.nav.top).toBeDefined();
@@ -31,5 +43,42 @@
             expect(controller.nav.bottom).toBeDefined();
             expect(controller.nav.bottom.copyrightYear).toEqual(new Date().getFullYear());
         });
+
+        it('should form the user displayName as lastName, firstName when both the fields are present', function () {
+            expect(controller.displayName).toBeDefined();
+            expect(controller.displayName).toEqual('last, first');
+        });
+
+        it('should form the user displayName as lastname when only lastname field is present', inject(function ($controller) {
+            _window.sessionStorage.user = JSON.stringify({
+                lastname: 'last',
+                username: 'username'
+            });
+            controller = $controller('NavBarCtrl', {$scope: scope, $state: state, $window: _window});
+
+            expect(controller.displayName).toBeDefined();
+            expect(controller.displayName).toEqual('last');
+        }));
+
+        it('should form the user displayName as firstname when only firstname field is present', inject(function ($controller) {
+            _window.sessionStorage.user = JSON.stringify({
+                firstname: 'first',
+                username: 'username'
+            });
+            controller = $controller('NavBarCtrl', {$scope: scope, $state: state, $window: _window});
+
+            expect(controller.displayName).toBeDefined();
+            expect(controller.displayName).toEqual('first');
+        }));
+
+        it('should form the user displayName as username when only username field is present', inject(function ($controller) {
+            _window.sessionStorage.user = JSON.stringify({
+                username: 'username'
+            });
+            controller = $controller('NavBarCtrl', {$scope: scope, $state: state, $window: _window});
+
+            expect(controller.displayName).toBeDefined();
+            expect(controller.displayName).toEqual('username');
+        }));
     });
 })();

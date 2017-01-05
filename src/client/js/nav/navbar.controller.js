@@ -4,11 +4,12 @@
     module.exports = angular.module('bcbsa-shell.navigation.controllers.navBarController', [])
         .controller('NavBarCtrl', NavBarCtrl);
 
-    NavBarCtrl.$inject = ['$rootScope', '$state'];
-    function NavBarCtrl($rootScope, $state) {
+    NavBarCtrl.$inject = ['$state', '$window'];
+    function NavBarCtrl($state, $window) {
         var vm = this;
 
-        vm.user = sessionStorage.user ? JSON.parse(sessionStorage.user) : false;
+        vm.user = $window.sessionStorage.user ? JSON.parse($window.sessionStorage.user) : false;
+        vm.displayName = displayName(vm.user);
         vm.loggedIn = !!vm.user;
 
         vm.nav = {
@@ -57,6 +58,23 @@
                 copyrightYear: new Date().getFullYear()
             }
         };
+
+        function displayName(user) {
+            var name = '';
+
+            if (user.lastname) {
+                name += user.lastname;
+                if (user.firstname) {
+                    name += ', ' + user.firstname;
+                }
+            } else if (user.firstname) {
+                name += user.firstname;
+            } else {
+                name += user.username;
+            }
+
+            return name;
+        }
 
         if (!vm.loggedIn) {
             $state.go('logout');
