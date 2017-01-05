@@ -26,26 +26,34 @@
                 planSetup: {
                     name: 'configuration.planSetup',
                     url: '/planSetup',
-                    docTitle: 'Configuration | Plan Setup',
-                    templateUrl: 'templates/partials/configuration/plan.setup.html'
+                    templateUrl: 'templates/partials/configuration/plan.setup.html',
+                    data: {
+                        docTitle: 'Configuration | Plan Setup'
+                    }
                 },
                 planAdditional: {
                     name: 'configuration.planAdditional',
                     url: '/planAdditional',
-                    docTitle: 'Configuration | Plan Additional',
-                    templateUrl: 'templates/partials/configuration/plan.additional.html'
+                    templateUrl: 'templates/partials/configuration/plan.additional.html',
+                    data: {
+                        docTitle: 'Configuration | Plan Additional',
+                    }
                 },
                 featurePool: {
                     name: 'configuration.featurePool',
                     url: '/featurePool',
-                    docTitle: 'Configuration | Feature Pool',
-                    templateUrl: 'templates/partials/configuration/feature.pool.html'
+                    templateUrl: 'templates/partials/configuration/feature.pool.html',
+                    data: {
+                        docTitle: 'Configuration | Feature Pool',
+                    }
                 },
                 featureAssignment: {
                     name: 'configuration.featureAssignment',
                     url: '/featureAssignment',
-                    docTitle: 'Configuration | Feature Assignment',
-                    templateUrl: 'templates/partials/configuration/feature.assignment.html'
+                    templateUrl: 'templates/partials/configuration/feature.assignment.html',
+                    data: {
+                        docTitle: 'Configuration | Feature Assignment',
+                    }
                 }
             };
         }

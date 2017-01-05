@@ -44,23 +44,29 @@
                 dashboard: {
                     name: 'dashboard',
                     url: '/dashboard',
-                    docTitle: 'Dashboard',
                     parent: 'nav',
-                    templateUrl: 'templates/partials/dashboard.html'
+                    templateUrl: 'templates/partials/dashboard.html',
+                    data: {
+                        docTitle: 'Dashboard'
+                    }
                 },
                 about: {
                     name: 'about',
                     url: '/about',
-                    docTitle: 'About',
                     parent: 'nav',
-                    templateUrl: 'templates/partials/about.html'
+                    templateUrl: 'templates/partials/about.html',
+                    data: {
+                        docTitle: 'About'
+                    }
                 },
                 help: {
                     name: 'help',
                     url: '/help',
-                    docTitle: 'Help',
                     parent: 'nav',
-                    templateUrl: 'templates/partials/help.html'
+                    templateUrl: 'templates/partials/help.html',
+                    data: {
+                        docTitle: 'Help'
+                    }
                 }
             };
         }
