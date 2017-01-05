@@ -14,14 +14,14 @@
         $locationProvider.html5Mode(true);
 
         $stateProvider
-            .state(state().nav)
-            .state(state().nonav)
-            .state(state().notFound)
-            .state(state().dashboard)
-            .state(state().about)
-            .state(state().help);
+            .state(states().nav)
+            .state(states().nonav)
+            .state(states().notFound)
+            .state(states().dashboard)
+            .state(states().about)
+            .state(states().help);
 
-        function state() {
+        function states() {
             return {
                 nav: {
                     name: 'nav',
