@@ -1,9 +1,8 @@
-Configuration Service for BCBSA Shell Application
--
+# Configuration Service for Blue Cross Blue Shield Association Shell Application
 
-Install instructions
--
+## Installation
 
+```
 1. install [node](https://nodejs.org/en/)
 
 2. install bower globally
@@ -33,3 +32,4 @@ Install instructions
     `web: {
         port: 8090 // change it accordingly if needed
     }`
+```
