@@ -4,8 +4,8 @@
     module.exports = angular.module('bcbsa-shell.auth.services.authService', [])
         .factory('auth', auth);
 
-    auth.$inject = ['$rootScope', '$injector', '$http', '$state'];
-    function auth($rootScope, $injector, $http, $state) {
+    auth.$inject = ['$rootScope', '$injector', '$http', '$state', '$window'];
+    function auth($rootScope, $injector, $http, $state, $window) {
         var service = {};
 
         service.clear = clear;
@@ -13,19 +13,20 @@
         service.setLoggedIn = setLoggedIn;
         service.register = register;
         service.login = login;
+        service.isAuthenticated = isAuthenticated;
         service.logout = logout;
 
         return service;
 
         function store(user) {
             $rootScope.user = user;
-            sessionStorage.user = JSON.stringify(user);
+            $window.sessionStorage.user = JSON.stringify(user);
             setLoggedIn(true);
         }
 
         function clear() {
             $rootScope.user = '';
-            sessionStorage.user = '';
+            $window.sessionStorage.user = '';
             setLoggedIn(false);
         }
 
@@ -83,6 +84,12 @@
                 clear();
                 $rootScope.$broadcast('authenticationFailed');
             });
+        }
+
+        function isAuthenticated() {
+            var user = $window.sessionStorage.user;
+
+            return !!user;
         }
 
         function logout() {

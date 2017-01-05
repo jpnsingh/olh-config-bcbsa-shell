@@ -5,8 +5,8 @@
         open = require('gulp-open'),
         config = require('config');
 
-    gulp.task('open', function () {
-        gulp
+    module.exports = gulp.task('open', function () {
+        return gulp
             .src('src/client/views/index.html')
             .pipe(open({uri: formWebUriFromConfig()}));
     });

@@ -5,7 +5,6 @@
         less = require('gulp-less'),
         gulpConfig = require('../config');
 
-
     module.exports = gulp.task('less', function () {
         return gulp
             .src(gulpConfig.paths.src.less)

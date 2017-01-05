@@ -3,7 +3,6 @@
 
     describe('NavBarCtrl', function () {
         var scope,
-            state,
             _window,
             controller;
 
@@ -11,16 +10,9 @@
 
         beforeEach(inject(function ($rootScope, $controller, $window) {
             scope = $rootScope.$new();
-            state = jasmine.createSpyObj('state', ['go']);
             _window = $window;
-            controller = $controller('NavBarCtrl', {$scope: scope, $state: state, $window: _window});
+            controller = $controller('NavBarCtrl', {$scope: scope, $window: _window});
         }));
-
-        // Keep this test first as controller get initialized with sessionStorage after this...
-        it('should invoke auth logout when user is not logged in', function () {
-            expect(state.go).toHaveBeenCalled();
-            expect(state.go).toHaveBeenCalledWith('logout');
-        });
 
         it('should initialize the controller and set loggedIn accordingly with sessionStorage', inject(function ($controller) {
             _window.sessionStorage.user = JSON.stringify({
@@ -28,7 +20,7 @@
                 firstname: 'first',
                 username: 'username'
             });
-            controller = $controller('NavBarCtrl', {$scope: scope, $state: state, $window: _window});
+            controller = $controller('NavBarCtrl', {$scope: scope, $window: _window});
 
             expect(controller.loggedIn).toBeTruthy();
         }));
@@ -54,7 +46,7 @@
                 lastname: 'last',
                 username: 'username'
             });
-            controller = $controller('NavBarCtrl', {$scope: scope, $state: state, $window: _window});
+            controller = $controller('NavBarCtrl', {$scope: scope, $window: _window});
 
             expect(controller.displayName).toBeDefined();
             expect(controller.displayName).toEqual('last');
@@ -65,7 +57,7 @@
                 firstname: 'first',
                 username: 'username'
             });
-            controller = $controller('NavBarCtrl', {$scope: scope, $state: state, $window: _window});
+            controller = $controller('NavBarCtrl', {$scope: scope, $window: _window});
 
             expect(controller.displayName).toBeDefined();
             expect(controller.displayName).toEqual('first');
@@ -75,7 +67,7 @@
             _window.sessionStorage.user = JSON.stringify({
                 username: 'username'
             });
-            controller = $controller('NavBarCtrl', {$scope: scope, $state: state, $window: _window});
+            controller = $controller('NavBarCtrl', {$scope: scope, $window: _window});
 
             expect(controller.displayName).toBeDefined();
             expect(controller.displayName).toEqual('username');

@@ -46,6 +46,7 @@
             };
 
         $urlRouterProvider.when('', '/');
+        $urlRouterProvider.otherwise('/404');
 
         $locationProvider.hashPrefix('');
 

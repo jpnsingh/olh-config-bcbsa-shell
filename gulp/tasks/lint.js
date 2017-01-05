@@ -6,7 +6,7 @@
         jscs = require('gulp-jscs'),
         gulpConfig = require('../config');
 
-    gulp.task('lint', function () {
+    module.exports = gulp.task('lint', function () {
         return gulp
             .src(gulpConfig.files.js)
             .pipe(jshint())
