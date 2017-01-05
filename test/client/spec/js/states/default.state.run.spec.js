@@ -66,9 +66,9 @@
         });
 
         describe('on stateChangeSuccess', function () {
-            it('should set the docTitle accordingly on root scope', function () {
+            it('should set the data.docTitle accordingly on root scope', function () {
                 var eventFunction = $rootScope.$on.calls.argsFor(1)[1]; // Second call for $rootScope.$on is for success
-                eventFunction({}, {docTitle: 'Test'});
+                eventFunction({}, {data: {docTitle: 'Test'}});
 
                 expect($rootScope.title).toEqual('BCBSA Shell | Test')
             });
