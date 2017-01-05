@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    module.exports = defaultStateConfig;
+    module.exports = DefaultStateConfig;
 
-    defaultStateConfig.$inject = ['$urlMatcherFactoryProvider', '$urlRouterProvider', '$locationProvider', '$stateProvider'];
-    function defaultStateConfig($urlMatcherFactoryProvider, $urlRouterProvider, $locationProvider, $stateProvider) {
+    DefaultStateConfig.$inject = ['$urlMatcherFactoryProvider', '$urlRouterProvider', '$locationProvider', '$stateProvider'];
+    function DefaultStateConfig($urlMatcherFactoryProvider, $urlRouterProvider, $locationProvider, $stateProvider) {
         $urlMatcherFactoryProvider.caseInsensitive(true);
         $urlMatcherFactoryProvider.strictMode(false);
 
