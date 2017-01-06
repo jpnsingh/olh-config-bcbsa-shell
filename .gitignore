@@ -7,3 +7,7 @@
 public/lib
 
 node_modules
+
+coverage
+
+coverage-report
