@@ -9,8 +9,8 @@ module.exports = function (config) {
 
         frameworks: [
             'browserify',
-            'sinon',
-            'jasmine'
+            'jasmine',
+            'sinon'
         ],
 
         files: [
@@ -45,8 +45,6 @@ module.exports = function (config) {
 
         coverageReporter: {
             reporters: [
-                //{type: 'html'},
-                //{type: 'text'},
                 {type: 'text-summary'}
             ]
         },
@@ -80,5 +78,4 @@ module.exports = function (config) {
             ]
         }
     });
-
 };
