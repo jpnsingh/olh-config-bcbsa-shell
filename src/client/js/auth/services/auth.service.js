@@ -4,61 +4,63 @@
     module.exports = angular.module('bcbsa-shell.auth.services.authService', [])
         .factory('auth', auth);
 
-    auth.$inject = ['$rootScope', '$injector', '$http', '$state', '$window'];
-    function auth($rootScope, $injector, $http, $state, $window) {
+    auth.$inject = ['$rootScope', '$injector', '$state', '$window'];
+    function auth($rootScope, $injector, $state, $window) {
         var service = {};
 
         service.clear = clear;
-        service.getLoggedIn = getLoggedIn;
-        service.setLoggedIn = setLoggedIn;
-        service.register = register;
-        service.login = login;
+        service.storeUser = storeUser;
+        service.currentUser = currentUser;
         service.isAuthenticated = isAuthenticated;
         service.logout = logout;
+        service.register = register;
+        service.login = login;
 
         return service;
 
-        function store(user) {
-            $rootScope.user = user;
-            $window.sessionStorage.user = JSON.stringify(user);
-            setLoggedIn(true);
-        }
-
         function clear() {
-            $rootScope.user = '';
-            $window.sessionStorage.user = '';
-            setLoggedIn(false);
+            $window.sessionStorage.user = JSON.stringify({});
         }
 
-        function getLoggedIn() {
-            return service.loggedIn;
+        function storeUser(user) {
+            $window.sessionStorage.user = user ? JSON.stringify(user) : {};
+            $rootScope.$broadcast('loginEvent', user);
+            return user;
         }
 
-        function setLoggedIn(loggedIn) {
-            service.loggedIn = loggedIn;
+        function currentUser() {
+            return !_.isEmpty($window.sessionStorage.user) ? JSON.parse($window.sessionStorage.user) : {};
+        }
+
+        function isAuthenticated() {
+            return !_.isEmpty(currentUser());
+        }
+
+        function logout() {
+            clear();
+            $state.go('login');
+        }
+
+        function failureEvent(name) {
+            console.log('Failed to %s', name);
+            clear();
+            $rootScope.$broadcast('authenticationFailed');
         }
 
         function register(username, password) {
             return $injector.get('$http')({
                 method: 'POST',
                 url: '/auth/register',
-                headers: {
-                    //'Content-Type': 'application/x-www-form-urlencoded',
-                },
+                headers: {},
                 data: {
                     grantType: 'password',
                     username: username,
                     password: password
                 }
             }).then(function (response) {
-                // success - user logged in
-                store(response.data.user);
-                $rootScope.$broadcast('loginEvent', response.data.user);
-                return response.data.user;
+                return storeUser(response.data.user);
             }, function () {
-                console.log('Failed to register');
-                clear();
-                $rootScope.$broadcast('authenticationFailed');
+                failureEvent('login');
             });
         }
 
@@ -66,35 +68,17 @@
             return $injector.get('$http')({
                 method: 'POST',
                 url: '/auth/login',
-                headers: {
-                    //'Content-Type': 'application/x-www-form-urlencoded',
-                },
+                headers: {},
                 data: {
                     grantType: 'password',
                     username: username,
                     password: password
                 }
             }).then(function (response) {
-                // success - user logged in
-                store(response.data.user);
-                $rootScope.$broadcast('loginEvent', response.data.user);
-                return response.data.user;
+                return storeUser(response.data.user);
             }, function () {
-                console.log('Failed to log in');
-                clear();
-                $rootScope.$broadcast('authenticationFailed');
+                failureEvent('register');
             });
-        }
-
-        function isAuthenticated() {
-            var user = $window.sessionStorage.user;
-
-            return !!user;
-        }
-
-        function logout() {
-            clear();
-            $state.go('login');
         }
     }
 })();
