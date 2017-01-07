@@ -18,7 +18,8 @@
             script: './src/server/index.js',
             delayTime: 1,
             env: {
-                'PORT': config.web.port
+                'port': config.web.port,
+                'host': config.web.host
             },
             watch: gulpConfig.files.js
         };

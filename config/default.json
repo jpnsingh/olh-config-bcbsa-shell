@@ -1,5 +1,6 @@
 {
   "app": "bcbsa-shell",
+  "secret": "bcbsa-shell-app",
   "web": {
     "protocol": "http",
     "host": "localhost",

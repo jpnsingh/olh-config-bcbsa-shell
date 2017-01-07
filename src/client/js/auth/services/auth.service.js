@@ -42,7 +42,7 @@
         }
 
         function failureEvent(name) {
-            console.log('Failed to %s', name);
+            console.log('Failed to ' + name);
             clear();
             $rootScope.$broadcast('authenticationFailed');
         }
