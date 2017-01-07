@@ -18,10 +18,21 @@
     "tests"
   ],
   "dependencies": {
+    "jquery-ui": "^1.12.1",
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
     "angular": "^1.6.1",
+    "angular-bootstrap": "^2.4.0",
+    "angular-cookies": "^1.6.1",
+    "angular-http-auth": "^1.5.0",
+    "angular-mocks": "^1.6.1",
+    "angular-sanitize": "^1.6.1",
+    "angular-translate": "^2.13.1",
+    "angular-translate-loader-partial": "^2.13.1",
+    "angular-ui-grid": "^4.0.2",
+    "angular-ui-mask": "^1.8.7",
     "angular-ui-router": "^0.3.2",
+    "dropzone": "^4.3.0",
     "lodash": "^4.17.4"
   },
   "overrides": {
