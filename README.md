@@ -14,9 +14,9 @@
 
 4. Open terminal and navigate to project's directory and then run following commands:
 
-    `bower install`
-
     `npm install`
+
+    `bower install`
 
     ###### The above commands will install all the client and server side dependencies for the application
 
