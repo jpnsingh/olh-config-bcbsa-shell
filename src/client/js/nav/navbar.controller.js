@@ -8,9 +8,9 @@
     function NavBarCtrl($window) {
         var vm = this;
 
-        vm.user = $window.sessionStorage.user ? JSON.parse($window.sessionStorage.user) : false;
+        vm.user = !_.isEmpty($window.sessionStorage.user) ? JSON.parse($window.sessionStorage.user) : {};
+        vm.loggedIn = !_.isEmpty(vm.user);
         vm.displayName = displayName(vm.user);
-        vm.loggedIn = !!vm.user;
 
         vm.nav = {
             top: {

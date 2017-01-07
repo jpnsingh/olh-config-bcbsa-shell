@@ -2,53 +2,65 @@
     'use strict';
 
     describe('auth service:', function () {
-        var _rootScope,
-            _injector,
+        var _q,
+            _rootScope,
             _http,
             _state,
             _window,
-            _auth;
+            _auth,
+            testUser = {
+                _id: '123-456-789',
+                username: 'foo',
+                email: 'foo@bar.com'
+            };
 
         beforeEach(angular.mock.module('bcbsa-shell'));
 
-        beforeEach(inject(function ($rootScope, $injector, $http, $state, $window, auth) {
+        beforeEach(inject(function ($q, $rootScope, $http, $state, $window, auth) {
+            _q = $q;
             _rootScope = $rootScope;
-            _injector = $injector;
             _http = $http;
+            spyOn(_http, 'post').and.returnValue(_q.when(testUser));
+
             _state = $state;
             spyOn(_state, 'go').and.callThrough();
+
             _window = $window;
             _auth = auth;
         }));
 
         describe('clear:', function () {
-            it('should clear the user from rootScope and sessionStorage and set loggedIn as false', function () {
+            it('should clear the user from session', function () {
                 _auth.clear();
 
-                expect(_rootScope.user).toBe('');
-                expect(_window.sessionStorage.user).toBe('');
-                expect(_auth.loggedIn).toBeFalsy();
+                expect(_auth.currentUser()).toEqual({});
             });
         });
 
-        describe('setLoggedIn and getLoggedIn:', function () {
-            it('should set and retrieve the loggedIn status accordingly', function () {
-                expect(_auth.getLoggedIn()).toBeFalsy();
+        describe('storeUser:', function () {
+            it('should store the user json accordingly', function () {
+                _auth.storeUser(testUser);
 
-                _auth.setLoggedIn(true);
+                expect(_auth.currentUser()).toEqual(testUser);
+            });
+        });
 
-                expect(_auth.getLoggedIn()).toBeTruthy();
+        describe('currentUser:', function () {
+            it('should return the current user present is session', function () {
+                _auth.storeUser(testUser);
+
+                expect(_auth.currentUser()).toEqual(testUser);
             });
         });
 
         describe('isAuthenticated:', function () {
-            it('should return false if the user is not present is sessionStorage', function () {
-
+            it('should return false if the user is not present is session', function () {
+                _auth.clear();
                 expect(_auth.isAuthenticated()).toBeFalsy();
             });
 
-            it('should return true if the user is present is sessionStorage', function () {
-                _window.sessionStorage.user = JSON.stringify({username: 'test', password: 'test'});
+            it('should return true if the user is present is session', function () {
+                _auth.storeUser(testUser);
 
                 expect(_auth.isAuthenticated()).toBeTruthy();
             });
@@ -56,30 +68,32 @@
 
         describe('logout:', function () {
             it('should clear the user from session and change the state to login', function () {
-                var user = JSON.stringify({username: 'test', password: 'test'});
-                _window.sessionStorage.user = user;
-                _rootScope.user = user;
+                _auth.storeUser(testUser);
 
                 _auth.logout();
 
-                expect(_rootScope.user).toBe('');
-                expect(_window.sessionStorage.user).toBe('');
-                expect(_auth.loggedIn).toBeFalsy();
+                expect(_auth.currentUser()).toEqual({});
                 expect(_state.go).toHaveBeenCalledWith('login');
             });
         });
 
         describe('register:', function () {
             it('should invoke the register api via $http', function () {
-                _auth.register('testUser', 'testPassword');
-                //TODO: complete this spec
+                expect(_auth.currentUser()).toEqual({});
+
+                // _auth
+                //     .register()
+                //     .then(expect(_auth.currentUser()).toEqual(testUser));
             });
         });
 
         describe('login:', function () {
-            it('should invoke the login api via $http', function () {
-                _auth.login('testUser', 'testPassword');
-                //TODO: complete this spec
+            it('should set the current user upon successful login', function () {
+                expect(_auth.currentUser()).toEqual({});
+
+                // _auth
+                //     .login()
+                //     .then(expect(_auth.currentUser()).toEqual(testUser));
             });
         });
     });
