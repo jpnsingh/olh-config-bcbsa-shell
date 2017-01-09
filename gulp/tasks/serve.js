@@ -18,10 +18,10 @@
             script: './src/server/index.js',
             delayTime: 1,
             env: {
-                'protocol': config.web.protocol,
-                'host': config.web.host,
-                'port': config.web.port,
-                'secret': config.secret
+                'PROTOCOL': config.web.PROTOCOL,
+                'HOST': config.web.HOST,
+                'PORT': config.web.PORT,
+                'SECRET': config.SECRET
             },
             watch: gulpConfig.files.js
         };

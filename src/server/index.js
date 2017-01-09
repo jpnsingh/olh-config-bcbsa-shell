@@ -8,8 +8,8 @@
         favicon = require('serve-favicon'),
         app = express(),
         router = express.Router(),
-        port = process.env.port || 3000,
-        secret = process.env.secret || 'bcbsa-shell-app-secret';
+        port = process.env.PORT || 3000,
+        secret = process.env.SECRET || 'bcbsa-shell-app-secret';
 
     router.use(favicon('.build/web/images/favicon.png'));
 
