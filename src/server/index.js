@@ -28,9 +28,5 @@
 
     var server = app.listen(port, function () {
         console.log('Server now listening at port: %s', server.address().port);
-        console.log('\n');
-        console.log('env: %s', JSON.stringify(process.env));
-        console.log('\n');
-        console.log('config: %s', JSON.stringify(require('config')));
     });
 })();
