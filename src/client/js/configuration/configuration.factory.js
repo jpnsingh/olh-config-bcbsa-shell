@@ -13,16 +13,16 @@
         function getDefaultConfig() {
             var defaultConfig = {
                     planSetup: {
-                        name: 'Plan Setup',
+                        header: 'Plan Setup',
                         branding: {
                             header: 'Branding',
                             planInfo: {
-                                title: 'Plan Title'
+                                title: 'Plan Title',
+                                value: ''
                             },
-                            colorTheme: ['red', 'green', 'blue'],
-                            language: {
-                                multilingual: true,
-                                languages: ['English', 'Spanish']
+                            colorTheme: {
+                                themes: ['red', 'green', 'blue'],
+                                selected: ''
                             },
                             logo: {
                                 url: ''
@@ -32,13 +32,31 @@
                             }
                         },
                         support: {
-                            name: 'Support Personnel Name',
-                            contactNumber: 'Support Contact Number',
-                            hours: 'Support Hours'
+                            header: 'Support',
+                            fields: [
+                                {name: 'personName', title: 'Support Personnel Name', value: ''},
+                                {name: 'contactNumber', title: 'Support Contact Number', value: ''},
+                                {name: 'hours', title: 'Support Hours', value: ''}
+                            ]
+                        },
+                        language: {
+                            multilingual: true,
+                            languages: ['English', 'Spanish']
                         },
                         notifications: {
                             configurable: false
                         }
+                    },
+                    planAdditional: {
+                        newsFeed: {},
+                        interest: {},
+                        insight: {}
+                    },
+                    featurePool: {
+                        appPool: []
+                    },
+                    featureAssignment: {
+                        features: []
                     }
                 },
                 deferredPromise = $q.defer();

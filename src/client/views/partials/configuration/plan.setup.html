@@ -1,1 +1,165 @@
-<h4>Plan Setup</h4>
+<header>
+</header>
+<main>
+    <form action="">
+        <div class="row">
+            <section class="col-xs-12 col-sm-8 col-md-8">
+                <fieldset class="well fieldset form-group col-xs-12">
+                    <legend class="legend"><strong>Branding</strong></legend>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="planTitle">Plan Information</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="planTitle"
+                                       name="planTitle"
+                                       data-ng-model="plan.setup.planTitle"
+                                       placeholder="Plan Title"
+                                       required
+                                       autofocus>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="planLogo">Plan Information</label>
+                                <input type="file"
+                                       class="form-control"
+                                       id="planLogo"
+                                       name="planLogo"
+                                       data-ng-model="plan.setup.planLogo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label>Color Theme</label>
+                                <div class="radio">
+                                    <label><input type="radio" name="planColorTheme">Blue</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="planColorTheme">Orange</label>
+                                </div>
+
+                                <button type="button" class="btn btn-default">Apply</button>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label>Background Image</label>
+                                <div class="radio">
+                                    <label><input type="radio" name="planLogo">Use Default</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="planLogo">Upload New</label>
+                                </div>
+
+                                <button type="button" class="btn btn-default">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </section>
+            <section class="col-xs-12 col-sm-4 col-md-4">
+                <fieldset class="well fieldset form-group col-xs-12">
+                    <legend class="legend"><strong>Support</strong></legend>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                <span class="input-group-addon" id="user-addOn">
+                                    <i class="fa fa-user-o fa-lg"></i>
+                                </span>
+                                    <input type="text"
+                                           class="form-control"
+                                           aria-describedby="user-addOn"
+                                           id="supportPersonName"
+                                           name="supportPersonName"
+                                           data-ng-model="plan.setup.support.personName"
+                                           placeholder="Support Personnel Name"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                <span class="input-group-addon" id="contact-addOn">
+                                    <i class="fa fa-phone fa-lg"></i>
+                                </span>
+                                    <input type="text"
+                                           class="form-control"
+                                           aria-describedby="contact-addOn"
+                                           id="supportContactNumber"
+                                           name="supportContactNumber"
+                                           data-ng-model="plan.setup.support.personContactNumber"
+                                           placeholder="Support Contact Number"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                <span class="input-group-addon" id="clock-addOn">
+                                    <i class="fa fa-clock-o fa-lg"></i>
+                                </span>
+                                    <input type="text"
+                                           class="form-control"
+                                           aria-describedby="clock-addOn"
+                                           id="supportHours"
+                                           name="supportHours"
+                                           data-ng-model="plan.setup.support.supportHours"
+                                           placeholder="Support hours"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </section>
+        </div>
+
+        <div class="row">
+            <section class="col-xs-12 col-sm-8 col-md-8">
+                <fieldset class="well fieldset form-group col-xs-12">
+                    <legend class="legend"><strong>Languages</strong></legend>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <span>Multilingual Support</span>
+                            <div class="form-group">
+                                <label class="radio-inline"><input type="radio" name="notifications">Yes</label>
+                                <label class="radio-inline"><input type="radio" name="notifications">No</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <span>Languages</span>
+                            <div class="form-group">
+                                <select name="" id=""></select>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </section>
+            <section class="col-xs-12 col-sm-4 col-md-4">
+                <fieldset class="well fieldset form-group col-xs-12">
+                    <legend class="legend"><strong>Notifications</strong></legend>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <span>Apply To Configure Notifications</span>
+                            <div class="form-group">
+                                <label class="radio-inline"><input type="radio" name="notifications">Yes</label>
+                                <label class="radio-inline"><input type="radio" name="notifications">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </section>
+        </div>
+    </form>
+</main>
+<footer>
+
+</footer>
