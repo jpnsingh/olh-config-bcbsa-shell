@@ -8,7 +8,7 @@
         favicon = require('serve-favicon'),
         app = express(),
         router = express.Router(),
-        port = process.env.port || 8090,
+        port = process.env.port || 3000,
         secret = process.env.secret || 'bcbsa-shell-app-secret';
 
     router.use(favicon('.build/web/images/favicon.png'));
@@ -27,6 +27,6 @@
     require('./routes')(app);
 
     app.listen(port, function () {
-        console.log('App now listening at port: ' + port);
+        console.log('App now running on port: ' + port);
     });
 })();
