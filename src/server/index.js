@@ -8,8 +8,10 @@
         favicon = require('serve-favicon'),
         app = express(),
         router = express.Router(),
-        port = process.env.PORT || 3000,
-        secret = process.env.SECRET || 'bcbsa-shell-app-secret';
+        PROTOCOL = process.env.PROTOCOL || 'http',
+        PORT = process.env.PORT || 3000,
+        HOST = process.env.HOST || 'localhost',
+        SECRET = process.env.SECRET || 'bcbsa-shell-app-secret';
 
     router.use(favicon('.build/web/images/favicon.png'));
 
@@ -17,7 +19,7 @@
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(cookieParser());
-    app.use(session({secret: secret}));
+    app.use(session({secret: SECRET, resave: false, saveUninitialized: true}));
 
     require('./config/passport')(app);
 
@@ -26,7 +28,9 @@
 
     require('./routes')(app);
 
-    app.listen(port, function () {
-        console.log('App now running on port: ' + port);
+    var server = app.listen(PORT, HOST, function () {
+        console.log('App now running at ' + PROTOCOL + '://' + server.address().address + ':' + server.address().port);
+        console.log('host: ' + HOST);
+        console.log('env: ' + process.env);
     });
 })();
