@@ -14,7 +14,7 @@
   },
   "scripts": {
     "test": "gulp test",
-    "start": "gulp serve",
+    "start": "node ./src/server/index.js",
     "postinstall": "bower install && gulp build"
   },
   "repository": {

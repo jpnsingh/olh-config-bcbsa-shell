@@ -1,1 +1,1 @@
-web: gulp serve
+web: node ./src/server/index.js

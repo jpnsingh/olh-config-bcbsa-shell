@@ -17,7 +17,7 @@
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(cookieParser());
-    app.use(session({secret: secret, resave: false, saveUninitialized: true}));
+    app.use(session({secret: secret}));
 
     require('./config/passport')(app);
 

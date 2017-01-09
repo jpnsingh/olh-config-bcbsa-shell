@@ -2,7 +2,7 @@
   "web": {
     "protocol": "https",
     "host": "bcbsa-shell.herokuapp.com",
-    "port": "3000"
+    "port": ""
   },
   "db": {
     "shellCmd": "mongo ds151068.mlab.com:51068/heroku_m87zl4rl -u heroku_m87zl4rl -p t863gtkmrv2bks58g132sgj2ot",
