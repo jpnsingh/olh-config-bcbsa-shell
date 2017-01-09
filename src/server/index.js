@@ -8,8 +8,6 @@
         favicon = require('serve-favicon'),
         app = express(),
         router = express.Router(),
-        protocol = process.env.protocol || 'http',
-        host = process.env.host || 'localhost',
         port = process.env.port || 8090,
         secret = process.env.secret || 'bcbsa-shell-app-secret';
 
@@ -28,7 +26,7 @@
 
     require('./routes')(app);
 
-    app.listen(port, host, function () {
-        console.log('App now running at ' + protocol + '://' + host + ':' + port);
+    app.listen(port, function () {
+        console.log('App now listening at port: ' + port);
     });
 })();
