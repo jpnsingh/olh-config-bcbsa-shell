@@ -1,64 +1,89 @@
 (function () {
     'use strict';
 
-    var config = require('config');
-    var build = {};
+    var config = require('config'),
+        build = {};
+
     build.root = '.build';
     build.webPath = build.root + '/web';
     build.transpiled = '.transpiled';
 
-    module.exports = {
-        module: config.app,
-        files: {
-            js: ['src/**/*.js']
-        },
-        inject: {
-            src: './src/client/views/*.html',
-            dest: './src/client/views',
-            wiredep: {
-                options: {
-                    bowerJson: require('../bower.json'),
-                    directory: './' + build.webPath + '/libs',
-                    ignorePath: '../../' + build.webPath + '/'
-                }
+    module.exports = gulpConfig();
+
+    function gulpConfig() {
+        return {
+            module: config.app,
+            files: {
+                js: ['src/**/*.js']
             },
-            gulp: {
-                src: {
-                    css: './' + build.webPath + '/styles/css/*.css',
-                    js: './' + build.webPath + '/js/*.js'
+            inject: {
+                src: './src/client/views/*.html',
+                dest: './src/client/views',
+                wiredep: {
+                    options: {
+                        bowerJson: require('../bower.json'),
+                        directory: './' + build.webPath + '/libs',
+                        ignorePath: '../../' + build.webPath + '/'
+                    }
                 },
+                gulp: {
+                    src: {
+                        css: './' + build.webPath + '/styles/css/*.css',
+                        js: './' + build.webPath + '/js/*.js'
+                    },
+                    options: {
+                        ignorePath: ['/public/', '/.build/web/']
+                    }
+                }
+            },
+            paths: {
+                test: './test',
+                src: {
+                    js: './src/client/js/**/*.js',
+                    libs: ['public/lib/**/*', 'libs/**/*'],
+                    images: 'images/**/*',
+                    styles: ['./src/client/styles/**/*', '!src/client/styles/{less,less/**}'],
+                    less: './src/client/styles/less/**/*.less',
+                    templates: './src/client/views/**/*.html',
+                    browserify: {
+                        entry: './' + build.transpiled + '/app.js'
+                    }
+                },
+                dest: {
+                    root: build.root,
+                    js: build.webPath + '/js',
+                    libs: build.webPath + '/libs',
+                    images: build.webPath + '/images',
+                    styles: build.webPath + '/styles',
+                    css: build.webPath + '/styles/css',
+                    templates: build.webPath + '/templates',
+                    transpiled: build.transpiled
+                },
+                publish: {
+                    src: build.root + '**/*',
+                    dest: '.publish'
+                }
+            },
+            nodemon: {
                 options: {
-                    ignorePath: ['/public/', '/.build/web/']
+                    script: './src/server/index.js',
+                    watch: 'src',
+                    ext: 'js html css less',
+                    ignore: [
+                        'src/client/views/404.html',
+                        'src/client/views/500.html',
+                        'src/client/views/index.html'
+                    ],
+                    tasks: ['build'],
+                    delayTime: 1000,
+                    env: {
+                        'PROTOCOL': config.web.PROTOCOL,
+                        'HOST': config.web.HOST,
+                        'PORT': config.web.PORT,
+                        'SECRET': config.SECRET
+                    }
                 }
             }
-        },
-        paths: {
-            test: './test',
-            src: {
-                js: './src/client/js/**/*.js',
-                libs: ['public/lib/**/*', 'libs/**/*'],
-                images: 'images/**/*',
-                styles: ['./src/client/styles/**/*', '!src/client/styles/{less,less/**}'],
-                less: './src/client/styles/less/**/*.less',
-                templates: './src/client/views/**/*.html',
-                browserify: {
-                    entry: './' + build.transpiled + '/app.js'
-                }
-            },
-            dest: {
-                root: build.root,
-                js: build.webPath + '/js',
-                libs: build.webPath + '/libs',
-                images: build.webPath + '/images',
-                styles: build.webPath + '/styles',
-                css: build.webPath + '/styles/css',
-                templates: build.webPath + '/templates',
-                transpiled: build.transpiled
-            },
-            publish: {
-                src: build.root + '**/*',
-                dest: '.publish'
-            }
-        }
-    };
+        };
+    }
 })();
