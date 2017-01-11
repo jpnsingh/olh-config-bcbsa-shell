@@ -57,7 +57,13 @@
                     },
                     featureAssignment: {
                         features: []
-                    }
+                    },
+                    tabs: [
+                        {title: 'Plan Setup', state: 'configuration.planSetup'},
+                        {title: 'Plan Additional', state: 'configuration.planAdditional'},
+                        {title: 'Feature Pool', state: 'configuration.featurePool'},
+                        {title: 'Feature Assignment', state: 'configuration.featureAssignment'}
+                    ]
                 },
                 deferredPromise = $q.defer();
 

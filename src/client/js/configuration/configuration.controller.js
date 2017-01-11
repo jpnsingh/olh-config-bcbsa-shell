@@ -10,22 +10,12 @@
 
         vm.loading = true;
         vm.config = {};
-        vm.config.tabs = configTabs();
-
-        function configTabs() {
-            return [
-                {title: 'Plan Setup', state: 'configuration.planSetup'},
-                {title: 'Plan Additional', state: 'configuration.planAdditional'},
-                {title: 'Feature Pool', state: 'configuration.featurePool'},
-                {title: 'Feature Assignment', state: 'configuration.featureAssignment'}
-            ];
-        }
 
         ConfigFactory
             .getDefaultConfig()
             .then(function (data) {
                 vm.loading = false;
-                vm.config.data = data;
+                angular.extend(vm.config, data);
             });
     }
 })();
