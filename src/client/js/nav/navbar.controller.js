@@ -10,7 +10,7 @@
 
         vm.user = !_.isEmpty($window.sessionStorage.user) ? JSON.parse($window.sessionStorage.user) : {};
         vm.loggedIn = !_.isEmpty(vm.user);
-        vm.displayName = displayName(vm.user);
+        vm.displayName = vm.loggedIn ? displayName(vm.user) : '';
 
         vm.nav = {
             top: {
@@ -62,15 +62,15 @@
         function displayName(user) {
             var name = '';
 
-            if (user.lastname) {
-                name += user.lastname;
-                if (user.firstname) {
-                    name += ', ' + user.firstname;
+            if (user.lastName) {
+                name += user.lastName;
+                if (user.firstName) {
+                    name += ', ' + user.firstName;
                 }
-            } else if (user.firstname) {
-                name += user.firstname;
+            } else if (user.firstName) {
+                name += user.firstName;
             } else {
-                name += user.username;
+                name += user.auth.userName;
             }
 
             return name;

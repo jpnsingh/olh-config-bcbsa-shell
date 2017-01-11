@@ -14,7 +14,7 @@
             vm.loggingIn = true;
 
             auth
-                .login(vm.username, vm.password)
+                .login(vm.userName, vm.password)
                 .then(function () {
                     vm.loggingIn = false;
                     $state.go('dashboard');

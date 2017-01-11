@@ -11,19 +11,19 @@
         beforeEach(inject(function ($rootScope, $controller, $window) {
             scope = $rootScope.$new();
             _window = $window;
-            controller = $controller('NavBarCtrl', {$scope: scope, $window: _window});
-        }));
-
-        it('should initialize the controller and set loggedIn accordingly with sessionStorage', inject(function ($controller) {
             _window.sessionStorage.user = JSON.stringify({
-                lastname: 'last',
-                firstname: 'first',
-                username: 'username'
+                lastName: 'last',
+                firstName: 'first',
+                auth: {
+                    userName: 'UserName'
+                }
             });
             controller = $controller('NavBarCtrl', {$scope: scope, $window: _window});
-
-            expect(controller.loggedIn).toBeTruthy();
         }));
+
+        it('should initialize the controller and set loggedIn accordingly with sessionStorage', function () {
+            expect(controller.loggedIn).toBeTruthy();
+        });
 
         it('should initialize the top nav accordingly', function () {
             expect(controller.nav.top).toBeDefined();
@@ -41,10 +41,12 @@
             expect(controller.displayName).toEqual('last, first');
         });
 
-        it('should form the user displayName as lastname when only lastname field is present', inject(function ($controller) {
+        it('should form the user displayName as lastName when only lastName field is present', inject(function ($controller) {
             _window.sessionStorage.user = JSON.stringify({
-                lastname: 'last',
-                username: 'username'
+                lastName: 'last',
+                auth: {
+                    userName: 'userName'
+                }
             });
             controller = $controller('NavBarCtrl', {$scope: scope, $window: _window});
 
@@ -52,10 +54,12 @@
             expect(controller.displayName).toEqual('last');
         }));
 
-        it('should form the user displayName as firstname when only firstname field is present', inject(function ($controller) {
+        it('should form the user displayName as firstName when only firstName field is present', inject(function ($controller) {
             _window.sessionStorage.user = JSON.stringify({
-                firstname: 'first',
-                username: 'username'
+                firstName: 'first',
+                auth: {
+                    userName: 'userName'
+                }
             });
             controller = $controller('NavBarCtrl', {$scope: scope, $window: _window});
 
@@ -63,14 +67,16 @@
             expect(controller.displayName).toEqual('first');
         }));
 
-        it('should form the user displayName as username when only username field is present', inject(function ($controller) {
+        it('should form the user displayName as userName when only userName field is present', inject(function ($controller) {
             _window.sessionStorage.user = JSON.stringify({
-                username: 'username'
+                auth: {
+                    userName: 'userName'
+                }
             });
             controller = $controller('NavBarCtrl', {$scope: scope, $window: _window});
 
             expect(controller.displayName).toBeDefined();
-            expect(controller.displayName).toEqual('username');
+            expect(controller.displayName).toEqual('userName');
         }));
     });
 })();

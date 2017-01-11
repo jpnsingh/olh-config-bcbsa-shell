@@ -9,18 +9,18 @@
     module.exports = function () {
         passport.use(new LocalStrategy(
             {
-                usernameField: 'username',
+                usernameField: 'userName',
                 passwordField: 'password'
             },
-            function (username, password, done) {
+            function (userName, password, done) {
                 var url = dbConfig.dbConnectionUrl();
 
                 mongodb.connect(url, function (error, db) {
                     var usersCollection = db.collection('users');
 
-                    usersCollection.findOne({username: username}, function (error, results) {
-                        if (results && results.password === password) {
-                            done(null, results);
+                    usersCollection.findOne({'auth.userName': userName}, function (error, result) {
+                        if (result && result.auth.password === password) {
+                            done(null, result);
                         } else {
                             done(null, false, {message: 'Username or password entered is incorrect!'});
                         }

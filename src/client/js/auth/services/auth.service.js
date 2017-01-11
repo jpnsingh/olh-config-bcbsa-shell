@@ -47,16 +47,16 @@
             $rootScope.$broadcast('authenticationFailed');
         }
 
-        function register(username, password) {
+        function register(user) {
+            user.createdAt = new Date();
+            user.updatedAt = new Date();
+            user.auth.grantType = 'password';
+
             return $injector.get('$http')({
                 method: 'POST',
                 url: '/auth/register',
                 headers: {},
-                data: {
-                    grantType: 'password',
-                    username: username,
-                    password: password
-                }
+                data: user
             }).then(function (response) {
                 return storeUser(response.data.user);
             }, function () {
@@ -64,14 +64,13 @@
             });
         }
 
-        function login(username, password) {
+        function login(userName, password) {
             return $injector.get('$http')({
                 method: 'POST',
                 url: '/auth/login',
                 headers: {},
                 data: {
-                    grantType: 'password',
-                    username: username,
+                    userName: userName,
                     password: password
                 }
             }).then(function (response) {
