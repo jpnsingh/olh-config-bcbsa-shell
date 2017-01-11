@@ -5,8 +5,17 @@
         passport = require('passport'),
         dbConfig = require('../config/dbConfig')();
 
-    module.exports = function () {
-        var register = function (request, response) {
+    module.exports = AuthController;
+
+    function AuthController() {
+        return {
+            authenticate: passport.authenticate('local', {failureRedirect: '/'}),
+            middleware: middleware,
+            login: login,
+            register: register
+        };
+
+        function register(request, response) {
             var user = request.body;
 
             var url = dbConfig.dbConnectionUrl();
@@ -20,36 +29,18 @@
                     });
                 });
             });
-        };
+        }
 
-        var authenticate = passport.authenticate('local', {
-            failureRedirect: '/'
-        });
-
-
-        var login = function (request, response) {
+        function login(request, response) {
             response.json({user: request.user});
-        };
+        }
 
-        var middleware = function (request, response, next) {
+        function middleware(request, response, next) {
             if (!request.user) {
                 response.redirect('/');
             } else {
                 next();
             }
-        };
-
-        var profile = function (request, response) {
-            console.log(request.user);
-            response.json({user: request.user});
-        };
-
-        return {
-            authenticate: authenticate,
-            login: login,
-            middleware: middleware,
-            profile: profile,
-            register: register
-        };
-    };
+        }
+    }
 })();

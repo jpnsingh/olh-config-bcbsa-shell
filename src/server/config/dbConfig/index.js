@@ -3,13 +3,15 @@
 
     var config = require('config');
 
-    module.exports = function () {
-        function dbConnectionUrl() {
-            return config.db.hostUrl + '/' + config.db.dbName;
-        }
+    module.exports = DBConfig;
 
+    function DBConfig() {
         return {
             dbConnectionUrl: dbConnectionUrl
         };
-    };
+
+        function dbConnectionUrl() {
+            return config.db.hostUrl + '/' + config.db.dbName;
+        }
+    }
 })();

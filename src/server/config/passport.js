@@ -3,7 +3,9 @@
 
     var passport = require('passport');
 
-    module.exports = function (app) {
+    module.exports = PassportConfig;
+
+    function PassportConfig(app) {
         app.use(passport.initialize());
         app.use(passport.session());
 
@@ -16,5 +18,5 @@
         });
 
         require('./strategies/local.stategy')();
-    };
+    }
 })();

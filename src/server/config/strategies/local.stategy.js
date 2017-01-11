@@ -6,7 +6,9 @@
         mongodb = require('mongodb').MongoClient,
         dbConfig = require('../dbConfig')();
 
-    module.exports = function () {
+    module.exports = Strategy;
+
+    function Strategy() {
         passport.use(new LocalStrategy(
             {
                 usernameField: 'userName',
@@ -28,5 +30,5 @@
                 });
             }
         ));
-    };
+    }
 })();

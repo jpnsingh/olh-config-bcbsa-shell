@@ -4,7 +4,9 @@
     var authRouter = require('express').Router(),
         authController = require('../controllers/auth.controller')(null, {});
 
-    module.exports = function () {
+    module.exports = AuthRoutes;
+
+    function AuthRoutes() {
         authRouter
             .route('/register')
             .post(authController.register);
@@ -13,11 +15,6 @@
             .route('/login')
             .post(authController.authenticate, authController.login);
 
-        authRouter
-            .route('/profile')
-            .all(authController.middleware)
-            .get(authController.profile);
-
         return authRouter;
-    };
+    }
 })();
