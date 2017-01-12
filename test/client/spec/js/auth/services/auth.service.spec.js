@@ -3,31 +3,41 @@
 
     describe('auth service:', function () {
         var _q,
+            _deferred,
             _rootScope,
             _http,
-            _state,
             _window,
             _auth,
             testUser = {
                 _id: '123-456-789',
-                username: 'foo',
+                auth: {
+                    userName: 'foo',
+                    password: 'bar'
+                },
                 email: 'foo@bar.com'
             };
 
-        beforeEach(angular.mock.module('bcbsa-shell'));
+        beforeEach(angular.mock.module('bcbsa-shell.auth.services.authService'));
 
-        beforeEach(inject(function ($q, $rootScope, $http, $state, $window, auth) {
+        beforeEach(inject(function ($q, $rootScope, $http, $window, auth) {
             _q = $q;
-            _rootScope = $rootScope;
-            _http = $http;
-            spyOn(_http, 'post').and.returnValue(_q.when(testUser));
+            _deferred = _q.defer();
 
-            _state = $state;
-            spyOn(_state, 'go').and.callThrough();
+            _rootScope = $rootScope;
+            spyOn(_rootScope, '$broadcast').and.callFake(function () {
+            });
+
+            _http = $http;
+            spyOn(_http, 'post').and.returnValue(_deferred.promise);
 
             _window = $window;
+
             _auth = auth;
         }));
+
+        afterEach(function () {
+            _auth.clear();
+        });
 
         describe('clear:', function () {
             it('should clear the user from session', function () {
@@ -73,28 +83,78 @@
                 _auth.logout();
 
                 expect(_auth.currentUser()).toEqual({});
-                expect(_state.go).toHaveBeenCalledWith('login');
             });
         });
 
         describe('register:', function () {
-            it('should invoke the register api via $http', function () {
+            it('should invoke the register api via $http', inject(function ($timeout) {
                 expect(_auth.currentUser()).toEqual({});
 
-                // _auth
-                //     .register()
-                //     .then(expect(_auth.currentUser()).toEqual(testUser));
-            });
+                _auth.register(testUser);
+
+                expect(_http.post).toHaveBeenCalled();
+
+                _deferred.resolve({data: {user: testUser}});
+                $timeout.flush();
+
+                expect(_auth.currentUser()).toEqual(jasmine.objectContaining({
+                    auth: {
+                        userName: 'foo',
+                        password: 'bar',
+                        grantType: 'password'
+                    }
+                }));
+            }));
+
+            it('should handle the error accordingly', inject(function ($timeout) {
+                expect(_auth.currentUser()).toEqual({});
+
+                _auth.register(testUser);
+
+                expect(_http.post).toHaveBeenCalled();
+
+                _deferred.reject({data: {error: 'register error'}});
+
+                $timeout.flush();
+
+                expect(_rootScope.$broadcast).toHaveBeenCalledWith('authenticationFailed');
+            }));
         });
 
         describe('login:', function () {
-            it('should set the current user upon successful login', function () {
+            it('should set the current user upon successful login', inject(function ($timeout) {
                 expect(_auth.currentUser()).toEqual({});
 
-                // _auth
-                //     .login()
-                //     .then(expect(_auth.currentUser()).toEqual(testUser));
-            });
+                _auth.login('foo', 'bar');
+
+                expect(_http.post).toHaveBeenCalledWith('/auth/login', {userName: 'foo', password: 'bar'}, {});
+
+                _deferred.resolve({data: {user: testUser}});
+
+                $timeout.flush();
+
+                expect(_auth.currentUser()).toEqual(jasmine.objectContaining({
+                    auth: {
+                        userName: 'foo',
+                        password: 'bar',
+                        grantType: 'password'
+                    }
+                }));
+            }));
+
+            it('should set the current user upon successful login', inject(function ($timeout) {
+                expect(_auth.currentUser()).toEqual({});
+
+                _auth.login('foo', 'bar');
+
+                expect(_http.post).toHaveBeenCalledWith('/auth/login', {userName: 'foo', password: 'bar'}, {});
+
+                _deferred.reject({data: {error: 'login error'}});
+
+                $timeout.flush();
+
+                expect(_rootScope.$broadcast).toHaveBeenCalledWith('authenticationFailed');
+            }));
         });
     });
 })();

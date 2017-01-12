@@ -4,8 +4,8 @@
     module.exports = angular.module('bcbsa-shell.auth.services.authService', [])
         .factory('auth', auth);
 
-    auth.$inject = ['$rootScope', '$http', '$state', '$window', '$q'];
-    function auth($rootScope, $http, $state, $window, $q) {
+    auth.$inject = ['$rootScope', '$http', '$window', '$q'];
+    function auth($rootScope, $http, $window, $q) {
         var service = {};
 
         service.clear = clear;
@@ -38,7 +38,6 @@
 
         function logout() {
             clear();
-            $state.go('login');
         }
 
         function failureEvent(name) {
