@@ -4,8 +4,8 @@
     module.exports = angular.module('bcbsa-shell.auth.services.authService', [])
         .factory('auth', auth);
 
-    auth.$inject = ['$rootScope', '$injector', '$state', '$window'];
-    function auth($rootScope, $injector, $state, $window) {
+    auth.$inject = ['$rootScope', '$http', '$state', '$window', '$q'];
+    function auth($rootScope, $http, $state, $window, $q) {
         var service = {};
 
         service.clear = clear;
@@ -52,34 +52,26 @@
             user.updatedAt = new Date();
             user.auth.grantType = 'password';
 
-            return $injector.get('$http')({
-                method: 'POST',
-                url: '/auth/register',
-                headers: {},
-                data: user
-            }).then(function (response) {
-                return storeUser(response.data.user);
-            }, function (response) {
-                failureEvent('register');
-                return response.data;
-            });
+            return $http
+                .post('/auth/register', user, {})
+                .then(function (response) {
+                    return storeUser(response.data.user);
+                }, function (response) {
+                    failureEvent('register');
+                    return response.data;
+                });
         }
 
         function login(userName, password) {
-            return $injector.get('$http')({
-                method: 'POST',
-                url: '/auth/login',
-                headers: {},
-                data: {
-                    userName: userName,
-                    password: password
-                }
-            }).then(function (response) {
-                return storeUser(response.data.user);
-            }, function (response) {
-                failureEvent('login');
-                return response.data;
-            });
+            var user = {userName: userName, password: password};
+            return $http
+                .post('/auth/login', user, {})
+                .then(function (response) {
+                    return storeUser(response.data.user);
+                }, function (response) {
+                    failureEvent('login');
+                    return $q.reject(response.data.error);
+                });
         }
     }
 })();

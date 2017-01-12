@@ -23,16 +23,16 @@
                     usersCollection.findOne({
                         'auth.userName': userName,
                         'auth.password': password
-                    }, function (error, result) {
+                    }, {_id: 0, 'auth.password': 0}, function (error, user) {
                         if (error) {
-                            throw error;
+                            return done(error);
                         }
 
-                        if (result && result.auth.password === password) {
-                            done(null, result);
-                        } else {
-                            throw Error('Username or password entered is incorrect!');
+                        if (!user) {
+                            return done(null, false, {message: 'Username or password entered is incorrect'});
                         }
+
+                        return done(null, user);
                     });
                 });
             }

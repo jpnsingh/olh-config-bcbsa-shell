@@ -13,7 +13,7 @@
 
         authRouter
             .route('/login')
-            .post(authController.authenticate, authController.login);
+            .post(authController.authenticateAndLogin);
 
         return authRouter;
     }

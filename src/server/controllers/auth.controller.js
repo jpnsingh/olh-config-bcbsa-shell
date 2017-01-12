@@ -9,11 +9,31 @@
 
     function AuthController() {
         return {
-            authenticate: passport.authenticate('local', {failureRedirect: '/'}),
+            authenticateAndLogin: authenticateAndLogin,
             middleware: middleware,
-            login: login,
             register: register
         };
+
+
+        function authenticateAndLogin(request, response, next) {
+            passport.authenticate('local', function (error, user, info) {
+                if (error) {
+                    return next(error);
+                }
+
+                if (!user) {
+                    return response.status(500).json({error: info});
+                }
+
+                request.login(user, function (error) {
+                    if (error) {
+                        return next(error);
+                    }
+
+                    return response.json({user: request.user});
+                });
+            })(request, response, next);
+        }
 
         function register(request, response) {
             var user = request.body;
@@ -21,23 +41,12 @@
             var url = dbConfig.dbConnectionUrl();
 
             mongodb.connect(url, function (error, db) {
-                var usersCollection = db.collection('users');
-
-                usersCollection.insert(user, function (error, results) {
+                db.collection('users').insert(user, function (error, results) {
                     request.login(results.ops[0], function () {
                         response.json({user: results.ops[0]});
                     });
                 });
             });
-        }
-
-        function login(request, response) {
-            try {
-                response.json({user: request.user});
-            } catch (error) {
-                console.log(error);
-                response.status(401).json({error: true, message: 'Username or password entered is incorrect'});
-            }
         }
 
         function middleware(request, response, next) {
