@@ -15,12 +15,16 @@
 
             auth
                 .login(vm.userName, vm.password)
-                .then(function () {
+                .then(function (data) {
                     vm.loggingIn = false;
-                    $state.go('dashboard');
-                }, function (data) {
+                    if (data && data.user) {
+                        $state.go('dashboard');
+                    } else {
+                        vm.error = 'Error occurred';
+                    }
+                }, function (error) {
                     vm.loggingIn = false;
-                    vm.error = data.error;
+                    vm.error = error;
                 });
         }
     }

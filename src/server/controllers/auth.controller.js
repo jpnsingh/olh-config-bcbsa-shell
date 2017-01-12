@@ -32,7 +32,12 @@
         }
 
         function login(request, response) {
-            response.json({user: request.user});
+            try {
+                response.json({user: request.user});
+            } catch (error) {
+                console.log(error);
+                response.status(401).json({error: true, message: 'Username or password entered is incorrect'});
+            }
         }
 
         function middleware(request, response, next) {

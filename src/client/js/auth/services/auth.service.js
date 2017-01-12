@@ -59,8 +59,9 @@
                 data: user
             }).then(function (response) {
                 return storeUser(response.data.user);
-            }, function () {
-                failureEvent('login');
+            }, function (response) {
+                failureEvent('register');
+                return response.data;
             });
         }
 
@@ -75,8 +76,9 @@
                 }
             }).then(function (response) {
                 return storeUser(response.data.user);
-            }, function () {
-                failureEvent('register');
+            }, function (response) {
+                failureEvent('login');
+                return response.data;
             });
         }
     }

@@ -26,6 +26,14 @@
 
     require('./routes')(app);
 
+    function errorHandler(err, req, res/*, next*/) {
+        console.error(err.message);
+        console.error(err.stack);
+        res.status(500).json({error: err});
+    }
+
+    app.use(errorHandler);
+
     var server = app.listen(port, function () {
         console.log('Server now listening at port: %s', server.address().port);
     });

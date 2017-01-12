@@ -20,11 +20,18 @@
                 mongodb.connect(url, function (error, db) {
                     var usersCollection = db.collection('users');
 
-                    usersCollection.findOne({'auth.userName': userName}, function (error, result) {
+                    usersCollection.findOne({
+                        'auth.userName': userName,
+                        'auth.password': password
+                    }, function (error, result) {
+                        if (error) {
+                            throw error;
+                        }
+
                         if (result && result.auth.password === password) {
                             done(null, result);
                         } else {
-                            done(null, false, {message: 'Username or password entered is incorrect!'});
+                            throw Error('Username or password entered is incorrect!');
                         }
                     });
                 });
