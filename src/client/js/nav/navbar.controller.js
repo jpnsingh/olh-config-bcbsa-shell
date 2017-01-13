@@ -20,7 +20,7 @@
                 },
                 links: {
                     left: [
-                        {label: 'Configuration', stateRef: 'configuration.planSetup'}
+                        {label: 'Configuration', stateRef: 'configuration.role', active: 'configuration'}
                     ],
                     right: [
                         {

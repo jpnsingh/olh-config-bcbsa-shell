@@ -7,10 +7,9 @@
     function ConfigStateConfig($stateProvider) {
         $stateProvider
             .state(states().configuration)
-            .state(states().planSetup)
-            .state(states().planAdditional)
-            .state(states().featurePool)
-            .state(states().featureAssignment);
+            .state(states().roles)
+            .state(states().users)
+            .state(states().reports);
 
         function states() {
             return {
@@ -23,36 +22,28 @@
                     controller: 'ConfigCtrl',
                     controllerAs: 'configCtrl'
                 },
-                planSetup: {
-                    name: 'configuration.planSetup',
-                    url: '/planSetup',
-                    templateUrl: 'templates/partials/configuration/plan.setup.html',
+                roles: {
+                    name: 'configuration.role',
+                    url: '/role',
+                    templateUrl: 'templates/partials/configuration/config.role.html',
                     data: {
-                        docTitle: 'Configuration | Plan Setup'
+                        docTitle: 'Configuration | Role Management'
                     }
                 },
-                planAdditional: {
-                    name: 'configuration.planAdditional',
-                    url: '/planAdditional',
-                    templateUrl: 'templates/partials/configuration/plan.additional.html',
+                users: {
+                    name: 'configuration.user',
+                    url: '/user',
+                    templateUrl: 'templates/partials/configuration/config.user.html',
                     data: {
-                        docTitle: 'Configuration | Plan Additional',
+                        docTitle: 'Configuration | User Management'
                     }
                 },
-                featurePool: {
-                    name: 'configuration.featurePool',
-                    url: '/featurePool',
-                    templateUrl: 'templates/partials/configuration/feature.pool.html',
+                reports: {
+                    name: 'configuration.report',
+                    url: '/report',
+                    templateUrl: 'templates/partials/configuration/config.report.html',
                     data: {
-                        docTitle: 'Configuration | Feature Pool',
-                    }
-                },
-                featureAssignment: {
-                    name: 'configuration.featureAssignment',
-                    url: '/featureAssignment',
-                    templateUrl: 'templates/partials/configuration/feature.assignment.html',
-                    data: {
-                        docTitle: 'Configuration | Feature Assignment',
+                        docTitle: 'Configuration | Reports'
                     }
                 }
             };

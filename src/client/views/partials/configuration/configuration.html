@@ -1,30 +1,18 @@
 <section>
     <div class="row">
         <data-loading-spinner data-loading="configCtrl.loading"></data-loading-spinner>
-        <div class="col-xs-12" data-ng-if="!configCtrl.loading">
-            <header>
-                <h2>Plan Management</h2>
-            </header>
-            <main>
-                <div class="nav-tabs-custom">
-                    <ul class="nav nav-pills">
-                        <li data-ng-repeat="tab in configCtrl.config.tabs" data-ui-sref-active="active">
-                            <a data-ui-sref="{{tab.state}}">{{tab.title}}</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content clearfix">
-                        <hr/>
-                        <div class="col-xs-12">
-                            <data-ui-view></data-ui-view>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <footer>
-                <div class="pull-right">
-                    <button class="btn btn-primary">Next {{tab.title}}</button>
-                </div>
-            </footer>
+        <div class="col-sm-3 col-md-2 sidebar">
+            <aside>
+                <ul class="nav nav-sidebar">
+                    <li data-ng-repeat="nav in configCtrl.config.sidebar"
+                        data-ui-sref-active="active">
+                        <a data-ui-sref="{{nav.state}}">{{nav.title}}</a>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" data-ng-if="!configCtrl.loading">
+            <data-ui-view></data-ui-view>
         </div>
     </div>
 </section>
