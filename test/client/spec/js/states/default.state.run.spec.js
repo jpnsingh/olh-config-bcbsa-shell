@@ -31,7 +31,7 @@
                     {name: 'test'}
                 );
 
-                expect(auth.isAuthenticated).toHaveBeenCalledWith();
+                expect(auth.isAuthenticated).toHaveBeenCalled();
             });
 
             it('should call logout if not authenticated', function () {
@@ -45,8 +45,8 @@
                     {name: 'test'}
                 );
 
-                expect(auth.isAuthenticated).toHaveBeenCalledWith();
-                expect(auth.logout).toHaveBeenCalledWith();
+                expect(auth.isAuthenticated).toHaveBeenCalled();
+                expect(auth.logout).toHaveBeenCalled();
             });
 
             it('should not call logout if authenticated', function () {
@@ -60,8 +60,8 @@
                     {name: 'test'}
                 );
 
-                expect(auth.isAuthenticated).toHaveBeenCalledWith();
-                expect(auth.logout).not.toHaveBeenCalledWith();
+                expect(auth.isAuthenticated).toHaveBeenCalled();
+                expect(auth.logout).not.toHaveBeenCalled();
             });
         });
 
