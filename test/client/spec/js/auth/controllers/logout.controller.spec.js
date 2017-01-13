@@ -6,7 +6,7 @@
             _auth,
             _controller;
 
-        beforeEach(angular.mock.module('bcbsa-shell'));
+        beforeEach(angular.mock.module('bcbsa-shell.auth.controllers.logoutController'));
 
         beforeEach(inject(function ($rootScope, $controller) {
             _scope = $rootScope.$new();

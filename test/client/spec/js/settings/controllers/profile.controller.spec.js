@@ -5,7 +5,7 @@
         var scope,
             controller;
 
-        beforeEach(angular.mock.module('bcbsa-shell'));
+        beforeEach(angular.mock.module('bsbsa-shell.settings.controllers.profileController'));
 
         beforeEach(inject(function ($rootScope, $controller) {
             scope = $rootScope.$new();

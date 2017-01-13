@@ -1,11 +1,12 @@
 (function () {
     'use strict';
 
-    module.exports = angular.module('bcbsa-shell.auth.services.authService', [])
-        .factory('auth', auth);
+    module.exports = angular.module('bcbsa-shell.auth.services.authService', [
+        'ui.router'
+    ]).factory('auth', auth);
 
-    auth.$inject = ['$rootScope', '$http', '$window', '$q'];
-    function auth($rootScope, $http, $window, $q) {
+    auth.$inject = ['$q', '$rootScope', '$http', '$window', '$state'];
+    function auth($q, $rootScope, $http, $window, $state) {
         var service = {};
 
         service.clear = clear;
@@ -38,6 +39,7 @@
 
         function logout() {
             clear();
+            $state.go('login');
         }
 
         function failureEvent(name) {

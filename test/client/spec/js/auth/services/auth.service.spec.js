@@ -7,6 +7,8 @@
             _rootScope,
             _http,
             _window,
+            _state,
+            _timeout,
             _auth,
             testUser = {
                 _id: '123-456-789',
@@ -19,17 +21,21 @@
 
         beforeEach(angular.mock.module('bcbsa-shell.auth.services.authService'));
 
-        beforeEach(inject(function ($q, $rootScope, $http, $window, auth) {
+        beforeEach(inject(function ($q, $rootScope, $http, $window, $state, $timeout, auth) {
             _q = $q;
             _deferred = _q.defer();
 
             _rootScope = $rootScope;
-            spyOn(_rootScope, '$broadcast').and.callFake(function () {
-            });
+            spyOn(_rootScope, '$broadcast').and.callThrough();
 
             _http = $http;
             spyOn(_http, 'post').and.returnValue(_deferred.promise);
 
+            _state = $state;
+            spyOn(_state, 'go').and.callFake(function () {
+            });
+
+            _timeout = $timeout;
             _window = $window;
 
             _auth = auth;
@@ -83,11 +89,12 @@
                 _auth.logout();
 
                 expect(_auth.currentUser()).toEqual({});
+                expect(_state.go).toHaveBeenCalledWith('login');
             });
         });
 
         describe('register:', function () {
-            it('should invoke the register api via $http', inject(function ($timeout) {
+            it('should invoke the register api via $http', function () {
                 expect(_auth.currentUser()).toEqual({});
 
                 _auth.register(testUser);
@@ -95,7 +102,8 @@
                 expect(_http.post).toHaveBeenCalled();
 
                 _deferred.resolve({data: {user: testUser}});
-                $timeout.flush();
+
+                _timeout.flush();
 
                 expect(_auth.currentUser()).toEqual(jasmine.objectContaining({
                     auth: {
@@ -104,9 +112,9 @@
                         grantType: 'password'
                     }
                 }));
-            }));
+            });
 
-            it('should handle the error accordingly', inject(function ($timeout) {
+            it('should handle the error accordingly', function () {
                 expect(_auth.currentUser()).toEqual({});
 
                 _auth.register(testUser);
@@ -115,14 +123,14 @@
 
                 _deferred.reject({data: {error: 'register error'}});
 
-                $timeout.flush();
+                _timeout.flush();
 
                 expect(_rootScope.$broadcast).toHaveBeenCalledWith('authenticationFailed');
-            }));
+            });
         });
 
         describe('login:', function () {
-            it('should set the current user upon successful login', inject(function ($timeout) {
+            it('should set the current user upon successful login', function () {
                 expect(_auth.currentUser()).toEqual({});
 
                 _auth.login('foo', 'bar');
@@ -131,7 +139,7 @@
 
                 _deferred.resolve({data: {user: testUser}});
 
-                $timeout.flush();
+                _timeout.flush();
 
                 expect(_auth.currentUser()).toEqual(jasmine.objectContaining({
                     auth: {
@@ -140,9 +148,9 @@
                         grantType: 'password'
                     }
                 }));
-            }));
+            });
 
-            it('should set the current user upon successful login', inject(function ($timeout) {
+            it('should set the current user upon successful login', function () {
                 expect(_auth.currentUser()).toEqual({});
 
                 _auth.login('foo', 'bar');
@@ -151,10 +159,10 @@
 
                 _deferred.reject({data: {error: 'login error'}});
 
-                $timeout.flush();
+                _timeout.flush();
 
                 expect(_rootScope.$broadcast).toHaveBeenCalledWith('authenticationFailed');
-            }));
+            });
         });
     });
 })();

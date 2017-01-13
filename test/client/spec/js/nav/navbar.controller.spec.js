@@ -6,7 +6,7 @@
             _window,
             controller;
 
-        beforeEach(angular.mock.module('bcbsa-shell'));
+        beforeEach(angular.mock.module('bcbsa-shell.navigation.controllers.navBarController'));
 
         beforeEach(inject(function ($rootScope, $controller, $window) {
             scope = $rootScope.$new();
