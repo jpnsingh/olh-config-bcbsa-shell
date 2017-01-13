@@ -15,7 +15,7 @@
             .getDefaultConfig()
             .then(function (data) {
                 vm.loading = false;
-                angular.extend(vm.config, data);
+                angular.extend(vm.config, data.config);
             });
     }
 })();

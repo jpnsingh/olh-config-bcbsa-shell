@@ -54,7 +54,7 @@
             user.auth.grantType = 'password';
 
             return $http
-                .post('/auth/register', user, {})
+                .post('/api/auth/register', user, {})
                 .then(function (response) {
                     return storeUser(response.data.user);
                 }, function (response) {
@@ -66,7 +66,7 @@
         function login(userName, password) {
             var user = {userName: userName, password: password};
             return $http
-                .post('/auth/login', user, {})
+                .post('/api/auth/login', user, {})
                 .then(function (response) {
                     return storeUser(response.data.user);
                 }, function (response) {

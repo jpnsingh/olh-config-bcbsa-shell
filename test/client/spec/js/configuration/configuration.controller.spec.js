@@ -8,8 +8,10 @@
             _timeout,
             ConfigFactory,
             controller,
-            testConfig = {
-                test: 'test'
+            responseData = {
+                config: {
+                    test: 'test'
+                }
             };
 
         beforeEach(angular.mock.module('bcbsa-shell.configuration.controllers.ConfigurationController'));
@@ -36,11 +38,11 @@
         it('should invoke the config factory and set the config accordingly', function () {
             expect(ConfigFactory.getDefaultConfig).toHaveBeenCalled();
 
-            deferred.resolve(testConfig);
+            deferred.resolve(responseData);
             _timeout.flush();
 
             expect(controller.loading).toBeFalsy();
-            expect(controller.config).toEqual(testConfig);
+            expect(controller.config).toEqual(responseData.config);
         });
     });
 })();

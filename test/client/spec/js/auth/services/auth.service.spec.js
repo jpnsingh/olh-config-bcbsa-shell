@@ -135,7 +135,7 @@
 
                 _auth.login('foo', 'bar');
 
-                expect(_http.post).toHaveBeenCalledWith('/auth/login', {userName: 'foo', password: 'bar'}, {});
+                expect(_http.post).toHaveBeenCalledWith('/api/auth/login', {userName: 'foo', password: 'bar'}, {});
 
                 _deferred.resolve({data: {user: testUser}});
 
@@ -155,7 +155,7 @@
 
                 _auth.login('foo', 'bar');
 
-                expect(_http.post).toHaveBeenCalledWith('/auth/login', {userName: 'foo', password: 'bar'}, {});
+                expect(_http.post).toHaveBeenCalledWith('/api/auth/login', {userName: 'foo', password: 'bar'}, {});
 
                 _deferred.reject({data: {error: 'login error'}});
 

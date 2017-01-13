@@ -4,74 +4,20 @@
     module.exports = angular.module('bcbsa-shell.configuration.services.configurationFactory', [])
         .factory('ConfigFactory', ConfigFactory);
 
-    ConfigFactory.$inject = ['$q', '$timeout'];
-    function ConfigFactory($q, $timeout) {
+    ConfigFactory.$inject = ['$q', '$timeout', '$http'];
+    function ConfigFactory($q, $timeout, $http) {
         return {
             getDefaultConfig: getDefaultConfig
         };
 
-        function getDefaultConfig() {
-            var defaultConfig = {
-                    planSetup: {
-                        header: 'Plan Setup',
-                        branding: {
-                            header: 'Branding',
-                            planInfo: {
-                                title: 'Plan Title',
-                                value: ''
-                            },
-                            colorTheme: {
-                                themes: ['red', 'green', 'blue'],
-                                selected: ''
-                            },
-                            logo: {
-                                url: ''
-                            },
-                            background: {
-                                imageUrl: ''
-                            }
-                        },
-                        support: {
-                            header: 'Support',
-                            fields: [
-                                {name: 'personName', title: 'Support Personnel Name', value: ''},
-                                {name: 'contactNumber', title: 'Support Contact Number', value: ''},
-                                {name: 'hours', title: 'Support Hours', value: ''}
-                            ]
-                        },
-                        language: {
-                            multilingual: true,
-                            languages: ['English', 'Spanish']
-                        },
-                        notifications: {
-                            configurable: false
-                        }
-                    },
-                    planAdditional: {
-                        newsFeed: {},
-                        interest: {},
-                        insight: {}
-                    },
-                    featurePool: {
-                        appPool: []
-                    },
-                    featureAssignment: {
-                        features: []
-                    },
-                    tabs: [
-                        {title: 'Plan Setup', state: 'configuration.planSetup'},
-                        {title: 'Plan Additional', state: 'configuration.planAdditional'},
-                        {title: 'Feature Pool', state: 'configuration.featurePool'},
-                        {title: 'Feature Assignment', state: 'configuration.featureAssignment'}
-                    ]
-                },
-                deferredPromise = $q.defer();
-
-            $timeout(function () {
-                return deferredPromise.resolve(defaultConfig);
-            }, 1000);
-
-            return deferredPromise.promise;
+        function getDefaultConfig(groupId) {
+            return $http
+                .get('api/config/:groupId'.replace(':groupId', groupId || 'root'))
+                .then(function (response) {
+                    return response.data.groupConfig;
+                }, function (response) {
+                    return response.data.error;
+                });
         }
     }
 })();

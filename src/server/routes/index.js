@@ -4,7 +4,7 @@
     module.exports = Routes;
 
     function Routes(app) {
-        app.use('/auth', require('./auth.routes')());
+        require('./api')(app);
 
         app.all('/*', function (request, response) {
             response.sendFile('index.html', {root: 'src/client/views/'});

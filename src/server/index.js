@@ -25,14 +25,7 @@
     app.set('view engine', 'html');
 
     require('./routes')(app);
-
-    function errorHandler(err, req, res/*, next*/) {
-        console.error(err.message);
-        console.error(err.stack);
-        res.status(500).json({error: err});
-    }
-
-    app.use(errorHandler);
+    app.use(require('./middlewares/error.handler'));
 
     var server = app.listen(port, function () {
         console.log('Server now listening at port: %s', server.address().port);
