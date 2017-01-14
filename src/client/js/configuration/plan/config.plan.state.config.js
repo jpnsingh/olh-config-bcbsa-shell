@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    module.exports = ConfigPlansStateConfig;
+    module.exports = ConfigPlanStateConfig;
 
-    ConfigPlansStateConfig.$inject = ['$stateProvider'];
-    function ConfigPlansStateConfig($stateProvider) {
+    ConfigPlanStateConfig.$inject = ['$stateProvider'];
+    function ConfigPlanStateConfig($stateProvider) {
         $stateProvider
             .state(states().plan)
             .state(states().planSetup)

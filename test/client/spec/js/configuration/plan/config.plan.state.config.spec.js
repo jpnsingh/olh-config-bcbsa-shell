@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var ConfigPlanStateConfig = require('../../../../../src/client/js/configuration/config.plans.state.config');
+    var ConfigPlanStateConfig = require('../../../../../../src/client/js/configuration/plan/config.plan.state.config.js');
 
     describe('ConfigPlanStateConfig', function () {
         var $stateProvider,
