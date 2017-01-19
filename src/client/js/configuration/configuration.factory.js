@@ -4,8 +4,8 @@
     module.exports = angular.module('bcbsa-shell.configuration.services.configurationFactory', [])
         .factory('ConfigFactory', ConfigFactory);
 
-    ConfigFactory.$inject = ['$q', '$timeout', '$http'];
-    function ConfigFactory($q, $timeout, $http) {
+    ConfigFactory.$inject = ['$http'];
+    function ConfigFactory($http) {
         return {
             getDefaultConfig: getDefaultConfig
         };
