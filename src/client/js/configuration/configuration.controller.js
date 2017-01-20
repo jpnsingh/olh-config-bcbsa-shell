@@ -30,6 +30,7 @@
             .then(function (data) {
                 vm.loading = false;
                 angular.extend(vm.config, data.config);
+                ConfigFactory.cacheConfig(vm.config);
             });
     }
 })();

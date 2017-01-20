@@ -22,10 +22,9 @@
             deferred = q.defer();
             _timeout = $timeout;
             ConfigFactory = {
-                getDefaultConfig: function () {
-                }
+                getDefaultConfig: jasmine.createSpy().and.returnValue(deferred.promise),
+                cacheConfig: jasmine.createSpy()
             };
-            spyOn(ConfigFactory, 'getDefaultConfig').and.returnValue(deferred.promise);
 
             controller = $controller('ConfigCtrl as configCtrl', {$scope: scope, ConfigFactory: ConfigFactory});
             controller.config = {};
@@ -43,6 +42,7 @@
 
             expect(controller.loading).toBeFalsy();
             expect(controller.config).toEqual(responseData.config);
+            expect(ConfigFactory.cacheConfig).toHaveBeenCalled();
         });
     });
 })();

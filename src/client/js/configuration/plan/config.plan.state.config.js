@@ -26,7 +26,9 @@
                     templateUrl: 'templates/partials/configuration/plan/plan.setup.html',
                     data: {
                         docTitle: 'Configuration | Plan | Setup'
-                    }
+                    },
+                    controller: 'PlanSetupCtrl',
+                    controllerAs: 'planSetupCtrl'
                 },
                 planAdditional: {
                     name: 'configuration.plan.additional',

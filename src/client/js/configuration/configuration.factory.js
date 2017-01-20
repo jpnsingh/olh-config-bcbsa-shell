@@ -6,8 +6,13 @@
 
     ConfigFactory.$inject = ['$http'];
     function ConfigFactory($http) {
+        var self = this;
+
         return {
-            getDefaultConfig: getDefaultConfig
+            getDefaultConfig: getDefaultConfig,
+            cacheConfig: cacheConfig,
+            getCachedConfig: getCachedConfig,
+            getConfigurableLanguages: getConfigurableLanguages
         };
 
         function getDefaultConfig(groupId) {
@@ -18,6 +23,22 @@
                 }, function (response) {
                     return response.data.error;
                 });
+        }
+
+        function cacheConfig(config) {
+            self.config = config;
+        }
+
+        function getCachedConfig() {
+            return self.config;
+        }
+
+        function getConfigurableLanguages() {
+            return [
+                {id: 'english', value: 'English'},
+                {id: 'spanish', value: 'Spanish'},
+                {id: 'french', value: 'French'}
+            ];
         }
     }
 })();

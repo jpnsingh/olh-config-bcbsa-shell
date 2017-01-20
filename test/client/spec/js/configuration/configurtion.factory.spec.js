@@ -68,5 +68,19 @@
                 expect(_deferred.promise).toRejectWith(_errorResponse);
             });
         });
+
+        describe('cacheConfig and getCachedConfig', function () {
+            it('should cache the passed config and return the same respectively', function () {
+                _configFactory.cacheConfig(_successResponse.data.config);
+
+                expect(_configFactory.getCachedConfig()).toEqual(_successResponse.data.config);
+            });
+        });
+
+        describe('cacheConfig and getCachedConfig', function () {
+            it('should return the array of configurable languages accordingly', function () {
+                expect(_configFactory.getConfigurableLanguages().length).toBe(3);
+            });
+        });
     });
 })();
