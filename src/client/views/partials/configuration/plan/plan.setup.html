@@ -26,18 +26,17 @@
 
                                 <button type="button"
                                         class="btn btn-default"
-                                        data-ngf-select="planSetupCtrl.upload($file)">
-                                    <span data-ng-if="!planSetupCtrl.uploading">Upload</span>
-                                    <span data-ng-if="planSetupCtrl.uploading">
+                                        data-ngf-select="planSetupCtrl.uploadLogo($file)">
+                                    <span data-ng-if="!planSetupCtrl.uploadingLogo">Upload</span>
+                                    <span data-ng-if="planSetupCtrl.uploadingLogo">
                                         <i class="fa fa-spinner fa-pulse"></i> Uploading...
-                                        {{planSetupCtrl.uploadProgress}} %
+                                        {{planSetupCtrl.uploadLogoProgress}} %
                                     </span>
                                 </button>
                             </div>
-                            <div class="col-xs-6">
-                                <img class="preview"
-                                     data-ngf-src="planSetupCtrl.file"
-                                     data-ngf-resize="{width: 80, height: 80, quality: 1}">
+                            <div class="col-xs-6" data-ng-if="planSetupCtrl.base64Logo">
+                                <img class="logo-preview"
+                                     src="{{planSetupCtrl.base64Logo}}">
                             </div>
                         </div>
                     </div>
@@ -82,13 +81,17 @@
                                                data-ng-model="planSetupCtrl.planSetup.branding.background.default"
                                                data-ng-value="false">
                                         Upload New
-                                        <input type="text"
-                                               class="form-control"
-                                               data-ng-if="!planSetupCtrl.planSetup.branding.background.default"
-                                               data-ng-model="planSetupCtrl.planSetup.branding.background.newUrl">
+                                        <button type="button"
+                                                class="btn btn-default btn-sm"
+                                                data-ng-if="!planSetupCtrl.planSetup.branding.background.default"
+                                                data-ngf-select="planSetupCtrl.uploadBackgroundImage($file)">
+                                            <span data-ng-if="!planSetupCtrl.uploadingBackgroundImage">Upload</span>
+                                            <span data-ng-if="planSetupCtrl.uploadingBackgroundImage">
+                                                <i class="fa fa-spinner fa-pulse"></i> Uploading...
+                                                {{planSetupCtrl.uploadBackgroundImageProgress}} %
+                                            </span>
+                                        </button>
                                     </label>
-
-
                                 </div>
 
                                 <button type="button" class="btn btn-default">Preview</button>

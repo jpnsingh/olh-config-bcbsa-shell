@@ -7,13 +7,13 @@
     ImageUploader.$inject = ['Upload'];
     function ImageUploader(Upload) {
         return {
-            uploadImage: uploadImage
+            uploadFile: uploadFile
         };
 
-        function uploadImage(image) {
+        function uploadFile(image) {
             return Upload
                 .upload({
-                    url: 'api/upload/image',
+                    url: 'api/upload/file',
                     file: image
                 }).then(function (response) {
                     return response.data;

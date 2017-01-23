@@ -18,23 +18,43 @@
             console.log(vm.planSetup);
         };
 
-        vm.upload = function (file) {
+        vm.uploadLogo = function (file) {
             if (!file) {
                 return;
             }
 
-            vm.uploading = true;
+            vm.uploadingLogo = true;
             vm.file = file;
             ImageUploader
-                .uploadImage(file)
+                .uploadFile(file)
                 .then(function (data) {
-                    vm.uploading = false;
-                    console.log(data);
+                    vm.uploadingLogo = false;
+                    vm.base64Logo = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
                 }, function (error) {
-                    vm.uploading = false;
+                    vm.uploadingLogo = false;
                     console.log(error);
                 }, function (progress) {
-                    vm.uploadProgress = progress;
+                    vm.uploadLogoProgress = progress;
+                });
+        };
+
+        vm.uploadBackgroundImage = function (file) {
+            if (!file) {
+                return;
+            }
+
+            vm.uploadingBackgroundImage = true;
+            vm.file = file;
+            ImageUploader
+                .uploadFile(file)
+                .then(function (data) {
+                    vm.uploadingBackgroundImage = false;
+                    vm.base64BackgroundImage = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
+                }, function (error) {
+                    vm.uploadingBackgroundImage = false;
+                    console.log(error);
+                }, function (progress) {
+                    vm.uploadBackgroundImageProgress = progress;
                 });
         };
     }

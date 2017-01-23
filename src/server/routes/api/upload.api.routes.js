@@ -8,8 +8,8 @@
 
     function UploadApiRoutes() {
         uploadApiRouter
-            .route('/image')
-            .post(uploadApiController.uploadImage);
+            .route('/file')
+            .post(uploadApiController.uploadFile);
 
         return uploadApiRouter;
     }
