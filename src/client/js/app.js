@@ -8,6 +8,7 @@
         require('./auth').name,
         require('./nav').name,
         require('./configuration').name,
+        require('./upload').name,
         require('./settings').name,
         require('./states').name
     ]);

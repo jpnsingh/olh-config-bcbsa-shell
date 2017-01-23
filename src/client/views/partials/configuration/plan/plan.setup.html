@@ -21,13 +21,23 @@
                             </div>
                         </div>
                         <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="planLogo">Logo</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="planLogo"
-                                       name="planLogo"
-                                       data-ng-model="planSetupCtrl.planSetup.branding.logo.url">
+                            <div class="form-group col-xs-6 p-x-0">
+                                <label>Logo</label><br>
+
+                                <button type="button"
+                                        class="btn btn-default"
+                                        data-ngf-select="planSetupCtrl.upload($file)">
+                                    <span data-ng-if="!planSetupCtrl.uploading">Upload</span>
+                                    <span data-ng-if="planSetupCtrl.uploading">
+                                        <i class="fa fa-spinner fa-pulse"></i> Uploading...
+                                        {{planSetupCtrl.uploadProgress}} %
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                <img class="preview"
+                                     data-ngf-src="planSetupCtrl.file"
+                                     data-ngf-resize="{width: 80, height: 80, quality: 1}">
                             </div>
                         </div>
                     </div>

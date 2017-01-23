@@ -1,0 +1,46 @@
+@marginsTill: 50;
+
+.margins (@index) when (@index >= 0) {
+
+  .set-margin-var(@i) when (@i = 0) {
+    @margin: ~"@{i}";
+  }
+  .set-margin-var(@i) when (@i > 0) {
+    @margin: ~"@{index}px";
+  }
+  .set-margin-var(@index);
+
+  .m-t-@{index} {
+    margin-top: @margin !important;
+  }
+
+  .m-r-@{index} {
+    margin-right: @margin !important;
+  }
+
+  .m-b-@{index} {
+    margin-bottom: @margin !important;
+  }
+
+  .m-l-@{index} {
+    margin-left: @margin !important;
+  }
+
+  .m-y-@{index} {
+    margin-top: @margin !important;
+    margin-bottom: @margin !important;
+  }
+
+  .m-x-@{index} {
+    margin-right: @margin !important;
+    margin-left: @margin !important;
+  }
+
+  .m-a-@{index} {
+    margin: @margin !important;
+  }
+
+  .margins(@index - 1);
+}
+
+.margins(@marginsTill);

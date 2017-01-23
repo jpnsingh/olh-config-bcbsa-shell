@@ -1,0 +1,46 @@
+@paddingsTill: 50;
+
+.paddings (@index) when (@index >= 0) {
+
+  .set-padding-var(@i) when (@i = 0) {
+    @padding: ~"@{i}";
+  }
+  .set-padding-var(@i) when (@i > 0) {
+    @padding: ~"@{index}px";
+  }
+  .set-padding-var(@index);
+
+  .p-t-@{index} {
+    padding-top: @padding !important;
+  }
+
+  .p-r-@{index} {
+    padding-right: @padding !important;
+  }
+
+  .p-b-@{index} {
+    padding-bottom: @padding !important;
+  }
+
+  .p-l-@{index} {
+    padding-left: @padding !important;
+  }
+
+  .p-y-@{index} {
+    padding-top: @padding !important;
+    padding-bottom: @padding !important;
+  }
+
+  .p-x-@{index} {
+    padding-right: @padding !important;
+    padding-left: @padding !important;
+  }
+
+  .p-a-@{index} {
+    padding: @padding !important;
+  }
+
+  .paddings(@index - 1);
+}
+
+.paddings(@paddingsTill);
