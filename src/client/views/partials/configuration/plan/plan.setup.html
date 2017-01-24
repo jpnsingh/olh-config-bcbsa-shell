@@ -90,18 +90,27 @@
                                         <!--data-file-model="planSetupCtrl.base64Logo"-->
                                         <!--data-hide="planSetupCtrl.planSetup.branding.background.default">-->
                                         <!--</data-file-upload-button>-->
-
-                                        <button type="button"
-                                                class="btn btn-default btn-sm m-l-20"
-                                                data-ng-if="!planSetupCtrl.planSetup.branding.background.default"
-                                                data-ngf-select="planSetupCtrl.uploadBackgroundImage($file)">
-                                            <span data-ng-if="!planSetupCtrl.uploadingBackgroundImage">Upload</span>
-                                            <span data-ng-if="planSetupCtrl.uploadingBackgroundImage">
+                                    </label>
+                                </div>
+                                <div>
+                                    <button type="button"
+                                            class="btn btn-default btn-sm m-l-20"
+                                            data-ng-if="!planSetupCtrl.planSetup.branding.background.default"
+                                            data-ngf-select="planSetupCtrl.uploadBackgroundImage($file)">
+                                        <span data-ng-if="!planSetupCtrl.uploadingBackgroundImage">Upload</span>
+                                        <span data-ng-if="planSetupCtrl.uploadingBackgroundImage">
                                                 <i class="fa fa-spinner fa-pulse"></i> Uploading...
                                                 {{planSetupCtrl.uploadBackgroundImageProgress}} %
                                             </span>
-                                        </button>
-                                    </label>
+                                    </button>
+
+                                    <button type="button"
+                                            class="btn btn-default btn-sm"
+                                            data-toggle="modal"
+                                            data-target="#previewModal"
+                                            data-ng-if="!planSetupCtrl.planSetup.branding.background.default && planSetupCtrl.base64BackgroundImage">
+                                        Preview
+                                    </button>
                                 </div>
 
                                 <div class="modal fade bg-preview-container"
@@ -133,14 +142,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <button type="button"
-                                        class="btn btn-default btn-sm"
-                                        data-toggle="modal"
-                                        data-target="#previewModal"
-                                        data-ng-if="!planSetupCtrl.planSetup.branding.background.default && planSetupCtrl.base64BackgroundImage">
-                                    Preview {{planSetupCtrl.backgroundImage.originalFilename}}
-                                </button>
                             </div>
                         </div>
                     </div>
