@@ -24,6 +24,10 @@
                             <div class="form-group col-xs-6 p-x-0">
                                 <label>Logo</label><br>
 
+                                <!--<data-file-upload-button class="btn btn-default"-->
+                                <!--data-file-model="planSetupCtrl.base64Logo"-->
+                                <!--data-hide="false"></data-file-upload-button>-->
+
                                 <button type="button"
                                         class="btn btn-default"
                                         data-ngf-select="planSetupCtrl.uploadLogo($file)">
@@ -81,6 +85,12 @@
                                                data-ng-model="planSetupCtrl.planSetup.branding.background.default"
                                                data-ng-value="false">
                                         Upload New
+
+                                        <!--<data-file-upload-button class="btn btn-default btn-sm"-->
+                                        <!--data-file-model="planSetupCtrl.base64Logo"-->
+                                        <!--data-hide="planSetupCtrl.planSetup.branding.background.default">-->
+                                        <!--</data-file-upload-button>-->
+
                                         <button type="button"
                                                 class="btn btn-default btn-sm"
                                                 data-ng-if="!planSetupCtrl.planSetup.branding.background.default"

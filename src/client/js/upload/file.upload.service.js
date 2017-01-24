@@ -1,11 +1,11 @@
 (function () {
     'use strict';
 
-    module.exports = angular.module('bcbsa-shell.upload.controller.imageUploadController', [])
-        .factory('ImageUploader', ImageUploader);
+    module.exports = angular.module('bcbsa-shell.upload.services.fileUploaderService', [])
+        .factory('FileUploader', FileUploader);
 
-    ImageUploader.$inject = ['Upload'];
-    function ImageUploader(Upload) {
+    FileUploader.$inject = ['Upload'];
+    function FileUploader(Upload) {
         return {
             uploadFile: uploadFile
         };

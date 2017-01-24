@@ -4,8 +4,8 @@
     module.exports = angular.module('bcsba-shell.configuration.plan.controllers.planSetupController', [])
         .controller('PlanSetupCtrl', PlanSetupCtrl);
 
-    PlanSetupCtrl.$inject = ['ConfigFactory', 'ImageUploader'];
-    function PlanSetupCtrl(ConfigFactory, ImageUploader) {
+    PlanSetupCtrl.$inject = ['ConfigFactory', 'FileUploader'];
+    function PlanSetupCtrl(ConfigFactory, FileUploader) {
         var vm = this;
 
         vm.planSetup = {};
@@ -24,8 +24,8 @@
             }
 
             vm.uploadingLogo = true;
-            vm.file = file;
-            ImageUploader
+
+            FileUploader
                 .uploadFile(file)
                 .then(function (data) {
                     vm.uploadingLogo = false;
@@ -44,8 +44,8 @@
             }
 
             vm.uploadingBackgroundImage = true;
-            vm.file = file;
-            ImageUploader
+
+            FileUploader
                 .uploadFile(file)
                 .then(function (data) {
                     vm.uploadingBackgroundImage = false;

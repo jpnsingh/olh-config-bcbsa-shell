@@ -3,6 +3,7 @@
 
     module.exports = angular.module('bcbsa-shell.upload', [
         'ngFileUpload',
-        require('./image.upload.service.js').name
+        require('./file.upload.service').name,
+        require('./file.upload.button.directive').name
     ]);
 })();
