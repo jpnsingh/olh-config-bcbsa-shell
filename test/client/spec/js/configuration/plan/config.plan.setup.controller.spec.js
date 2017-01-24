@@ -4,6 +4,7 @@
     describe('PlanSetupCtrl', function () {
         var scope,
             ConfigFactory,
+            FileUploader,
             controller,
             cachedConfig = {
                 planSetup: {
@@ -28,7 +29,15 @@
                 getConfigurableLanguages: jasmine.createSpy().and.returnValue(languages)
             };
 
-            controller = $controller('PlanSetupCtrl', {$scope: scope, ConfigFactory: ConfigFactory});
+            FileUploader = {
+                uploadFile: jasmine.createSpy()
+            };
+
+            controller = $controller('PlanSetupCtrl', {
+                $scope: scope,
+                ConfigFactory: ConfigFactory,
+                FileUploader: FileUploader
+            });
         }));
 
         it('should initialize the controller accordingly', function () {
