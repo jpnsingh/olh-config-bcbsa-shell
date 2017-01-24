@@ -49,6 +49,7 @@
                 .uploadFile(file)
                 .then(function (data) {
                     vm.uploadingBackgroundImage = false;
+                    vm.backgroundImage = data.file;
                     vm.base64BackgroundImage = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
                 }, function (error) {
                     vm.uploadingBackgroundImage = false;
