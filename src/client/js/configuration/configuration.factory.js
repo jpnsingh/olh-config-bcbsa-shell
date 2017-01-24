@@ -12,6 +12,7 @@
             getDefaultConfig: getDefaultConfig,
             cacheConfig: cacheConfig,
             getCachedConfig: getCachedConfig,
+            updateConfig: updateConfig,
             getConfigurableLanguages: getConfigurableLanguages
         };
 
@@ -39,6 +40,16 @@
                 {id: 'spanish', value: 'Spanish'},
                 {id: 'french', value: 'French'}
             ];
+        }
+
+        function updateConfig(config, groupId) {
+            return $http
+                .post('api/config/:groupId'.replace(':groupId', groupId || 'root'), config, {})
+                .then(function (response) {
+                    return response.data;
+                }, function (response) {
+                    return response.error;
+                });
         }
     }
 })();

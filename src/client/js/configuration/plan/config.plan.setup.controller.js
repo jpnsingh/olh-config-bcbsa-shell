@@ -8,9 +8,11 @@
     function PlanSetupCtrl(ConfigFactory, FileUploader) {
         var vm = this;
 
+        vm.rootConfig = ConfigFactory.getCachedConfig();
+
         vm.planSetup = {};
 
-        vm.planSetup = angular.extend(vm.planSetup, ConfigFactory.getCachedConfig().planSetup);
+        vm.planSetup = angular.extend(vm.planSetup, vm.rootConfig.planSetup);
 
         vm.languages = ConfigFactory.getConfigurableLanguages();
 
@@ -56,6 +58,22 @@
                     console.log(error);
                 }, function (progress) {
                     vm.uploadBackgroundImageProgress = progress;
+                });
+        };
+
+        vm.update = function () {
+            vm.updating = true;
+
+            ConfigFactory
+                .updateConfig(vm.rootConfig)
+                .then(function (data) {
+                    vm.updating = false;
+
+                    vm.planSetup = data.groupConfig.planSetup;
+                }, function (error) {
+                    vm.updating = false;
+
+                    vm.error = error;
                 });
         };
     }

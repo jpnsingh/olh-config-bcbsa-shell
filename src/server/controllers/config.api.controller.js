@@ -7,7 +7,8 @@
 
     function ConfigApiController() {
         return {
-            groupConfig: groupConfig
+            groupConfig: groupConfig,
+            saveGroupConfig: saveGroupConfig
         };
 
         function groupConfig(request, response, next) {
@@ -24,6 +25,24 @@
                     }
 
                     response.json({groupConfig: groupConfig});
+                });
+            });
+        }
+
+        function saveGroupConfig(request, response, next) {
+            var url = dbConfig.dbConnectionUrl();
+
+            var config = request.body;
+
+            mongodb.connect(url, function (error, db) {
+                db.collection('groups').updateOne({'_id': request.params.groupId}, {$set: {config: config}}, function (error, result) {
+                    if (error) {
+                        next(error);
+                    }
+
+                    if (result.matchedCount === 1 && result.modifiedCount === 1) {
+                        response.json({groupConfig: config});
+                    }
                 });
             });
         }

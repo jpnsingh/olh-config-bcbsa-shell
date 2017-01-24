@@ -11,6 +11,10 @@
             .route('/:groupId')
             .get(configApiController.groupConfig);
 
+        configApiRouter
+            .route('/:groupId')
+            .post(configApiController.saveGroupConfig);
+
         return configApiRouter;
     }
 })();
