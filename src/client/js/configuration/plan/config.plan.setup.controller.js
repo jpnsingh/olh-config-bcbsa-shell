@@ -20,7 +20,7 @@
             console.log(vm.planSetup);
         };
 
-        vm.uploadLogo = function (file) {
+        vm.uploadLogo = function (file, model) {
             if (!file) {
                 return;
             }
@@ -32,6 +32,7 @@
                 .then(function (data) {
                     vm.uploadingLogo = false;
                     vm.base64Logo = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
+                    model.src = vm.base64Logo;
                 }, function (error) {
                     vm.uploadingLogo = false;
                     console.log(error);

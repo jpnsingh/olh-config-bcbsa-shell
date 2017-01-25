@@ -26,8 +26,9 @@
                 .then(function (data) {
                     vm.uploadingFeedImage = false;
                     vm.feedImage = data.file;
-                    model.image.value = vm.feedImage.originalFilename;
                     vm.base64FeedImage = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
+                    model.value = vm.feedImage.originalFilename;
+                    model.src = vm.feedImage.originalFilename;
                 }, function (error) {
                     vm.uploadingFeedImage = false;
                     console.log(error);

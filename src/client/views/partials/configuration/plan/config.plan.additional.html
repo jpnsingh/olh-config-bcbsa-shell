@@ -41,7 +41,7 @@
                                     <span class="input-group-btn">
                                         <button type="button"
                                                 class="btn btn-primary"
-                                                data-ngf-select="planAdditionalCtrl.uploadFeedImage($file, feed)">
+                                                data-ngf-select="planAdditionalCtrl.uploadFeedImage($file, feed.image)">
                                             <span data-ng-if="!planAdditionalCtrl.uploadingFeedImage">Upload</span>
                                             <span data-ng-if="planAdditionalCtrl.uploadingFeedImage">
                                                 <i class="fa fa-spinner fa-pulse"></i> Uploading...
@@ -52,22 +52,20 @@
                                 </div>
                             </div>
                         </article>
-                        <article class="col-xs-12">
-                            <div class="form-group">
-                                <span class="col-xs-9 p-l-0">
-                                    <label for="feedDisplayItems">
-                                        {{planAdditionalCtrl.planAdditional.newsFeed.display.label}}
-                                    </label>
-                                </span>
-                                <span class="col-xs-3 p-r-0">
-                                    <input type="number"
-                                           class="form-control"
-                                           id="feedDisplayItems"
-                                           name="feedDisplayItems"
-                                           data-ng-model="planAdditionalCtrl.planAdditional.newsFeed.display.limit"
-                                           placeholder="{{feed.link.placeholder}}">
-                                </span>
-                            </div>
+                        <article class="form-group col-xs-12">
+                            <span class="col-xs-9 p-l-0 p-y-2">
+                                <label for="feedDisplayItems" class="m-t-5">
+                                    {{planAdditionalCtrl.planAdditional.newsFeed.display.label}}
+                                </label>
+                            </span>
+                            <span class="col-xs-3 p-r-0">
+                                <input type="number"
+                                       class="form-control"
+                                       id="feedDisplayItems"
+                                       name="feedDisplayItems"
+                                       data-ng-model="planAdditionalCtrl.planAdditional.newsFeed.display.limit"
+                                       placeholder="{{feed.link.placeholder}}">
+                            </span>
                         </article>
                     </div>
                 </fieldset>
@@ -110,7 +108,7 @@
                                     <span class="input-group-btn">
                                         <button type="button"
                                                 class="btn btn-primary"
-                                                data-ngf-select="planAdditionalCtrl.uploadInterestImage($file, interest)">
+                                                data-ngf-select="planAdditionalCtrl.uploadInterestImage($file, interest.image)">
                                             <span data-ng-if="!planAdditionalCtrl.uploadingInterestImage">Upload</span>
                                             <span data-ng-if="planAdditionalCtrl.uploadingInterestImage">
                                                 <i class="fa fa-spinner fa-pulse"></i> Uploading...
@@ -158,13 +156,12 @@
 
                             </div>
                             <div class="form-group col-xs-6">
-                                <div class="form-group">
-                                <span class="col-xs-9 p-l-0">
-                                    <label for="insightDisplayItems">
+                                <span class="col-xs-9 p-l-0 p-y-2">
+                                    <label for="insightDisplayItems" class="m-t-5">
                                         {{planAdditionalCtrl.planAdditional.insight.display.label}}
                                     </label>
                                 </span>
-                                    <span class="col-xs-3 p-r-0">
+                                <span class="col-xs-3 p-r-0">
                                     <input type="number"
                                            class="form-control"
                                            id="insightDisplayItems"
@@ -172,7 +169,6 @@
                                            data-ng-model="planAdditionalCtrl.planAdditional.insight.display.limit"
                                            placeholder="{{feed.link.placeholder}}">
                                 </span>
-                                </div>
                             </div>
                         </article>
                     </div>

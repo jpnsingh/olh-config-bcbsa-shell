@@ -8,7 +8,7 @@
                     <legend class="legend"><strong>{{featurePoolCtrl.featurePool.header || 'Feature Info'}}</strong>
                     </legend>
                     <div class="row">
-                        <article class="col-xs-10"
+                        <article class="col-xs-12"
                                  data-ng-repeat="app in featurePoolCtrl.featurePool.appPool">
                             <div class="form-group col-xs-6" data-ng-repeat="(appKey, appField) in app">
                                 <input data-ng-if="appField.type === 'text'"
