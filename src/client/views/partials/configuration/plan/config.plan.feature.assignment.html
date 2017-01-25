@@ -1,43 +1,39 @@
 <div class="row">
     <section class="col-xs-12">
-        <fieldset class="well fieldset form-group col-xs-12">
-            <div class="row">
-                <div class="form-group col-xs-12">
-                    <div class="input-group">
-                        <input type="text"
-                               class="form-control"
-                               id="featureSearch"
-                               name="featureSearch"
-                               data-ng-model="search.displayName.value"
-                               placeholder="Search apps by display name..."
-                               autofocus>
-                        <span class="input-group-btn">
-                        <button type="button"
-                                class="btn btn-primary">
-                            <i class="fa fa-search fa-lg"></i>
-                        </button>
-                    </span>
-                    </div>
+        <fieldset class="well fieldset form-group">
+            <section class="form-group col-xs-12">
+                <div class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           id="featureSearch"
+                           name="featureSearch"
+                           data-ng-model="search.displayName.value"
+                           placeholder="Search apps by display name..."
+                           autofocus>
+                    <span class="input-group-btn">
+                    <button type="button"
+                            class="btn btn-primary">
+                        <i class="fa fa-search fa-lg"></i>
+                    </button>
+                </span>
                 </div>
-            </div>
-            <div class="row">
-                <section class="col-xs-12">
-                    <article class="feature-container text-center col-xs-2 p-y-15"
-                             data-ng-class="{'feature-enabled': app.enabled.value}"
-                             data-ng-click="app.enabled.value = !app.enabled.value"
-                             data-ng-repeat="app in featureAssignmentCtrl.rootConfig.featurePool.appPool | filter:search">
-                        <figure class="col-xs-12">
-                            <img class="img-circle logo-preview" src="{{app.icon.src}}" alt="">
-                            <figcaption>
-                                <small>{{app.displayName.value}}</small>
-                            </figcaption>
-                        </figure>
-                        <div class="col-xs-12">
-                            <input type="checkbox" data-ng-model="app.enabled.value">
-                        </div>
-                    </article>
-                </section>
-            </div>
+            </section>
+            <section class="col-xs-12">
+                <article class="feature-container text-center col-xs-2 p-y-15"
+                         data-ng-class="{'feature-enabled': app.enabled.value}"
+                         data-ng-click="app.enabled.value = !app.enabled.value"
+                         data-ng-repeat="app in featureAssignmentCtrl.rootConfig.featurePool.appPool | filter:search">
+                    <figure class="col-xs-12">
+                        <img class="img-circle logo-preview" src="{{app.icon.src}}" alt="">
+                        <figcaption>
+                            <small>{{app.displayName.value}}</small>
+                        </figcaption>
+                    </figure>
+                    <div class="col-xs-12">
+                        <input type="checkbox" data-ng-model="app.enabled.value">
+                    </div>
+                </article>
+            </section>
         </fieldset>
     </section>
 

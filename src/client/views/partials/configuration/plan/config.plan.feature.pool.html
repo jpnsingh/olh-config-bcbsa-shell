@@ -5,58 +5,56 @@
         <div class="row">
             <section class="col-xs-12">
                 <fieldset class="well fieldset form-group col-xs-12">
-                    <legend class="legend"><strong>{{featurePoolCtrl.featurePool.header || 'Feature Info'}}</strong>
+                    <legend class="legend">
+                        <strong>{{featurePoolCtrl.featurePool.header || 'Feature Info'}}</strong>
                     </legend>
-                    <div class="row">
-                        <article class="col-xs-12"
-                                 data-ng-repeat="app in featurePoolCtrl.featurePool.appPool">
-                            <div class="form-group col-xs-6" data-ng-repeat="(appKey, appField) in app">
-                                <input data-ng-if="appField.type === 'text'"
-                                       type="{{appField.type}}"
+                    <section data-ng-repeat="app in featurePoolCtrl.featurePool.appPool">
+                        <div class="form-group col-xs-6" data-ng-repeat="(appKey, appField) in app">
+                            <input data-ng-if="appField.type === 'text'"
+                                   type="{{appField.type}}"
+                                   class="form-control"
+                                   id="{{appKey}}"
+                                   name="{{appKey}}"
+                                   data-ng-model="appField.value"
+                                   placeholder="{{appField.placeholder}}">
+
+                            <div data-ng-if="appField.type === 'checkbox'">
+                                <section class="col-xs-2 p-l-0 p-r-0">
+                                    <input type="{{appField.type}}"
+                                           class="form-control"
+                                           id="{{appKey}}"
+                                           name="{{appKey}}"
+                                           data-ng-model="appField.value">
+                                </section>
+                                <section class="col-xs-8 p-l-0">
+                                    <label class="vertical-center m-t-10" for="{{appKey}}">
+                                        {{appField.label}}
+                                    </label>
+                                </section>
+                            </div>
+
+                            <div class="input-group" data-ng-if="appField.type === 'image'">
+                                <input type="text"
                                        class="form-control"
-                                       id="{{appKey}}"
+                                       id="{{appkey}}"
                                        name="{{appKey}}"
                                        data-ng-model="appField.value"
+                                       data-ng-readonly="true"
                                        placeholder="{{appField.placeholder}}">
-
-                                <div data-ng-if="appField.type === 'checkbox'">
-                                    <section class="col-xs-2 p-l-0 p-r-0">
-                                        <input type="{{appField.type}}"
-                                               class="form-control"
-                                               id="{{appKey}}"
-                                               name="{{appKey}}"
-                                               data-ng-model="appField.value">
-                                    </section>
-                                    <section class="col-xs-8 p-l-0">
-                                        <label class="vertical-center m-t-10" for="{{appKey}}">
-                                            {{appField.label}}
-                                        </label>
-                                    </section>
-                                </div>
-
-                                <div class="input-group" data-ng-if="appField.type === 'image'">
-                                    <input type="text"
-                                           class="form-control"
-                                           id="{{appkey}}"
-                                           name="{{appKey}}"
-                                           data-ng-model="appField.value"
-                                           data-ng-readonly="true"
-                                           placeholder="{{appField.placeholder}}">
-                                    <span class="input-group-btn">
-                                        <button type="button"
-                                                class="btn btn-primary"
-                                                data-ngf-select="featurePoolCtrl.uploadAppImage($file, appField)">
-                                            <span data-ng-if="!featurePoolCtrl.uploadingAppImage">Upload</span>
-                                            <span data-ng-if="featurePoolCtrl.uploadingAppImage">
-                                                <i class="fa fa-spinner fa-pulse"></i> Uploading...
-                                                {{featurePoolCtrl.uploadAppImageProgress}} %
-                                            </span>
-                                        </button>
+                                <span class="input-group-btn">
+                                <button type="button"
+                                        class="btn btn-primary"
+                                        data-ngf-select="featurePoolCtrl.uploadAppImage($file, appField)">
+                                    <span data-ng-if="!featurePoolCtrl.uploadingAppImage">Upload</span>
+                                    <span data-ng-if="featurePoolCtrl.uploadingAppImage">
+                                        <i class="fa fa-spinner fa-pulse"></i> Uploading...
+                                        {{featurePoolCtrl.uploadAppImageProgress}} %
                                     </span>
-                                </div>
+                                </button>
+                            </span>
                             </div>
-                        </article>
-                    </div>
+                        </div>
+                    </section>
                 </fieldset>
             </section>
             <section class="col-xs-12">
@@ -64,7 +62,7 @@
                     <legend class="legend"><strong>App Pool</strong></legend>
                     <div class="row">
                         <article class="col-xs-12">
-                            <div class="form-group">
+                            <div class="form-group col-xs-12">
                                 <button type="button"
                                         class="btn btn-success"
                                         data-ng-repeat="app in featurePoolCtrl.featurePool.appPool">

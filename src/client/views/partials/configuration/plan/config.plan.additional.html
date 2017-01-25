@@ -126,11 +126,10 @@
 
         <div class="row">
             <section class="col-xs-12">
-                <fieldset class="well fieldset form-group col-xs-12">
+                <fieldset class="well fieldset form-group">
                     <legend class="legend"><strong>Insights</strong></legend>
                     <div class="row">
-                        <article class="col-xs-12"
-                                 data-ng-repeat="insight in planAdditionalCtrl.planAdditional.insight.list">
+                        <article data-ng-repeat="insight in planAdditionalCtrl.planAdditional.insight.list">
                             <div class="form-group col-xs-6">
                                 <label for="insightHeader">{{insight.header.label}}</label>
                                 <input type="{{insight.header.type}}"
@@ -151,9 +150,8 @@
                                        placeholder="{{insight.url.placeholder}}">
                             </div>
                         </article>
-                        <article class="col-xs-12">
+                        <article>
                             <div class="form-group col-xs-6">
-
                             </div>
                             <div class="form-group col-xs-6">
                                 <span class="col-xs-9 p-l-0 p-y-2">
