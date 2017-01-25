@@ -14,25 +14,26 @@
 
         vm.featurePool = angular.extend(vm.featurePool, vm.rootConfig.featurePool);
 
-        vm.uploadAppIcon = function (file, model) {
+        vm.uploadAppImage = function (file, model) {
             if (!file) {
                 return;
             }
 
-            vm.uploadingFeedImage = true;
+            vm.uploadingAppImage = true;
 
             FileUploader
                 .uploadFile(file)
                 .then(function (data) {
-                    vm.uploadingFeedImage = false;
-                    vm.feedImage = data.file;
-                    model.image.value = vm.feedImage.originalFilename;
-                    vm.base64FeedImage = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
+                    vm.uploadingAppImage = false;
+                    vm.appImage = data.file;
+                    model.value = vm.appImage.originalFilename;
+                    vm.base64AppImage = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
+                    model.src = vm.base64AppImage;
                 }, function (error) {
-                    vm.uploadingFeedImage = false;
+                    vm.uploadingAppImage = false;
                     console.log(error);
                 }, function (progress) {
-                    vm.uploadFeedImageProgress = progress;
+                    vm.uploadAppImageProgress = progress;
                 });
         };
 

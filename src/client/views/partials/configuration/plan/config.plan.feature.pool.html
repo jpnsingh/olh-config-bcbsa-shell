@@ -8,7 +8,7 @@
                     <legend class="legend"><strong>{{featurePoolCtrl.featurePool.header || 'Feature Info'}}</strong>
                     </legend>
                     <div class="row">
-                        <article class="col-xs-12"
+                        <article class="col-xs-10"
                                  data-ng-repeat="app in featurePoolCtrl.featurePool.appPool">
                             <div class="form-group col-xs-6" data-ng-repeat="(appKey, appField) in app">
                                 <input data-ng-if="appField.type === 'text'"
@@ -45,7 +45,7 @@
                                     <span class="input-group-btn">
                                         <button type="button"
                                                 class="btn btn-primary"
-                                                data-ngf-select="featurePoolCtrl.uploadAppImage($file, app)">
+                                                data-ngf-select="featurePoolCtrl.uploadAppImage($file, appField)">
                                             <span data-ng-if="!featurePoolCtrl.uploadingAppImage">Upload</span>
                                             <span data-ng-if="featurePoolCtrl.uploadingAppImage">
                                                 <i class="fa fa-spinner fa-pulse"></i> Uploading...
