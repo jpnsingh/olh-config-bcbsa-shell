@@ -46,7 +46,9 @@
                     templateUrl: 'templates/partials/configuration/plan/config.plan.feature.pool.html',
                     data: {
                         docTitle: 'Configuration | Plan | Feature Pool',
-                    }
+                    },
+                    controller: 'FeaturePoolCtrl',
+                    controllerAs: 'featurePoolCtrl'
                 },
                 featureAssignment: {
                     name: 'configuration.plan.featureAssignment',
