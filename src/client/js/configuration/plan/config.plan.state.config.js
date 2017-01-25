@@ -56,7 +56,9 @@
                     templateUrl: 'templates/partials/configuration/plan/config.plan.feature.assignment.html',
                     data: {
                         docTitle: 'Configuration | Plan | Feature Assignment',
-                    }
+                    },
+                    controller: 'FeatureAssignmentCtrl',
+                    controllerAs: 'featureAssignmentCtrl'
                 }
             };
         }

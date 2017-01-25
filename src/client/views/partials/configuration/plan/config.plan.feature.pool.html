@@ -64,11 +64,13 @@
                     <legend class="legend"><strong>App Pool</strong></legend>
                     <div class="row">
                         <article class="col-xs-12">
-                            <button type="button"
-                                    class="btn btn-success"
-                                    data-ng-repeat="app in featurePoolCtrl.featurePool.appPool">
-                                <span>{{app.displayName.value}}</span>
-                            </button>
+                            <div class="form-group">
+                                <button type="button"
+                                        class="btn btn-success"
+                                        data-ng-repeat="app in featurePoolCtrl.featurePool.appPool">
+                                    <span>{{app.displayName.value}}</span>
+                                </button>
+                            </div>
                         </article>
                     </div>
                 </fieldset>
