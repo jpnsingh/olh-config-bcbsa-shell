@@ -36,7 +36,9 @@
                     templateUrl: 'templates/partials/configuration/plan/plan.additional.html',
                     data: {
                         docTitle: 'Configuration | Plan | Additional',
-                    }
+                    },
+                    controller: 'PlanAdditionalCtrl',
+                    controllerAs: 'planAdditionalCtrl'
                 },
                 featurePool: {
                     name: 'configuration.plan.featurePool',
