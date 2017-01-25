@@ -23,7 +23,7 @@
                 planSetup: {
                     name: 'configuration.plan.setup',
                     url: '/setup',
-                    templateUrl: 'templates/partials/configuration/plan/plan.setup.html',
+                    templateUrl: 'templates/partials/configuration/plan/config.plan.setup.html',
                     data: {
                         docTitle: 'Configuration | Plan | Setup'
                     },
@@ -33,7 +33,7 @@
                 planAdditional: {
                     name: 'configuration.plan.additional',
                     url: '/additional',
-                    templateUrl: 'templates/partials/configuration/plan/plan.additional.html',
+                    templateUrl: 'templates/partials/configuration/plan/config.plan.additional.html',
                     data: {
                         docTitle: 'Configuration | Plan | Additional',
                     },
@@ -43,7 +43,7 @@
                 featurePool: {
                     name: 'configuration.plan.featurePool',
                     url: '/featurePool',
-                    templateUrl: 'templates/partials/configuration/plan/feature.pool.html',
+                    templateUrl: 'templates/partials/configuration/plan/config.plan.feature.pool.html',
                     data: {
                         docTitle: 'Configuration | Plan | Feature Pool',
                     }
@@ -51,7 +51,7 @@
                 featureAssignment: {
                     name: 'configuration.plan.featureAssignment',
                     url: '/featureAssignment',
-                    templateUrl: 'templates/partials/configuration/plan/feature.assignment.html',
+                    templateUrl: 'templates/partials/configuration/plan/config.plan.feature.assignment.html',
                     data: {
                         docTitle: 'Configuration | Plan | Feature Assignment',
                     }
