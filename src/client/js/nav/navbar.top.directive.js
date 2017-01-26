@@ -6,7 +6,7 @@
 
     function navbarTopDirective() {
         return {
-            restrict: 'E',
+            restrict: 'AE',
             replace: true,
             templateUrl: 'templates/partials/nav/navbar.top.html'
         };

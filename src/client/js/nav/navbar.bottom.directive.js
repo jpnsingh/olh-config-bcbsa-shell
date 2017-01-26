@@ -6,7 +6,7 @@
 
     function navbarBottomDirective() {
         return {
-            restrict: 'E',
+            restrict: 'AE',
             replace: true,
             templateUrl: 'templates/partials/nav/navbar.bottom.html'
         };
