@@ -17,7 +17,6 @@
 
         xit('should render the generic navigational bar for the application', function () {
             element = compiler('<data-navbar-top></data-navbar-top>')(scope);
-            console.log(element);
             scope.$apply();
         });
     });

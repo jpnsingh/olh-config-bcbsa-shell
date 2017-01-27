@@ -16,10 +16,6 @@
 
         vm.languages = ConfigFactory.getConfigurableLanguages();
 
-        vm.applyColorTheme = function () {
-            console.log(vm.planSetup);
-        };
-
         vm.uploadLogo = function (file, model) {
             if (!file) {
                 return;

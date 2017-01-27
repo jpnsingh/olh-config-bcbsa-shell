@@ -17,8 +17,6 @@
         vm.update = function () {
             vm.updating = true;
 
-            console.log(vm.rootConfig);
-
             ConfigFactory
                 .updateConfig(vm.rootConfig)
                 .then(function (data) {

@@ -81,7 +81,6 @@
             initInterest();
         };
 
-
         vm.addInsight = function () {
             vm.planAdditional.insight.list.unshift(new Insight());
             initInsight();
@@ -91,7 +90,6 @@
             _.remove(vm.planAdditional.insight.list, vm.selectedInsight);
             initInsight();
         };
-
 
         vm.update = function () {
             vm.updating = true;
