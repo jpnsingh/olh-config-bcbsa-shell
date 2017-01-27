@@ -4,6 +4,9 @@
     module.exports = angular
         .module('bcsba-shell.configuration.plan', [
             require('./config.plan.setup.controller').name,
+            require('./config.newsFeed.factory').name,
+            require('./config.interest.factory').name,
+            require('./config.insight.factory').name,
             require('./config.plan.additional.controller').name,
             require('./config.app.factory.js').name,
             require('./config.feature.pool.controller').name,
