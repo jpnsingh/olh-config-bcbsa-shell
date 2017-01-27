@@ -1,5 +1,11 @@
 <form>
-    <div class="row">
+    <div data-ng-if="!featureAssignmentCtrl.rootConfig.featurePool.appPool.length">
+        <div class="alert alert-info col-xs-12 m-b-0">
+            Nothing can be assigned yet. Please configure apps from the Feature Pool tab...
+        </div>
+    </div>
+
+    <div class="row" data-ng-if="featureAssignmentCtrl.rootConfig.featurePool.appPool.length">
         <section class="col-xs-12">
             <fieldset class="well fieldset form-group">
                 <section class="form-group col-xs-12">
@@ -12,11 +18,11 @@
                                placeholder="Search apps by display name..."
                                autofocus>
                         <span class="input-group-btn">
-                    <button type="button"
-                            class="btn btn-primary">
-                        <i class="fa fa-search fa-lg"></i>
-                    </button>
-                </span>
+                            <button type="button"
+                                    class="btn btn-primary">
+                                <i class="fa fa-search fa-lg"></i>
+                            </button>
+                        </span>
                     </div>
                 </section>
                 <section class="col-xs-12">

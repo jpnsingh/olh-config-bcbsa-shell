@@ -5,7 +5,11 @@
                 <strong>{{featurePoolCtrl.featurePool.header}}</strong>
             </header>
             <main>
-                <fieldset class="well fieldset form-group col-xs-12">
+                <fieldset class="well fieldset col-xs-12">
+                    <div class="alert alert-info m-b-0" data-ng-if="!featurePoolCtrl.selected">
+                        Please select an app from the pool or add one...
+                    </div>
+
                     <div class="form-group col-xs-6" data-ng-repeat="(appKey, appField) in featurePoolCtrl.selected">
                         <input data-ng-if="appField.type === 'text'"
                                type="{{appField.type}}"
@@ -59,21 +63,26 @@
                 <strong>App Pool</strong>
 
                 <section class="pull-right">
-                    <button class="btn btn-success btn-xs" data-ng-click="featurePoolCtrl.addApp()">
-                        <i class="fa fa-plus"></i>
-                    </button>
-                    <button class="btn btn-warning btn-xs">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                    <button class="btn btn-danger btn-xs" data-ng-click="featurePoolCtrl.deleteApp()">
-                        <i class="fa fa-trash"></i>
-                    </button>
+                    <button class="btn btn-success btn-xs"
+                            data-ng-click="featurePoolCtrl.addApp()"><i class="fa fa-plus"></i></button>
+
+                    <button class="btn btn-warning btn-xs"
+                            data-ng-disabled="!featurePoolCtrl.selected"><i class="fa fa-edit"></i></button>
+
+                    <button class="btn btn-danger btn-xs"
+                            data-ng-disabled="!featurePoolCtrl.selected"
+                            data-ng-click="featurePoolCtrl.deleteApp()"><i class="fa fa-trash"></i></button>
                 </section>
             </header>
             <main>
                 <fieldset class="well fieldset form-group col-xs-12">
                     <div class="row">
                         <article class="col-xs-12">
+                            <div class="alert alert-info m-b-0"
+                                 data-ng-if="!featurePoolCtrl.featurePool.appPool.length">
+                                No app is configured yet. Please add one...
+                            </div>
+
                             <button type="button"
                                     class="btn m-x-5"
                                     data-ng-repeat="app in featurePoolCtrl.featurePool.appPool"
