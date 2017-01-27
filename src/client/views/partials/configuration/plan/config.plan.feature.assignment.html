@@ -20,10 +20,10 @@
                     </div>
                 </section>
                 <section class="col-xs-12">
-                    <article class="feature-container text-center col-xs-2 p-y-15"
+                    <article class="feature-container text-center col-xs-2 p-y-15 m-x-15"
+                             data-ng-repeat="app in featureAssignmentCtrl.rootConfig.featurePool.appPool | filter:search"
                              data-ng-class="{'feature-enabled': app.enabled.value}"
-                             data-ng-click="app.enabled.value = !app.enabled.value"
-                             data-ng-repeat="app in featureAssignmentCtrl.rootConfig.featurePool.appPool | filter:search">
+                             data-ng-click="app.enabled.value = !app.enabled.value">
                         <figure class="col-xs-12">
                             <img class="img-circle logo-preview" src="{{app.icon.src}}" alt="">
                             <figcaption>

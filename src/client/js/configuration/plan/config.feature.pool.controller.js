@@ -4,8 +4,8 @@
     module.exports = angular.module('bcsba-shell.configuration.plan.controllers.featurePoolCtrlController', [])
         .controller('FeaturePoolCtrl', FeaturePoolCtrl);
 
-    FeaturePoolCtrl.$inject = ['ConfigFactory', 'FileUploader'];
-    function FeaturePoolCtrl(ConfigFactory, FileUploader) {
+    FeaturePoolCtrl.$inject = ['ConfigFactory', 'FileUploader', 'App'];
+    function FeaturePoolCtrl(ConfigFactory, FileUploader, App) {
         var vm = this;
 
         vm.rootConfig = ConfigFactory.getCachedConfig();
@@ -13,6 +13,8 @@
         vm.featurePool = {};
 
         vm.featurePool = angular.extend(vm.featurePool, vm.rootConfig.featurePool);
+
+        init();
 
         vm.uploadAppImage = function (file, model) {
             if (!file) {
@@ -37,6 +39,16 @@
                 });
         };
 
+        vm.addApp = function () {
+            vm.featurePool.appPool.unshift(new App());
+            init();
+        };
+
+        vm.deleteApp = function () {
+            _.remove(vm.featurePool.appPool, vm.selected);
+            init();
+        };
+
         vm.update = function () {
             vm.updating = true;
 
@@ -48,11 +60,16 @@
                     vm.updating = false;
 
                     vm.featurePool = data.groupConfig.featurePool;
+                    init();
                 }, function (error) {
                     vm.updating = false;
 
                     vm.error = error;
                 });
         };
+
+        function init() {
+            vm.selected = vm.featurePool.appPool[0];
+        }
     }
 })();
