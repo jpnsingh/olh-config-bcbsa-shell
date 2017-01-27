@@ -197,18 +197,16 @@
                                     data-ng-model="planAdditionalCtrl.selectedInsight"></select>
                         </div>
 
-                        <article class="col-xs-12"
-                                 data-ng-repeat="(key, insight) in planAdditionalCtrl.selectedInsight">
-                            <div class="form-group col-xs-12">
-                                <label for="{{key}}">{{insight.label}}</label>
-                                <input type="{{insight.type}}"
-                                       class="form-control"
-                                       id="{{key}}"
-                                       name="{{key}}"
-                                       data-ng-model="insight.value"
-                                       placeholder="{{insight.placeholder}}">
-                            </div>
-                        </article>
+                        <div class="form-group col-xs-12"
+                             data-ng-repeat="(key, insight) in planAdditionalCtrl.selectedInsight">
+                            <label for="{{key}}">{{insight.label}}</label>
+                            <input type="{{insight.type}}"
+                                   class="form-control"
+                                   id="{{key}}"
+                                   name="{{key}}"
+                                   data-ng-model="insight.value"
+                                   placeholder="{{insight.placeholder}}">
+                        </div>
                     </div>
                 </fieldset>
             </main>
