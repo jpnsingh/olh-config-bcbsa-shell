@@ -1,4 +1,4 @@
-<form>
+<form name="featurePoolForm">
     <div class="row">
         <section class="col-xs-12">
             <header class="col-xs-12 m-y-5">
@@ -11,6 +11,8 @@
                     </div>
 
                     <div class="form-group col-xs-6" data-ng-repeat="(appKey, appField) in featurePoolCtrl.selected">
+                        <label for="{{appKey}}" data-ng-bind="appField.label"></label>
+
                         <input data-ng-if="appField.type === 'text'"
                                type="{{appField.type}}"
                                class="form-control"
@@ -20,18 +22,11 @@
                                placeholder="{{appField.placeholder}}">
 
                         <div data-ng-if="appField.type === 'checkbox'">
-                            <section class="col-xs-2 p-l-0 p-r-0">
-                                <input type="{{appField.type}}"
-                                       class="form-control"
-                                       id="{{appKey}}"
-                                       name="{{appKey}}"
-                                       data-ng-model="appField.value">
-                            </section>
-                            <section class="col-xs-8 p-l-0">
-                                <label class="vertical-center m-t-10" for="{{appKey}}">
-                                    {{appField.label}}
-                                </label>
-                            </section>
+                            <input type="{{appField.type}}"
+                                   class="form-control"
+                                   id="{{appKey}}"
+                                   name="{{appKey}}"
+                                   data-ng-model="appField.value">
                         </div>
 
                         <div class="input-group" data-ng-if="appField.type === 'image'">
@@ -96,7 +91,10 @@
     </div>
     <div class="row">
         <section class="col-xs-12">
-            <button type="button" class="btn btn-primary" data-ng-click="featurePoolCtrl.update()">
+            <button type="button"
+                    class="btn btn-primary"
+                    data-ng-disabled="featurePoolForm.$invalid || featurePoolCtrl.updating"
+                    data-ng-click="featurePoolCtrl.update()">
                 <span data-ng-if="featurePoolCtrl.updating">
                     <i class="fa fa-spinner fa-pulse"></i> Updating...
                 </span>

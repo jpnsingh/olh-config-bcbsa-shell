@@ -1,8 +1,10 @@
-<form>
+<form name="planSetupForm">
     <div class="row">
         <section class="col-xs-12 col-sm-8 col-md-8">
+            <header class="col-xs-12 m-y-5">
+                <strong>{{planSetupCtrl.planSetup.branding.header}}</strong>
+            </header>
             <fieldset class="well fieldset form-group col-xs-12">
-                <legend class="legend"><strong>{{planSetupCtrl.planSetup.branding.header}}</strong></legend>
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="form-group">
@@ -144,8 +146,10 @@
             </fieldset>
         </section>
         <section class="col-xs-12 col-sm-4 col-md-4">
+            <header class="col-xs-12 m-y-5">
+                <strong>{{planSetupCtrl.planSetup.support.header}}</strong>
+            </header>
             <fieldset class="well fieldset form-group col-xs-12">
-                <legend class="legend"><strong>{{planSetupCtrl.planSetup.support.header}}</strong></legend>
                 <div class="row">
                     <div class="col-xs-12" data-ng-repeat="field in planSetupCtrl.planSetup.support.fields">
                         <div class="form-group">
@@ -170,8 +174,10 @@
     </div>
     <div class="row">
         <section class="col-xs-12 col-sm-8 col-md-8">
+            <header class="col-xs-12 m-y-5">
+                <strong>Languages</strong>
+            </header>
             <fieldset class="well fieldset form-group col-xs-12">
-                <legend class="legend"><strong>Languages</strong></legend>
                 <div class="row">
                     <div class="col-xs-4">
                         <span>Multilingual Support</span>
@@ -205,8 +211,10 @@
             </fieldset>
         </section>
         <section class="col-xs-12 col-sm-4 col-md-4">
+            <header class="col-xs-12 m-y-5">
+                <strong>Notifications</strong>
+            </header>
             <fieldset class="well fieldset form-group col-xs-12">
-                <legend class="legend"><strong>Notifications</strong></legend>
                 <div class="row">
                     <div class="col-xs-12">
                         <span>Apply To Configure Notifications</span>
@@ -231,7 +239,10 @@
     </div>
     <div class="row">
         <section class="col-xs-12">
-            <button type="button" class="btn btn-primary" data-ng-click="planSetupCtrl.update()">
+            <button type="button"
+                    class="btn btn-primary"
+                    data-ng-disabled="planSetupForm.$invalid || planSetupCtrl.updating"
+                    data-ng-click="planSetupCtrl.update()">
                     <span data-ng-if="planSetupCtrl.updating">
                         <i class="fa fa-spinner fa-pulse"></i> Updating...
                     </span>

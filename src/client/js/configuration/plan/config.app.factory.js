@@ -8,14 +8,14 @@
     function AppFactory() {
         return function () {
             this.displayName = {
-                label: '',
+                label: 'Display Name',
                 type: 'text',
                 placeholder: 'Display Name',
                 value: ''
             };
 
             this.icon = {
-                label: '',
+                label: 'Icon/Image',
                 type: 'image',
                 placeholder: 'Icon/Image',
                 value: '',
@@ -23,7 +23,7 @@
             };
 
             this.appName = {
-                label: '',
+                label: 'App Name',
                 type: 'text',
                 placeholder: 'App Name',
                 value: ''

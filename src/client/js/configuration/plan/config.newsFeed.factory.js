@@ -8,22 +8,22 @@
     function NewsFeedFactory() {
         return function () {
             this.header = {
-                label: 'Feed Header',
+                label: 'Header',
                 type: 'text',
                 placeholder: 'Feed Header',
                 value: ''
             };
 
             this.link = {
-                label: 'Feed Link',
+                label: 'Link',
                 type: 'text',
                 placeholder: 'Feed Link',
                 value: ''
             };
 
             this.image = {
-                label: 'Feed Image',
-                type: 'text',
+                label: 'Image',
+                type: 'image',
                 placeholder: 'Feed Image',
                 value: '',
                 src: ''

@@ -8,22 +8,22 @@
     function InterestFactory() {
         return function () {
             this.header = {
-                label: 'Interest Header',
+                label: 'Header',
                 type: 'text',
                 placeholder: 'Interest Header',
                 value: ''
             };
 
             this.description = {
-                label: 'Interest Link',
+                label: 'Description',
                 type: 'text',
-                placeholder: 'Interest Link',
+                placeholder: 'Interest Description',
                 value: ''
             };
 
             this.image = {
-                label: 'Interest Image',
-                type: 'text',
+                label: 'Image',
+                type: 'image',
                 placeholder: 'Interest Image',
                 value: '',
                 src: ''

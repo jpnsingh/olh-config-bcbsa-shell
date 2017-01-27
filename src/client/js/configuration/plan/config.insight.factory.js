@@ -8,7 +8,7 @@
     function InsightFactory() {
         return function () {
             this.header = {
-                label: 'Insight Section Header',
+                label: 'Header',
                 type: 'text',
                 placeholder: 'Insight Header',
                 value: ''

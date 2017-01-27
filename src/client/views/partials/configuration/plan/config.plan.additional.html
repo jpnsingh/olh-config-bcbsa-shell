@@ -1,4 +1,4 @@
-<form>
+<form name="planAdditionalForm">
     <div class="row">
         <section class="col-xs-12 col-sm-6 col-md-6">
             <header class="col-xs-12 m-y-5">
@@ -17,7 +17,7 @@
                 <fieldset class="well fieldset">
                     <div class="alert alert-info m-b-0"
                          data-ng-if="!planAdditionalCtrl.planAdditional.newsFeed.list.length">
-                        No news feed is configured yet. Please add one...
+                        No News Feed is configured yet. Please add one...
                     </div>
 
                     <div class="row" data-ng-if="planAdditionalCtrl.planAdditional.newsFeed.list.length">
@@ -46,40 +46,30 @@
                                     data-ng-model="planAdditionalCtrl.selectedNewsFeed"></select>
                         </div>
 
-                        <article class="col-xs-12" data-ng-if="planAdditionalCtrl.selectedNewsFeed">
-                            <div class="form-group col-xs-12">
-                                <label for="feedHeader">{{planAdditionalCtrl.selectedNewsFeed.header.label}}</label>
-                                <input type="{{planAdditionalCtrl.selectedNewsFeed.header.type}}"
+                        <div class=" form-group col-xs-12"
+                             data-ng-repeat="(key, newsFeedField) in planAdditionalCtrl.selectedNewsFeed">
+                            <label for="{{key}}">{{newsFeedField.label}}</label>
+
+                            <input data-ng-if="newsFeedField.type === 'text'"
+                                   type="{{newsFeedField.type}}"
+                                   class="form-control"
+                                   id="{{key}}"
+                                   name="{{key}}"
+                                   data-ng-model="newsFeedField.value"
+                                   placeholder="{{newsFeedField.placeholder}}">
+
+                            <div class="input-group" data-ng-if="newsFeedField.type === 'image'">
+                                <input type="text"
                                        class="form-control"
-                                       id="feedHeader"
-                                       name="feedHeader"
-                                       data-ng-model="planAdditionalCtrl.selectedNewsFeed.header.value"
-                                       placeholder="{{planAdditionalCtrl.selectedNewsFeed.header.placeholder}}"
-                                       autofocus>
-                            </div>
-                            <div class="form-group col-xs-12">
-                                <label for="feedLink">{{planAdditionalCtrl.selectedNewsFeed.link.label}}</label>
-                                <input type="{{planAdditionalCtrl.selectedNewsFeed.link.type}}"
-                                       class="form-control"
-                                       id="feedLink"
-                                       name="feedLink"
-                                       data-ng-model="planAdditionalCtrl.selectedNewsFeed.link.value"
-                                       placeholder="{{planAdditionalCtrl.selectedNewsFeed.link.placeholder}}">
-                            </div>
-                            <div class="form-group col-xs-12">
-                                <label for="feedImage">{{planAdditionalCtrl.selectedNewsFeed.image.label}}</label>
-                                <div class="input-group">
-                                    <input type="{{planAdditionalCtrl.selectedNewsFeed.image.type}}"
-                                           class="form-control"
-                                           id="feedImage"
-                                           name="feedImage"
-                                           data-ng-model="planAdditionalCtrl.selectedNewsFeed.image.value"
-                                           data-ng-readonly="true"
-                                           placeholder="{{planAdditionalCtrl.selectedNewsFeed.image.placeholder}}">
-                                    <span class="input-group-btn">
+                                       id="{{key}}"
+                                       name="{{key}}"
+                                       data-ng-model="newsFeedField.value"
+                                       data-ng-readonly="true"
+                                       placeholder="{{newsFeedField.placeholder}}">
+                                <span class="input-group-btn">
                                     <button type="button"
                                             class="btn btn-primary"
-                                            data-ngf-select="planAdditionalCtrl.uploadFeedImage($file, planAdditionalCtrl.selectedNewsFeed.image)">
+                                            data-ngf-select="planAdditionalCtrl.uploadFeedImage($file, newsFeedField)">
                                         <span data-ng-if="!planAdditionalCtrl.uploadingFeedImage">Upload</span>
                                         <span data-ng-if="planAdditionalCtrl.uploadingFeedImage">
                                             <i class="fa fa-spinner fa-pulse"></i> Uploading...
@@ -87,9 +77,8 @@
                                         </span>
                                     </button>
                                 </span>
-                                </div>
                             </div>
-                        </article>
+                        </div>
                     </div>
                 </fieldset>
             </main>
@@ -120,8 +109,7 @@
                                        id="interestHeader"
                                        name="interestHeader"
                                        data-ng-model="interest.header.value"
-                                       placeholder="{{interest.header.placeholder}}"
-                                       autofocus>
+                                       placeholder="{{interest.header.placeholder}}">
                             </div>
                             <div class="form-group">
                                 <label for="interestLink">{{interest.description.label}}</label>
@@ -180,7 +168,7 @@
                 <fieldset class="well fieldset">
                     <div class="alert alert-info m-b-0"
                          data-ng-if="!planAdditionalCtrl.planAdditional.insight.list.length">
-                        No insight is configured yet. Please add one...
+                        No Insight is configured yet. Please add one...
                     </div>
 
                     <div class="row" data-ng-if="planAdditionalCtrl.planAdditional.insight.list.length">
@@ -209,25 +197,16 @@
                                     data-ng-model="planAdditionalCtrl.selectedInsight"></select>
                         </div>
 
-                        <article class="col-xs-12" data-ng-if="planAdditionalCtrl.selectedInsight">
+                        <article class="col-xs-12"
+                                 data-ng-repeat="(key, insight) in planAdditionalCtrl.selectedInsight">
                             <div class="form-group col-xs-12">
-                                <label for="insightHeader">{{planAdditionalCtrl.selectedInsight.header.label}}</label>
-                                <input type="{{planAdditionalCtrl.selectedInsight.header.type}}"
+                                <label for="{{key}}">{{insight.label}}</label>
+                                <input type="{{insight.type}}"
                                        class="form-control"
-                                       id="insightHeader"
-                                       name="insightHeader"
-                                       data-ng-model="planAdditionalCtrl.selectedInsight.header.value"
-                                       placeholder="{{planAdditionalCtrl.selectedInsight.header.placeholder}}"
-                                       autofocus>
-                            </div>
-                            <div class="form-group col-xs-12">
-                                <label for="insightLink">{{planAdditionalCtrl.selectedInsight.url.label}}</label>
-                                <input type="{{planAdditionalCtrl.selectedInsight.url.type}}"
-                                       class="form-control"
-                                       id="insightLink"
-                                       name="insightLink"
-                                       data-ng-model="planAdditionalCtrl.selectedInsight.url.value"
-                                       placeholder="{{planAdditionalCtrl.selectedInsight.url.placeholder}}">
+                                       id="{{key}}"
+                                       name="{{key}}"
+                                       data-ng-model="insight.value"
+                                       placeholder="{{insight.placeholder}}">
                             </div>
                         </article>
                     </div>
@@ -237,7 +216,10 @@
     </div>
     <div class="row">
         <section class="col-xs-12">
-            <button type="button" class="btn btn-primary" data-ng-click="planAdditionalCtrl.update()">
+            <button type="button"
+                    class="btn btn-primary"
+                    data-ng-disabled="planAdditionalForm.$invalid || planAdditionalCtrl.updating"
+                    data-ng-click="planAdditionalCtrl.update()">
                 <span data-ng-if="planAdditionalCtrl.updating">
                     <i class="fa fa-spinner fa-pulse"></i> Updating...
                 </span>
