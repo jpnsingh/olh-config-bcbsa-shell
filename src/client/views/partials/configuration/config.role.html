@@ -64,18 +64,18 @@
                 </fieldset>
             </form>
         </main>
+        <footer class="row">
+            <section class="col-xs-12">
+                <button type="button"
+                        class="btn btn-primary"
+                        data-ng-disabled="true"
+                        data-ng-click="roleCtrl.updateRoles()">
+                    <span data-ng-if="!roleCtrl.updating">Update</span>
+                    <span data-ng-if="roleCtrl.updating">
+                        <i class="fa fa-spinner fa-pulse"></i> Updating...
+                    </span>
+                </button>
+            </section>
+        </footer>
     </section>
 </main>
-<footer>
-    <section class="col-xs-12">
-        <button type="button"
-                class="btn btn-primary"
-                data-ng-disabled="true"
-                data-ng-click="roleCtrl.updateRoles()">
-            <span data-ng-if="!roleCtrl.updating">Update</span>
-            <span data-ng-if="roleCtrl.updating">
-                <i class="fa fa-spinner fa-pulse"></i> Updating...
-            </span>
-        </button>
-    </section>
-</footer>
