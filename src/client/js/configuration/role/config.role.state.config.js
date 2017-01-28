@@ -16,7 +16,9 @@
                     templateUrl: 'templates/partials/configuration/config.role.html',
                     data: {
                         docTitle: 'Configuration | Role Management'
-                    }
+                    },
+                    controller: 'RoleCtrl',
+                    controllerAs: 'roleCtrl'
                 }
             };
         }

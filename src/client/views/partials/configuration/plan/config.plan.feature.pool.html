@@ -76,10 +76,9 @@
                             </div>
 
                             <button type="button"
-                                    class="btn m-x-5"
+                                    class="btn btn-default m-x-5"
                                     data-ng-repeat="app in featurePoolCtrl.featurePool.appPool"
                                     data-ng-class="{'btn-success': app.displayName === featurePoolCtrl.selected.displayName}"
-                                    data-ng-class="{'btn-default': app.displayName !== featurePoolCtrl.selected.displayName}"
                                     data-ng-click="featurePoolCtrl.selected = app">
                                 <span data-ng-bind="app.displayName.value"></span>
                             </button>
