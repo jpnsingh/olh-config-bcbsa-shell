@@ -4,65 +4,58 @@
     module.exports = angular.module('bcsba-shell.configuration.plan.appFactory', [])
         .factory('App', AppFactory);
 
-    AppFactory.$inject = [];
-    function AppFactory() {
-        return function () {
-            this.displayName = {
-                label: 'Display Name',
-                type: 'text',
-                placeholder: 'Display Name',
-                value: ''
-            };
+    AppFactory.$inject = ['Field'];
+    function AppFactory(Field) {
+        var App = function () {
+            this.displayName = new Field('appDisplayName')
+                .type('text')
+                .label('Display Name')
+                .placeholder('Display Name')
+                .value('');
 
-            this.icon = {
-                label: 'Icon/Image',
-                type: 'image',
-                placeholder: 'Icon/Image',
-                value: '',
-                src: ''
-            };
+            this.icon = new Field('appIcon')
+                .type('image')
+                .label('Icon/Image')
+                .placeholder('Icon/Image')
+                .value('')
+                .src('');
 
-            this.appName = {
-                label: 'App Name',
-                type: 'text',
-                placeholder: 'App Name',
-                value: ''
-            };
+            this.appName = new Field('appName')
+                .type('text')
+                .label('App Name')
+                .placeholder('App Name')
+                .value('');
 
-            this.appType = {
-                label: 'App Type',
-                type: 'text',
-                placeholder: 'App Type',
-                value: ''
-            };
+            this.appType = new Field('appType')
+                .type('text')
+                .label('App Type')
+                .placeholder('App Type')
+                .value('');
 
-            this.appId = {
-                label: 'App ID',
-                type: 'text',
-                placeholder: 'App ID',
-                value: ''
-            };
+            this.appId = new Field('appID')
+                .type('text')
+                .label('App ID')
+                .placeholder('App ID')
+                .value('');
 
-            this.appUrl = {
-                label: 'App URL',
-                type: 'text',
-                placeholder: 'App URL',
-                value: ''
-            };
+            this.appUrl = new Field('appUrl')
+                .type('text')
+                .label('App Url')
+                .placeholder('App Url')
+                .value('');
 
-            this.storeUrl = {
-                label: 'Store URL',
-                type: 'text',
-                placeholder: 'Store URL',
-                value: ''
-            };
+            this.storeUrl = new Field('appStoreUrl')
+                .type('text')
+                .label('Store Url')
+                .placeholder('Store Url')
+                .value('');
 
-            this.enabled = {
-                label: 'Enabled',
-                type: 'checkbox',
-                placeholder: 'Enabled',
-                value: false
-            };
+            this.enabled = new Field('appEnabled')
+                .type('checkbox')
+                .label('Enabled')
+                .value('');
         };
+
+        return App;
     }
 })();
