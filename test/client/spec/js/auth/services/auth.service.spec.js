@@ -16,7 +16,8 @@
                     userName: 'foo',
                     password: 'bar'
                 },
-                email: 'foo@bar.com'
+                email: 'foo@bar.com',
+                roles: ['PlanAdmin']
             };
 
         beforeEach(angular.mock.module('bcbsa-shell.auth.services.authService'));
@@ -148,9 +149,11 @@
                         grantType: 'password'
                     }
                 }));
+
+                expect(_auth.currentUser().roles).toEqual(['PlanAdmin']);
             });
 
-            it('should set the current user upon successful login', function () {
+            it('should handle the failure accordingly', function () {
                 expect(_auth.currentUser()).toEqual({});
 
                 _auth.login('foo', 'bar');
