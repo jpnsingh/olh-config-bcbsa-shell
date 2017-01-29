@@ -1,21 +1,18 @@
 <header>
-    <h2>Plan Management</h2>
+    <h3>Plan Management</h3>
 </header>
-<main>
-    <div class="nav-tabs-custom">
-        <ul class="nav nav-pills">
-            <li data-ng-repeat="tab in configCtrl.config.tabs"
-                data-ui-sref-active="active">
-                <a data-ui-sref="{{tab.state}}" data-ng-bind="tab.title"></a>
-            </li>
-        </ul>
-        <div class="tab-content clearfix">
-            <hr/>
-            <div class="col-xs-12">
-                <data-ui-view></data-ui-view>
-            </div>
+<main class="plan-container main-content">
+    <ul class="nav nav-pills">
+        <li data-ng-repeat="tab in configCtrl.config.tabs"
+            data-ui-sref-active="active">
+            <a data-ui-sref="{{tab.state}}" data-ng-bind="tab.title"></a>
+        </li>
+    </ul>
+    <div class="tab-content clearfix">
+        <hr/>
+        <div class="col-xs-12">
+            <data-ui-view></data-ui-view>
         </div>
     </div>
 </main>
-<footer>
-</footer>
+<footer></footer>
