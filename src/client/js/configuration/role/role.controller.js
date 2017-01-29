@@ -4,50 +4,29 @@
     module.exports = angular.module('bcbsa-shell.config.role.controllers.roleController', [])
         .controller('RoleCtrl', RoleCtrl);
 
-    RoleCtrl.$inject = ['Role'];
-    function RoleCtrl(Role) {
+    RoleCtrl.$inject = ['auth', 'Role', 'RoleService'];
+    function RoleCtrl(auth, Role, RoleService) {
         var vm = this;
 
-        vm.roles = [];
+        vm.canModifyRoles = _.includes(auth.currentUser().roles, 'SuperUser');
 
-        vm.roles.push(new Role('PlanAdmin')
-            .name('Plan Admin')
-            .description('Plan Level Admin')
-            .responsibilities({
-                canUpdatePlanConfig: true,
-                canUpdateRootConfig: false
-            }));
+        vm.loadingRoles = true;
 
-        vm.roles.push(new Role('BCBSAAdmin')
-            .name('BCBSA Admin')
-            .description('Root Admin')
-            .responsibilities({
-                canUpdatePlanConfig: true,
-                canUpdateRootConfig: true
-            }));
-
-        vm.roles.push(new Role('SuperUser')
-            .name('SuperUser')
-            .description('Super User')
-            .responsibilities({
-                canUpdatePlanConfig: true,
-                canUpdateRootConfig: true
-            }));
-
-        vm.updateRoles = function () {
-            vm.updating = true;
-        };
-
-        init();
+        RoleService
+            .getRoles()
+            .then(function (data) {
+                vm.loadingRoles = false;
+                vm.roles = data.roles;
+                init();
+            }, function (error) {
+                vm.loadingRoles = false;
+                vm.error = error;
+            });
 
         vm.addRole = function () {
             vm.roles.unshift(new Role('')
                 .name('')
-                .description('')
-                .responsibilities({
-                    canUpdatePlanConfig: false,
-                    canUpdateRootConfig: false
-                }));
+                .description(''));
             init();
         };
 

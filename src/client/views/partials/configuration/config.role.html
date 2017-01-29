@@ -1,18 +1,24 @@
 <header>
     <h3>Role Management</h3>
 </header>
-<main class="roles-container main-content clearfix">
+<data-loading-spinner data-loading="roleCtrl.loadingRoles"></data-loading-spinner>
+
+<main class="roles-container main-content clearfix" data-ng-if="!roleCtrl.loadingRoles">
     <section class="role-list col-xs-12">
         <header class="col-xs-12 m-y-5">
             <strong>Roles</strong>
             <section class="pull-right">
                 <button class="btn btn-success btn-xs"
-                        data-ng-click="roleCtrl.addRole()"><i class="fa fa-plus"></i></button>
+                        data-ng-disabled="!roleCtrl.canModifyRoles"
+                        data-ng-click="roleCtrl.addRole()">
+                    <i class="fa fa-plus"></i></button>
                 <button class="btn btn-warning btn-xs"
-                        data-ng-disabled="!roleCtrl.selected"><i class="fa fa-edit"></i></button>
+                        data-ng-disabled="!roleCtrl.canModifyRoles || !roleCtrl.selected">
+                    <i class="fa fa-edit"></i></button>
                 <button class="btn btn-danger btn-xs"
-                        data-ng-disabled="!roleCtrl.selected"
-                        data-ng-click="roleCtrl.deleteRole()"><i class="fa fa-trash"></i></button>
+                        data-ng-disabled="!roleCtrl.canModifyRoles || !roleCtrl.selected"
+                        data-ng-click="roleCtrl.deleteRole()">
+                    <i class="fa fa-trash"></i></button>
             </section>
         </header>
         <main>
@@ -37,7 +43,7 @@
         </header>
         <main>
             <form name="roleForm">
-                <fieldset class="fieldset well col-xs-12">
+                <fieldset class="fieldset well col-xs-12" data-ng-disabled="!roleCtrl.canModifyRoles">
                     <div class="alert alert-info m-b-0" data-ng-if="!roleCtrl.roles.length">
                         Please select a role from the list or add one...
                     </div>
@@ -51,15 +57,6 @@
                                    class="form-control"
                                    data-ng-model="roleValue">
                         </div>
-
-                        <div data-ng-if="key === 'responsibilities'"
-                             data-ng-repeat="(resp, responsibility) in roleValue.responsibilities">
-                            <label for="role-{{resp}}" class="text-capitalize" data-ng-bind="resp"></label>
-                            <input type="checkbox"
-                                   id="role-{{resp}}"
-                                   name="role-{{resp}}"
-                                   data-ng-model="responsibility">
-                        </div>
                     </div>
                 </fieldset>
             </form>
@@ -68,7 +65,7 @@
             <section class="col-xs-12">
                 <button type="button"
                         class="btn btn-primary"
-                        data-ng-disabled="true"
+                        data-ng-disabled="!roleCtrl.canModifyRoles"
                         data-ng-click="roleCtrl.updateRoles()">
                     <span data-ng-if="!roleCtrl.updating">Update</span>
                     <span data-ng-if="roleCtrl.updating">

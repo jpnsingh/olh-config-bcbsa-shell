@@ -20,11 +20,6 @@
             return this;
         };
 
-        Role.prototype.responsibilities = function (responsibilities) {
-            this.responsibilities = responsibilities;
-            return this;
-        };
-
         return Role;
     }
 })();
