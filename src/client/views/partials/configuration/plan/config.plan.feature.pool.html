@@ -5,49 +5,52 @@
                 <strong>{{featurePoolCtrl.featurePool.header}}</strong>
             </header>
             <main>
-                <fieldset class="well fieldset col-xs-12">
+                <fieldset class="fieldset well">
                     <div class="alert alert-info m-b-0" data-ng-if="!featurePoolCtrl.selected">
                         Please select an app from the pool or add one...
                     </div>
 
-                    <div class="form-group col-xs-6" data-ng-repeat="(appKey, appField) in featurePoolCtrl.selected">
-                        <label for="{{appKey}}" data-ng-bind="appField.label"></label>
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-6"
+                             data-ng-repeat="(appKey, appField) in featurePoolCtrl.selected">
+                            <label for="{{appKey}}" data-ng-bind="appField.label"></label>
 
-                        <input data-ng-if="appField.type === 'text'"
-                               type="{{appField.type}}"
-                               class="form-control"
-                               id="{{appKey}}"
-                               name="{{appKey}}"
-                               data-ng-model="appField.value"
-                               placeholder="{{appField.placeholder}}">
-
-                        <div data-ng-if="appField.type === 'checkbox'">
-                            <input type="{{appField.type}}"
-                                   class=""
+                            <input data-ng-if="appField.type === 'text'"
+                                   type="{{appField.type}}"
+                                   class="form-control"
                                    id="{{appKey}}"
                                    name="{{appKey}}"
-                                   data-ng-model="appField.value">
-                        </div>
-
-                        <div class="input-group" data-ng-if="appField.type === 'image'">
-                            <input type="text"
-                                   class="form-control"
-                                   id="{{appkey}}"
-                                   name="{{appKey}}"
                                    data-ng-model="appField.value"
-                                   data-ng-readonly="true"
                                    placeholder="{{appField.placeholder}}">
-                            <span class="input-group-btn">
-                                <button type="button"
-                                        class="btn btn-primary"
-                                        data-ngf-select="featurePoolCtrl.uploadAppImage($file, appField)">
-                                    <span data-ng-if="!featurePoolCtrl.uploadingAppImage">Upload</span>
-                                    <span data-ng-if="featurePoolCtrl.uploadingAppImage">
-                                        <i class="fa fa-spinner fa-pulse"></i> Uploading...
-                                        {{featurePoolCtrl.uploadAppImageProgress}} %
-                                    </span>
-                                </button>
-                            </span>
+
+                            <div data-ng-if="appField.type === 'checkbox'">
+                                <input type="{{appField.type}}"
+                                       class=""
+                                       id="{{appKey}}"
+                                       name="{{appKey}}"
+                                       data-ng-model="appField.value">
+                            </div>
+
+                            <div class="input-group" data-ng-if="appField.type === 'image'">
+                                <input type="text"
+                                       class="form-control"
+                                       id="{{appkey}}"
+                                       name="{{appKey}}"
+                                       data-ng-model="appField.value"
+                                       data-ng-readonly="true"
+                                       placeholder="{{appField.placeholder}}">
+                                <span class="input-group-btn">
+                                    <button type="button"
+                                            class="btn btn-primary"
+                                            data-ngf-select="featurePoolCtrl.uploadAppImage($file, appField)">
+                                        <span data-ng-if="!featurePoolCtrl.uploadingAppImage">Upload</span>
+                                        <span data-ng-if="featurePoolCtrl.uploadingAppImage">
+                                            <i class="fa fa-spinner fa-pulse"></i> Uploading...
+                                            {{featurePoolCtrl.uploadAppImageProgress}} %
+                                        </span>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </fieldset>

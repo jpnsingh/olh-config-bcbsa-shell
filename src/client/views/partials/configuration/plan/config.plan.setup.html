@@ -1,12 +1,12 @@
 <form name="planSetupForm">
     <div class="row">
-        <section class="col-xs-12 col-sm-8 col-md-8">
+        <section class="col-xs-12 col-sm-8">
             <header class="col-xs-12 m-y-5">
                 <strong>{{planSetupCtrl.planSetup.branding.header}}</strong>
             </header>
             <fieldset class="well fieldset form-group col-xs-12">
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-12 col-sm-6">
                         <div class="form-group">
                             <label for="planTitle">Plan Information</label>
                             <input type="text"
@@ -19,7 +19,7 @@
                                    autofocus>
                         </div>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-12 col-sm-6">
                         <div class="form-group col-xs-6 p-x-0">
                             <label>Logo</label><br>
 
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-12 col-sm-6">
                         <div class="form-group">
                             <label>Color Theme</label>
                             <div class="radio"
@@ -60,7 +60,7 @@
                             <button type="button" class="btn btn-default btn-sm">Apply</button>
                         </div>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-12 col-sm-6">
                         <div class="form-group">
                             <label>Background Image</label>
                             <div class="radio">
@@ -142,7 +142,7 @@
                 </div>
             </fieldset>
         </section>
-        <section class="col-xs-12 col-sm-4 col-md-4">
+        <section class="col-xs-12 col-sm-4">
             <header class="col-xs-12 m-y-5">
                 <strong>{{planSetupCtrl.planSetup.support.header}}</strong>
             </header>
@@ -170,13 +170,13 @@
         </section>
     </div>
     <div class="row">
-        <section class="col-xs-12 col-sm-8 col-md-8">
+        <section class="col-xs-12 col-sm-8">
             <header class="col-xs-12 m-y-5">
                 <strong>Languages</strong>
             </header>
             <fieldset class="well fieldset form-group col-xs-12">
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-6">
                         <span>Multilingual Support</span>
                         <div class="form-group">
                             <label class="radio-inline">
@@ -193,7 +193,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-xs-4" data-ng-if="planSetupCtrl.planSetup.language.multilingual">
+                    <div class="col-xs-6" data-ng-if="planSetupCtrl.planSetup.language.multilingual">
                         <span>Languages</span>
                         <div class="form-group">
                             <label>
@@ -207,7 +207,7 @@
                 </div>
             </fieldset>
         </section>
-        <section class="col-xs-12 col-sm-4 col-md-4">
+        <section class="col-xs-12 col-sm-4">
             <header class="col-xs-12 m-y-5">
                 <strong>Notifications</strong>
             </header>
