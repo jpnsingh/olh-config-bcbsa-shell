@@ -20,8 +20,7 @@
             <section class="navbar-left" data-ng-if="navBarCtrl.loggedIn">
                 <ul class="nav navbar-nav">
                     <li data-ng-repeat="link in navBarCtrl.nav.top.links.left"
-                        data-ui-sref-active="active"
-                        data-ng-class="{active: $state.includes(link.active)}">
+                        data-ui-sref-active="{active: link.active}">
                         <a data-ui-sref="{{link.stateRef}}" title="{{link.label}}">{{link.label}}</a>
                     </li>
                 </ul>
