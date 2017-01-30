@@ -4,8 +4,8 @@
     module.exports = angular.module('bcbsa-shell.configuration.services.configurationFactory', [])
         .factory('ConfigFactory', ConfigFactory);
 
-    ConfigFactory.$inject = ['$http'];
-    function ConfigFactory($http) {
+    ConfigFactory.$inject = ['$http', 'auth'];
+    function ConfigFactory($http, auth) {
         var self = this;
 
         return {
@@ -44,7 +44,10 @@
 
         function updateConfig(config, groupId) {
             return $http
-                .post('api/config/:groupId'.replace(':groupId', groupId || 'root'), config, {})
+                .post('api/config/:groupId'.replace(':groupId', groupId || 'root'), {
+                    config: config,
+                    userName: auth.currentUser().auth.userName
+                }, {})
                 .then(function (response) {
                     return response.data;
                 }, function (response) {

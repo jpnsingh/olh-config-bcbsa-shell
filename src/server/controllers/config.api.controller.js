@@ -32,9 +32,10 @@
         }
 
         function saveGroupConfig(request, response, next) {
-            var config = request.body,
+            var config = request.body.config,
+                userName = request.body.userName,
                 query = {'_id': request.params.groupId},
-                updateObj = {$set: {config: config}};
+                updateObj = {$set: {config: config, updatedAt: new Date(), updatedBy: userName}};
 
             mongodb.connect(connectionString, function (error, db) {
                 db.collection('groups').updateOne(query, updateObj, function (error, result) {
