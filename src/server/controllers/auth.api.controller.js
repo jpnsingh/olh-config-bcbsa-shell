@@ -38,9 +38,7 @@
         function register(request, response) {
             var user = request.body;
 
-            var url = dbConfig.dbConnectionUrl();
-
-            mongodb.connect(url, function (error, db) {
+            mongodb.connect(dbConfig.dbConnectionString(), function (error, db) {
                 db.collection('users').insert(user, function (error, results) {
                     request.login(results.ops[0], function () {
                         response.json({user: results.ops[0]});

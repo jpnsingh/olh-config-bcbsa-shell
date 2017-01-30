@@ -6,6 +6,8 @@
     module.exports = RoleApiController;
 
     function RoleApiController() {
+        var connectionString = dbConfig.dbConnectionString();
+
         return {
             getRoles: getRoles,
             addRole: addRole,
@@ -13,9 +15,7 @@
         };
 
         function getRoles(request, response, next) {
-            var url = dbConfig.dbConnectionUrl();
-
-            mongodb.connect(url, function (error, db) {
+            mongodb.connect(connectionString, function (error, db) {
                 db.collection('roles').find({}).toArray(function (error, roles) {
                     if (error) {
                         next(error);
@@ -27,11 +27,9 @@
         }
 
         function addRole(request, response, next) {
-            var url = dbConfig.dbConnectionUrl();
-
             var role = request.body;
 
-            mongodb.connect(url, function (error, db) {
+            mongodb.connect(connectionString, function (error, db) {
                 db.collection('roles').insertOne(role, function (error, result) {
                     if (error) {
                         next(error);
@@ -45,12 +43,12 @@
         }
 
         function updateRole(request, response, next) {
-            var url = dbConfig.dbConnectionUrl();
+            var role = request.body,
+                query = {'_id': request.params.roleId},
+                updateObj = {$set: {role: role}};
 
-            var role = request.body;
-
-            mongodb.connect(url, function (error, db) {
-                db.collection('roles').updateOne({'_id': request.params.roleId}, {$set: {role: role}}, function (error, result) {
+            mongodb.connect(connectionString, function (error, db) {
+                db.collection('roles').updateOne(query, updateObj, function (error, result) {
                     if (error) {
                         next(error);
                     }

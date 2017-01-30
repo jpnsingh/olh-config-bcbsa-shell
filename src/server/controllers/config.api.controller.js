@@ -6,16 +6,18 @@
     module.exports = ConfigApiController;
 
     function ConfigApiController() {
+        var connectionString = dbConfig.dbConnectionString();
+
         return {
             groupConfig: groupConfig,
             saveGroupConfig: saveGroupConfig
         };
 
         function groupConfig(request, response, next) {
-            var url = dbConfig.dbConnectionUrl();
+            var query = {'_id': request.params.groupId};
 
-            mongodb.connect(url, function (error, db) {
-                db.collection('groups').findOne({'_id': request.params.groupId}, function (error, groupConfig) {
+            mongodb.connect(connectionString, function (error, db) {
+                db.collection('groups').findOne(query, function (error, groupConfig) {
                     if (error) {
                         next(error);
                     }
@@ -30,12 +32,12 @@
         }
 
         function saveGroupConfig(request, response, next) {
-            var url = dbConfig.dbConnectionUrl();
+            var config = request.body,
+                query = {'_id': request.params.groupId},
+                updateObj = {$set: {config: config}};
 
-            var config = request.body;
-
-            mongodb.connect(url, function (error, db) {
-                db.collection('groups').updateOne({'_id': request.params.groupId}, {$set: {config: config}}, function (error, result) {
+            mongodb.connect(connectionString, function (error, db) {
+                db.collection('groups').updateOne(query, updateObj, function (error, result) {
                     if (error) {
                         next(error);
                     }

@@ -7,10 +7,10 @@
 
     function DBConfig() {
         return {
-            dbConnectionUrl: dbConnectionUrl
+            dbConnectionString: dbConnectionString
         };
 
-        function dbConnectionUrl() {
+        function dbConnectionString() {
             return config.db.hostUrl + '/' + config.db.dbName;
         }
     }

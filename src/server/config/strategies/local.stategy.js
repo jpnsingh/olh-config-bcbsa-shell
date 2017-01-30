@@ -15,25 +15,25 @@
                 passwordField: 'password'
             },
             function (userName, password, done) {
-                var url = dbConfig.dbConnectionUrl();
+                mongodb.connect(dbConfig.dbConnectionString(), function (error, db) {
+                    var query = {
+                            'auth.userName': userName,
+                            'auth.password': password
+                        },
+                        projection = {_id: 0, 'auth.password': 0};
 
-                mongodb.connect(url, function (error, db) {
-                    var usersCollection = db.collection('users');
+                    db.collection('users')
+                        .findOne(query, projection, function (error, user) {
+                            if (error) {
+                                return done(error);
+                            }
 
-                    usersCollection.findOne({
-                        'auth.userName': userName,
-                        'auth.password': password
-                    }, {_id: 0, 'auth.password': 0}, function (error, user) {
-                        if (error) {
-                            return done(error);
-                        }
+                            if (!user) {
+                                return done(null, false, {message: 'Username or password entered is incorrect'});
+                            }
 
-                        if (!user) {
-                            return done(null, false, {message: 'Username or password entered is incorrect'});
-                        }
-
-                        return done(null, user);
-                    });
+                            return done(null, user);
+                        });
                 });
             }
         ));
