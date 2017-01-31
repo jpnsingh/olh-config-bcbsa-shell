@@ -66,7 +66,7 @@
                 .then(function (data) {
                     vm.updating = false;
 
-                    vm.planSetup = data.groupConfig.planSetup;
+                    vm.planSetup = data.config.planSetup;
                 }, function (error) {
                     vm.updating = false;
 

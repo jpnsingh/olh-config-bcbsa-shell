@@ -5,14 +5,15 @@
                 <strong>News Feed</strong>
                 <section class="pull-right">
                     <button class="btn btn-success btn-xs"
+                            data-ng-disabled="planAdditionalCtrl.updating"
                             data-ng-click="planAdditionalCtrl.addNewsFeed()"><i class="fa fa-plus"></i></button>
                     <button class="btn btn-danger btn-xs"
-                            data-ng-disabled="!planAdditionalCtrl.selectedNewsFeed"
+                            data-ng-disabled="!planAdditionalCtrl.selectedNewsFeed || planAdditionalCtrl.updating"
                             data-ng-click="planAdditionalCtrl.deleteNewsFeed()"><i class="fa fa-trash"></i></button>
                 </section>
             </header>
             <main>
-                <fieldset class="fieldset well">
+                <fieldset class="fieldset well" data-ng-disabled="planAdditionalCtrl.updating">
                     <div class="alert alert-info m-b-0"
                          data-ng-if="!planAdditionalCtrl.planAdditional.newsFeed.list.length">
                         No News Feed is configured yet. Please add one...
@@ -87,14 +88,15 @@
                 <strong>Interest</strong>
                 <section class="pull-right">
                     <button class="btn btn-success btn-xs"
+                            data-ng-disabled="planAdditionalCtrl.updating"
                             data-ng-click="planAdditionalCtrl.addInterest()"><i class="fa fa-plus"></i></button>
                     <button class="btn btn-danger btn-xs"
-                            data-ng-disabled="!planAdditionalCtrl.selectedInterest"
+                            data-ng-disabled="!planAdditionalCtrl.selectedInterest || planAdditionalCtrl.updating"
                             data-ng-click="planAdditionalCtrl.deleteInterest()"><i class="fa fa-trash"></i></button>
                 </section>
             </header>
             <main>
-                <fieldset class="well fieldset form-group col-xs-12">
+                <fieldset class="fieldset well form-group col-xs-12" data-ng-disabled="planAdditionalCtrl.updating">
                     <div class="row">
                         <article class="col-xs-12"
                                  data-ng-repeat="interest in planAdditionalCtrl.planAdditional.interest.list">
@@ -152,14 +154,15 @@
                 <strong>Insights</strong>
                 <section class="pull-right">
                     <button class="btn btn-success btn-xs"
+                            data-ng-disabled="planAdditionalCtrl.updating"
                             data-ng-click="planAdditionalCtrl.addInsight()"><i class="fa fa-plus"></i></button>
                     <button class="btn btn-danger btn-xs"
-                            data-ng-disabled="!planAdditionalCtrl.selectedInsight"
+                            data-ng-disabled="!planAdditionalCtrl.selectedInsight || planAdditionalCtrl.updating"
                             data-ng-click="planAdditionalCtrl.deleteInsight()"><i class="fa fa-trash"></i></button>
                 </section>
             </header>
             <main>
-                <fieldset class="well fieldset">
+                <fieldset class="fieldset well" data-ng-disabled="planAdditionalCtrl.updating">
                     <div class="alert alert-info m-b-0"
                          data-ng-if="!planAdditionalCtrl.planAdditional.insight.list.length">
                         No Insight is configured yet. Please add one...

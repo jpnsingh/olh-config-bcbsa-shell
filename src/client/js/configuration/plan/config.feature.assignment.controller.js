@@ -22,7 +22,7 @@
                 .then(function (data) {
                     vm.updating = false;
 
-                    vm.featureAssignment = data.groupConfig.featureAssignment;
+                    vm.featureAssignment = data.config.featureAssignment;
                 }, function (error) {
                     vm.updating = false;
 

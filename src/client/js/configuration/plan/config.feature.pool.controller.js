@@ -57,7 +57,7 @@
                 .then(function (data) {
                     vm.updating = false;
 
-                    vm.featurePool = data.groupConfig.featurePool;
+                    vm.featurePool = data.config.featurePool;
                     init();
                 }, function (error) {
                     vm.updating = false;

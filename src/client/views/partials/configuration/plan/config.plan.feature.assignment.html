@@ -7,7 +7,7 @@
 
     <div class="row" data-ng-if="featureAssignmentCtrl.rootConfig.featurePool.appPool.length">
         <section class="col-xs-12">
-            <fieldset class="well fieldset form-group">
+            <fieldset class="fieldset well form-group" data-ng-disabled="featureAssignmentCtrl.updating">
                 <section class="form-group">
                     <div class="input-group">
                         <input type="text"

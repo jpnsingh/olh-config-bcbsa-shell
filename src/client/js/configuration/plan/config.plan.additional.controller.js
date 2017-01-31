@@ -98,7 +98,7 @@
                 .updateConfig(vm.rootConfig)
                 .then(function (data) {
                     vm.updating = false;
-                    vm.planAdditional = data.groupConfig.planAdditional;
+                    vm.planAdditional = data.config.planAdditional;
                     init();
                 }, function (error) {
                     vm.updating = false;

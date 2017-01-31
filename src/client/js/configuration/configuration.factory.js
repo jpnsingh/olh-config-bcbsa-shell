@@ -60,7 +60,7 @@
                     userName: auth.currentUser().auth.userName
                 }, {})
                 .then(function (response) {
-                    return response.data;
+                    return response.data.groupConfig;
                 }, function (response) {
                     return response.error;
                 });
