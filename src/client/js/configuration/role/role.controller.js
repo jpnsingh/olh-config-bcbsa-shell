@@ -36,19 +36,19 @@
         };
 
         vm.updateRole = function () {
-            vm.updaing = true;
+            vm.updating = true;
 
             $timeout(function () {
                 RoleService
                     .updateRole(vm.selected)
                     .then(function (data) {
-                        vm.updaing = false;
+                        vm.updating = false;
                         vm.selected = data.role;
                     }, function (error) {
-                        vm.updaing = false;
+                        vm.updating = false;
                         vm.error = error;
                     });
-            }, 5000);
+            }, 2000);
         };
 
         function init() {
