@@ -8,7 +8,7 @@
     function RoleCtrl(auth, Role, RoleService) {
         var vm = this;
 
-        vm.canModifyRoles = _.includes(auth.currentUser().roles, 'SuperUser');
+        vm.canModifyRoles = _.some(auth.currentUser().roles, {_id: 'SuperUser'});
 
         vm.loadingRoles = true;
 

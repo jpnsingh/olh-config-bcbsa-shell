@@ -9,12 +9,23 @@
         var self = this;
 
         return {
+            listGroups: listGroups,
             getDefaultConfig: getDefaultConfig,
             cacheConfig: cacheConfig,
             getCachedConfig: getCachedConfig,
             updateConfig: updateConfig,
             getConfigurableLanguages: getConfigurableLanguages
         };
+
+        function listGroups() {
+            return $http
+                .get('api/config/list')
+                .then(function (response) {
+                    return response.data;
+                }, function (response) {
+                    return response.data.error;
+                });
+        }
 
         function getDefaultConfig(groupId) {
             return $http

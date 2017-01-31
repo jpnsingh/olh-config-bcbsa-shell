@@ -9,9 +9,28 @@
         var connectionString = dbConfig.dbConnectionString();
 
         return {
+            listGroups: listGroups,
             groupConfig: groupConfig,
             saveGroupConfig: saveGroupConfig
         };
+
+        function listGroups(request, response, next) {
+            var query = {},
+                projection = {groupdId: 1, name: 1, description: 1};
+
+            mongodb.connect(connectionString, function (error, db) {
+                if (error) {
+                    next(error);
+                }
+
+                var cursor = db.collection('groups').find(query);
+                cursor.projection = projection;
+
+                cursor.toArray(function (error, groups) {
+                    response.json({groups: groups});
+                });
+            });
+        }
 
         function groupConfig(request, response, next) {
             var query = {'_id': request.params.groupId};

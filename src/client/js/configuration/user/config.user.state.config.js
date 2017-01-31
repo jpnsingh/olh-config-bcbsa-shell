@@ -16,7 +16,9 @@
                     templateUrl: 'templates/partials/configuration/config.user.html',
                     data: {
                         docTitle: 'Configuration | User Management'
-                    }
+                    },
+                    controller: 'UserCtrl',
+                    controllerAs: 'userCtrl'
                 }
             };
         }

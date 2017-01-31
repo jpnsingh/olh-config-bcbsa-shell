@@ -1,7 +1,113 @@
 <header>
     <h3>User Management</h3>
 </header>
-<main class="user-container main-content">
-    <div class="alert alert-info m-b-0">User Management content goes here...</div>
+<data-loading-spinner data-loading="userCtrl.loadingUsers"></data-loading-spinner>
+
+<main class="user-container main-content clearfix" data-ng-if="!userCtrl.loadingUsers">
+    <section class="user-list col-xs-12">
+        <header class="col-xs-12 m-y-5">
+            <strong>Users</strong>
+            <section class="pull-right">
+                <button class="btn btn-success btn-xs"
+                        data-ng-disabled="!userCtrl.canModifyUsers"
+                        data-ng-click="userCtrl.addUser()">
+                    <i class="fa fa-plus"></i></button>
+                <button class="btn btn-warning btn-xs"
+                        data-ng-disabled="!userCtrl.canModifyUsers || !userCtrl.selected">
+                    <i class="fa fa-edit"></i></button>
+                <button class="btn btn-danger btn-xs"
+                        data-ng-disabled="!userCtrl.canModifyUsers || !userCtrl.selected"
+                        data-ng-click="userCtrl.deleteUser()">
+                    <i class="fa fa-trash"></i></button>
+            </section>
+        </header>
+        <main>
+            <fieldset class="fieldset well col-xs-12">
+                <div class="alert alert-info m-b-0" data-ng-if="!userCtrl.users.length">
+                    No users configured yet. Please add one...
+                </div>
+
+                <button data-ng-repeat="user in userCtrl.users"
+                        type="button"
+                        class="btn btn-default m-x-5"
+                        data-ng-class="{'btn-success': user._id === userCtrl.selected._id}"
+                        data-ng-click="userCtrl.selected = user"
+                        data-ng-bind="user.auth.userName"></button>
+            </fieldset>
+        </main>
+    </section>
+
+    <section class="user-info col-xs-12">
+        <header class="col-xs-12 m-y-5">
+            <strong>User Info</strong>
+        </header>
+        <main>
+            <form name="userForm">
+                <fieldset class="fieldset well col-xs-12" data-ng-disabled="!userCtrl.canModifyUsers">
+                    <div class="alert alert-info m-b-0" data-ng-if="!userCtrl.users.length">
+                        Please select a user from the list or add one...
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-xs-4">
+                            <label for="userName" class="text-capitalize">Username</label>
+                            <input type="text"
+                                   id="userName"
+                                   name="userName"
+                                   class="form-control"
+                                   data-ng-model="userCtrl.selected.auth.userName">
+                        </div>
+                        <div class="form-group col-xs-4">
+                            <label for="password" class="text-capitalize">Password</label>
+                            <input type="password"
+                                   id="password"
+                                   name="password"
+                                   class="form-control"
+                                   data-ng-model="userCtrl.selected.auth.password">
+                        </div>
+                        <div class="form-group col-xs-4" data-ng-if="adding">
+                            <label for="passwordConfirm" class="text-capitalize">Confirm Password</label>
+                            <input type="password"
+                                   id="passwordConfirm"
+                                   name="passwordConfirm"
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-xs-4">
+                            <label for="userRoles">Roles</label>
+                            <select id="userRoles"
+                                    class="form-control multiselect"
+                                    multiple="multiple"
+                                    data-ng-options="role.name for role in userCtrl.roles track by role._id"
+                                    data-ng-model="userCtrl.selected.roles"></select>
+                        </div>
+
+                        <div class="form-group col-xs-4">
+                            <label for="userGroups">Groups</label>
+                            <select id="userGroups"
+                                    class="form-control multiselect"
+                                    multiple="multiple"
+                                    data-ng-options="group.name for group in userCtrl.groups track by group._id"
+                                    data-ng-model="userCtrl.selected.groups"></select>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </main>
+        <footer class="row">
+            <section class="col-xs-12">
+                <button type="button"
+                        class="btn btn-primary"
+                        data-ng-disabled="!userCtrl.canModifyUsers"
+                        data-ng-click="userCtrl.updateUsers()">
+                    <span data-ng-if="!userCtrl.updating">Update</span>
+                    <span data-ng-if="userCtrl.updating">
+                        <i class="fa fa-spinner fa-pulse"></i> Updating...
+                    </span>
+                </button>
+            </section>
+        </footer>
+    </section>
 </main>
-<footer></footer>

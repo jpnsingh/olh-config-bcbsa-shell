@@ -28,7 +28,7 @@
                         next(error);
                     }
 
-                    if (result.matchedCount === 1 && result.modifiedCount === 1) {
+                    if (results.matchedCount === 1 && results.modifiedCount === 1) {
                         response.json({user: results.ops[0]});
                     }
                 });

@@ -8,6 +8,10 @@
 
     function ConfigApiRoutes() {
         configApiRouter
+            .route('/list')
+            .get(configApiController.listGroups);
+
+        configApiRouter
             .route('/:groupId')
             .get(configApiController.groupConfig);
 
