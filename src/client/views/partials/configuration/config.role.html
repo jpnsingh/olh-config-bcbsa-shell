@@ -10,17 +10,17 @@
             <strong>Roles</strong>
             <section class="pull-right">
                 <button class="btn btn-success btn-xs"
-                        data-ng-disabled="!roleCtrl.canModifyRoles"
+                        data-ng-disabled="!roleCtrl.canModifyRoles || roleCtrl.updating"
                         data-ng-click="roleCtrl.addRole()">
                     <i class="fa fa-plus"></i></button>
                 <button class="btn btn-danger btn-xs"
-                        data-ng-disabled="!roleCtrl.canModifyRoles || !roleCtrl.selected"
+                        data-ng-disabled="!roleCtrl.canModifyRoles || roleCtrl.updating || !roleCtrl.selected"
                         data-ng-click="roleCtrl.deleteRole()">
                     <i class="fa fa-trash"></i></button>
             </section>
         </header>
         <main>
-            <fieldset class="fieldset well col-xs-12">
+            <fieldset class="fieldset well col-xs-12" data-ng-disabled="roleCtrl.updating">
                 <div class="alert alert-info m-b-0" data-ng-if="!roleCtrl.roles.length">
                     No roles configured yet. Please add one...
                 </div>
@@ -41,7 +41,8 @@
         </header>
         <main>
             <form name="roleForm">
-                <fieldset class="fieldset well col-xs-12" data-ng-disabled="!roleCtrl.canModifyRoles">
+                <fieldset class="fieldset well col-xs-12"
+                          data-ng-disabled="!roleCtrl.canModifyRoles || roleCtrl.updating">
                     <div class="alert alert-info m-b-0" data-ng-if="!roleCtrl.roles.length">
                         Please select a role from the list or add one...
                     </div>

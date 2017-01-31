@@ -10,17 +10,17 @@
             <strong>Users</strong>
             <section class="pull-right">
                 <button class="btn btn-success btn-xs"
-                        data-ng-disabled="!userCtrl.canModifyUsers"
+                        data-ng-disabled="!userCtrl.canModifyUsers || userCtrl.updating"
                         data-ng-click="userCtrl.addUser()">
                     <i class="fa fa-plus"></i></button>
                 <button class="btn btn-danger btn-xs"
-                        data-ng-disabled="!userCtrl.canModifyUsers || !userCtrl.selected"
+                        data-ng-disabled="!userCtrl.canModifyUsers || userCtrl.updating || !userCtrl.selected"
                         data-ng-click="userCtrl.deleteUser()">
                     <i class="fa fa-trash"></i></button>
             </section>
         </header>
         <main>
-            <fieldset class="fieldset well col-xs-12">
+            <fieldset class="fieldset well col-xs-12" data-ng-disabled="userCtrl.updating">
                 <div class="alert alert-info m-b-0" data-ng-if="!userCtrl.users.length">
                     No users configured yet. Please add one...
                 </div>
@@ -41,7 +41,8 @@
         </header>
         <main>
             <form name="userForm">
-                <fieldset class="fieldset well col-xs-12" data-ng-disabled="!userCtrl.canModifyUsers">
+                <fieldset class="fieldset well col-xs-12"
+                          data-ng-disabled="!userCtrl.canModifyUsers || userCtrl.updating">
                     <div class="alert alert-info m-b-0" data-ng-if="!userCtrl.users.length">
                         Please select a user from the list or add one...
                     </div>
