@@ -8,8 +8,12 @@
 
     function RoleApiRoutes() {
         RoleApiRouter
-            .route('/roles')
-            .get(roleApiController.getRoles);
+            .route('/list')
+            .get(roleApiController.listRoles);
+
+        RoleApiRouter
+            .route('/userRoles')
+            .get(roleApiController.userRoles);
 
         RoleApiRouter
             .route('/')

@@ -1,6 +1,7 @@
 <header>
     <h3>User Management</h3>
 </header>
+
 <data-loading-spinner data-loading="userCtrl.loadingUsers"></data-loading-spinner>
 
 <main class="user-container main-content clearfix" data-ng-if="!userCtrl.loadingUsers">
@@ -77,7 +78,7 @@
                             <select id="userRoles"
                                     class="form-control multiselect"
                                     multiple="multiple"
-                                    data-ng-options="role.name for role in userCtrl.roles track by role._id"
+                                    data-ng-options="role.name for role in userCtrl.roles track by role.id"
                                     data-ng-model="userCtrl.selected.roles"></select>
                         </div>
 
@@ -97,8 +98,8 @@
             <section class="col-xs-12">
                 <button type="button"
                         class="btn btn-primary"
-                        data-ng-disabled="!userCtrl.canModifyUsers"
-                        data-ng-click="userCtrl.updateUsers()">
+                        data-ng-disabled="!userCtrl.canModifyUsers || userCtrl.updating"
+                        data-ng-click="userCtrl.updateUser()">
                     <span data-ng-if="!userCtrl.updating">Update</span>
                     <span data-ng-if="userCtrl.updating">
                         <i class="fa fa-spinner fa-pulse"></i> Updating...

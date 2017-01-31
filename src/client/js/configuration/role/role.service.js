@@ -4,13 +4,46 @@
     module.exports = angular.module('bcbsa-shell.config.role.roleService', [])
         .service('RoleService', RoleService);
 
-    RoleService.$inject = ['$http'];
-    function RoleService($http) {
+    RoleService.$inject = ['$http', 'auth'];
+    function RoleService($http, auth) {
         var self = this;
 
-        self.getRoles = function () {
+        self.listRoles = function () {
             return $http
-                .get('api/role/roles')
+                .get('api/role/list')
+                .then(function (response) {
+                    return response.data;
+                }, function (response) {
+                    return response.error;
+                });
+        };
+
+        self.userRoles = function () {
+            return $http
+                .get('api/role/userRoles')
+                .then(function (response) {
+                    return response.data;
+                }, function (response) {
+                    return response.error;
+                });
+        };
+
+        self.addRole = function (role) {
+            return $http
+                .post('api/role/', role)
+                .then(function (response) {
+                    return response.data;
+                }, function (response) {
+                    return response.error;
+                });
+        };
+
+        self.updateRole = function (role) {
+            return $http
+                .put('api/role/:roleId'.replace(':roleId', role._id), {
+                    role: role,
+                    userName: auth.currentUser().auth.userName
+                })
                 .then(function (response) {
                     return response.data;
                 }, function (response) {

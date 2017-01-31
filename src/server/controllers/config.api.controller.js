@@ -23,8 +23,7 @@
                     next(error);
                 }
 
-                var cursor = db.collection('groups').find(query);
-                cursor.projection = projection;
+                var cursor = db.collection('groups').find(query, projection);
 
                 cursor.toArray(function (error, groups) {
                     response.json({groups: groups});
@@ -63,7 +62,9 @@
                     }
 
                     if (result.matchedCount === 1 && result.modifiedCount === 1) {
-                        response.json({groupConfig: config});
+                        db.collection('groups').findOne(query, function (error, groupConfig) {
+                            response.json({groupConfig: groupConfig});
+                        });
                     }
                 });
             });

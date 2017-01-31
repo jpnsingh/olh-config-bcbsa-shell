@@ -4,16 +4,17 @@
     module.exports = angular.module('bcbsa-shell.config.user.controllers.userController', [])
         .controller('UserCtrl', UserCtrl);
 
-    UserCtrl.$inject = ['auth', 'User', 'UserService', 'RoleService', 'ConfigFactory'];
-    function UserCtrl(auth, User, UserService, RoleService, ConfigFactory) {
+    UserCtrl.$inject = ['$timeout', 'auth', 'User', 'UserService', 'RoleService', 'ConfigFactory'];
+    function UserCtrl($timeout, auth, User, UserService, RoleService, ConfigFactory) {
         var vm = this;
 
-        vm.canModifyUsers = _.some(auth.currentUser().roles, {_id: 'SuperUser'});
+        vm.canModifyUsers = _.some(auth.currentUser().roles, {id: 'SuperUser'});
 
         vm.loadingUsers = true;
+        vm.updaing = false;
 
         RoleService
-            .getRoles()
+            .userRoles()
             .then(function (data) {
                 vm.roles = data.roles;
             });
@@ -45,9 +46,20 @@
             init();
         };
 
-        vm.updateUsers = function () {
-            console.log(vm.users);
-            console.log(vm.selected);
+        vm.updateUser = function () {
+            vm.updaing = true;
+
+            $timeout(function () {
+                UserService
+                    .updateUser(vm.selected)
+                    .then(function (data) {
+                        vm.updaing = false;
+                        vm.selected = data.user;
+                    }, function (error) {
+                        vm.updaing = false;
+                        vm.error = error;
+                    });
+            }, 5000);
         };
 
         function init() {

@@ -17,7 +17,7 @@
 
         userApiRouter
             .route('/:userId')
-            .post(userApiController.updateUser);
+            .put(userApiController.updateUser);
 
         return userApiRouter;
     }
