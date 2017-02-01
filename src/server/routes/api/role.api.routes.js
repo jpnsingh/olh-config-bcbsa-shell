@@ -16,8 +16,8 @@
             .get(roleApiController.userRoles);
 
         RoleApiRouter
-            .route('/')
-            .post(roleApiController.addRole);
+            .route('/:roleId')
+            .delete(roleApiController.deleteRole);
 
         RoleApiRouter
             .route('/:roleId')

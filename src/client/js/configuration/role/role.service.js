@@ -28,9 +28,9 @@
                 });
         };
 
-        self.addRole = function (role) {
+        self.deleteRole = function (roleId) {
             return $http
-                .post('api/role/', role)
+                .delete('api/role/:roleId'.replace(':roleId', roleId))
                 .then(function (response) {
                     return response.data;
                 }, function (response) {
@@ -40,7 +40,7 @@
 
         self.updateRole = function (role) {
             return $http
-                .put('api/role/:roleId'.replace(':roleId', role._id), {
+                .put('api/role/:roleId'.replace(':roleId', role._id ? role._id : 'new'), {
                     role: role,
                     userName: auth.currentUser().auth.userName
                 })

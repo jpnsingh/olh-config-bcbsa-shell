@@ -13,7 +13,7 @@
         return {
             listRoles: listRoles,
             userRoles: userRoles,
-            addRole: addRole,
+            deleteRole: deleteRole,
             updateRole: updateRole
         };
 
@@ -46,17 +46,18 @@
             });
         }
 
-        function addRole(request, response, next) {
-            var role = request.body;
+        function deleteRole(request, response, next) {
+            var roleId = request.params.roleId,
+                query = {_id: new ObjectID(roleId)};
 
             mongodbClient.connect(connectionString, function (error, db) {
-                db.collection('roles').insertOne(role, function (error, result) {
+                db.collection('roles').deleteOne(query, function (error, result) {
                     if (error) {
                         next(error);
                     }
 
-                    if (result.matchedCount === 1 && result.modifiedCount === 1) {
-                        response.json({role: result.ops[0]});
+                    if (result.deletedCount === 1) {
+                        response.json({success: {deleted: 1}});
                     }
                 });
             });
@@ -64,8 +65,9 @@
 
         function updateRole(request, response, next) {
             var role = request.body.role,
+                roleId = request.params.roleId,
                 userName = request.body.userName,
-                query = {'_id': new ObjectID(request.params.roleId)},
+                query = {'_id': roleId === 'new' ? new ObjectID() : new ObjectID(roleId)},
                 updateObj = {
                     $set: {
                         id: role.id,
@@ -74,15 +76,22 @@
                         updatedAt: new Date(),
                         updatedBy: userName
                     }
+                },
+                updateOptions = {
+                    upsert: true
                 };
 
+            if (roleId === 'new') {
+                updateObj.$set.createdAt = new Date();
+            }
+
             mongodbClient.connect(connectionString, function (error, db) {
-                db.collection('roles').updateOne(query, updateObj, function (error, result) {
+                db.collection('roles').updateOne(query, updateObj, updateOptions, function (error, result) {
                     if (error) {
                         next(error);
                     }
 
-                    if (result.matchedCount === 1 && result.modifiedCount === 1) {
+                    if ((result.matchedCount === 1 && result.modifiedCount === 1) || result.upsertedCount === 1) {
                         db.collection('roles').findOne(query, function (error, role) {
                             response.json({role: role});
                         });
