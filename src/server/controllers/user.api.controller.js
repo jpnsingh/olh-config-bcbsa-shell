@@ -11,27 +11,23 @@
         var connectionString = dbConfig.dbConnectionString();
 
         return {
-            addUser: addUser,
+            deleteUser: deleteUser,
             listUsers: listUsers,
             updateUser: updateUser
         };
 
-        function addUser(request, response, next) {
-            var user = request.body.user,
-                userName = request.body.userName;
-
-            user.createdAt = new Date();
-            user.updatedAt = new Date();
-            user.updatedBy = userName;
+        function deleteUser(request, response, next) {
+            var userId = request.params.userId,
+                query = {_id: new ObjectID(userId)};
 
             mongodbClient.connect(connectionString, function (error, db) {
-                db.collection('users').insertOne(user, function (error, results) {
+                db.collection('users').deleteOne(query, function (error, result) {
                     if (error) {
                         next(error);
                     }
 
-                    if (results.matchedCount === 1 && results.modifiedCount === 1) {
-                        response.json({user: results.ops[0]});
+                    if (result.deletedCount === 1) {
+                        response.json({success: {deleted: 1}});
                     }
                 });
             });
@@ -53,8 +49,9 @@
 
         function updateUser(request, response, next) {
             var user = request.body.user,
+                userId = request.params.userId,
                 userName = request.body.userName,
-                query = {'_id': new ObjectID(request.params.userId)},
+                query = {'_id': userId === 'new' ? new ObjectID() : new ObjectID(userId)},
                 updateObj = {
                     $set: {
                         'auth.userName': user.auth.userName,
@@ -64,15 +61,18 @@
                         updatedAt: new Date(),
                         updatedBy: userName
                     }
+                },
+                updateOptions = {
+                    upsert: true
                 };
 
             mongodbClient.connect(connectionString, function (error, db) {
-                db.collection('users').updateOne(query, updateObj, function (error, result) {
+                db.collection('users').updateOne(query, updateObj, updateOptions, function (error, result) {
                     if (error) {
                         next(error);
                     }
 
-                    if (result.matchedCount === 1 && result.modifiedCount === 1) {
+                    if ((result.matchedCount === 1 && result.modifiedCount === 1) || result.upsertedCount === 1) {
                         db.collection('users').findOne(query, function (error, user) {
                             response.json({user: user});
                         });

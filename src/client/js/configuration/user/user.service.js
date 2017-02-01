@@ -18,9 +18,19 @@
                 });
         };
 
+        self.deleteUser = function (userId) {
+            return $http
+                .delete('api/user/:userId'.replace(':userId', userId))
+                .then(function (response) {
+                    return response.data;
+                }, function (response) {
+                    return response.error;
+                });
+        };
+
         self.updateUser = function (user) {
             return $http
-                .put('api/user/:userId'.replace(':userId', user._id), {
+                .put('api/user/:userId'.replace(':userId', user._id ? user._id : 'new'), {
                     user: user,
                     userName: auth.currentUser().auth.userName
                 })

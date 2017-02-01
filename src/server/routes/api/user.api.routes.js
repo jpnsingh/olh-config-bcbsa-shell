@@ -12,8 +12,8 @@
             .get(userApiController.listUsers);
 
         userApiRouter
-            .route('/')
-            .post(userApiController.addUser);
+            .route('/:userId')
+            .delete(userApiController.deleteUser);
 
         userApiRouter
             .route('/:userId')

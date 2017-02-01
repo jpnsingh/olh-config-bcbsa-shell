@@ -11,8 +11,6 @@
 
         vm.canModifyUsers = _.some(auth.currentUser().roles, {id: 'SuperUser'});
 
-        vm.loadingUsers = true;
-
         RoleService
             .userRoles()
             .then(function (data) {
@@ -25,25 +23,25 @@
                 vm.groups = data.groups;
             });
 
-        UserService
-            .getUsers()
-            .then(function (data) {
-                vm.loadingUsers = false;
-                vm.users = data.users;
-                init();
-            }, function (error) {
-                vm.loadingUsers = false;
-                vm.error = error;
-            });
-
         vm.addUser = function () {
             vm.users.unshift(new User());
-            init();
+            initSelection();
         };
 
         vm.deleteUser = function () {
-            _.remove(vm.users, vm.selected);
-            init();
+            vm.updating = true;
+
+            $timeout(function () {
+                UserService
+                    .deleteUser(vm.selected._id)
+                    .then(function () {
+                        vm.updating = false;
+                        _.remove(vm.users, vm.selected);
+                        initSelection();
+                    }, function () {
+
+                    });
+            }, 2000);
         };
 
         vm.updateUser = function () {
@@ -52,9 +50,9 @@
             $timeout(function () {
                 UserService
                     .updateUser(vm.selected)
-                    .then(function (data) {
+                    .then(function () {
                         vm.updating = false;
-                        vm.selected = data.user;
+                        init();
                     }, function (error) {
                         vm.updating = false;
                         vm.error = error;
@@ -62,8 +60,25 @@
             }, 2000);
         };
 
-        function init() {
+        function initSelection() {
             vm.selected = vm.users[0];
         }
+
+        function init() {
+            vm.loadingUsers = true;
+
+            UserService
+                .getUsers()
+                .then(function (data) {
+                    vm.loadingUsers = false;
+                    vm.users = data.users;
+                    initSelection();
+                }, function (error) {
+                    vm.loadingUsers = false;
+                    vm.error = error;
+                });
+        }
+
+        init();
     }
 })();
