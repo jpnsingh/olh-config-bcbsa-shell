@@ -3,7 +3,7 @@
 
     describe('PlanSetupCtrl', function () {
         var scope,
-            ConfigFactory,
+            ConfigService,
             FileUploader,
             controller,
             cachedConfig = {
@@ -24,7 +24,7 @@
         beforeEach(inject(function ($rootScope, $controller) {
             scope = $rootScope.$new();
 
-            ConfigFactory = {
+            ConfigService = {
                 getCachedConfig: jasmine.createSpy().and.returnValue(cachedConfig),
                 getConfigurableLanguages: jasmine.createSpy().and.returnValue(languages)
             };
@@ -35,7 +35,7 @@
 
             controller = $controller('PlanSetupCtrl', {
                 $scope: scope,
-                ConfigFactory: ConfigFactory,
+                ConfigService: ConfigService,
                 FileUploader: FileUploader
             });
         }));

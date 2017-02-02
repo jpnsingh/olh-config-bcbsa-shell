@@ -4,11 +4,11 @@
     module.exports = angular.module('bcsba-shell.configuration.plan.controllers.featurePoolCtrlController', [])
         .controller('FeaturePoolCtrl', FeaturePoolCtrl);
 
-    FeaturePoolCtrl.$inject = ['ConfigFactory', 'FileUploader', 'App'];
-    function FeaturePoolCtrl(ConfigFactory, FileUploader, App) {
+    FeaturePoolCtrl.$inject = ['ConfigService', 'FileUploader', 'App'];
+    function FeaturePoolCtrl(ConfigService, FileUploader, App) {
         var vm = this;
 
-        vm.rootConfig = ConfigFactory.getCachedConfig();
+        vm.rootConfig = ConfigService.getCachedConfig();
 
         vm.featurePool = {};
 

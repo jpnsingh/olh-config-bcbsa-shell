@@ -6,7 +6,7 @@
             q,
             deferred,
             _timeout,
-            ConfigFactory,
+            ConfigService,
             UserService,
             controller,
             responseData = {
@@ -22,7 +22,7 @@
             q = $q;
             deferred = q.defer();
             _timeout = $timeout;
-            ConfigFactory = {
+            ConfigService = {
                 getGroupConfig: jasmine.createSpy().and.returnValue(deferred.promise),
                 cacheConfig: jasmine.createSpy()
             };
@@ -32,7 +32,7 @@
 
             controller = $controller('ConfigCtrl as configCtrl', {
                 $scope: scope,
-                ConfigFactory: ConfigFactory,
+                ConfigService: ConfigService,
                 UserService: UserService
             });
             controller.config = {};
@@ -43,14 +43,14 @@
         });
 
         it('should invoke the config factory and set the config accordingly', function () {
-            expect(ConfigFactory.getGroupConfig).toHaveBeenCalled();
+            expect(ConfigService.getGroupConfig).toHaveBeenCalled();
 
             deferred.resolve(responseData);
             _timeout.flush();
 
             expect(controller.loading).toBeFalsy();
             expect(controller.config).toEqual(responseData.config);
-            expect(ConfigFactory.cacheConfig).toHaveBeenCalled();
+            expect(ConfigService.cacheConfig).toHaveBeenCalled();
         });
     });
 })();

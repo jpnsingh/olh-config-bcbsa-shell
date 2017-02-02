@@ -7,7 +7,7 @@
             _rootScope,
             _http,
             _timeout,
-            _configFactory,
+            _configService,
             _successResponse = {
                 data: {
                     config: {
@@ -29,7 +29,7 @@
 
         beforeEach(angular.mock.module('bcbsa-shell.configuration.services.configurationFactory'));
 
-        beforeEach(inject(function ($q, $rootScope, $http, $timeout, ConfigFactory) {
+        beforeEach(inject(function ($q, $rootScope, $http, $timeout, ConfigService) {
             _q = $q;
             _deferred = _q.defer();
 
@@ -40,12 +40,12 @@
 
             _timeout = $timeout;
 
-            _configFactory = ConfigFactory;
+            _configService = ConfigService;
         }));
 
         describe('getGroupConfig:', function () {
             it('should fetch the default config from config api and resolve the promise accordingly', function () {
-                _configFactory.getGroupConfig();
+                _configService.getGroupConfig();
 
                 expect(_http.get).toHaveBeenCalledWith('api/config/root');
 
@@ -57,7 +57,7 @@
             });
 
             it('should handle the promise rejection accordingly', function () {
-                _configFactory.getGroupConfig();
+                _configService.getGroupConfig();
 
                 expect(_http.get).toHaveBeenCalledWith('api/config/root');
 
@@ -71,15 +71,15 @@
 
         describe('cacheConfig and getCachedConfig', function () {
             it('should cache the passed config and return the same respectively', function () {
-                _configFactory.cacheConfig(_successResponse.data.config);
+                _configService.cacheConfig(_successResponse.data.config);
 
-                expect(_configFactory.getCachedConfig()).toEqual(_successResponse.data.config);
+                expect(_configService.getCachedConfig()).toEqual(_successResponse.data.config);
             });
         });
 
         describe('getConfigurableLanguages', function () {
             it('should return the array of configurable languages accordingly', function () {
-                expect(_configFactory.getConfigurableLanguages().length).toBe(3);
+                expect(_configService.getConfigurableLanguages().length).toBe(3);
             });
         });
     });

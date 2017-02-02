@@ -5,8 +5,8 @@
         .controller('UserCtrl', UserCtrl);
 
     /* jshint maxparams:6 */
-    UserCtrl.$inject = ['$timeout', 'auth', 'User', 'UserService', 'RoleService', 'ConfigFactory'];
-    function UserCtrl($timeout, auth, User, UserService, RoleService, ConfigFactory) {
+    UserCtrl.$inject = ['$timeout', 'auth', 'User', 'UserService', 'RoleService', 'ConfigService'];
+    function UserCtrl($timeout, auth, User, UserService, RoleService, ConfigService) {
         var vm = this;
 
         vm.canModifyUsers = _.some(auth.currentUser().roles, {id: 'SuperUser'});
@@ -17,7 +17,7 @@
                 vm.roles = data.roles;
             });
 
-        ConfigFactory
+        ConfigService
             .listGroups()
             .then(function (data) {
                 vm.groups = data.groups;

@@ -4,11 +4,11 @@
     module.exports = angular.module('bcsba-shell.configuration.plan.controllers.planAdditionalController', [])
         .controller('PlanAdditionalCtrl', PlanAdditionalCtrl);
 
-    PlanAdditionalCtrl.$inject = ['ConfigFactory', 'FileUploader', 'NewsFeed', 'Interest', 'Insight'];
-    function PlanAdditionalCtrl(ConfigFactory, FileUploader, NewsFeed, Interest, Insight) {
+    PlanAdditionalCtrl.$inject = ['ConfigService', 'FileUploader', 'NewsFeed', 'Interest', 'Insight'];
+    function PlanAdditionalCtrl(ConfigService, FileUploader, NewsFeed, Interest, Insight) {
         var vm = this;
 
-        vm.rootConfig = ConfigFactory.getCachedConfig();
+        vm.rootConfig = ConfigService.getCachedConfig();
 
         vm.planAdditional = {};
 

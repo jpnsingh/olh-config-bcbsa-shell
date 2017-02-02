@@ -4,11 +4,11 @@
     module.exports = angular.module('bcsba-shell.configuration.plan.controllers.featureAssignmentController', [])
         .controller('FeatureAssignmentCtrl', FeatureAssignmentCtrl);
 
-    FeatureAssignmentCtrl.$inject = ['ConfigFactory'];
-    function FeatureAssignmentCtrl(ConfigFactory) {
+    FeatureAssignmentCtrl.$inject = ['ConfigService'];
+    function FeatureAssignmentCtrl(ConfigService) {
         var vm = this;
 
-        vm.rootConfig = ConfigFactory.getCachedConfig();
+        vm.rootConfig = ConfigService.getCachedConfig();
 
         vm.featureAssignment = {};
 

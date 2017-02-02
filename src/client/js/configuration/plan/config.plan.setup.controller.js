@@ -4,17 +4,17 @@
     module.exports = angular.module('bcsba-shell.configuration.plan.controllers.planSetupController', [])
         .controller('PlanSetupCtrl', PlanSetupCtrl);
 
-    PlanSetupCtrl.$inject = ['ConfigFactory', 'FileUploader'];
-    function PlanSetupCtrl(ConfigFactory, FileUploader) {
+    PlanSetupCtrl.$inject = ['ConfigService', 'FileUploader'];
+    function PlanSetupCtrl(ConfigService, FileUploader) {
         var vm = this;
 
-        vm.rootConfig = ConfigFactory.getCachedConfig();
+        vm.rootConfig = ConfigService.getCachedConfig();
 
         vm.planSetup = {};
 
         vm.planSetup = angular.extend(vm.planSetup, vm.rootConfig.planSetup);
 
-        vm.languages = ConfigFactory.getConfigurableLanguages();
+        vm.languages = ConfigService.getConfigurableLanguages();
 
         vm.uploadLogo = function (file, model) {
             if (!file) {
