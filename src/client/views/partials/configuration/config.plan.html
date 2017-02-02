@@ -9,6 +9,7 @@
                 <select id="userGroups"
                         class="form-control"
                         data-ng-options="group.name for group in configCtrl.userGroups track by group._id"
+                        data-ng-change="configCtrl.initGroupConfig()"
                         data-ng-model="configCtrl.selectedGroup"></select>
             </section>
         </section>
@@ -24,20 +25,32 @@
             <button class="btn btn-success btn-xs"
                     title="Add Plan"
                     data-ng-disabled="configCtrl.updating"
-                    data-ng-click="configCtrl.add()"><i class="fa fa-plus"></i></button>
+                    data-ng-click="configCtrl.addPlan()"><i class="fa fa-plus"></i></button>
             <button class="btn btn-warning btn-xs"
                     title="Update Plan"
+                    data-ng-if="configCtrl.planConfigured"
                     data-ng-disabled="configCtrl.updating"
-                    data-ng-click="configCtrl.update()"><i class="fa fa-edit"></i></button>
+                    data-ng-click="configCtrl.updatePlan()"><i class="fa fa-edit"></i></button>
             <button class="btn btn-danger btn-xs"
                     title="Delete Plan"
+                    data-ng-if="configCtrl.planConfigured"
                     data-ng-disabled="!configCtrl.selected || configCtrl.updating"
-                    data-ng-click="configCtrl.delete()"><i class="fa fa-trash"></i></button>
+                    data-ng-click="configCtrl.deletePlan()"><i class="fa fa-trash"></i></button>
         </li>
     </ul>
     <div class="tab-content clearfix">
         <hr/>
-        <div class="col-xs-12">
+
+        <data-loading-spinner data-loading="configCtrl.loadingConfig"></data-loading-spinner>
+
+        <div class="col-xs-12" data-ng-if="!configCtrl.planConfigured && !configCtrl.loadingConfig">
+            <div class="alert alert-info">
+                Plan for this group is not configured yet. Please add one or contact your administrator to enable it for
+                you...
+            </div>
+        </div>
+
+        <div class="col-xs-12" data-ng-if="configCtrl.planConfigured && !configCtrl.loadingConfig">
             <data-ui-view></data-ui-view>
         </div>
     </div>

@@ -4,8 +4,8 @@
     module.exports = angular.module('bcbsa-shell.configuration.controllers.ConfigurationController', [])
         .controller('ConfigCtrl', ConfigCtrl);
 
-    ConfigCtrl.$inject = ['$rootScope', '$timeout', 'ConfigService', 'UserService'];
-    function ConfigCtrl($rootScope, $timeout, ConfigService, UserService) {
+    ConfigCtrl.$inject = ['$rootScope', '$timeout', 'ConfigPlan', 'ConfigService', 'UserService'];
+    function ConfigCtrl($rootScope, $timeout, ConfigPlan, ConfigService, UserService) {
         var vm = this;
 
         vm.config = {};
@@ -26,17 +26,39 @@
             {'title': 'Feature Assignment', 'state': 'configuration.plan.featureAssignment'}
         ];
 
-        vm.update = function () {
+        vm.initGroupConfig = function () {
+            vm.loadingConfig = true;
+
+            $timeout(function () {
+                ConfigService
+                    .getGroupConfig(vm.selectedGroup._id)
+                    .then(function (groupData) {
+                        vm.loadingConfig = false;
+                        vm.groupId = groupData._id;
+                        setupConfig(groupData.config);
+                    }, function (error) {
+                        vm.loadingConfig = false;
+                        vm.error = error;
+                    });
+            }, 500);
+        };
+
+        vm.addPlan = function () {
+            vm.userGroups.unshift({_id: '', name: '', description: ''});
+            vm.selectedGroup = vm.userGroups[0];
+            setupConfig(new ConfigPlan());
+        };
+
+        vm.updatePlan = function () {
             $rootScope.updatingPlan = true;
             console.log(vm.config);
 
             $timeout(function () {
                 ConfigService
-                    .updateConfig(vm.config)
-                    .then(function (data) {
+                    .updateConfig(vm.config, vm.groupId)
+                    .then(function (groupData) {
                         $rootScope.updatingPlan = false;
-                        vm.config = data.config;
-                        ConfigService.cacheConfig(vm.config);
+                        setupConfig(groupData.config);
                     }, function (error) {
                         $rootScope.updatingPlan = false;
                         vm.error = error;
@@ -44,25 +66,28 @@
             }, 2000);
         };
 
-        function init() {
-            vm.loading = true;
+        vm.deletePlan = function () {
 
+        };
+
+        function setupConfig(config) {
+            if (_.isEmpty(config)) {
+                vm.planConfigured = false;
+                return;
+            }
+
+            angular.extend(vm.config, config);
+            ConfigService.cacheConfig(vm.config);
+            vm.planConfigured = true;
+        }
+
+        function init() {
             UserService
                 .getUserGroups()
                 .then(function (data) {
                     vm.userGroups = data.groups;
                     vm.selectedGroup = vm.userGroups[0];
-
-                    ConfigService
-                        .getGroupConfig(vm.selectedGroup._id)
-                        .then(function (data) {
-                            vm.loading = false;
-                            angular.extend(vm.config, data.config);
-                            ConfigService.cacheConfig(vm.config);
-                        }, function (error) {
-                            vm.loading = false;
-                            vm.error = error;
-                        });
+                    vm.initGroupConfig();
                 }, function (error) {
                     vm.error = error;
                 });

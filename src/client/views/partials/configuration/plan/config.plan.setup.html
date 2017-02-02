@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-xs-6" data-ng-if="planSetupCtrl.planSetup.branding.logo.src">
                             <img class="img-circle logo-preview"
-                                 src="{{planSetupCtrl.planSetup.branding.logo.src}}">
+                                 data-ng-src="{{planSetupCtrl.planSetup.branding.logo.src}}">
                         </div>
                     </div>
                 </div>
@@ -127,7 +127,8 @@
                                             </h4>
                                         </div>
                                         <div class="modal-body text-center">
-                                            <img class="bg-preview" src="{{planSetupCtrl.base64BackgroundImage}}">
+                                            <img class="bg-preview"
+                                                 data-ng-src="{{planSetupCtrl.base64BackgroundImage}}">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">

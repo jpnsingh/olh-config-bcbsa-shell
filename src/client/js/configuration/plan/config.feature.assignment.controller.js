@@ -9,9 +9,5 @@
         var vm = this;
 
         vm.rootConfig = ConfigService.getCachedConfig();
-
-        vm.featureAssignment = {};
-
-        vm.featureAssignment = angular.extend(vm.featureAssignment, vm.rootConfig.featureAssignment);
     }
 })();
