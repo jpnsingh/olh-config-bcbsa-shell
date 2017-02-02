@@ -13,7 +13,7 @@
                 </section>
             </header>
             <main>
-                <fieldset class="fieldset well" data-ng-disabled="planAdditionalCtrl.updating">
+                <fieldset class="fieldset well" data-ng-disabled="updatingPlan">
                     <div class="alert alert-info m-b-0"
                          data-ng-if="!planAdditionalCtrl.planAdditional.newsFeed.list.length">
                         No News Feed is configured yet. Please add one...
@@ -96,7 +96,7 @@
                 </section>
             </header>
             <main>
-                <fieldset class="fieldset well form-group col-xs-12" data-ng-disabled="planAdditionalCtrl.updating">
+                <fieldset class="fieldset well form-group col-xs-12" data-ng-disabled="updatingPlan">
                     <div class="row">
                         <article class="col-xs-12"
                                  data-ng-repeat="interest in planAdditionalCtrl.planAdditional.interest.list">
@@ -162,7 +162,7 @@
                 </section>
             </header>
             <main>
-                <fieldset class="fieldset well" data-ng-disabled="planAdditionalCtrl.updating">
+                <fieldset class="fieldset well" data-ng-disabled="updatingPlan">
                     <div class="alert alert-info m-b-0"
                          data-ng-if="!planAdditionalCtrl.planAdditional.insight.list.length">
                         No Insight is configured yet. Please add one...

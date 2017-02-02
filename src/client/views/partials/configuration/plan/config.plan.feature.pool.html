@@ -5,7 +5,7 @@
                 <strong>{{featurePoolCtrl.featurePool.header}}</strong>
             </header>
             <main>
-                <fieldset class="fieldset well" data-ng-disabled="featurePoolCtrl.updating">
+                <fieldset class="fieldset well" data-ng-disabled="updatingPlan">
                     <div class="alert alert-info m-b-0" data-ng-if="!featurePoolCtrl.selected">
                         Please select an app from the pool or add one...
                     </div>
@@ -69,7 +69,7 @@
                 </section>
             </header>
             <main>
-                <fieldset class="fieldset well form-group col-xs-12" data-ng-disabled="featurePoolCtrl.updating">
+                <fieldset class="fieldset well form-group col-xs-12" data-ng-disabled="updatingPlan">
                     <div class="row">
                         <article class="col-xs-12">
                             <div class="alert alert-info m-b-0"

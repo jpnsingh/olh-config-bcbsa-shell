@@ -4,8 +4,8 @@
     module.exports = angular.module('bcbsa-shell.configuration.controllers.ConfigurationController', [])
         .controller('ConfigCtrl', ConfigCtrl);
 
-    ConfigCtrl.$inject = ['ConfigFactory'];
-    function ConfigCtrl(ConfigFactory) {
+    ConfigCtrl.$inject = ['$rootScope', '$timeout', 'ConfigFactory'];
+    function ConfigCtrl($rootScope, $timeout, ConfigFactory) {
         var vm = this;
 
         vm.config = {};
@@ -27,19 +27,21 @@
         ];
 
         vm.update = function () {
-            vm.updating = true;
+            $rootScope.updatingPlan = true;
             console.log(vm.config);
 
-            ConfigFactory
-                .updateConfig(vm.config)
-                .then(function (data) {
-                    vm.updating = false;
-                    vm.config = data.config;
-                    ConfigFactory.cacheConfig(vm.config);
-                }, function (error) {
-                    vm.updating = false;
-                    vm.error = error;
-                });
+            $timeout(function () {
+                ConfigFactory
+                    .updateConfig(vm.config)
+                    .then(function (data) {
+                        $rootScope.updatingPlan = false;
+                        vm.config = data.config;
+                        ConfigFactory.cacheConfig(vm.config);
+                    }, function (error) {
+                        $rootScope.updatingPlan = false;
+                        vm.error = error;
+                    });
+            }, 2000);
         };
 
         function init() {
