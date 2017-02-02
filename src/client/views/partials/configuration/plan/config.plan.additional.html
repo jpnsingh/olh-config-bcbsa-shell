@@ -209,17 +209,4 @@
             </main>
         </section>
     </div>
-    <div class="row">
-        <section class="col-xs-12">
-            <button type="button"
-                    class="btn btn-primary"
-                    data-ng-disabled="planAdditionalForm.$invalid || planAdditionalCtrl.updating"
-                    data-ng-click="planAdditionalCtrl.update()">
-                <span data-ng-if="planAdditionalCtrl.updating">
-                    <i class="fa fa-spinner fa-pulse"></i> Updating...
-                </span>
-                <span data-ng-if="!planAdditionalCtrl.updating">Update</span>
-            </button>
-        </section>
-    </div>
 </form>

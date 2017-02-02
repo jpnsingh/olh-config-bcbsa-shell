@@ -13,21 +13,5 @@
         vm.featureAssignment = {};
 
         vm.featureAssignment = angular.extend(vm.featureAssignment, vm.rootConfig.featureAssignment);
-
-        vm.update = function () {
-            vm.updating = true;
-
-            ConfigFactory
-                .updateConfig(vm.rootConfig)
-                .then(function (data) {
-                    vm.updating = false;
-
-                    vm.featureAssignment = data.config.featureAssignment;
-                }, function (error) {
-                    vm.updating = false;
-
-                    vm.error = error;
-                });
-        };
     }
 })();

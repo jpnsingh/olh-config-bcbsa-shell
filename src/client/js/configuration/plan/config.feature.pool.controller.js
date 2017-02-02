@@ -49,23 +49,6 @@
             init();
         };
 
-        vm.update = function () {
-            vm.updating = true;
-
-            ConfigFactory
-                .updateConfig(vm.rootConfig)
-                .then(function (data) {
-                    vm.updating = false;
-
-                    vm.featurePool = data.config.featurePool;
-                    init();
-                }, function (error) {
-                    vm.updating = false;
-
-                    vm.error = error;
-                });
-        };
-
         function init() {
             vm.selected = vm.featurePool.appPool[0];
         }

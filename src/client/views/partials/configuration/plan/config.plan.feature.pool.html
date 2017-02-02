@@ -90,17 +90,4 @@
             </main>
         </section>
     </div>
-    <div class="row">
-        <section class="col-xs-12">
-            <button type="button"
-                    class="btn btn-primary"
-                    data-ng-disabled="featurePoolForm.$invalid || featurePoolCtrl.updating"
-                    data-ng-click="featurePoolCtrl.update()">
-                <span data-ng-if="featurePoolCtrl.updating">
-                    <i class="fa fa-spinner fa-pulse"></i> Updating...
-                </span>
-                <span data-ng-if="!featurePoolCtrl.updating">Update</span>
-            </button>
-        </section>
-    </div>
 </form>

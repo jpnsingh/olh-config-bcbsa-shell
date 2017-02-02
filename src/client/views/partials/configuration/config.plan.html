@@ -7,6 +7,20 @@
             data-ui-sref-active="active">
             <a data-ui-sref="{{tab.state}}" data-ng-bind="tab.title"></a>
         </li>
+        <li class="pull-right p-t-25 p-r-25">
+            <button class="btn btn-success btn-xs"
+                    title="Add Plan"
+                    data-ng-disabled="configCtrl.updating"
+                    data-ng-click="configCtrl.add()"><i class="fa fa-plus"></i></button>
+            <button class="btn btn-warning btn-xs"
+                    title="Update Plan"
+                    data-ng-disabled="configCtrl.updating"
+                    data-ng-click="configCtrl.update()"><i class="fa fa-edit"></i></button>
+            <button class="btn btn-danger btn-xs"
+                    title="Delete Plan"
+                    data-ng-disabled="!configCtrl.selected || configCtrl.updating"
+                    data-ng-click="configCtrl.delete()"><i class="fa fa-trash"></i></button>
+        </li>
     </ul>
     <div class="tab-content clearfix">
         <hr/>

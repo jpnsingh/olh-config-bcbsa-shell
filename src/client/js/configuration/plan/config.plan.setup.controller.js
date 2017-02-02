@@ -57,21 +57,5 @@
                     vm.uploadBackgroundImageProgress = progress;
                 });
         };
-
-        vm.update = function () {
-            vm.updating = true;
-
-            ConfigFactory
-                .updateConfig(vm.rootConfig)
-                .then(function (data) {
-                    vm.updating = false;
-
-                    vm.planSetup = data.config.planSetup;
-                }, function (error) {
-                    vm.updating = false;
-
-                    vm.error = error;
-                });
-        };
     }
 })();
