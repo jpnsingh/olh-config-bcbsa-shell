@@ -10,7 +10,7 @@
 
         return {
             listGroups: listGroups,
-            getDefaultConfig: getDefaultConfig,
+            getGroupConfig: getGroupConfig,
             cacheConfig: cacheConfig,
             getCachedConfig: getCachedConfig,
             updateConfig: updateConfig,
@@ -27,9 +27,9 @@
                 });
         }
 
-        function getDefaultConfig(groupId) {
+        function getGroupConfig(groupId) {
             return $http
-                .get('api/config/:groupId'.replace(':groupId', groupId || 'root'))
+                .get('api/config/:groupId'.replace(':groupId', groupId))
                 .then(function (response) {
                     return response.data.groupConfig;
                 }, function (response) {
@@ -45,14 +45,6 @@
             return self.config;
         }
 
-        function getConfigurableLanguages() {
-            return [
-                {id: 'english', value: 'English'},
-                {id: 'spanish', value: 'Spanish'},
-                {id: 'french', value: 'French'}
-            ];
-        }
-
         function updateConfig(config, groupId) {
             return $http
                 .post('api/config/:groupId'.replace(':groupId', groupId || 'root'), {
@@ -64,6 +56,14 @@
                 }, function (response) {
                     return response.error;
                 });
+        }
+
+        function getConfigurableLanguages() {
+            return [
+                {id: 'english', value: 'English'},
+                {id: 'spanish', value: 'Spanish'},
+                {id: 'french', value: 'French'}
+            ];
         }
     }
 })();

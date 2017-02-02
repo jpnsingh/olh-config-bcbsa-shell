@@ -1,6 +1,7 @@
 (function () {
     'use strict';
-    var mongodb = require('mongodb').MongoClient,
+    var mongodb = require('mongodb'),
+        mongodbClient = mongodb.MongoClient,
         dbConfig = require('../config/dbConfig')();
 
     module.exports = ConfigApiController;
@@ -18,7 +19,7 @@
             var query = {},
                 projection = {groupdId: 1, name: 1, description: 1};
 
-            mongodb.connect(connectionString, function (error, db) {
+            mongodbClient.connect(connectionString, function (error, db) {
                 if (error) {
                     next(error);
                 }
@@ -34,7 +35,7 @@
         function groupConfig(request, response, next) {
             var query = {'_id': request.params.groupId};
 
-            mongodb.connect(connectionString, function (error, db) {
+            mongodbClient.connect(connectionString, function (error, db) {
                 db.collection('groups').findOne(query, function (error, groupConfig) {
                     if (error) {
                         next(error);
@@ -55,7 +56,7 @@
                 query = {'_id': request.params.groupId},
                 updateObj = {$set: {config: config, updatedAt: new Date(), updatedBy: userName}};
 
-            mongodb.connect(connectionString, function (error, db) {
+            mongodbClient.connect(connectionString, function (error, db) {
                 db.collection('groups').updateOne(query, updateObj, function (error, result) {
                     if (error) {
                         next(error);

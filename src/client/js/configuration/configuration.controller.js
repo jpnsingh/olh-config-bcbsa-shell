@@ -4,8 +4,8 @@
     module.exports = angular.module('bcbsa-shell.configuration.controllers.ConfigurationController', [])
         .controller('ConfigCtrl', ConfigCtrl);
 
-    ConfigCtrl.$inject = ['$rootScope', '$timeout', 'ConfigFactory'];
-    function ConfigCtrl($rootScope, $timeout, ConfigFactory) {
+    ConfigCtrl.$inject = ['$rootScope', '$timeout', 'ConfigFactory', 'UserService'];
+    function ConfigCtrl($rootScope, $timeout, ConfigFactory, UserService) {
         var vm = this;
 
         vm.config = {};
@@ -46,14 +46,24 @@
 
         function init() {
             vm.loading = true;
-            ConfigFactory
-                .getDefaultConfig()
+
+            UserService
+                .getUserGroups()
                 .then(function (data) {
-                    vm.loading = false;
-                    angular.extend(vm.config, data.config);
-                    ConfigFactory.cacheConfig(vm.config);
+                    vm.userGroups = data.groups;
+                    vm.selectedGroup = vm.userGroups[0];
+
+                    ConfigFactory
+                        .getGroupConfig(vm.selectedGroup._id)
+                        .then(function (data) {
+                            vm.loading = false;
+                            angular.extend(vm.config, data.config);
+                            ConfigFactory.cacheConfig(vm.config);
+                        }, function (error) {
+                            vm.loading = false;
+                            vm.error = error;
+                        });
                 }, function (error) {
-                    vm.loading = false;
                     vm.error = error;
                 });
         }

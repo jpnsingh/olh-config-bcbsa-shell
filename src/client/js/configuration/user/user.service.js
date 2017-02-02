@@ -18,6 +18,16 @@
                 });
         };
 
+        self.getUserGroups = function () {
+            return $http
+                .get('api/user/:userId/groups'.replace(':userId', auth.currentUser()._id))
+                .then(function (response) {
+                    return response.data;
+                }, function (response) {
+                    return response.error;
+                });
+        };
+
         self.deleteUser = function (userId) {
             return $http
                 .delete('api/user/:userId'.replace(':userId', userId))

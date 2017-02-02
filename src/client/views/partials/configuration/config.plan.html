@@ -1,5 +1,18 @@
 <header>
-    <h3>Plan Management</h3>
+    <div class="row">
+        <section class="col-xs-6">
+            <h3>Plan Management</h3>
+        </section>
+        <section class="col-xs-6">
+            <section class="pull-right m-b-10 p-x-15">
+                <label for="userGroups"></label>
+                <select id="userGroups"
+                        class="form-control"
+                        data-ng-options="group.name for group in configCtrl.userGroups track by group._id"
+                        data-ng-model="configCtrl.selectedGroup"></select>
+            </section>
+        </section>
+    </div>
 </header>
 <main class="plan-container main-content">
     <ul class="nav nav-pills">

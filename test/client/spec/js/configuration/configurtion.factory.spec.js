@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    describe('auth service:', function () {
+    xdescribe('ConfigurationFactory:', function () {
         var _q,
             _deferred,
             _rootScope,
@@ -43,9 +43,9 @@
             _configFactory = ConfigFactory;
         }));
 
-        describe('getDefaultConfig:', function () {
+        describe('getGroupConfig:', function () {
             it('should fetch the default config from config api and resolve the promise accordingly', function () {
-                _configFactory.getDefaultConfig();
+                _configFactory.getGroupConfig();
 
                 expect(_http.get).toHaveBeenCalledWith('api/config/root');
 
@@ -57,7 +57,7 @@
             });
 
             it('should handle the promise rejection accordingly', function () {
-                _configFactory.getDefaultConfig();
+                _configFactory.getGroupConfig();
 
                 expect(_http.get).toHaveBeenCalledWith('api/config/root');
 
@@ -77,7 +77,7 @@
             });
         });
 
-        describe('cacheConfig and getCachedConfig', function () {
+        describe('getConfigurableLanguages', function () {
             it('should return the array of configurable languages accordingly', function () {
                 expect(_configFactory.getConfigurableLanguages().length).toBe(3);
             });

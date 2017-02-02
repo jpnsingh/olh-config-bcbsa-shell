@@ -20,7 +20,7 @@
                             'auth.userName': userName,
                             'auth.password': password
                         },
-                        projection = {_id: 0, 'auth.password': 0};
+                        projection = {'auth.password': 0};
 
                     db.collection('users')
                         .findOne(query, projection, function (error, user) {

@@ -12,6 +12,10 @@
             .get(userApiController.listUsers);
 
         userApiRouter
+            .route('/:userId/groups')
+            .get(userApiController.listUserGroups);
+
+        userApiRouter
             .route('/:userId')
             .delete(userApiController.deleteUser);
 
