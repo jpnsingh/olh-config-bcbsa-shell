@@ -1,5 +1,7 @@
 //@import url('https://fonts.googleapis.com/css?family=Oswald:300,400:latin,latin-ext');
 
+@libs: "../../libs";
+
 body {
   padding-top: 64px !important;
   padding-bottom: 64px !important;
@@ -11,4 +13,12 @@ body {
     border-radius: 3px;
     padding: 25px;
   }
+}
+
+// Smoke is used for notifications
+@import (css) "@{libs}/smoke/css/smoke.min.css";
+
+.jumbotron p {
+  font-size: 14px;
+  font-weight: normal;
 }

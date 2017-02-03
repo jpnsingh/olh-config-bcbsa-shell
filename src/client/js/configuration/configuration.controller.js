@@ -4,8 +4,9 @@
     module.exports = angular.module('bcbsa-shell.configuration.controllers.ConfigurationController', [])
         .controller('ConfigCtrl', ConfigCtrl);
 
-    ConfigCtrl.$inject = ['$rootScope', '$timeout', 'ConfigPlan', 'ConfigService', 'UserService'];
-    function ConfigCtrl($rootScope, $timeout, ConfigPlan, ConfigService, UserService) {
+    /* jshint maxparams: 6 */
+    ConfigCtrl.$inject = ['$rootScope', '$timeout', 'ConfigPlan', 'ConfigService', 'UserService', 'NotificationService'];
+    function ConfigCtrl($rootScope, $timeout, ConfigPlan, ConfigService, UserService, NotificationService) {
         var vm = this;
 
         vm.config = {};
@@ -57,13 +58,15 @@
                 ConfigService
                     .updateConfig(vm.config, vm.groupId)
                     .then(function (groupData) {
+                        NotificationService.displaySuccess('Plan updated successfully.');
                         $rootScope.updatingPlan = false;
                         setupConfig(groupData.config);
                     }, function (error) {
                         $rootScope.updatingPlan = false;
                         vm.error = error;
+                        NotificationService.displayError('Error updating the plan.');
                     });
-            }, 2000);
+            }, 1000);
         };
 
         vm.deletePlan = function () {

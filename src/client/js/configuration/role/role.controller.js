@@ -4,8 +4,8 @@
     module.exports = angular.module('bcbsa-shell.config.role.controllers.roleController', [])
         .controller('RoleCtrl', RoleCtrl);
 
-    RoleCtrl.$inject = ['$timeout', 'auth', 'Role', 'RoleService'];
-    function RoleCtrl($timeout, auth, Role, RoleService) {
+    RoleCtrl.$inject = ['$timeout', 'auth', 'Role', 'RoleService', 'NotificationService'];
+    function RoleCtrl($timeout, auth, Role, RoleService, NotificationService) {
         var vm = this;
 
         vm.canModifyRoles = _.some(auth.currentUser().roles, {id: 'SuperUser'});
@@ -24,13 +24,16 @@
                 RoleService
                     .deleteRole(vm.selected._id)
                     .then(function () {
+                        NotificationService.displaySuccess('Role deleted successfully.');
                         vm.updating = false;
                         _.remove(vm.roles, vm.selected);
                         initSelection();
-                    }, function () {
-
+                    }, function (error) {
+                        vm.updating = false;
+                        vm.error = error;
+                        NotificationService.displayError('Error deleting Role.');
                     });
-            }, 2000);
+            }, 1000);
         };
 
         vm.updateRole = function () {
@@ -40,13 +43,15 @@
                 RoleService
                     .updateRole(vm.selected)
                     .then(function () {
+                        NotificationService.displaySuccess('Role updated successfully.');
                         vm.updating = false;
                         init();
                     }, function (error) {
                         vm.updating = false;
                         vm.error = error;
+                        NotificationService.displayError('Error updating Role.');
                     });
-            }, 2000);
+            }, 1000);
         };
 
         function initSelection() {
