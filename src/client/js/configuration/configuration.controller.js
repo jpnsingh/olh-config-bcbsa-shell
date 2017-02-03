@@ -52,10 +52,6 @@
                 });
         };
 
-        vm.deletePlan = function () {
-
-        };
-
         function setupConfig(config) {
             if (_.isEmpty(config)) {
                 vm.planConfigured = false;
@@ -74,7 +70,6 @@
                 .getGroupConfig(vm.selectedGroup._id)
                 .then(function (groupData) {
                     vm.loadingConfig = false;
-                    console.log(groupData);
                     vm.groupId = groupData._id;
                     setupConfig(groupData.config);
                 }, function (error) {

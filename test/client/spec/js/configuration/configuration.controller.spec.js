@@ -2,10 +2,11 @@
     'use strict';
 
     describe('ConfigCtrl:', function () {
-        var scope,
+        var rootScope,
+            scope,
             q,
-            deferredUserGroups,
-            deferredGroupConfig,
+            deferredUserService,
+            deferredConfigService,
             _timeout,
             ConfigPlan,
             ConfigService,
@@ -18,31 +19,32 @@
             ],
             responseUserGroups = {
                 groups: groupData
-            },
-            responseData = {
-                config: {
-                    test: 'test'
-                }
             };
 
         beforeEach(angular.mock.module('bcbsa-shell.configuration.controllers.ConfigurationController'));
 
         beforeEach(inject(function ($rootScope, $q, $timeout, $controller) {
-            scope = $rootScope.$new();
+            rootScope = $rootScope;
+            scope = rootScope.$new();
             q = $q;
-            deferredUserGroups = q.defer();
-            deferredGroupConfig = q.defer();
+            deferredUserService = q.defer();
+            deferredConfigService = q.defer();
             _timeout = $timeout;
 
-            ConfigPlan = {};
+            ConfigPlan = function () {
+                this.planSetup = {};
+                this.planAdditional = {};
+                this.featurePool = {};
+            };
 
             UserService = {
-                getUserGroups: jasmine.createSpy().and.returnValue(deferredUserGroups.promise)
+                getUserGroups: jasmine.createSpy().and.returnValue(deferredUserService.promise)
             };
 
             ConfigService = {
-                getGroupConfig: jasmine.createSpy().and.returnValue(deferredGroupConfig.promise),
-                cacheConfig: jasmine.createSpy()
+                getGroupConfig: jasmine.createSpy().and.returnValue(deferredConfigService.promise),
+                cacheConfig: jasmine.createSpy(),
+                updateConfig: jasmine.createSpy().and.returnValue(deferredConfigService.promise)
             };
 
             NotificationService = {
@@ -66,7 +68,7 @@
         it('should initialize the user groups first and set first one from the list as selected an then initialize the group config accordingly', function () {
             expect(UserService.getUserGroups).toHaveBeenCalled();
 
-            deferredUserGroups.resolve(responseUserGroups);
+            deferredUserService.resolve(responseUserGroups);
             _timeout.flush();
 
             expect(controller.userGroups).toBeDefined();
@@ -75,13 +77,81 @@
             expect(controller.loadingConfig).toBeTruthy();
             expect(ConfigService.getGroupConfig).toHaveBeenCalledWith('root');
 
-            deferredGroupConfig.resolve(groupData[0]);
+            deferredConfigService.resolve(groupData[0]);
             _timeout.flush();
 
             expect(controller.loadingConfig).toBeFalsy();
             expect(controller.groupId).toEqual('root');
             expect(controller.planConfigured).toBe(true);
             expect(controller.config).toEqual(jasmine.objectContaining(groupData[0].config));
+        });
+
+        it('should error if user group promise is rejected', function () {
+            expect(UserService.getUserGroups).toHaveBeenCalled();
+
+            deferredUserService.reject([{message: 'Error initializing user groups.'}]);
+            _timeout.flush();
+
+            expect(controller.error).toBeDefined();
+        });
+
+        describe('changeGroup:', function () {
+            it('should reinitialize the selected group', function () {
+                controller.selectedGroup = groupData[1];
+                controller.changeGroup();
+
+                expect(controller.loadingConfig).toBeTruthy();
+                expect(ConfigService.getGroupConfig).toHaveBeenCalledWith('bcbst');
+
+                deferredConfigService.resolve(groupData[1]);
+                _timeout.flush();
+
+                expect(controller.loadingConfig).toBeFalsy();
+                expect(controller.groupId).toEqual('bcbst');
+                expect(controller.planConfigured).toBe(true);
+                expect(controller.config).toEqual(jasmine.objectContaining(groupData[1].config));
+            });
+        });
+
+        describe('addPlan:', function () {
+            it('should add a new plan in the list and make that selected for edit', function () {
+                controller.userGroups = groupData;
+
+                controller.addPlan();
+
+                expect(controller.userGroups.length).toBe(3);
+                expect(controller.selectedGroup).toEqual({_id: '', name: '', description: ''});
+                expect(controller.planConfigured).toBe(true);
+            });
+        });
+
+        describe('updatePlan:', function () {
+            it('should update the selected plan and refresh accordingly on success', function () {
+                controller.updatePlan();
+
+                expect(rootScope.updatingPlan).toBe(true);
+
+                deferredConfigService.resolve(groupData[1]);
+                _timeout.flush();
+
+                expect(NotificationService.displaySuccess).toHaveBeenCalled();
+                expect(rootScope.updatingPlan).toBe(false);
+                expect(controller.planConfigured).toBe(true);
+                expect(controller.config).toEqual(jasmine.objectContaining(groupData[1].config));
+            });
+
+            it('should display error notification on failure', function () {
+                controller.updatePlan();
+
+                expect(rootScope.updatingPlan).toBe(true);
+
+                deferredConfigService.reject([{message: 'Error'}]);
+                _timeout.flush();
+
+                expect(rootScope.updatingPlan).toBe(false);
+                expect(controller.error).toBeDefined();
+                expect(NotificationService.displayError).toHaveBeenCalled();
+            });
         });
     });
 })();
