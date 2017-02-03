@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    module.exports = angular.module('bcbsa-shell.configuration.services.configurationFactory', [])
+    module.exports = angular.module('bcbsa-shell.configuration.services.configurationService', [])
         .factory('ConfigService', ConfigService);
 
     ConfigService.$inject = ['$http', 'auth'];
