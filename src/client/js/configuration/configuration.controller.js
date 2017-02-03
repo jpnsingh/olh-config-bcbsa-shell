@@ -20,10 +20,10 @@
         ];
 
         vm.config.tabs = [
-            {'title': 'Plan Setup', 'state': 'configuration.plan.setup'},
-            {'title': 'Plan Additional', 'state': 'configuration.plan.additional'},
-            {'title': 'Feature Pool', 'state': 'configuration.plan.featurePool'},
-            {'title': 'Feature Assignment', 'state': 'configuration.plan.featureAssignment'}
+            {title: 'Plan Setup', state: 'configuration.plan.setup'},
+            {title: 'Plan Additional', state: 'configuration.plan.additional'},
+            {title: 'Feature Pool', state: 'configuration.plan.featurePool'},
+            {title: 'Feature Assignment', state: 'configuration.plan.featureAssignment'}
         ];
 
         vm.initGroupConfig = function () {
