@@ -23,10 +23,9 @@
         </li>
         <li class="pull-right p-t-20 p-r-10">
             <button class="btn btn-success btn-xs"
-                    title="New Plan"
+                    title="{{!configCtrl.planConfigured ? 'Add Plan Config': 'New Plan'}}"
                     data-ng-disabled="configCtrl.updating"
-                    data-toggle="modal"
-                    data-target="#addPlan"><i class="fa fa-plus"></i></button>
+                    data-ng-click="configCtrl.newPlan()"><i class="fa fa-plus"></i></button>
             <button class="btn btn-warning btn-xs"
                     title="Update Plan"
                     data-ng-if="configCtrl.planConfigured"

@@ -30,6 +30,14 @@
             initGroupConfig();
         };
 
+        vm.newPlan = function () {
+            if (!vm.planConfigured) {
+                setupConfig(new ConfigPlan());
+            } else {
+                $('#addPlan').modal('toggle');
+            }
+        };
+
         vm.addPlan = function () {
             vm.adding = true;
 
