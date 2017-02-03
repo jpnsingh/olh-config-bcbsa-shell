@@ -42,7 +42,7 @@
             vm.adding = true;
 
             ConfigService
-                .newGroupConfig(vm.newPlan)
+                .newGroupConfig(vm.plan)
                 .then(function (group) {
                     NotificationService.displaySuccess('Plan created successfully.');
                     var newUserGroup = {
