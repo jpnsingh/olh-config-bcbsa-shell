@@ -10,10 +10,12 @@
             <strong>Users</strong>
             <section class="pull-right">
                 <button class="btn btn-success btn-xs"
+                        title="New User"
                         data-ng-disabled="!userCtrl.canModifyUsers || userCtrl.updating"
                         data-ng-click="userCtrl.addUser()">
                     <i class="fa fa-plus"></i></button>
                 <button class="btn btn-danger btn-xs"
+                        title="Delete User"
                         data-ng-disabled="!userCtrl.canModifyUsers || userCtrl.updating || !userCtrl.selected"
                         data-ng-click="userCtrl.deleteUser()">
                     <i class="fa fa-trash"></i></button>
@@ -37,7 +39,7 @@
 
     <section class="user-info col-xs-12">
         <header class="col-xs-12 m-y-5">
-            <strong>User Info</strong>
+            <strong>User Info.</strong>
         </header>
         <main>
             <form name="userForm">
@@ -72,7 +74,7 @@
                                    class="form-control">
                         </div>
                         <div class="form-group col-xs-6">
-                            <label for="userRoles">Roles</label>
+                            <label for="userRoles">User Roles</label>
                             <select id="userRoles"
                                     class="form-control multiselect"
                                     multiple="multiple"
@@ -80,7 +82,7 @@
                                     data-ng-model="userCtrl.selected.roles"></select>
                         </div>
                         <div class="form-group col-xs-6">
-                            <label for="userGroups">Groups</label>
+                            <label for="userGroups">User Groups</label>
                             <select id="userGroups"
                                     class="form-control multiselect"
                                     multiple="multiple"

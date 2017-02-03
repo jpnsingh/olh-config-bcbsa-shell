@@ -5,9 +5,11 @@
                 <strong>News Feed</strong>
                 <section class="pull-right">
                     <button class="btn btn-success btn-xs"
+                            title="New Feed"
                             data-ng-disabled="planAdditionalCtrl.updating"
                             data-ng-click="planAdditionalCtrl.addNewsFeed()"><i class="fa fa-plus"></i></button>
                     <button class="btn btn-danger btn-xs"
+                            title="Delete Feed"
                             data-ng-disabled="!planAdditionalCtrl.selectedNewsFeed || planAdditionalCtrl.updating"
                             data-ng-click="planAdditionalCtrl.deleteNewsFeed()"><i class="fa fa-trash"></i></button>
                 </section>
@@ -88,9 +90,11 @@
                 <strong>Interest</strong>
                 <section class="pull-right">
                     <button class="btn btn-success btn-xs"
+                            title="New Interest"
                             data-ng-disabled="planAdditionalCtrl.updating"
                             data-ng-click="planAdditionalCtrl.addInterest()"><i class="fa fa-plus"></i></button>
                     <button class="btn btn-danger btn-xs"
+                            title="Delete Interest"
                             data-ng-disabled="!planAdditionalCtrl.selectedInterest || planAdditionalCtrl.updating"
                             data-ng-click="planAdditionalCtrl.deleteInterest()"><i class="fa fa-trash"></i></button>
                 </section>
@@ -154,9 +158,11 @@
                 <strong>Insights</strong>
                 <section class="pull-right">
                     <button class="btn btn-success btn-xs"
+                            title="New Insight"
                             data-ng-disabled="planAdditionalCtrl.updating"
                             data-ng-click="planAdditionalCtrl.addInsight()"><i class="fa fa-plus"></i></button>
                     <button class="btn btn-danger btn-xs"
+                            title="Delete Insight"
                             data-ng-disabled="!planAdditionalCtrl.selectedInsight || planAdditionalCtrl.updating"
                             data-ng-click="planAdditionalCtrl.deleteInsight()"><i class="fa fa-trash"></i></button>
                 </section>

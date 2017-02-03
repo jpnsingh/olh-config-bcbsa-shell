@@ -10,10 +10,12 @@
             <strong>Roles</strong>
             <section class="pull-right">
                 <button class="btn btn-success btn-xs"
+                        title="New Role"
                         data-ng-disabled="!roleCtrl.canModifyRoles || roleCtrl.updating"
                         data-ng-click="roleCtrl.addRole()">
                     <i class="fa fa-plus"></i></button>
                 <button class="btn btn-danger btn-xs"
+                        title="Delete Role"
                         data-ng-disabled="!roleCtrl.canModifyRoles || roleCtrl.updating || !roleCtrl.selected"
                         data-ng-click="roleCtrl.deleteRole()">
                     <i class="fa fa-trash"></i></button>
@@ -37,7 +39,7 @@
 
     <section class="role-info col-xs-12">
         <header class="col-xs-12 m-y-5">
-            <strong>Role Info</strong>
+            <strong>Role Info.</strong>
         </header>
         <main>
             <form name="roleForm">

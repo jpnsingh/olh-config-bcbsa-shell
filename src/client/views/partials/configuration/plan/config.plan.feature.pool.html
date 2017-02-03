@@ -2,7 +2,7 @@
     <div class="row">
         <section class="col-xs-12">
             <header class="col-xs-12 m-y-5">
-                <strong>{{featurePoolCtrl.featurePool.header}}</strong>
+                <strong>{{featurePoolCtrl.featurePool.header}}.</strong>
             </header>
             <main>
                 <fieldset class="fieldset well" data-ng-disabled="updatingPlan">
@@ -61,9 +61,11 @@
                 <strong>App Pool</strong>
                 <section class="pull-right">
                     <button class="btn btn-success btn-xs"
+                            title="New App"
                             data-ng-disabled="featurePoolCtrl.updating"
                             data-ng-click="featurePoolCtrl.addApp()"><i class="fa fa-plus"></i></button>
                     <button class="btn btn-danger btn-xs"
+                            title="Delete App"
                             data-ng-disabled="!featurePoolCtrl.selected || featurePoolCtrl.updating"
                             data-ng-click="featurePoolCtrl.deleteApp()"><i class="fa fa-trash"></i></button>
                 </section>
