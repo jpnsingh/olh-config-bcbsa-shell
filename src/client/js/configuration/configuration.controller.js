@@ -4,9 +4,8 @@
     module.exports = angular.module('bcbsa-shell.configuration.controllers.ConfigurationController', [])
         .controller('ConfigCtrl', ConfigCtrl);
 
-    /* jshint maxparams: 6 */
-    ConfigCtrl.$inject = ['$rootScope', '$timeout', 'ConfigPlan', 'ConfigService', 'UserService', 'NotificationService'];
-    function ConfigCtrl($rootScope, $timeout, ConfigPlan, ConfigService, UserService, NotificationService) {
+    ConfigCtrl.$inject = ['$rootScope', 'ConfigPlan', 'ConfigService', 'UserService', 'NotificationService'];
+    function ConfigCtrl($rootScope, ConfigPlan, ConfigService, UserService, NotificationService) {
         var vm = this;
 
         vm.config = {};
@@ -27,21 +26,8 @@
             {title: 'Feature Assignment', state: 'configuration.plan.featureAssignment'}
         ];
 
-        vm.initGroupConfig = function () {
-            vm.loadingConfig = true;
-
-            $timeout(function () {
-                ConfigService
-                    .getGroupConfig(vm.selectedGroup._id)
-                    .then(function (groupData) {
-                        vm.loadingConfig = false;
-                        vm.groupId = groupData._id;
-                        setupConfig(groupData.config);
-                    }, function (error) {
-                        vm.loadingConfig = false;
-                        vm.error = error;
-                    });
-            }, 500);
+        vm.changeGroup = function () {
+            initGroupConfig();
         };
 
         vm.addPlan = function () {
@@ -52,21 +38,18 @@
 
         vm.updatePlan = function () {
             $rootScope.updatingPlan = true;
-            console.log(vm.config);
 
-            $timeout(function () {
-                ConfigService
-                    .updateConfig(vm.config, vm.groupId)
-                    .then(function (groupData) {
-                        NotificationService.displaySuccess('Plan updated successfully.');
-                        $rootScope.updatingPlan = false;
-                        setupConfig(groupData.config);
-                    }, function (error) {
-                        $rootScope.updatingPlan = false;
-                        vm.error = error;
-                        NotificationService.displayError('Error updating the plan.');
-                    });
-            }, 1000);
+            ConfigService
+                .updateConfig(vm.config, vm.groupId)
+                .then(function (groupData) {
+                    NotificationService.displaySuccess('Plan updated successfully.');
+                    $rootScope.updatingPlan = false;
+                    setupConfig(groupData.config);
+                }, function (error) {
+                    $rootScope.updatingPlan = false;
+                    vm.error = error;
+                    NotificationService.displayError('Error updating the plan.');
+                });
         };
 
         vm.deletePlan = function () {
@@ -79,9 +62,25 @@
                 return;
             }
 
+            vm.planConfigured = true;
             angular.extend(vm.config, config);
             ConfigService.cacheConfig(vm.config);
-            vm.planConfigured = true;
+        }
+
+        function initGroupConfig() {
+            vm.loadingConfig = true;
+
+            ConfigService
+                .getGroupConfig(vm.selectedGroup._id)
+                .then(function (groupData) {
+                    vm.loadingConfig = false;
+                    console.log(groupData);
+                    vm.groupId = groupData._id;
+                    setupConfig(groupData.config);
+                }, function (error) {
+                    vm.loadingConfig = false;
+                    vm.error = error;
+                });
         }
 
         function init() {
@@ -90,7 +89,7 @@
                 .then(function (data) {
                     vm.userGroups = data.groups;
                     vm.selectedGroup = vm.userGroups[0];
-                    vm.initGroupConfig();
+                    initGroupConfig();
                 }, function (error) {
                     vm.error = error;
                 });

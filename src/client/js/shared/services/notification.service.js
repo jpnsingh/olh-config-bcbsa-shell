@@ -48,7 +48,7 @@
             });
         };
 
-        self.displayServerErrors = (data) => {
+        self.displayServerErrors = function (data) {
             if (data.errors) {
                 self.hideCurrentDismissables();
                 self.displayError(buildErrorMessages(data.errors), true);
