@@ -25,7 +25,8 @@
             <button class="btn btn-success btn-xs"
                     title="New Plan"
                     data-ng-disabled="configCtrl.updating"
-                    data-ng-click="configCtrl.addPlan()"><i class="fa fa-plus"></i></button>
+                    data-toggle="modal"
+                    data-target="#addPlan"><i class="fa fa-plus"></i></button>
             <button class="btn btn-warning btn-xs"
                     title="Update Plan"
                     data-ng-if="configCtrl.planConfigured"
@@ -33,8 +34,7 @@
                     data-ng-click="configCtrl.updatePlan()"><i class="fa fa-edit"></i></button>
             <button class="btn btn-danger btn-xs"
                     title="Delete Plan"
-                    data-ng-if="configCtrl.planConfigured"
-                    data-ng-disabled="!configCtrl.selected || configCtrl.updating"
+                    data-ng-disabled="!configCtrl.selectedGroup || configCtrl.updating"
                     data-ng-click="configCtrl.deletePlan()"><i class="fa fa-trash"></i></button>
         </li>
     </ul>
@@ -52,6 +52,75 @@
 
         <div class="col-xs-12" data-ng-if="configCtrl.planConfigured && !configCtrl.loadingConfig">
             <data-ui-view></data-ui-view>
+        </div>
+
+
+        <div class="modal fade"
+             id="addPlan"
+             tabindex="-1"
+             role="dialog"
+             aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                data-ng-disabled="configCtrl.adding"
+                                aria-label="Close"><span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            New Plan
+                        </h4>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <form name="planForm">
+                            <div class="col-xs-12">
+                                <div class="alert alert-info">
+                                    Provide a Name and Description for the Plan...
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-6">
+                                <label for="planName">Plan Name</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="planName"
+                                       name="planName"
+                                       placeholder="Plan Name"
+                                       data-ng-model="configCtrl.newPlan.name"
+                                       required>
+                            </div>
+                            <div class="form-group col-xs-6">
+                                <label for="planDescription">Plan Description</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="planDescription"
+                                       name="planDescription"
+                                       placeholder="Plan Description"
+                                       data-ng-model="configCtrl.newPlan.description"
+                                       required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn btn-default"
+                                data-dismiss="modal"
+                                data-ng-disabled="configCtrl.adding">
+                            Close
+                        </button>
+                        <button type="button"
+                                class="btn btn-primary"
+                                data-ng-disabled="planForm.$invalid"
+                                data-ng-click="configCtrl.addPlan()">
+                            <span data-ng-if="!configCtrl.adding">Create</span>
+                            <span data-ng-if="configCtrl.adding">
+                                <i class="fa fa-spinner fa-pulse"></i> Creating...
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </main>

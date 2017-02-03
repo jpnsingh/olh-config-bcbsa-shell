@@ -13,7 +13,9 @@
             getGroupConfig: getGroupConfig,
             cacheConfig: cacheConfig,
             getCachedConfig: getCachedConfig,
+            newGroupConfig: newGroupConfig,
             updateConfig: updateConfig,
+            deleteGroupConfig: deleteGroupConfig,
             getConfigurableLanguages: getConfigurableLanguages
         };
 
@@ -45,6 +47,19 @@
             return self.config;
         }
 
+        function newGroupConfig(planConfig) {
+            return $http
+                .post('api/config/', {
+                    config: planConfig,
+                    userName: auth.currentUser().auth.userName
+                }, {})
+                .then(function (response) {
+                    return response.data.group;
+                }, function (response) {
+                    return response.error;
+                });
+        }
+
         function updateConfig(config, groupId) {
             return $http
                 .post('api/config/:groupId'.replace(':groupId', groupId || 'root'), {
@@ -52,7 +67,17 @@
                     userName: auth.currentUser().auth.userName
                 }, {})
                 .then(function (response) {
-                    return response.data.groupConfig;
+                    return response.data.group;
+                }, function (response) {
+                    return response.error;
+                });
+        }
+
+        function deleteGroupConfig(groupId) {
+            return $http
+                .delete('api/config/:groupId'.replace(':groupId', groupId))
+                .then(function (response) {
+                    return response.data;
                 }, function (response) {
                     return response.error;
                 });

@@ -16,8 +16,16 @@
             .get(configApiController.groupConfig);
 
         configApiRouter
+            .route('/')
+            .post(configApiController.newGroupConfig);
+
+        configApiRouter
             .route('/:groupId')
             .post(configApiController.saveGroupConfig);
+
+        configApiRouter
+            .route('/:groupId')
+            .delete(configApiController.deleteGroupConfig);
 
         return configApiRouter;
     }

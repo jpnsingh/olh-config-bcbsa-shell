@@ -2,6 +2,7 @@
     'use strict';
     var mongodb = require('mongodb'),
         mongodbClient = mongodb.MongoClient,
+        ObjectID = mongodb.ObjectID,
         dbConfig = require('../config/dbConfig')();
 
     module.exports = ConfigApiController;
@@ -12,7 +13,9 @@
         return {
             listGroups: listGroups,
             groupConfig: groupConfig,
-            saveGroupConfig: saveGroupConfig
+            newGroupConfig: newGroupConfig,
+            saveGroupConfig: saveGroupConfig,
+            deleteGroupConfig: deleteGroupConfig
         };
 
         function listGroups(request, response, next) {
@@ -33,7 +36,8 @@
         }
 
         function groupConfig(request, response, next) {
-            var query = {'_id': request.params.groupId};
+            var groupId = request.params.groupId,
+                query = {'_id': new ObjectID(groupId)};
 
             mongodbClient.connect(connectionString, function (error, db) {
                 db.collection('groups').findOne(query, function (error, groupConfig) {
@@ -50,10 +54,47 @@
             });
         }
 
+        function newGroupConfig(request, response, next) {
+            var group = request.body.config,
+                userName = request.body.userName;
+
+            group.config = {};
+            group.createdAt = new Date();
+            group.updatedAt = new Date();
+            group.updatedBy = userName;
+
+            mongodbClient.connect(connectionString, function (error, db) {
+                if (error) {
+                    next(error);
+                }
+
+                db.collection('groups').insert(group, function (error, result) {
+                    var group = result.ops[0],
+                        newUserGroup = {
+                            _id: new ObjectID(group._id),
+                            name: group.name,
+                            description: group.description
+                        },
+                        userQuery = {'auth.userName': userName},
+                        addUserGroup = {$addToSet: {groups: newUserGroup}};
+
+                    db.collection('users').updateOne(userQuery, addUserGroup, function (error, result) {
+                        if (error) {
+                            next(error);
+                        }
+
+                        if (result.matchedCount === 1 && result.modifiedCount === 1) {
+                            response.json({group: group});
+                        }
+                    });
+                });
+            });
+        }
+
         function saveGroupConfig(request, response, next) {
             var config = request.body.config,
                 userName = request.body.userName,
-                query = {'_id': request.params.groupId},
+                query = {'_id': new ObjectID(request.params.groupId)},
                 updateObj = {$set: {config: config, updatedAt: new Date(), updatedBy: userName}};
 
             mongodbClient.connect(connectionString, function (error, db) {
@@ -63,9 +104,37 @@
                     }
 
                     if (result.matchedCount === 1 && result.modifiedCount === 1) {
-                        db.collection('groups').findOne(query, function (error, groupConfig) {
-                            response.json({groupConfig: groupConfig});
+                        db.collection('groups').findOne(query, function (error, group) {
+                            response.json({group: group});
                         });
+                    }
+                });
+            });
+        }
+
+        function deleteGroupConfig(request, response, next) {
+            var groupId = request.params.groupId,
+                query = {_id: new ObjectID(groupId)};
+
+            mongodbClient.connect(connectionString, function (error, db) {
+                db.collection('groups').deleteOne(query, function (error, result) {
+                    if (error) {
+                        next(error);
+                    }
+
+                    if (result.deletedCount === 1) {
+                        db.collection('users').updateOne(
+                            {'groups._id': new ObjectID(groupId)},
+                            {$pull: {groups: {_id: new ObjectID(groupId)}}},
+                            function (error, result) {
+                                if (error) {
+                                    next(error);
+                                }
+
+                                if (result.matchedCount === 1 && result.modifiedCount === 1) {
+                                    response.json({success: {deleted: 1}});
+                                }
+                            });
                     }
                 });
             });
