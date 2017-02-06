@@ -62,11 +62,11 @@
                 <section class="pull-right">
                     <button class="btn btn-success btn-xs"
                             title="New App"
-                            data-ng-disabled="featurePoolCtrl.updating"
+                            data-ng-disabled="updatingPlan"
                             data-ng-click="featurePoolCtrl.addApp()"><i class="fa fa-plus"></i></button>
                     <button class="btn btn-danger btn-xs"
                             title="Delete App"
-                            data-ng-disabled="!featurePoolCtrl.selected || featurePoolCtrl.updating"
+                            data-ng-disabled="!featurePoolCtrl.selected || updatingPlan"
                             data-ng-click="featurePoolCtrl.deleteApp()"><i class="fa fa-trash"></i></button>
                 </section>
             </header>

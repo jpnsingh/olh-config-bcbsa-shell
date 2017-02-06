@@ -73,6 +73,7 @@
                         id: role.id,
                         name: role.name,
                         description: role.description,
+                        priority: role.priority,
                         updatedAt: new Date(),
                         updatedBy: userName
                     }
