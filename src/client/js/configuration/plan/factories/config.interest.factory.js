@@ -1,30 +1,30 @@
 (function () {
     'use strict';
 
-    module.exports = angular.module('bcsba-shell.configuration.plan.newsFeedFactory', [])
-        .factory('NewsFeed', NewsFeedFactory);
+    module.exports = angular.module('bcsba-shell.configuration.plan.factories.interestFactory', [])
+        .factory('Interest', InterestFactory);
 
-    NewsFeedFactory.$inject = [];
-    function NewsFeedFactory() {
+    InterestFactory.$inject = [];
+    function InterestFactory() {
         return function () {
             this.header = {
                 label: 'Header',
                 type: 'text',
-                placeholder: 'Feed Header',
+                placeholder: 'Interest Header',
                 value: ''
             };
 
-            this.link = {
-                label: 'Link',
+            this.description = {
+                label: 'Description',
                 type: 'text',
-                placeholder: 'Feed Link',
+                placeholder: 'Interest Description',
                 value: ''
             };
 
             this.image = {
                 label: 'Image',
                 type: 'image',
-                placeholder: 'Feed Image',
+                placeholder: 'Interest Image',
                 value: '',
                 src: ''
             };

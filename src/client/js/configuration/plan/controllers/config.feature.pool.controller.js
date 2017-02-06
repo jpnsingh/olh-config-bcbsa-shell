@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    module.exports = angular.module('bcsba-shell.configuration.plan.controllers.featurePoolCtrlController', [])
+    module.exports = angular.module('bcsba-shell.configuration.plan.controllers.featurePoolController', [])
         .controller('FeaturePoolCtrl', FeaturePoolCtrl);
 
     FeaturePoolCtrl.$inject = ['ConfigService', 'FileUploader', 'App'];
