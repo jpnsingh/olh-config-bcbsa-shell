@@ -13,18 +13,18 @@
 
         init();
 
-        vm.config.sidebar = [
+        vm.sidebar = [
             {title: 'Role Management', state: 'configuration.role', active: 'configuration.role'},
             {title: 'User Management', state: 'configuration.user', active: 'configuration.user'},
             {title: 'Plan Management', state: 'configuration.plan.setup', active: 'configuration.plan'},
             {title: 'Reports', state: 'configuration.report', active: 'configuration.report'}
         ];
 
-        vm.config.tabs = [
-            {title: 'Plan Setup', state: 'configuration.plan.setup'},
-            {title: 'Plan Additional', state: 'configuration.plan.additional'},
-            {title: 'Feature Pool', state: 'configuration.plan.featurePool'},
-            {title: 'Feature Assignment', state: 'configuration.plan.featureAssignment'}
+        vm.tabs = [
+            {title: 'Plan Setup', state: 'configuration.plan.setup', order: 1},
+            {title: 'Plan Additional', state: 'configuration.plan.additional', order: 2},
+            {title: 'Feature Pool', state: 'configuration.plan.featurePool', order: 3},
+            {title: 'Feature Assignment', state: 'configuration.plan.featureAssignment', order: 4}
         ];
 
         vm.changeGroup = function () {
@@ -34,6 +34,7 @@
         vm.newPlan = function () {
             if (!vm.planConfigured) {
                 setupConfig(new ConfigPlan());
+                vm.addingConfig = true;
             } else {
                 $('#addPlan').modal('toggle');
             }
@@ -78,6 +79,7 @@
                     setupConfig(groupData.config);
                 }, function (error) {
                     $rootScope.updatingPlan = false;
+                    vm.addingConfig = false;
                     vm.error = error;
                     NotificationService.displayError('Error updating plan.');
                 });
@@ -93,6 +95,7 @@
                     vm.updating = false;
                     _.remove(vm.userGroups, vm.selectedGroup);
                     vm.selectedGroup = vm.userGroups[0];
+                    initGroupConfig();
                 }, function (error) {
                     vm.error = error;
                     vm.updating = false;
