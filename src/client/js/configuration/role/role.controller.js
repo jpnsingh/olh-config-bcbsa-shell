@@ -4,8 +4,9 @@
     module.exports = angular.module('bcbsa-shell.config.role.controllers.roleController', [])
         .controller('RoleCtrl', RoleCtrl);
 
-    RoleCtrl.$inject = ['$timeout', 'auth', 'Role', 'RoleService', 'NotificationService'];
-    function RoleCtrl($timeout, auth, Role, RoleService, NotificationService) {
+    /* jshint maxparams: 6 */
+    RoleCtrl.$inject = ['$timeout', '$filter', 'auth', 'Role', 'RoleService', 'NotificationService'];
+    function RoleCtrl($timeout, $filter, auth, Role, RoleService, NotificationService) {
         var vm = this;
 
         vm.canModifyRoles = _.some(auth.currentUser().roles, {id: 'SuperUser'});
@@ -65,7 +66,7 @@
                 .listRoles()
                 .then(function (data) {
                     vm.loadingRoles = false;
-                    vm.roles = data.roles;
+                    vm.roles = $filter('orderBy')(data.roles, 'priority');
                     initSelection();
                 }, function (error) {
                     vm.loadingRoles = false;

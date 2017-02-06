@@ -20,7 +20,7 @@
 
         function listGroups(request, response, next) {
             var query = {},
-                projection = {groupdId: 1, name: 1, description: 1};
+                projection = {groupId: 1, name: 1, description: 1};
 
             mongodbClient.connect(connectionString, function (error, db) {
                 if (error) {

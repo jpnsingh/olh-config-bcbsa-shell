@@ -56,7 +56,7 @@
 
                     <div class="row" data-ng-if="userCtrl.users.length">
                         <div class="form-group col-xs-6">
-                            <label for="userName" class="text-capitalize">Username</label>
+                            <label for="userName">Username</label>
                             <input type="text"
                                    id="userName"
                                    name="userName"
@@ -64,7 +64,7 @@
                                    data-ng-model="userCtrl.selected.auth.userName">
                         </div>
                         <div class="form-group col-xs-6">
-                            <label for="password" class="text-capitalize">Password</label>
+                            <label for="password">Password</label>
                             <input type="password"
                                    id="password"
                                    name="password"
@@ -72,7 +72,7 @@
                                    data-ng-model="userCtrl.selected.auth.password">
                         </div>
                         <div class="form-group col-xs-6" data-ng-if="adding">
-                            <label for="passwordConfirm" class="text-capitalize">Confirm Password</label>
+                            <label for="passwordConfirm">Confirm Password</label>
                             <input type="password"
                                    id="passwordConfirm"
                                    name="passwordConfirm"
@@ -83,7 +83,7 @@
                             <select id="userRoles"
                                     class="form-control multiselect"
                                     multiple="multiple"
-                                    data-ng-options="role.name for role in userCtrl.roles track by role.id"
+                                    data-ng-options="role.name for role in userCtrl.roles | orderBy: 'priority' track by role.id"
                                     data-ng-model="userCtrl.selected.roles"></select>
                         </div>
                         <div class="form-group col-xs-6">
@@ -91,7 +91,7 @@
                             <select id="userGroups"
                                     class="form-control multiselect"
                                     multiple="multiple"
-                                    data-ng-options="group.name for group in userCtrl.groups track by group._id"
+                                    data-ng-options="group.name for group in userCtrl.groups | orderBy: 'groupId' track by group._id"
                                     data-ng-model="userCtrl.selected.groups"></select>
                         </div>
                     </div>

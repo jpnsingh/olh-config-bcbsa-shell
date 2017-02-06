@@ -31,7 +31,7 @@
 
         function userRoles(request, response, next) {
             var query = {},
-                projection = {_id: 0, id: 1, name: 1};
+                projection = {_id: 0, id: 1, name: 1, priority: 1};
 
             mongodbClient.connect(connectionString, function (error, db) {
                 var cursor = db.collection('roles').find(query, projection);

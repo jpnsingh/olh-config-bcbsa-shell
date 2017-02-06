@@ -4,8 +4,9 @@
     module.exports = angular.module('bcbsa-shell.configuration.controllers.ConfigurationController', [])
         .controller('ConfigCtrl', ConfigCtrl);
 
-    ConfigCtrl.$inject = ['$rootScope', 'ConfigPlan', 'ConfigService', 'UserService', 'NotificationService'];
-    function ConfigCtrl($rootScope, ConfigPlan, ConfigService, UserService, NotificationService) {
+    /* jshint maxparams: 6 */
+    ConfigCtrl.$inject = ['$rootScope', '$filter', 'ConfigPlan', 'ConfigService', 'UserService', 'NotificationService'];
+    function ConfigCtrl($rootScope, $filter, ConfigPlan, ConfigService, UserService, NotificationService) {
         var vm = this;
 
         vm.config = {};
@@ -91,6 +92,7 @@
                     NotificationService.displaySuccess('Plan deleted successfully.');
                     vm.updating = false;
                     _.remove(vm.userGroups, vm.selectedGroup);
+                    vm.selectedGroup = vm.userGroups[0];
                 }, function (error) {
                     vm.error = error;
                     vm.updating = false;
@@ -127,7 +129,7 @@
             UserService
                 .getUserGroups()
                 .then(function (data) {
-                    vm.userGroups = data.groups;
+                    vm.userGroups = $filter('orderBy')(data.groups, 'groupId');
                     vm.selectedGroup = vm.userGroups[0];
                     initGroupConfig();
                 }, function (error) {
