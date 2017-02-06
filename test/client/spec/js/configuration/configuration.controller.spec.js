@@ -14,9 +14,10 @@
             NotificationService,
             controller,
             groupData = [
-                {_id: 'root', name: 'Root', config: {test: 'test'}},
-                {_id: 'bcbst', name: 'BCBST', config: {test: 'test'}}
+                {_id: 'root', name: 'Root', config: {test: 'test'}, groupId: 1},
+                {_id: 'bcbst', name: 'BCBST', config: {test: 'test'}, groupId: 2}
             ],
+            newGroup = {_id: 'test', name: 'test', description: 'Test'},
             responseUserGroups = {
                 groups: groupData
             };
@@ -44,7 +45,8 @@
             ConfigService = {
                 getGroupConfig: jasmine.createSpy().and.returnValue(deferredConfigService.promise),
                 cacheConfig: jasmine.createSpy(),
-                updateConfig: jasmine.createSpy().and.returnValue(deferredConfigService.promise)
+                updateConfig: jasmine.createSpy().and.returnValue(deferredConfigService.promise),
+                newGroupConfig: jasmine.createSpy().and.returnValue(deferredConfigService.promise)
             };
 
             NotificationService = {
@@ -81,7 +83,6 @@
             _timeout.flush();
 
             expect(controller.loadingConfig).toBeFalsy();
-            expect(controller.groupId).toEqual('root');
             expect(controller.planConfigured).toBe(true);
             expect(controller.config).toEqual(jasmine.objectContaining(groupData[0].config));
         });
@@ -107,26 +108,36 @@
                 _timeout.flush();
 
                 expect(controller.loadingConfig).toBeFalsy();
-                expect(controller.groupId).toEqual('bcbst');
                 expect(controller.planConfigured).toBe(true);
                 expect(controller.config).toEqual(jasmine.objectContaining(groupData[1].config));
             });
         });
 
         describe('addPlan:', function () {
-            it('should add a new plan in the list and make that selected for edit', function () {
+            it('should add a new plan in the list and make that selected and fetch the config for the same for edit ', function () {
                 controller.userGroups = groupData;
+                controller.plan = {name: 'Test', description: 'Test'};
 
                 controller.addPlan();
 
+                expect(controller.adding).toBe(true);
+
+                deferredConfigService.resolve(newGroup);
+                _timeout.flush();
+
+                expect(controller.adding).toBe(false);
+                expect(NotificationService.displaySuccess).toHaveBeenCalled();
                 expect(controller.userGroups.length).toBe(3);
-                expect(controller.selectedGroup).toEqual({_id: '', name: '', description: ''});
-                expect(controller.planConfigured).toBe(true);
+                expect(controller.selectedGroup).toEqual(newGroup);
+
+                expect(ConfigService.getGroupConfig).toHaveBeenCalledWith('test');
             });
         });
 
         describe('updatePlan:', function () {
             it('should update the selected plan and refresh accordingly on success', function () {
+                controller.selectedGroup = groupData[1];
+
                 controller.updatePlan();
 
                 expect(rootScope.updatingPlan).toBe(true);
@@ -141,6 +152,8 @@
             });
 
             it('should display error notification on failure', function () {
+                controller.selectedGroup = groupData[1];
+
                 controller.updatePlan();
 
                 expect(rootScope.updatingPlan).toBe(true);

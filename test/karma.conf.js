@@ -15,6 +15,7 @@
                 // Libraries
                 'libs/lodash.min.js',
                 'libs/jquery.min.js',
+                'libs/bootstrap.min.js',
                 'libs/angular.min.js',
                 'libs/angular-mocks.js',
                 'libs/angular-strap.min.js',
