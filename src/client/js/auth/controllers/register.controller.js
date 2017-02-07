@@ -17,9 +17,9 @@
                 .then(function () {
                     vm.registering = false;
                     $state.go('dashboard');
-                }, function (data) {
+                }, function (error) {
                     vm.registering = false;
-                    vm.error = data.error;
+                    vm.error = error;
                 });
         }
     }

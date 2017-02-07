@@ -60,7 +60,7 @@
                     return storeUser(response.data.user);
                 }, function (response) {
                     failureEvent('register');
-                    return response.data;
+                    return $q.reject(response.data.error);
                 });
         }
 

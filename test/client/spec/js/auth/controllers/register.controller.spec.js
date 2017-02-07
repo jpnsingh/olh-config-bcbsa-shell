@@ -70,11 +70,11 @@
             expect(_controller.registering).toBeTruthy();
             expect(_auth.register).toHaveBeenCalledWith(user);
 
-            _deferred.reject({error: 'error'});
+            _deferred.reject({message: 'error'});
             $timeout.flush();
 
             expect(_controller.registering).toBeFalsy();
-            expect(_controller.error).toBe('error');
+            expect(_controller.error).toEqual({message: 'error'});
         }));
     });
 })();

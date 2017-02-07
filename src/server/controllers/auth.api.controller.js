@@ -39,10 +39,16 @@
             var user = request.body;
 
             mongodb.connect(dbConfig.dbConnectionString(), function (error, db) {
-                db.collection('users').insert(user, function (error, results) {
-                    request.login(results.ops[0], function () {
-                        response.json({user: results.ops[0]});
-                    });
+                db.collection('users').findOne({'auth.userName': user.auth.userName}, function (error, existingUser) {
+                    if (existingUser) {
+                        return response.status(409).json({error: {message: 'Username is already existing, please choose a different one!'}});
+                    } else {
+                        db.collection('users').insert(user, function (error, results) {
+                            request.login(results.ops[0], function () {
+                                response.json({user: results.ops[0]});
+                            });
+                        });
+                    }
                 });
             });
         }
