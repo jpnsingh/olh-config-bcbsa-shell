@@ -37,6 +37,9 @@
                 vm.addingConfig = true;
             } else {
                 $('#addPlan').modal('toggle');
+                $('#addPlan').on('shown.bs.modal', function () {
+                    $('#planName').focus();
+                });
             }
         };
 
@@ -47,17 +50,16 @@
                 .newGroupConfig(vm.plan)
                 .then(function (group) {
                     NotificationService.displaySuccess('Plan created successfully.');
+                    vm.adding = false;
                     var newUserGroup = {
                         _id: group._id,
                         name: group.name,
                         description: group.description,
                     };
 
-                    vm.adding = false;
-
                     vm.userGroups.unshift(newUserGroup);
+                    vm.userGroupPresent = true;
                     vm.selectedGroup = vm.userGroups[0];
-
                     initGroupConfig();
 
                     $('#addPlan').modal('toggle');
@@ -98,8 +100,13 @@
                     NotificationService.displaySuccess('Plan deleted successfully.');
                     vm.updating = false;
                     _.remove(vm.userGroups, vm.selectedGroup);
-                    vm.selectedGroup = vm.userGroups[0];
-                    initGroupConfig();
+                    if (vm.userGroups.length) {
+                        vm.selectedGroup = vm.userGroups[0];
+                        initGroupConfig();
+                    } else {
+                        vm.userGroupPresent = false;
+                        vm.selectedGroup = undefined;
+                    }
                 }, function (error) {
                     vm.error = error;
                     vm.updating = false;
@@ -133,6 +140,8 @@
         }
 
         function init() {
+            vm.userGroups = [];
+
             UserService
                 .getUserGroups()
                 .then(function (data) {

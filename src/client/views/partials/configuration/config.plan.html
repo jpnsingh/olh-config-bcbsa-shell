@@ -53,7 +53,7 @@
                 <a href="javascript:void(0)" class="alert-link" data-ng-click="configCtrl.inheritFromRoot()">
                     Inherit from Root
                 </a>
-                and modify according to your needs.
+                and modify accordingly.
             </div>
         </div>
 
@@ -69,19 +69,19 @@
              aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button"
-                                class="close"
-                                data-dismiss="modal"
-                                data-ng-disabled="configCtrl.adding"
-                                aria-label="Close"><span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">
-                            New Plan
-                        </h4>
-                    </div>
-                    <div class="modal-body clearfix">
-                        <form name="planForm">
+                    <form name="planForm" data-ng-submit="configCtrl.addPlan()">
+                        <div class="modal-header">
+                            <button type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    data-ng-disabled="configCtrl.adding"
+                                    aria-label="Close"><span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                New Plan
+                            </h4>
+                        </div>
+                        <div class="modal-body clearfix">
                             <div class="form-group col-xs-6">
                                 <label for="planName">Name</label>
                                 <input type="text"
@@ -102,25 +102,23 @@
                                        data-ng-model="configCtrl.plan.description"
                                        required>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button"
-                                class="btn btn-default"
-                                data-dismiss="modal"
-                                data-ng-disabled="configCtrl.adding">
-                            Close
-                        </button>
-                        <button type="button"
-                                class="btn btn-primary"
-                                data-ng-disabled="planForm.$invalid"
-                                data-ng-click="configCtrl.addPlan()">
-                            <span data-ng-if="!configCtrl.adding">Create</span>
-                            <span data-ng-if="configCtrl.adding">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"
+                                    class="btn btn-default"
+                                    data-dismiss="modal"
+                                    data-ng-disabled="configCtrl.adding">
+                                Close
+                            </button>
+                            <button class="btn btn-primary"
+                                    data-ng-disabled="planForm.$invalid">
+                                <span data-ng-if="!configCtrl.adding">Create</span>
+                                <span data-ng-if="configCtrl.adding">
                                 <i class="fa fa-spinner fa-pulse"></i> Creating...
                             </span>
-                        </button>
-                    </div>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
