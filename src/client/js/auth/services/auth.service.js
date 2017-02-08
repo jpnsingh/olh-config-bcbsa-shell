@@ -52,7 +52,7 @@
             user.createdAt = new Date();
             user.updatedAt = new Date();
             user.auth.grantType = 'password';
-            user.roles = ['PlanAdmin'];
+            user.roles = [{id: 'PlanAdmin'}];
 
             return $http
                 .post('/api/auth/register', user, {})

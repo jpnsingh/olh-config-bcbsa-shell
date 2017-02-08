@@ -16,8 +16,7 @@
                     userName: 'foo',
                     password: 'bar'
                 },
-                email: 'foo@bar.com',
-                roles: ['PlanAdmin']
+                email: 'foo@bar.com'
             };
 
         beforeEach(angular.mock.module('bcbsa-shell.auth.services.authService'));
@@ -95,6 +94,14 @@
         });
 
         describe('register:', function () {
+            it('should give a default role of PlanAdmin to the new user', function () {
+                expect(_auth.currentUser()).toEqual({});
+
+                _auth.register(testUser);
+
+                expect(testUser.roles).toEqual([{id: 'PlanAdmin'}]);
+            });
+
             it('should invoke the register api via $http', function () {
                 expect(_auth.currentUser()).toEqual({});
 
@@ -150,7 +157,7 @@
                     }
                 }));
 
-                expect(_auth.currentUser().roles).toEqual(['PlanAdmin']);
+                expect(_auth.currentUser().roles).toEqual([{id: 'PlanAdmin'}]);
             });
 
             it('should handle the failure accordingly', function () {

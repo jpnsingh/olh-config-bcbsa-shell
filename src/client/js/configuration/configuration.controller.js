@@ -32,7 +32,7 @@
         };
 
         vm.newPlan = function () {
-            if (!vm.planConfigured) {
+            if (vm.userGroupPresent && !vm.planConfigured) {
                 setupConfig(new ConfigPlan());
                 vm.addingConfig = true;
             } else {
@@ -136,9 +136,14 @@
             UserService
                 .getUserGroups()
                 .then(function (data) {
-                    vm.userGroups = $filter('orderBy')(data.groups, 'groupId');
-                    vm.selectedGroup = vm.userGroups[0];
-                    initGroupConfig();
+                    if (!_.isEmpty(data.groups)) {
+                        vm.userGroupPresent = true;
+                        vm.userGroups = $filter('orderBy')(data.groups, 'groupId');
+                        vm.selectedGroup = vm.userGroups[0];
+                        initGroupConfig();
+                    } else {
+                        vm.userGroupPresent = false;
+                    }
                 }, function (error) {
                     vm.error = error;
                 });

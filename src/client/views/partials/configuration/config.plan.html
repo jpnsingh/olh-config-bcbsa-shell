@@ -8,6 +8,7 @@
                 <label for="userGroups"></label>
                 <select id="userGroups"
                         class="form-control"
+                        data-ng-if="configCtrl.userGroups.length"
                         data-ng-options="group.name for group in configCtrl.userGroups track by group._id"
                         data-ng-change="configCtrl.changeGroup()"
                         data-ng-model="configCtrl.selectedGroup"></select>
@@ -23,7 +24,7 @@
         </li>
         <li class="pull-right p-t-20 p-r-10">
             <button class="btn btn-success btn-xs"
-                    title="{{!configCtrl.planConfigured ? 'Add Plan Config': 'New Plan'}}"
+                    title="{{configCtrl.userGroupPresent && !configCtrl.planConfigured ? 'Add Plan Config': 'New Plan'}}"
                     data-ng-disabled="configCtrl.updating || configCtrl.addingConfig"
                     data-ng-click="configCtrl.newPlan()"><i class="fa fa-plus"></i></button>
             <button class="btn btn-warning btn-xs"
@@ -42,12 +43,17 @@
 
         <data-loading-spinner data-loading="configCtrl.loadingConfig"></data-loading-spinner>
 
-        <div class="col-xs-12" data-ng-if="!configCtrl.planConfigured && !configCtrl.loadingConfig">
-            <div class="alert alert-info">
+        <div class="col-xs-12" data-ng-if="!configCtrl.loadingConfig">
+            <div class="alert alert-info" data-ng-if="!configCtrl.userGroupPresent">
+                You have not added a Group/Plan yet. Use the add button above to add one or contact your administrator.
+            </div>
+
+            <div class="alert alert-info" data-ng-if="configCtrl.userGroupPresent && !configCtrl.planConfigured">
                 Plan for this group is not configured yet. Use the add button above to configure on your own or
                 <a href="javascript:void(0)" class="alert-link" data-ng-click="configCtrl.inheritFromRoot()">
                     Inherit from Root
                 </a>
+                and modify according to your needs.
             </div>
         </div>
 
