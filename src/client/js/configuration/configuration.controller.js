@@ -71,7 +71,17 @@
         };
 
         vm.inheritFromRoot = function () {
-            setupConfig(angular.extend(vm.config, ConfigService.getCachedConfig()));
+            vm.loadingConfig = true;
+
+            ConfigService
+                .getGroupConfig('Root')
+                .then(function (groupData) {
+                    vm.loadingConfig = false;
+                    setupConfig(groupData.config);
+                }, function (error) {
+                    vm.loadingConfig = false;
+                    vm.error = error;
+                });
         };
 
         vm.updatePlan = function () {

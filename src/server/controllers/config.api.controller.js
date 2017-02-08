@@ -37,7 +37,7 @@
 
         function groupConfig(request, response, next) {
             var groupId = request.params.groupId,
-                query = {'_id': new ObjectID(groupId)};
+                query = groupId === 'Root' ? {name: 'Root'} : {_id: new ObjectID(groupId)};
 
             mongodbClient.connect(connectionString, function (error, db) {
                 db.collection('groups').findOne(query, function (error, groupConfig) {
