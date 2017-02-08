@@ -27,11 +27,11 @@
                     title="{{configCtrl.userGroupPresent && !configCtrl.planConfigured ? 'Add Plan Config': 'New Plan'}}"
                     data-ng-disabled="configCtrl.updating || configCtrl.addingConfig"
                     data-ng-click="configCtrl.newPlan()"><i class="fa fa-plus"></i></button>
-            <button class="btn btn-warning btn-xs"
+            <button class="btn btn-primary btn-xs"
                     title="Update Plan"
                     data-ng-if="configCtrl.planConfigured"
                     data-ng-disabled="configCtrl.updating"
-                    data-ng-click="configCtrl.updatePlan()"><i class="fa fa-edit"></i></button>
+                    data-ng-click="configCtrl.updatePlan()"><i class="fa fa-save"></i></button>
             <button class="btn btn-danger btn-xs"
                     title="Delete Plan"
                     data-ng-disabled="!configCtrl.selectedGroup || configCtrl.updating  || configCtrl.addingConfig"
