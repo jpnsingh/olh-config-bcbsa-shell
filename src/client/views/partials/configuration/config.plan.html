@@ -44,8 +44,10 @@
 
         <div class="col-xs-12" data-ng-if="!configCtrl.planConfigured && !configCtrl.loadingConfig">
             <div class="alert alert-info">
-                Plan for this group is not configured yet. Please add one or contact your administrator to enable it for
-                you...
+                Plan for this group is not configured yet. Use the add button above to configure on your own or
+                <a href="javascript:void(0)" class="alert-link" data-ng-click="configCtrl.inheritFromRoot()">
+                    Inherit from Root
+                </a>
             </div>
         </div>
 
@@ -74,13 +76,8 @@
                     </div>
                     <div class="modal-body clearfix">
                         <form name="planForm">
-                            <div class="col-xs-12">
-                                <div class="alert alert-info">
-                                    Provide a Name and Description for the Plan...
-                                </div>
-                            </div>
                             <div class="form-group col-xs-6">
-                                <label for="planName">Plan Name</label>
+                                <label for="planName">Name</label>
                                 <input type="text"
                                        class="form-control"
                                        id="planName"
@@ -90,7 +87,7 @@
                                        required>
                             </div>
                             <div class="form-group col-xs-6">
-                                <label for="planDescription">Plan Description</label>
+                                <label for="planDescription">Description</label>
                                 <input type="text"
                                        class="form-control"
                                        id="planDescription"

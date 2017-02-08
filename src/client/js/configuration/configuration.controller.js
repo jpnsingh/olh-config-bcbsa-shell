@@ -68,6 +68,10 @@
                 });
         };
 
+        vm.inheritFromRoot = function () {
+            setupConfig(angular.extend(vm.config, ConfigService.getCachedConfig()));
+        };
+
         vm.updatePlan = function () {
             $rootScope.updatingPlan = true;
 
