@@ -56,6 +56,8 @@
 
         function newGroupConfig(request, response, next) {
             var group = request.body.config,
+                groupNameRegex = new RegExp(['^', group.name, '$'].join(''), 'i'),
+                validateGroupQuery = {name: groupNameRegex},
                 userName = request.body.userName;
 
             group.config = {};
@@ -68,25 +70,35 @@
                     next(error);
                 }
 
-                db.collection('groups').insert(group, function (error, result) {
-                    var group = result.ops[0],
-                        newUserGroup = {
-                            _id: new ObjectID(group._id),
-                            name: group.name,
-                            description: group.description
-                        },
-                        userQuery = {'auth.userName': userName},
-                        addUserGroup = {$addToSet: {groups: newUserGroup}};
+                db.collection('groups').findOne(validateGroupQuery, function (error, existingGroup) {
+                    if (existingGroup) {
+                        return response.status(409).json({
+                            error: {
+                                message: 'Another Group with the same name already exists, please choose a different name!!'
+                            }
+                        });
+                    } else {
+                        db.collection('groups').insert(group, function (error, insertResult) {
+                            var group = insertResult.ops[0],
+                                newUserGroup = {
+                                    _id: new ObjectID(group._id),
+                                    name: group.name,
+                                    description: group.description
+                                },
+                                userQuery = {'auth.userName': userName},
+                                addUserGroup = {$addToSet: {groups: newUserGroup}};
 
-                    db.collection('users').updateOne(userQuery, addUserGroup, function (error, result) {
-                        if (error) {
-                            next(error);
-                        }
+                            db.collection('users').updateOne(userQuery, addUserGroup, function (error, updateResult) {
+                                if (error) {
+                                    next(error);
+                                }
 
-                        if (result.matchedCount === 1 && result.modifiedCount === 1) {
-                            response.json({group: group});
-                        }
-                    });
+                                if (updateResult.matchedCount === 1 && updateResult.modifiedCount === 1) {
+                                    response.json({group: group});
+                                }
+                            });
+                        });
+                    }
                 });
             });
         }

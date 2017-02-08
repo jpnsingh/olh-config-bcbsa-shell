@@ -4,8 +4,8 @@
     module.exports = angular.module('bcbsa-shell.configuration.services.configurationService', [])
         .factory('ConfigService', ConfigService);
 
-    ConfigService.$inject = ['$http', 'auth'];
-    function ConfigService($http, auth) {
+    ConfigService.$inject = ['$q', '$http', 'auth'];
+    function ConfigService($q, $http, auth) {
         var self = this;
 
         return {
@@ -56,7 +56,7 @@
                 .then(function (response) {
                     return response.data.group;
                 }, function (response) {
-                    return response.error;
+                    return $q.reject(response.data.error);
                 });
         }
 

@@ -134,6 +134,22 @@
             });
         });
 
+        describe('inheritFromRoot:', function () {
+            it('should get the config from Root and initialize accordingly', function () {
+                controller.inheritFromRoot();
+
+                expect(controller.loadingConfig).toBe(true);
+                expect(ConfigService.getGroupConfig).toHaveBeenCalledWith('Root');
+
+                deferredConfigService.resolve(groupData[0]);
+                _timeout.flush();
+
+                expect(controller.loadingConfig).toBe(false);
+                // expect(controller.planConfigured).toBe(true);
+                // expect(controller.config).toEqual(jasmine.objectContaining(groupData[0].config));
+            });
+        });
+
         describe('updatePlan:', function () {
             it('should update the selected plan and refresh accordingly on success', function () {
                 controller.selectedGroup = groupData[1];

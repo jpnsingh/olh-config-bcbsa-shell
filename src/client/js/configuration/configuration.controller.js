@@ -66,7 +66,7 @@
                 }, function (error) {
                     vm.adding = false;
                     vm.error = error;
-                    NotificationService.displayError('Error creating Plan.');
+                    NotificationService.displayError(error.message);
                 });
         };
 
