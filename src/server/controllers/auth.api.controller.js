@@ -22,7 +22,7 @@
                 }
 
                 if (!user) {
-                    return response.status(500).json({error: info});
+                    return response.status(401).json({error: info});
                 }
 
                 request.login(user, function (error) {
