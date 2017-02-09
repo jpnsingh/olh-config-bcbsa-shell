@@ -45,6 +45,11 @@
                     if (existingUser) {
                         return response.status(409).json({error: {message: 'Username is already existing, please choose a different one!'}});
                     } else {
+                        user.createdAt = new Date();
+                        user.updatedAt = new Date();
+                        user.auth.grantType = 'password';
+                        user.roles = [{id: 'PlanAdmin'}];
+
                         db.collection('users').insert(user, function (error, results) {
                             request.login(results.ops[0], function () {
                                 response.json({user: results.ops[0]});

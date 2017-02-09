@@ -7,17 +7,17 @@
 
     auth.$inject = ['$q', '$rootScope', '$http', '$window', '$state'];
     function auth($q, $rootScope, $http, $window, $state) {
-        var service = {};
+        var authService = {};
 
-        service.clear = clear;
-        service.storeUser = storeUser;
-        service.currentUser = currentUser;
-        service.isAuthenticated = isAuthenticated;
-        service.logout = logout;
-        service.register = register;
-        service.login = login;
+        authService.clear = clear;
+        authService.storeUser = storeUser;
+        authService.currentUser = currentUser;
+        authService.isAuthenticated = isAuthenticated;
+        authService.logout = logout;
+        authService.register = register;
+        authService.login = login;
 
-        return service;
+        return authService;
 
         function clear() {
             $window.sessionStorage.user = JSON.stringify({});
@@ -49,11 +49,6 @@
         }
 
         function register(user) {
-            user.createdAt = new Date();
-            user.updatedAt = new Date();
-            user.auth.grantType = 'password';
-            user.roles = [{id: 'PlanAdmin'}];
-
             return $http
                 .post('/api/auth/register', user, {})
                 .then(function (response) {
