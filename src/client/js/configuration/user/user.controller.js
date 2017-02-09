@@ -4,10 +4,12 @@
     module.exports = angular.module('bcbsa-shell.config.user.controllers.userController', [])
         .controller('UserCtrl', UserCtrl);
 
-    /* jshint maxparams:7 */
-    UserCtrl.$inject = ['$timeout', 'auth', 'User', 'UserService', 'RoleService', 'ConfigService', 'NotificationService'];
-    function UserCtrl($timeout, auth, User, UserService, RoleService, ConfigService, NotificationService) {
+    /* jshint maxparams:8 */
+    UserCtrl.$inject = ['$scope', '$timeout', 'auth', 'User', 'UserService', 'RoleService', 'ConfigService', 'NotificationService'];
+    function UserCtrl($scope, $timeout, auth, User, UserService, RoleService, ConfigService, NotificationService) {
         var vm = this;
+
+        init();
 
         vm.canModifyUsers = _.some(auth.currentUser().roles, {id: 'SuperUser'});
 
@@ -70,6 +72,7 @@
         }
 
         function init() {
+            vm.users = [];
             vm.loadingUsers = true;
 
             UserService
@@ -84,6 +87,8 @@
                 });
         }
 
-        init();
+        $scope.$watch('userCtrl.users', function (newVal, oldVal) {
+            vm.userChanged = !_.isEmpty(oldVal) && !_.isEmpty(newVal) && (newVal !== oldVal);
+        }, true);
     }
 })();

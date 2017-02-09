@@ -16,7 +16,7 @@
                     <i class="fa fa-plus"></i></button>
                 <button class="btn btn-primary btn-xs"
                         title="Update User"
-                        data-ng-disabled="!userCtrl.canModifyUsers || userCtrl.updating"
+                        data-ng-disabled="!userCtrl.userChanged || !userCtrl.canModifyUsers || userCtrl.updating"
                         data-ng-click="userCtrl.updateUser()">
                     <i class="fa fa-save"></i></button>
                 <button class="btn btn-danger btn-xs"

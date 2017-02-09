@@ -30,7 +30,7 @@
             <button class="btn btn-primary btn-xs"
                     title="Update Plan"
                     data-ng-if="configCtrl.planConfigured"
-                    data-ng-disabled="configCtrl.updating"
+                    data-ng-disabled="!configCtrl.configChanged || configCtrl.updating"
                     data-ng-click="configCtrl.updatePlan()"><i class="fa fa-save"></i></button>
             <button class="btn btn-danger btn-xs"
                     title="Delete Plan"

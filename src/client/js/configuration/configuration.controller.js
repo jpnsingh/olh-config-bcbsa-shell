@@ -4,12 +4,10 @@
     module.exports = angular.module('bcbsa-shell.configuration.controllers.ConfigurationController', [])
         .controller('ConfigCtrl', ConfigCtrl);
 
-    /* jshint maxparams: 6 */
-    ConfigCtrl.$inject = ['$rootScope', '$filter', 'ConfigPlan', 'ConfigService', 'UserService', 'NotificationService'];
-    function ConfigCtrl($rootScope, $filter, ConfigPlan, ConfigService, UserService, NotificationService) {
+    /* jshint maxparams: 7 */
+    ConfigCtrl.$inject = ['$rootScope', '$scope', '$filter', 'ConfigPlan', 'ConfigService', 'UserService', 'NotificationService'];
+    function ConfigCtrl($rootScope, $scope, $filter, ConfigPlan, ConfigService, UserService, NotificationService) {
         var vm = this;
-
-        vm.config = {};
 
         init();
 
@@ -150,6 +148,7 @@
         }
 
         function init() {
+            vm.config = {};
             vm.userGroups = [];
 
             UserService
@@ -167,5 +166,9 @@
                     vm.error = error;
                 });
         }
+
+        $scope.$watch('configCtrl.config', function (newVal, oldVal) {
+            vm.configChanged = !_.isEmpty(oldVal) && !_.isEmpty(newVal) && (newVal !== oldVal);
+        }, true);
     }
 })();

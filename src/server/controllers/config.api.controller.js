@@ -57,7 +57,7 @@
         function newGroupConfig(request, response, next) {
             var group = request.body.config,
                 groupNameRegex = new RegExp(['^', group.name, '$'].join(''), 'i'),
-                validateGroupQuery = {name: groupNameRegex},
+                checkExistingGroup = {name: groupNameRegex},
                 userName = request.body.userName;
 
             group.config = {};
@@ -70,7 +70,7 @@
                     next(error);
                 }
 
-                db.collection('groups').findOne(validateGroupQuery, function (error, existingGroup) {
+                db.collection('groups').findOne(checkExistingGroup, function (error, existingGroup) {
                     if (existingGroup) {
                         return response.status(409).json({
                             error: {

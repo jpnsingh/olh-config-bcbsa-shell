@@ -36,10 +36,12 @@
         }
 
         function register(request, response) {
-            var user = request.body;
+            var user = request.body,
+                userNameRegex = new RegExp(['^', user.auth.userName, '$'].join(''), 'i'),
+                checkExistingUser = {'auth.userName': userNameRegex};
 
             mongodb.connect(dbConfig.dbConnectionString(), function (error, db) {
-                db.collection('users').findOne({'auth.userName': user.auth.userName}, function (error, existingUser) {
+                db.collection('users').findOne(checkExistingUser, function (error, existingUser) {
                     if (existingUser) {
                         return response.status(409).json({error: {message: 'Username is already existing, please choose a different one!'}});
                     } else {
