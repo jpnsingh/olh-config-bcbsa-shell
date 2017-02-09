@@ -5,49 +5,50 @@
 <data-loading-spinner data-loading="userCtrl.loadingUsers"></data-loading-spinner>
 
 <main class="user-container main-content clearfix" data-ng-if="!userCtrl.loadingUsers">
-    <section class="user-list col-xs-12">
-        <header class="col-xs-12 m-y-5">
-            <strong>Users</strong>
-            <section class="pull-right">
-                <button class="btn btn-success btn-xs"
-                        title="New User"
-                        data-ng-disabled="!userCtrl.canModifyUsers || userCtrl.updating"
-                        data-ng-click="userCtrl.addUser()">
-                    <i class="fa fa-plus"></i></button>
-                <button class="btn btn-primary btn-xs"
-                        title="Update User"
-                        data-ng-disabled="!userCtrl.userChanged || !userCtrl.canModifyUsers || userCtrl.updating"
-                        data-ng-click="userCtrl.updateUser()">
-                    <i class="fa fa-save"></i></button>
-                <button class="btn btn-danger btn-xs"
-                        title="Delete User"
-                        data-ng-disabled="!userCtrl.canModifyUsers || userCtrl.updating || !userCtrl.selected"
-                        data-ng-click="userCtrl.deleteUser()">
-                    <i class="fa fa-trash"></i></button>
-            </section>
-        </header>
-        <main>
-            <fieldset class="fieldset well col-xs-12" data-ng-disabled="userCtrl.updating">
-                <div class="alert alert-info m-b-0" data-ng-if="!userCtrl.users.length">
-                    No users configured yet. Please add one...
-                </div>
+    <form name="userForm" data-ng-submit="userCtrl.updateUser()">
+        <section class="user-list col-xs-12">
+            <header class="col-xs-12 m-y-5">
+                <strong>Users</strong>
+                <section class="pull-right">
+                    <button type="button"
+                            class="btn btn-success btn-xs"
+                            title="New User"
+                            data-ng-disabled="!userCtrl.canModifyUsers || userCtrl.updating"
+                            data-ng-click="userCtrl.addUser()">
+                        <i class="fa fa-plus"></i></button>
+                    <button class="btn btn-primary btn-xs"
+                            title="Update User"
+                            data-ng-disabled="!userCtrl.userChanged || !userCtrl.canModifyUsers || userCtrl.updating">
+                        <i class="fa fa-save"></i></button>
+                    <button type="button"
+                            class="btn btn-danger btn-xs"
+                            title="Delete User"
+                            data-ng-disabled="!userCtrl.canModifyUsers || userCtrl.updating || !userCtrl.selected"
+                            data-ng-click="userCtrl.deleteUser()">
+                        <i class="fa fa-trash"></i></button>
+                </section>
+            </header>
+            <main>
+                <fieldset class="fieldset well col-xs-12" data-ng-disabled="userCtrl.updating">
+                    <div class="alert alert-info m-b-0" data-ng-if="!userCtrl.users.length">
+                        No users configured yet. Please add one...
+                    </div>
 
-                <button data-ng-repeat="user in userCtrl.users"
-                        type="button"
-                        class="btn btn-default m-x-5"
-                        data-ng-class="{'btn-success': user._id === userCtrl.selected._id}"
-                        data-ng-click="userCtrl.selected = user"
-                        data-ng-bind="user.auth.userName"></button>
-            </fieldset>
-        </main>
-    </section>
+                    <button data-ng-repeat="user in userCtrl.users"
+                            type="button"
+                            class="btn btn-default m-x-5"
+                            data-ng-class="{'btn-success': user._id === userCtrl.selected._id}"
+                            data-ng-click="userCtrl.selected = user"
+                            data-ng-bind="user.auth.userName"></button>
+                </fieldset>
+            </main>
+        </section>
 
-    <section class="user-info col-xs-12">
-        <header class="col-xs-12 m-y-5">
-            <strong>User Info.</strong>
-        </header>
-        <main>
-            <form name="userForm">
+        <section class="user-info col-xs-12">
+            <header class="col-xs-12 m-y-5">
+                <strong>User Info.</strong>
+            </header>
+            <main>
                 <fieldset class="fieldset well col-xs-12"
                           data-ng-disabled="!userCtrl.canModifyUsers || userCtrl.updating">
                     <div class="alert alert-info m-b-0" data-ng-if="!userCtrl.users.length">
@@ -96,8 +97,7 @@
                         </div>
                     </div>
                 </fieldset>
-            </form>
-        </main>
-        <footer></footer>
-    </section>
+            </main>
+        </section>
+    </form>
 </main>

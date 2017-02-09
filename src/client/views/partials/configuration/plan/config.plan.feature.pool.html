@@ -1,45 +1,44 @@
-<form name="featurePoolForm">
-    <div class="row">
-        <section class="col-xs-12">
-            <header class="col-xs-12 m-y-5">
-                <strong>{{featurePoolCtrl.featurePool.header}}.</strong>
-            </header>
-            <main>
-                <fieldset class="fieldset well" data-ng-disabled="updatingPlan">
-                    <div class="alert alert-info m-b-0" data-ng-if="!featurePoolCtrl.selected">
-                        Please select an app from the pool or add one...
-                    </div>
+<div class="row">
+    <section class="col-xs-12">
+        <header class="col-xs-12 m-y-5">
+            <strong>{{featurePoolCtrl.featurePool.header}}.</strong>
+        </header>
+        <main>
+            <fieldset class="fieldset well" data-ng-disabled="updatingPlan">
+                <div class="alert alert-info m-b-0" data-ng-if="!featurePoolCtrl.selected">
+                    Please select an app from the pool or add one...
+                </div>
 
-                    <div class="row">
-                        <div class="form-group col-xs-12 col-sm-6"
-                             data-ng-repeat="(appKey, appField) in featurePoolCtrl.selected">
-                            <label for="{{appKey}}" data-ng-bind="appField.label"></label>
+                <div class="row">
+                    <div class="form-group col-xs-12 col-sm-6"
+                         data-ng-repeat="(appKey, appField) in featurePoolCtrl.selected">
+                        <label for="{{appKey}}" data-ng-bind="appField.label"></label>
 
-                            <input data-ng-if="appField.type === 'text'"
-                                   type="{{appField.type}}"
-                                   class="form-control"
+                        <input data-ng-if="appField.type === 'text'"
+                               type="{{appField.type}}"
+                               class="form-control"
+                               id="{{appKey}}"
+                               name="{{appKey}}"
+                               data-ng-model="appField.value"
+                               placeholder="{{appField.placeholder}}">
+
+                        <div data-ng-if="appField.type === 'checkbox'">
+                            <input type="{{appField.type}}"
+                                   class=""
                                    id="{{appKey}}"
                                    name="{{appKey}}"
+                                   data-ng-model="appField.value">
+                        </div>
+
+                        <div class="input-group" data-ng-if="appField.type === 'image'">
+                            <input type="text"
+                                   class="form-control"
+                                   id="{{appkey}}"
+                                   name="{{appKey}}"
                                    data-ng-model="appField.value"
+                                   data-ng-readonly="true"
                                    placeholder="{{appField.placeholder}}">
-
-                            <div data-ng-if="appField.type === 'checkbox'">
-                                <input type="{{appField.type}}"
-                                       class=""
-                                       id="{{appKey}}"
-                                       name="{{appKey}}"
-                                       data-ng-model="appField.value">
-                            </div>
-
-                            <div class="input-group" data-ng-if="appField.type === 'image'">
-                                <input type="text"
-                                       class="form-control"
-                                       id="{{appkey}}"
-                                       name="{{appKey}}"
-                                       data-ng-model="appField.value"
-                                       data-ng-readonly="true"
-                                       placeholder="{{appField.placeholder}}">
-                                <span class="input-group-btn">
+                            <span class="input-group-btn">
                                     <button type="button"
                                             class="btn btn-primary"
                                             data-ngf-select="featurePoolCtrl.uploadAppImage($file, appField)">
@@ -50,46 +49,47 @@
                                         </span>
                                     </button>
                                 </span>
-                            </div>
                         </div>
                     </div>
-                </fieldset>
-            </main>
-        </section>
-        <section class="col-xs-12">
-            <header class="col-xs-12 m-y-5">
-                <strong>App Pool</strong>
-                <section class="pull-right">
-                    <button class="btn btn-success btn-xs"
-                            title="New App"
-                            data-ng-disabled="updatingPlan"
-                            data-ng-click="featurePoolCtrl.addApp()"><i class="fa fa-plus"></i></button>
-                    <button class="btn btn-danger btn-xs"
-                            title="Delete App"
-                            data-ng-disabled="!featurePoolCtrl.selected || updatingPlan"
-                            data-ng-click="featurePoolCtrl.deleteApp()"><i class="fa fa-trash"></i></button>
-                </section>
-            </header>
-            <main>
-                <fieldset class="fieldset well form-group col-xs-12" data-ng-disabled="updatingPlan">
-                    <div class="row">
-                        <article class="col-xs-12">
-                            <div class="alert alert-info m-b-0"
-                                 data-ng-if="!featurePoolCtrl.featurePool.appPool.length">
-                                No app is configured yet. Please add one...
-                            </div>
+                </div>
+            </fieldset>
+        </main>
+    </section>
+    <section class="col-xs-12">
+        <header class="col-xs-12 m-y-5">
+            <strong>App Pool</strong>
+            <section class="pull-right">
+                <button type="button"
+                        class="btn btn-success btn-xs"
+                        title="New App"
+                        data-ng-disabled="updatingPlan"
+                        data-ng-click="featurePoolCtrl.addApp()"><i class="fa fa-plus"></i></button>
+                <button type="button"
+                        class="btn btn-danger btn-xs"
+                        title="Delete App"
+                        data-ng-disabled="!featurePoolCtrl.selected || updatingPlan"
+                        data-ng-click="featurePoolCtrl.deleteApp()"><i class="fa fa-trash"></i></button>
+            </section>
+        </header>
+        <main>
+            <fieldset class="fieldset well form-group col-xs-12" data-ng-disabled="updatingPlan">
+                <div class="row">
+                    <article class="col-xs-12">
+                        <div class="alert alert-info m-b-0"
+                             data-ng-if="!featurePoolCtrl.featurePool.appPool.length">
+                            No app is configured yet. Please add one...
+                        </div>
 
-                            <button type="button"
-                                    class="btn btn-default m-x-5"
-                                    data-ng-repeat="app in featurePoolCtrl.featurePool.appPool"
-                                    data-ng-class="{'btn-success': app.displayName === featurePoolCtrl.selected.displayName}"
-                                    data-ng-click="featurePoolCtrl.selected = app">
-                                <span data-ng-bind="app.displayName.value"></span>
-                            </button>
-                        </article>
-                    </div>
-                </fieldset>
-            </main>
-        </section>
-    </div>
-</form>
+                        <button data-ng-repeat="app in featurePoolCtrl.featurePool.appPool"
+                                type="button"
+                                class="btn btn-default m-x-5"
+                                data-ng-class="{'btn-success': app.displayName === featurePoolCtrl.selected.displayName}"
+                                data-ng-click="featurePoolCtrl.selected = app">
+                            <span data-ng-bind="app.displayName.value"></span>
+                        </button>
+                    </article>
+                </div>
+            </fieldset>
+        </main>
+    </section>
+</div>

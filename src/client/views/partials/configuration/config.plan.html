@@ -17,111 +17,112 @@
     </div>
 </header>
 <main class="plan-container main-content">
-    <ul class="nav nav-pills">
-        <li data-ng-repeat="tab in configCtrl.tabs"
-            data-ui-sref-active="active">
-            <a data-ui-sref="{{tab.state}}" data-ng-bind="tab.title"></a>
-        </li>
-        <li class="pull-right p-t-20 p-r-10">
-            <button class="btn btn-success btn-xs"
-                    title="{{configCtrl.userGroupPresent && !configCtrl.planConfigured ? 'Add Plan Config': 'New Plan'}}"
-                    data-ng-disabled="configCtrl.updating || configCtrl.addingConfig"
-                    data-ng-click="configCtrl.newPlan()"><i class="fa fa-plus"></i></button>
-            <button class="btn btn-primary btn-xs"
-                    title="Update Plan"
-                    data-ng-if="configCtrl.planConfigured"
-                    data-ng-disabled="!configCtrl.configChanged || configCtrl.updating"
-                    data-ng-click="configCtrl.updatePlan()"><i class="fa fa-save"></i></button>
-            <button class="btn btn-danger btn-xs"
-                    title="Delete Plan"
-                    data-ng-disabled="!configCtrl.selectedGroup || configCtrl.updating  || configCtrl.addingConfig"
-                    data-ng-click="configCtrl.deletePlan()"><i class="fa fa-trash"></i></button>
-        </li>
-    </ul>
-    <div class="tab-content clearfix">
-        <hr/>
+    <form name="configForm" data-ng-submit="configCtrl.updatePlan()">
+        <ul class="nav nav-pills">
+            <li data-ng-repeat="tab in configCtrl.tabs"
+                data-ui-sref-active="active">
+                <a data-ui-sref="{{tab.state}}" data-ng-bind="tab.title"></a>
+            </li>
+            <li class="pull-right p-t-20 p-r-10">
+                <button type="button"
+                        class="btn btn-success btn-xs"
+                        title="{{configCtrl.userGroupPresent && !configCtrl.planConfigured ? 'Add Plan Config': 'New Plan'}}"
+                        data-ng-disabled="configCtrl.updating || configCtrl.addingConfig"
+                        data-ng-click="configCtrl.newPlan()"><i class="fa fa-plus"></i></button>
+                <button class="btn btn-primary btn-xs"
+                        title="Update Plan"
+                        data-ng-if="configCtrl.planConfigured"
+                        data-ng-disabled="!configCtrl.configChanged || configCtrl.updating"><i class="fa fa-save"></i></button>
+                <button type="button"
+                        class="btn btn-danger btn-xs"
+                        title="Delete Plan"
+                        data-ng-disabled="!configCtrl.selectedGroup || configCtrl.updating  || configCtrl.addingConfig"
+                        data-ng-click="configCtrl.deletePlan()"><i class="fa fa-trash"></i></button>
+            </li>
+        </ul>
+        <div class="tab-content clearfix">
+            <hr/>
 
-        <data-loading-spinner data-loading="configCtrl.loadingConfig"></data-loading-spinner>
+            <data-loading-spinner data-loading="configCtrl.loadingConfig"></data-loading-spinner>
 
-        <div class="col-xs-12" data-ng-if="!configCtrl.loadingConfig">
-            <div class="alert alert-info" data-ng-if="!configCtrl.userGroupPresent">
-                You have not added a Group/Plan yet. Use the add button above to add one or contact your administrator.
+            <div class="col-xs-12" data-ng-if="!configCtrl.loadingConfig">
+                <div class="alert alert-info" data-ng-if="!configCtrl.userGroupPresent">
+                    You have not added a Group/Plan yet. Use the add button above to add one or contact your administrator.
+                </div>
+
+                <div class="alert alert-info" data-ng-if="configCtrl.userGroupPresent && !configCtrl.planConfigured">
+                    Plan for this group is not configured yet. Use the add button above to configure on your own or
+                    <a href="javascript:void(0)" class="alert-link" data-ng-click="configCtrl.inheritFromRoot()">
+                        Inherit from Root
+                    </a>
+                    and modify accordingly.
+                </div>
             </div>
 
-            <div class="alert alert-info" data-ng-if="configCtrl.userGroupPresent && !configCtrl.planConfigured">
-                Plan for this group is not configured yet. Use the add button above to configure on your own or
-                <a href="javascript:void(0)" class="alert-link" data-ng-click="configCtrl.inheritFromRoot()">
-                    Inherit from Root
-                </a>
-                and modify accordingly.
+            <div class="col-xs-12" data-ng-if="configCtrl.planConfigured && !configCtrl.loadingConfig">
+                <data-ui-view></data-ui-view>
             </div>
         </div>
+    </form>
 
-        <div class="col-xs-12" data-ng-if="configCtrl.planConfigured && !configCtrl.loadingConfig">
-            <data-ui-view></data-ui-view>
-        </div>
-
-
-        <div class="modal fade"
-             id="addPlan"
-             tabindex="-1"
-             role="dialog"
-             aria-labelledby="myLargeModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <form name="planForm" data-ng-submit="configCtrl.addPlan()">
-                        <div class="modal-header">
-                            <button type="button"
-                                    class="close"
-                                    data-dismiss="modal"
-                                    data-ng-disabled="configCtrl.adding"
-                                    aria-label="Close"><span aria-hidden="true">&times;</span>
-                            </button>
-                            <h4 class="modal-title" id="myModalLabel">
-                                New Plan
-                            </h4>
+    <div class="modal fade"
+         id="addPlan"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form name="planForm" data-ng-submit="configCtrl.addPlan()">
+                    <div class="modal-header">
+                        <button type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                data-ng-disabled="configCtrl.adding"
+                                aria-label="Close"><span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            New Plan
+                        </h4>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <div class="form-group col-xs-6">
+                            <label for="planName">Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="planName"
+                                   name="planName"
+                                   placeholder="Plan Name"
+                                   data-ng-model="configCtrl.plan.name"
+                                   required>
                         </div>
-                        <div class="modal-body clearfix">
-                            <div class="form-group col-xs-6">
-                                <label for="planName">Name</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="planName"
-                                       name="planName"
-                                       placeholder="Plan Name"
-                                       data-ng-model="configCtrl.plan.name"
-                                       required>
-                            </div>
-                            <div class="form-group col-xs-6">
-                                <label for="planDescription">Description</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="planDescription"
-                                       name="planDescription"
-                                       placeholder="Plan Description"
-                                       data-ng-model="configCtrl.plan.description"
-                                       required>
-                            </div>
+                        <div class="form-group col-xs-6">
+                            <label for="planDescription">Description</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="planDescription"
+                                   name="planDescription"
+                                   placeholder="Plan Description"
+                                   data-ng-model="configCtrl.plan.description"
+                                   required>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button"
-                                    class="btn btn-default"
-                                    data-dismiss="modal"
-                                    data-ng-disabled="configCtrl.adding">
-                                Close
-                            </button>
-                            <button class="btn btn-primary"
-                                    data-ng-disabled="planForm.$invalid">
-                                <span data-ng-if="!configCtrl.adding">Create</span>
-                                <span data-ng-if="configCtrl.adding">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn btn-default"
+                                data-dismiss="modal"
+                                data-ng-disabled="configCtrl.adding">
+                            Close
+                        </button>
+                        <button class="btn btn-primary"
+                                data-ng-disabled="planForm.$invalid">
+                            <span data-ng-if="!configCtrl.adding">Create</span>
+                            <span data-ng-if="configCtrl.adding">
                                 <i class="fa fa-spinner fa-pulse"></i> Creating...
                             </span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </main>
-<footer></footer>

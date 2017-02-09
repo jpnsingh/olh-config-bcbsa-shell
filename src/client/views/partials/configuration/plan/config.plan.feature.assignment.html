@@ -1,47 +1,45 @@
-<form name="featureAssignmentForm">
-    <div data-ng-if="!featureAssignmentCtrl.rootConfig.featurePool.appPool.length">
-        <div class="alert alert-info col-xs-12 m-b-0">
-            Nothing can be assigned yet. Please configure apps from the Feature Pool tab...
-        </div>
+<div data-ng-if="!featureAssignmentCtrl.rootConfig.featurePool.appPool.length">
+    <div class="alert alert-info col-xs-12 m-b-0">
+        Nothing can be assigned yet. Please configure apps from the Feature Pool tab...
     </div>
+</div>
 
-    <div class="row" data-ng-if="featureAssignmentCtrl.rootConfig.featurePool.appPool.length">
-        <section class="col-xs-12">
-            <fieldset class="fieldset well form-group" data-ng-disabled="updatingPlan">
-                <section class="form-group">
-                    <div class="input-group">
-                        <input type="text"
-                               class="form-control"
-                               id="featureSearch"
-                               name="featureSearch"
-                               data-ng-model="search.displayName.value"
-                               placeholder="Search by display name..."
-                               autofocus>
-                        <span class="input-group-btn">
+<div class="row" data-ng-if="featureAssignmentCtrl.rootConfig.featurePool.appPool.length">
+    <section class="col-xs-12">
+        <fieldset class="fieldset well form-group" data-ng-disabled="updatingPlan">
+            <section class="form-group">
+                <div class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           id="featureSearch"
+                           name="featureSearch"
+                           data-ng-model="search.displayName.value"
+                           placeholder="Search by display name..."
+                           autofocus>
+                    <span class="input-group-btn">
                             <button type="button"
                                     class="btn btn-primary">
                                 <i class="fa fa-search fa-lg"></i>
                             </button>
                         </span>
+                </div>
+            </section>
+            <section>
+                <article class="feature-container text-center col-xs-6 col-sm-4 col-md-2 p-x-0 p-y-15 m-r-5 m-b-10"
+                         data-ng-repeat="app in featureAssignmentCtrl.rootConfig.featurePool.appPool | filter:search"
+                         data-ng-class="{'feature-enabled': app.enabled.value}"
+                         data-ng-click="app.enabled.value = !app.enabled.value">
+                    <figure>
+                        <img class="img-circle logo-preview" src="{{app.icon.src}}" alt="">
+                        <figcaption>
+                            <small>{{app.displayName.value}}</small>
+                        </figcaption>
+                    </figure>
+                    <div class="col-xs-12">
+                        <input type="checkbox" data-ng-model="app.enabled.value">
                     </div>
-                </section>
-                <section>
-                    <article class="feature-container text-center col-xs-6 col-sm-4 col-md-2 p-x-0 p-y-15 m-r-5 m-b-10"
-                             data-ng-repeat="app in featureAssignmentCtrl.rootConfig.featurePool.appPool | filter:search"
-                             data-ng-class="{'feature-enabled': app.enabled.value}"
-                             data-ng-click="app.enabled.value = !app.enabled.value">
-                        <figure>
-                            <img class="img-circle logo-preview" src="{{app.icon.src}}" alt="">
-                            <figcaption>
-                                <small>{{app.displayName.value}}</small>
-                            </figcaption>
-                        </figure>
-                        <div class="col-xs-12">
-                            <input type="checkbox" data-ng-model="app.enabled.value">
-                        </div>
-                    </article>
-                </section>
-            </fieldset>
-        </section>
-    </div>
-</form>
+                </article>
+            </section>
+        </fieldset>
+    </section>
+</div>

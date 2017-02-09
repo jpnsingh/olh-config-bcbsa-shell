@@ -5,49 +5,50 @@
 <data-loading-spinner data-loading="roleCtrl.loadingRoles"></data-loading-spinner>
 
 <main class="roles-container main-content clearfix" data-ng-if="!roleCtrl.loadingRoles">
-    <section class="role-list col-xs-12">
-        <header class="col-xs-12 m-y-5">
-            <strong>Roles</strong>
-            <section class="pull-right">
-                <button class="btn btn-success btn-xs"
-                        title="New Role"
-                        data-ng-disabled="!roleCtrl.canModifyRoles || roleCtrl.updating"
-                        data-ng-click="roleCtrl.addRole()">
-                    <i class="fa fa-plus"></i></button>
-                <button class="btn btn-primary btn-xs"
-                        title="Update Role"
-                        data-ng-disabled="!roleCtrl.roleChanged || !roleCtrl.canModifyRoles || roleCtrl.updating"
-                        data-ng-click="roleCtrl.updateRole()">
-                    <i class="fa fa-save"></i></button>
-                <button class="btn btn-danger btn-xs"
-                        title="Delete Role"
-                        data-ng-disabled="!roleCtrl.canModifyRoles || roleCtrl.updating || !roleCtrl.selected"
-                        data-ng-click="roleCtrl.deleteRole()">
-                    <i class="fa fa-trash"></i></button>
-            </section>
-        </header>
-        <main>
-            <fieldset class="fieldset well col-xs-12" data-ng-disabled="roleCtrl.updating">
-                <div class="alert alert-info m-b-0" data-ng-if="!roleCtrl.roles.length">
-                    No roles configured yet. Please add one...
-                </div>
+    <form name="roleForm" data-ng-submit="roleCtrl.updateRole()">
+        <section class="role-list col-xs-12">
+            <header class="col-xs-12 m-y-5">
+                <strong>Roles</strong>
+                <section class="pull-right">
+                    <button type="button"
+                            class="btn btn-success btn-xs"
+                            title="New Role"
+                            data-ng-disabled="!roleCtrl.canModifyRoles || roleCtrl.updating"
+                            data-ng-click="roleCtrl.addRole()">
+                        <i class="fa fa-plus"></i></button>
+                    <button class="btn btn-primary btn-xs"
+                            title="Update Role"
+                            data-ng-disabled="!roleCtrl.roleChanged || !roleCtrl.canModifyRoles || roleCtrl.updating">
+                        <i class="fa fa-save"></i></button>
+                    <button type="button"
+                            class="btn btn-danger btn-xs"
+                            title="Delete Role"
+                            data-ng-disabled="!roleCtrl.canModifyRoles || roleCtrl.updating || !roleCtrl.selected"
+                            data-ng-click="roleCtrl.deleteRole()">
+                        <i class="fa fa-trash"></i></button>
+                </section>
+            </header>
+            <main>
+                <fieldset class="fieldset well col-xs-12" data-ng-disabled="roleCtrl.updating">
+                    <div class="alert alert-info m-b-0" data-ng-if="!roleCtrl.roles.length">
+                        No roles configured yet. Please add one...
+                    </div>
 
-                <button data-ng-repeat="role in roleCtrl.roles"
-                        type="button"
-                        class="btn btn-default m-x-5"
-                        data-ng-class="{'btn-success': role.id === roleCtrl.selected.id}"
-                        data-ng-click="roleCtrl.selected = role"
-                        data-ng-bind="role.id"></button>
-            </fieldset>
-        </main>
-    </section>
+                    <button data-ng-repeat="role in roleCtrl.roles"
+                            type="button"
+                            class="btn btn-default m-x-5"
+                            data-ng-class="{'btn-success': role.id === roleCtrl.selected.id}"
+                            data-ng-click="roleCtrl.selected = role"
+                            data-ng-bind="role.id"></button>
+                </fieldset>
+            </main>
+        </section>
 
-    <section class="role-info col-xs-12">
-        <header class="col-xs-12 m-y-5">
-            <strong>Role Info.</strong>
-        </header>
-        <main>
-            <form name="roleForm">
+        <section class="role-info col-xs-12">
+            <header class="col-xs-12 m-y-5">
+                <strong>Role Info.</strong>
+            </header>
+            <main>
                 <fieldset class="fieldset well col-xs-12"
                           data-ng-disabled="!roleCtrl.canModifyRoles || roleCtrl.updating">
                     <div class="alert alert-info m-b-0" data-ng-if="!roleCtrl.roles.length">
@@ -89,8 +90,7 @@
                         </div>
                     </div>
                 </fieldset>
-            </form>
-        </main>
-        <footer></footer>
-    </section>
+            </main>
+        </section>
+    </form>
 </main>
