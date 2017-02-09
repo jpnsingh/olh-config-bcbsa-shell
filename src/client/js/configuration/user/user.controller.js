@@ -58,9 +58,10 @@
                     .then(function () {
                         NotificationService.displaySuccess('User updated successfully.');
                         vm.updating = false;
-                        init();
+                        vm.userChanged = false;
                     }, function (error) {
                         vm.updating = false;
+                        vm.userChanged = false;
                         vm.error = error;
                         NotificationService.displayError('Error updating User.');
                     });

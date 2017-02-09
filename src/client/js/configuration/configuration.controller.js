@@ -87,12 +87,13 @@
 
             ConfigService
                 .updateConfig(vm.config, vm.selectedGroup._id)
-                .then(function (groupData) {
+                .then(function () {
                     NotificationService.displaySuccess('Plan updated successfully.');
                     $rootScope.updatingPlan = false;
-                    setupConfig(groupData.config);
+                    vm.configChanged = false;
                 }, function (error) {
                     $rootScope.updatingPlan = false;
+                    vm.configChanged = false;
                     vm.addingConfig = false;
                     vm.error = error;
                     NotificationService.displayError('Error updating plan.');
@@ -148,8 +149,8 @@
         }
 
         function init() {
-            vm.config = {};
             vm.userGroups = [];
+            vm.config = {};
 
             UserService
                 .getUserGroups()

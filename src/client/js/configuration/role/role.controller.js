@@ -48,9 +48,10 @@
                     .then(function () {
                         NotificationService.displaySuccess('Role updated successfully.');
                         vm.updating = false;
-                        init();
+                        vm.roleChanged = false;
                     }, function (error) {
                         vm.updating = false;
+                        vm.roleChanged = false;
                         vm.error = error;
                         NotificationService.displayError('Error updating Role.');
                     });
