@@ -19,6 +19,8 @@
                     url: '/plan',
                     abstract: true,
                     templateUrl: 'templates/partials/configuration/config.plan.html',
+                    controller: 'ConfigPlanCtrl',
+                    controllerAs: 'configPlanCtrl'
                 },
                 planSetup: {
                     name: 'configuration.plan.setup',
