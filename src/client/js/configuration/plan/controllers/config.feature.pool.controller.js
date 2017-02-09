@@ -4,8 +4,8 @@
     module.exports = angular.module('bcsba-shell.configuration.plan.controllers.featurePoolController', [])
         .controller('FeaturePoolCtrl', FeaturePoolCtrl);
 
-    FeaturePoolCtrl.$inject = ['ConfigService', 'FileUploader', 'App'];
-    function FeaturePoolCtrl(ConfigService, FileUploader, App) {
+    FeaturePoolCtrl.$inject = ['ConfigService', 'FileUploader', 'App', 'NotificationService'];
+    function FeaturePoolCtrl(ConfigService, FileUploader, App, NotificationService) {
         var vm = this;
 
         vm.rootConfig = ConfigService.getCachedConfig();
@@ -33,7 +33,7 @@
                     model.src = vm.base64AppImage;
                 }, function (error) {
                     vm.uploadingAppImage = false;
-                    console.log(error);
+                    NotificationService.displayError(error.message);
                 }, function (progress) {
                     vm.uploadAppImageProgress = progress;
                 });

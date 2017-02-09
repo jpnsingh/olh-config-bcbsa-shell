@@ -78,24 +78,29 @@
                             }
                         });
                     } else {
-                        db.collection('groups').insert(group, function (error, insertResult) {
-                            var group = insertResult.ops[0],
-                                newUserGroup = {
-                                    _id: new ObjectID(group._id),
-                                    name: group.name,
-                                    description: group.description
-                                },
-                                userQuery = {'auth.userName': userName},
-                                addUserGroup = {$addToSet: {groups: newUserGroup}};
+                        db.collection('groups').find({}, {_id: 0, groupId: 1}).sort({groupId: -1}).limit(1).toArray(function (error, groupSeqResult) {
+                            group.groupId = groupSeqResult[0].groupId + 1;
 
-                            db.collection('users').updateOne(userQuery, addUserGroup, function (error, updateResult) {
-                                if (error) {
-                                    next(error);
-                                }
+                            db.collection('groups').insert(group, function (error, insertResult) {
+                                var group = insertResult.ops[0],
+                                    newUserGroup = {
+                                        _id: new ObjectID(group._id),
+                                        groupId: group.groupId,
+                                        name: group.name,
+                                        description: group.description
+                                    },
+                                    userQuery = {'auth.userName': userName},
+                                    addUserGroup = {$addToSet: {groups: newUserGroup}};
 
-                                if (updateResult.matchedCount === 1 && updateResult.modifiedCount === 1) {
-                                    response.json({group: group});
-                                }
+                                db.collection('users').updateOne(userQuery, addUserGroup, function (error, updateResult) {
+                                    if (error) {
+                                        next(error);
+                                    }
+
+                                    if (updateResult.matchedCount === 1 && updateResult.modifiedCount === 1) {
+                                        response.json({group: group});
+                                    }
+                                });
                             });
                         });
                     }

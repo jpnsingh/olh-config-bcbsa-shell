@@ -9,7 +9,7 @@
                 <select id="userGroups"
                         class="form-control"
                         data-ng-if="configCtrl.userGroups.length"
-                        data-ng-options="group.name for group in configCtrl.userGroups track by group._id"
+                        data-ng-options="group.name for group in configCtrl.userGroups | orderBy: 'groupId' track by group._id"
                         data-ng-change="configCtrl.changeGroup()"
                         data-ng-model="configCtrl.selectedGroup"></select>
             </section>

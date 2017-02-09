@@ -90,6 +90,7 @@
                 .then(function () {
                     NotificationService.displaySuccess('Plan updated successfully.');
                     $rootScope.updatingPlan = false;
+                    vm.addingConfig = false;
                     vm.configChanged = false;
                 }, function (error) {
                     $rootScope.updatingPlan = false;

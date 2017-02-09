@@ -4,8 +4,9 @@
     module.exports = angular.module('bcsba-shell.configuration.plan.controllers.planAdditionalController', [])
         .controller('PlanAdditionalCtrl', PlanAdditionalCtrl);
 
-    PlanAdditionalCtrl.$inject = ['ConfigService', 'FileUploader', 'NewsFeed', 'Interest', 'Insight'];
-    function PlanAdditionalCtrl(ConfigService, FileUploader, NewsFeed, Interest, Insight) {
+    /* jshint maxparams: 6 */
+    PlanAdditionalCtrl.$inject = ['ConfigService', 'FileUploader', 'NewsFeed', 'Interest', 'Insight', 'NotificationService'];
+    function PlanAdditionalCtrl(ConfigService, FileUploader, NewsFeed, Interest, Insight, NotificationService) {
         var vm = this;
 
         vm.rootConfig = ConfigService.getCachedConfig();
@@ -33,7 +34,7 @@
                     model.src = vm.feedImage.originalFilename;
                 }, function (error) {
                     vm.uploadingFeedImage = false;
-                    console.log(error);
+                    NotificationService.displayError(error.message);
                 }, function (progress) {
                     vm.uploadFeedImageProgress = progress;
                 });
@@ -55,7 +56,7 @@
                     vm.base64InterestImage = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
                 }, function (error) {
                     vm.uploadingInterestImage = false;
-                    console.log(error);
+                    NotificationService.displayError(error.message);
                 }, function (progress) {
                     vm.uploadInterestImageProgress = progress;
                 });

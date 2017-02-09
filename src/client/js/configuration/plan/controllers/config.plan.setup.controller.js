@@ -4,8 +4,8 @@
     module.exports = angular.module('bcsba-shell.configuration.plan.controllers.planSetupController', [])
         .controller('PlanSetupCtrl', PlanSetupCtrl);
 
-    PlanSetupCtrl.$inject = ['ConfigService', 'FileUploader'];
-    function PlanSetupCtrl(ConfigService, FileUploader) {
+    PlanSetupCtrl.$inject = ['ConfigService', 'FileUploader', 'NotificationService'];
+    function PlanSetupCtrl(ConfigService, FileUploader, NotificationService) {
         var vm = this;
 
         vm.rootConfig = ConfigService.getCachedConfig();
@@ -31,7 +31,7 @@
                     model.src = vm.base64Logo;
                 }, function (error) {
                     vm.uploadingLogo = false;
-                    console.log(error);
+                    NotificationService.displayError(error.message);
                 }, function (progress) {
                     vm.uploadLogoProgress = progress;
                 });
@@ -52,7 +52,7 @@
                     vm.base64BackgroundImage = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
                 }, function (error) {
                     vm.uploadingBackgroundImage = false;
-                    console.log(error);
+                    NotificationService.displayError(error.message);
                 }, function (progress) {
                     vm.uploadBackgroundImageProgress = progress;
                 });

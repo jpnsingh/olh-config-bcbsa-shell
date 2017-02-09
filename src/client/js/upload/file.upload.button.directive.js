@@ -4,8 +4,8 @@
     module.exports = angular.module('bcbsa-shell.upload.directives.fileUploadButtonDirective', [])
         .directive('fileUploadButton', UploadButtonDirective);
 
-    UploadButtonDirective.$inject = ['FileUploader'];
-    function UploadButtonDirective(FileUploader) {
+    UploadButtonDirective.$inject = ['FileUploader', 'NotificationService'];
+    function UploadButtonDirective(FileUploader, NotificationService) {
         return {
             restrict: 'EA',
             replace: true,
@@ -33,7 +33,7 @@
                             $scope.uploadModel = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
                         }, function (error) {
                             $scope.uploading = false;
-                            console.log(error);
+                            NotificationService.displayError(error.message);
                         }, function (progress) {
                             $scope.uploadProgress = progress;
                         });
