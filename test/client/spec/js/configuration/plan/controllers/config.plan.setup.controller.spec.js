@@ -5,6 +5,7 @@
         var scope,
             ConfigService,
             FileUploader,
+            NotificationService,
             controller,
             cachedConfig = {
                 planSetup: {
@@ -33,10 +34,16 @@
                 uploadFile: jasmine.createSpy()
             };
 
+            NotificationService = {
+                displayError: jasmine.createSpy(),
+                displaySuccess: jasmine.createSpy()
+            };
+
             controller = $controller('PlanSetupCtrl', {
                 $scope: scope,
                 ConfigService: ConfigService,
-                FileUploader: FileUploader
+                FileUploader: FileUploader,
+                NotificationService: NotificationService
             });
         }));
 

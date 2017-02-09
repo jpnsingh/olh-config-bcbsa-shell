@@ -8,6 +8,7 @@
             NewsFeed,
             Interest,
             Insight,
+            NotificationService,
             controller,
             cachedConfig = {
                 planAdditional: {
@@ -109,6 +110,10 @@
             NewsFeed = _NewsFeed_;
             Interest = _Interest_;
             Insight = _Insight_;
+            NotificationService = {
+                displayError: jasmine.createSpy(),
+                displaySuccess: jasmine.createSpy()
+            };
             controller = $controller('PlanAdditionalCtrl', {
                 $scope: scope,
                 ConfigService: ConfigService,
@@ -116,6 +121,7 @@
                 NewsFeed: NewsFeed,
                 Interest: Interest,
                 Insight: Insight,
+                NotificationService: NotificationService
             });
         }));
 

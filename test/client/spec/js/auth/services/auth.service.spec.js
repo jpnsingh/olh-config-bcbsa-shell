@@ -14,9 +14,11 @@
                 _id: '123-456-789',
                 auth: {
                     userName: 'foo',
-                    password: 'bar'
+                    password: 'bar',
+                    grantType: 'password'
                 },
-                email: 'foo@bar.com'
+                email: 'foo@bar.com',
+                roles: [{id: 'PlanAdmin'}]
             };
 
         beforeEach(angular.mock.module('bcbsa-shell.auth.services.authService'));
@@ -94,14 +96,6 @@
         });
 
         describe('register:', function () {
-            it('should give a default role of PlanAdmin to the new user', function () {
-                expect(_auth.currentUser()).toEqual({});
-
-                _auth.register(testUser);
-
-                expect(testUser.roles).toEqual([{id: 'PlanAdmin'}]);
-            });
-
             it('should invoke the register api via $http', function () {
                 expect(_auth.currentUser()).toEqual({});
 
