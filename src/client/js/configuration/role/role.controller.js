@@ -48,10 +48,10 @@
                     .then(function () {
                         NotificationService.displaySuccess('Role updated successfully.');
                         vm.updating = false;
-                        vm.roleChanged = false;
+                        vm.editingRole = false;
                     }, function (error) {
                         vm.updating = false;
-                        vm.roleChanged = false;
+                        vm.editingRole = false;
                         vm.error = error;
                         NotificationService.displayError('Error updating Role.');
                     });
@@ -79,7 +79,7 @@
         }
 
         $scope.$watch('roleCtrl.roles', function (newVal, oldVal) {
-            vm.roleChanged = !_.isEmpty(oldVal) && !_.isEmpty(newVal) && (newVal !== oldVal);
+            vm.editingRole = !_.isEmpty(oldVal) && !_.isEmpty(newVal) && (newVal !== oldVal);
         }, true);
     }
 })();

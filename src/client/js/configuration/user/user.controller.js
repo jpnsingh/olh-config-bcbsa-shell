@@ -58,10 +58,10 @@
                     .then(function () {
                         NotificationService.displaySuccess('User updated successfully.');
                         vm.updating = false;
-                        vm.userChanged = false;
+                        vm.editingUser = false;
                     }, function (error) {
                         vm.updating = false;
-                        vm.userChanged = false;
+                        vm.editingUser = false;
                         vm.error = error;
                         NotificationService.displayError('Error updating User.');
                     });
@@ -89,7 +89,7 @@
         }
 
         $scope.$watch('userCtrl.users', function (newVal, oldVal) {
-            vm.userChanged = !_.isEmpty(oldVal) && !_.isEmpty(newVal) && (newVal !== oldVal);
+            vm.editingUser = !_.isEmpty(oldVal) && !_.isEmpty(newVal) && (newVal !== oldVal);
         }, true);
     }
 })();
