@@ -3,10 +3,12 @@
 
     describe('PlanAdditionalCtrl', function () {
         var scope,
+            q,
+            defer,
+            _timeout,
             ConfigService,
             FileUploader,
             NewsFeed,
-            Interest,
             Insight,
             NotificationService,
             controller,
@@ -41,31 +43,6 @@
                             }
                         ]
                     },
-                    interest: {
-                        list: [
-                            {
-                                header: {
-                                    label: 'Header',
-                                    type: 'text',
-                                    placeholder: 'Interest Header',
-                                    value: 'Sample Interest Header'
-                                },
-                                description: {
-                                    label: 'Description',
-                                    type: 'text',
-                                    placeholder: 'Interest Description',
-                                    value: 'Sample Interest Description'
-                                },
-                                image: {
-                                    label: 'Image',
-                                    type: 'image',
-                                    placeholder: 'Interest Image',
-                                    value: 'Sample Interest Image',
-                                    src: ''
-                                }
-                            }
-                        ]
-                    },
                     insight: {
                         display: {
                             label: 'No. of items to display in Feed',
@@ -89,26 +66,45 @@
                         ]
                     }
                 }
+            },
+            testFile = {
+                header: {
+                    'content-type': 'image/png'
+                },
+                name: 'testFile'
+            },
+            testModel = {
+                src: ''
+            },
+            fileUploadResponse = {
+                file: {
+                    headers: {
+                        'content-type': 'image/png'
+                    },
+                    base64String: 'imageBase64String...'
+                }
             };
 
         beforeEach(angular.mock.module('bcsba-shell.configuration.plan.factories.newsFeedFactory'));
-        beforeEach(angular.mock.module('bcsba-shell.configuration.plan.factories.interestFactory'));
         beforeEach(angular.mock.module('bcsba-shell.configuration.plan.factories.insightFactory'));
         beforeEach(angular.mock.module('bcsba-shell.configuration.plan.controllers.planAdditionalController'));
 
-        beforeEach(inject(function ($rootScope, _NewsFeed_, _Interest_, _Insight_, $controller) {
+        beforeEach(inject(function ($rootScope, $q, $timeout, _NewsFeed_, _Insight_, $controller) {
             scope = $rootScope.$new();
+
+            q = $q;
+            defer = q.defer();
+            _timeout = $timeout;
 
             ConfigService = {
                 getCachedConfig: jasmine.createSpy().and.returnValue(cachedConfig)
             };
 
             FileUploader = {
-                uploadFile: jasmine.createSpy()
+                uploadFile: jasmine.createSpy('uploadFile').and.returnValue(defer.promise)
             };
 
             NewsFeed = _NewsFeed_;
-            Interest = _Interest_;
             Insight = _Insight_;
             NotificationService = {
                 displayError: jasmine.createSpy(),
@@ -119,23 +115,17 @@
                 ConfigService: ConfigService,
                 FileUploader: FileUploader,
                 NewsFeed: NewsFeed,
-                Interest: Interest,
                 Insight: Insight,
                 NotificationService: NotificationService
             });
         }));
 
         it('should initialize the controller accordingly', function () {
-            expect(controller.rootConfig).toBeDefined();
             expect(controller.planAdditional).toEqual(cachedConfig.planAdditional);
         });
 
         it('should initialize the News Feed', function () {
             expect(controller.selectedNewsFeed).toEqual(cachedConfig.planAdditional.newsFeed.list[0]);
-        });
-
-        it('should initialize the Interest', function () {
-            expect(controller.selectedInterest).toEqual(cachedConfig.planAdditional.interest.list[0]);
         });
 
         it('should initialize the Insight', function () {
@@ -157,22 +147,6 @@
             expect(controller.selectedNewsFeed).toBeUndefined();
         });
 
-        it('addInterest: should add a new Interest to list and make that selected for edit', function () {
-            controller.addInterest();
-
-            expect(controller.planAdditional.interest.list.length).toBe(2);
-            expect(controller.selectedInterest).toEqual(new Interest());
-
-            controller.deleteInterest();
-        });
-
-        it('deleteInterest: should delete the selected Interest and reinitialize the selected', function () {
-            controller.deleteInterest();
-
-            expect(controller.planAdditional.interest.list.length).toBe(0);
-            expect(controller.selectedInterest).toBeUndefined();
-        });
-
         it('addInsight: should add a new Insight to list and make that selected for edit', function () {
             controller.addInsight();
 
@@ -187,6 +161,41 @@
 
             expect(controller.planAdditional.insight.list.length).toBe(0);
             expect(controller.selectedInsight).toBeUndefined();
+        });
+
+        describe('uploadFeedImage:', function () {
+            it('should not return if no file is passed in', function () {
+                controller.uploadFeedImage();
+
+                expect(controller.uploadingFeedImage).not.toBeDefined();
+            });
+
+            it('should invoke FileUploader if a file and model is passed in', function () {
+                controller.uploadFeedImage(testFile, testModel);
+
+                expect(controller.uploadingFeedImage).toBe(true);
+                expect(FileUploader.uploadFile).toHaveBeenCalled();
+
+                defer.resolve(fileUploadResponse);
+                _timeout.flush();
+
+                expect(controller.uploadingFeedImage).toBe(false);
+                expect(controller.base64FeedImage).toBe('data:image/png;base64,imageBase64String...');
+                expect(testModel.src).toBe('data:image/png;base64,imageBase64String...');
+            });
+
+            it('should handle the error accordingly when FileUploader promise is rejected', function () {
+                controller.uploadFeedImage(testFile, testModel);
+
+                expect(controller.uploadingFeedImage).toBe(true);
+                expect(FileUploader.uploadFile).toHaveBeenCalled();
+
+                defer.reject({message: 'Error Uploading file.'});
+                _timeout.flush();
+
+                expect(controller.uploadingFeedImage).toBe(false);
+                expect(NotificationService.displayError).toHaveBeenCalledWith('Error Uploading file.');
+            });
         });
     });
 })();
