@@ -24,8 +24,8 @@
 
         vm.newPlan = function () {
             if (vm.userGroupPresent && !vm.planConfigured) {
-                setupConfig(new ConfigPlan());
                 vm.addingPlanConfig = true;
+                setupConfig(new ConfigPlan());
             } else {
                 $('#addPlanModal').modal('toggle');
                 $('#addPlanModal').on('shown.bs.modal', function () {

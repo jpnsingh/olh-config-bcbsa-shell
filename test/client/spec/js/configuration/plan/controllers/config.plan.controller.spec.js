@@ -42,7 +42,8 @@
                 getGroupConfig: jasmine.createSpy().and.returnValue(deferredConfigService.promise),
                 cacheConfig: jasmine.createSpy(),
                 updateConfig: jasmine.createSpy().and.returnValue(deferredConfigService.promise),
-                newGroupConfig: jasmine.createSpy().and.returnValue(deferredConfigService.promise)
+                newGroupConfig: jasmine.createSpy().and.returnValue(deferredConfigService.promise),
+                deleteGroupConfig: jasmine.createSpy().and.returnValue(deferredConfigService.promise)
             };
 
             NotificationService = {
@@ -89,6 +90,14 @@
             expect(controller.error).toBeDefined();
         });
 
+        it('should have the plan tabs defined with title, state and order for each of them', function () {
+            expect(controller.tabs).toBeDefined();
+            expect(controller.tabs.length).toBe(4);
+            expect(controller.tabs[1].title).toBeDefined();
+            expect(controller.tabs[1].state).toBeDefined();
+            expect(controller.tabs[1].order).toBeDefined();
+        });
+
         describe('changeGroup:', function () {
             it('should reinitialize the selected group', function () {
                 controller.selectedGroup = getGroupData()[1];
@@ -103,6 +112,29 @@
                 expect(controller.loadingConfig).toBeFalsy();
                 expect(controller.planConfigured).toBe(true);
                 expect(controller.config).toEqual(jasmine.objectContaining(getGroupData()[1].config));
+            });
+        });
+
+        describe('newPlan:', function () {
+            it('should allow config setup if the selected user group doesn\'t have a config setup', function () {
+                controller.userGroupPresent = true;
+                controller.planConfigured = false;
+
+                controller.newPlan();
+
+                expect(controller.addingPlanConfig).toBeTruthy();
+                expect(controller.planConfigured).toBeTruthy();
+                expect(controller.config).toBeDefined();
+                expect(ConfigService.cacheConfig).toHaveBeenCalled();
+            });
+
+            it('should allow the group/plan addition via a modal otherwise', function () {
+                controller.userGroupPresent = true;
+                controller.planConfigured = true;
+
+                controller.newPlan();
+
+                expect(controller.addingPlanConfig).toBeFalsy();
             });
         });
 
@@ -172,6 +204,41 @@
                 expect(rootScope.updatingPlan).toBe(false);
                 expect(controller.error).toBeDefined();
                 expect(NotificationService.displayError).toHaveBeenCalled();
+            });
+        });
+
+        describe('deletePlan:', function () {
+            it('should delete the selected plan and refresh accordingly on success', function () {
+                controller.userGroups = getGroupData();
+                controller.selectedGroup = controller.userGroups[1];
+
+                controller.deletePlan();
+
+                expect(controller.updating).toBe(true);
+                expect(ConfigService.deleteGroupConfig).toHaveBeenCalledWith('bcbst');
+
+                deferredConfigService.resolve({success: {deleted: 1}});
+                _timeout.flush();
+
+                expect(NotificationService.displaySuccess).toHaveBeenCalledWith('Plan deleted successfully.');
+                expect(controller.updating).toBe(false);
+                expect(controller.selectedGroup).toEqual(controller.userGroups[0]);
+            });
+
+            it('should display error notification on failure', function () {
+                controller.selectedGroup = getGroupData()[1];
+
+                controller.deletePlan();
+
+                expect(controller.updating).toBe(true);
+                expect(ConfigService.deleteGroupConfig).toHaveBeenCalledWith('bcbst');
+
+                deferredConfigService.reject({message: 'Error'});
+                _timeout.flush();
+
+                expect(controller.error.message).toEqual('Error');
+                expect(controller.updating).toBe(false);
+                expect(NotificationService.displayError).toHaveBeenCalledWith('Error deleting Plan.');
             });
         });
     });
