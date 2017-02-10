@@ -46,8 +46,9 @@
             };
 
             NotificationService = {
-                displaySuccess: jasmine.createSpy(),
-                displayError: jasmine.createSpy()
+                displayInfo: jasmine.createSpy('displayInfo'),
+                displaySuccess: jasmine.createSpy('displaySuccess'),
+                displayError: jasmine.createSpy('displayError')
             };
 
             controller = $controller('ConfigPlanCtrl as configPlanCtrl', {
@@ -136,6 +137,7 @@
                 _timeout.flush();
 
                 expect(controller.loadingConfig).toBe(false);
+                expect(NotificationService.displayInfo).toHaveBeenCalledWith('Add a Plan Title and configure accordingly.');
                 expect(controller.planConfigured).toBe(true);
                 expect(controller.config).toBeDefined();
                 expect(controller.config.planSetup.branding.planInfo.value).toEqual('');
