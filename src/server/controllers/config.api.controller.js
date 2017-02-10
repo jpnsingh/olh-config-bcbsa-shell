@@ -84,7 +84,7 @@
                             db.collection('groups').insert(group, function (error, insertResult) {
                                 var group = insertResult.ops[0],
                                     newUserGroup = {
-                                        _id: new ObjectID(group._id),
+                                        _id: group._id.toString(),
                                         groupId: group.groupId,
                                         name: group.name,
                                         description: group.description
@@ -141,8 +141,8 @@
 
                     if (result.deletedCount === 1) {
                         db.collection('users').updateOne(
-                            {'groups._id': new ObjectID(groupId)},
-                            {$pull: {groups: {_id: new ObjectID(groupId)}}},
+                            {'groups._id': groupId},
+                            {$pull: {groups: {_id: groupId}}},
                             function (error, result) {
                                 if (error) {
                                     next(error);
