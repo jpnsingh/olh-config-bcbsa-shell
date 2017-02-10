@@ -140,7 +140,7 @@
                     }
 
                     if (result.deletedCount === 1) {
-                        db.collection('users').updateOne(
+                        db.collection('users').updateMany(
                             {'groups._id': groupId},
                             {$pull: {groups: {_id: groupId}}},
                             function (error, result) {
@@ -148,7 +148,7 @@
                                     next(error);
                                 }
 
-                                if (result.matchedCount === 1 && result.modifiedCount === 1) {
+                                if (result.matchedCount >= 1 && result.modifiedCount >= 1) {
                                     response.json({success: {deleted: 1}});
                                 }
                             });
