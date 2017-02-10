@@ -70,6 +70,7 @@
                     vm.loadingConfig = false;
                     groupData.config.planSetup.branding.planInfo.value = '';
                     setupConfig(groupData.config);
+                    NotificationService.displayInfo('Add a Plan Title and configure accordingly.');
                 }, function (error) {
                     vm.loadingConfig = false;
                     vm.error = error;
