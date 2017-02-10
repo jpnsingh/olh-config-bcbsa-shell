@@ -25,7 +25,7 @@
         vm.newPlan = function () {
             if (vm.userGroupPresent && !vm.planConfigured) {
                 setupConfig(new ConfigPlan());
-                vm.addingConfig = true;
+                vm.addingPlanConfig = true;
             } else {
                 $('#addPlan').modal('toggle');
                 $('#addPlan').on('shown.bs.modal', function () {
@@ -35,13 +35,13 @@
         };
 
         vm.addPlan = function () {
-            vm.adding = true;
+            vm.addingPlan = true;
 
             ConfigService
                 .newGroupConfig(vm.plan)
                 .then(function (group) {
                     NotificationService.displaySuccess('Plan created successfully.');
-                    vm.adding = false;
+                    vm.addingPlan = false;
                     var newUserGroup = {
                         _id: group._id,
                         name: group.name,
@@ -55,7 +55,7 @@
 
                     $('#addPlan').modal('toggle');
                 }, function (error) {
-                    vm.adding = false;
+                    vm.addingPlan = false;
                     vm.error = error;
                     NotificationService.displayError(error.message);
                 });
@@ -83,12 +83,12 @@
                 .then(function () {
                     NotificationService.displaySuccess('Plan updated successfully.');
                     $rootScope.updatingPlan = false;
-                    vm.addingConfig = false;
+                    vm.addingPlanConfig = false;
                     vm.configChanged = false;
                 }, function (error) {
                     $rootScope.updatingPlan = false;
                     vm.configChanged = false;
-                    vm.addingConfig = false;
+                    vm.addingPlanConfig = false;
                     vm.error = error;
                     NotificationService.displayError('Error updating plan.');
                 });

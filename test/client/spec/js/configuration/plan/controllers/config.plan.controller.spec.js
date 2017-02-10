@@ -120,12 +120,12 @@
 
                 controller.addPlan();
 
-                expect(controller.adding).toBe(true);
+                expect(controller.addingPlan).toBe(true);
 
                 deferredConfigService.resolve(newGroup);
                 _timeout.flush();
 
-                expect(controller.adding).toBe(false);
+                expect(controller.addingPlan).toBe(false);
                 expect(NotificationService.displaySuccess).toHaveBeenCalled();
                 expect(controller.userGroups.length).toBe(3);
                 expect(controller.selectedGroup).toEqual(newGroup);
