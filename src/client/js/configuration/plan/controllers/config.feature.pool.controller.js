@@ -8,12 +8,6 @@
     function FeaturePoolCtrl(ConfigService, FileUploader, App, NotificationService) {
         var vm = this;
 
-        vm.rootConfig = ConfigService.getCachedConfig();
-
-        vm.featurePool = {};
-
-        vm.featurePool = angular.extend(vm.featurePool, vm.rootConfig.featurePool);
-
         init();
 
         vm.uploadAppImage = function (file, model) {
@@ -50,6 +44,9 @@
         };
 
         function init() {
+            vm.featurePool = {};
+            vm.featurePool = angular.extend(vm.featurePool, ConfigService.getCachedConfig().featurePool);
+
             vm.selected = vm.featurePool.appPool[0];
         }
     }
