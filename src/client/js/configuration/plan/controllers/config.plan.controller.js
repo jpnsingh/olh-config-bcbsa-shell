@@ -27,8 +27,8 @@
                 setupConfig(new ConfigPlan());
                 vm.addingPlanConfig = true;
             } else {
-                $('#addPlan').modal('toggle');
-                $('#addPlan').on('shown.bs.modal', function () {
+                $('#addPlanModal').modal('toggle');
+                $('#addPlanModal').on('shown.bs.modal', function () {
                     $('#planName').focus();
                 });
             }
@@ -53,7 +53,7 @@
                     vm.selectedGroup = vm.userGroups[0];
                     initGroupConfig();
 
-                    $('#addPlan').modal('toggle');
+                    $('#addPlanModal').modal('toggle');
                 }, function (error) {
                     vm.addingPlan = false;
                     vm.error = error;
@@ -111,6 +111,8 @@
                         vm.userGroupPresent = false;
                         vm.selectedGroup = undefined;
                     }
+
+                    $('#deletePlanModal').modal('toggle');
                 }, function (error) {
                     vm.error = error;
                     vm.updating = false;

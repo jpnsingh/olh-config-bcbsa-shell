@@ -37,7 +37,8 @@
                         class="btn btn-danger btn-xs"
                         title="Delete Plan"
                         data-ng-disabled="!configPlanCtrl.selectedGroup || configPlanCtrl.updating  || configPlanCtrl.addingPlanConfig"
-                        data-ng-click="configPlanCtrl.deletePlan()"><i class="fa fa-trash"></i></button>
+                        data-toggle="modal"
+                        data-target="#deletePlanModal"><i class="fa fa-trash"></i></button>
             </li>
         </ul>
         <div class="tab-content clearfix">
@@ -66,10 +67,10 @@
     </form>
 
     <div class="modal fade"
-         id="addPlan"
+         id="addPlanModal"
          tabindex="-1"
          role="dialog"
-         aria-labelledby="myLargeModalLabel">
+         aria-labelledby="addPlanModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form name="planForm" data-ng-submit="configPlanCtrl.addPlan()">
@@ -80,7 +81,7 @@
                                 data-ng-disabled="configPlanCtrl.addingPlan"
                                 aria-label="Close"><span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">
+                        <h4 class="modal-title" id="addPlanModalLabel">
                             New Plan
                         </h4>
                     </div>
@@ -122,6 +123,39 @@
                         </button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade"
+         id="deletePlanModal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="deletePlanModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="deletePlanModalLabel">
+                        Delete Plan: {{configPlanCtrl.selectedGroup.name}}
+                    </h4>
+                </div>
+                <div class="modal-body clearfix">
+                    <strong>Are you sure you want to delete?</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-default"
+                            data-dismiss="modal"
+                            data-ng-disabled="configPlanCtrl.addingPlan">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary" data-ng-click="configPlanCtrl.deletePlan()">
+                        <span data-ng-if="!configPlanCtrl.updating">Delete</span>
+                        <span data-ng-if="configPlanCtrl.updating">
+                            <i class="fa fa-spinner fa-pulse"></i> Deleting...
+                        </span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
