@@ -13,13 +13,9 @@
             UserService,
             NotificationService,
             controller,
-            groupData = [
-                {_id: 'root', name: 'Root', config: {test: 'test'}, groupId: 1},
-                {_id: 'bcbst', name: 'BCBST', config: {test: 'test'}, groupId: 2}
-            ],
             newGroup = {_id: 'test', name: 'test', description: 'Test'},
             responseUserGroups = {
-                groups: groupData
+                groups: getGroupData()
             };
 
         beforeEach(angular.mock.module('bcbsa-shell.configuration.plan.controllers.ConfigPlanController'));
@@ -63,10 +59,6 @@
             });
         }));
 
-        it('should initialize the controller accordingly', function () {
-            expect(controller.config).toBeDefined();
-        });
-
         it('should initialize the user groups first and set first one from the list as selected an then initialize the group config accordingly', function () {
             expect(UserService.getUserGroups).toHaveBeenCalled();
 
@@ -79,12 +71,12 @@
             expect(controller.loadingConfig).toBeTruthy();
             expect(ConfigService.getGroupConfig).toHaveBeenCalledWith('root');
 
-            deferredConfigService.resolve(groupData[0]);
+            deferredConfigService.resolve(getGroupData()[0]);
             _timeout.flush();
 
             expect(controller.loadingConfig).toBeFalsy();
             expect(controller.planConfigured).toBe(true);
-            expect(controller.config).toEqual(jasmine.objectContaining(groupData[0].config));
+            expect(controller.config).toEqual(jasmine.objectContaining(getGroupData()[0].config));
         });
 
         it('should error if user group promise is rejected', function () {
@@ -98,24 +90,24 @@
 
         describe('changeGroup:', function () {
             it('should reinitialize the selected group', function () {
-                controller.selectedGroup = groupData[1];
+                controller.selectedGroup = getGroupData()[1];
                 controller.changeGroup();
 
                 expect(controller.loadingConfig).toBeTruthy();
                 expect(ConfigService.getGroupConfig).toHaveBeenCalledWith('bcbst');
 
-                deferredConfigService.resolve(groupData[1]);
+                deferredConfigService.resolve(getGroupData()[1]);
                 _timeout.flush();
 
                 expect(controller.loadingConfig).toBeFalsy();
                 expect(controller.planConfigured).toBe(true);
-                expect(controller.config).toEqual(jasmine.objectContaining(groupData[1].config));
+                expect(controller.config).toEqual(jasmine.objectContaining(getGroupData()[1].config));
             });
         });
 
         describe('addPlan:', function () {
             it('should add a new plan in the list and make that selected and fetch the config for the same for edit ', function () {
-                controller.userGroups = groupData;
+                controller.userGroups = getGroupData();
                 controller.plan = {name: 'Test', description: 'Test'};
 
                 controller.addPlan();
@@ -135,30 +127,30 @@
         });
 
         describe('inheritFromRoot:', function () {
-            it('should get the config from Root and initialize accordingly', function () {
+            it('should get the config from Root and initialize accordingly and reset the planInfo to blank', function () {
                 controller.inheritFromRoot();
 
                 expect(controller.loadingConfig).toBe(true);
                 expect(ConfigService.getGroupConfig).toHaveBeenCalledWith('Root');
-
-                deferredConfigService.resolve(groupData[0]);
+                deferredConfigService.resolve(getGroupData()[0]);
                 _timeout.flush();
 
                 expect(controller.loadingConfig).toBe(false);
-                // expect(controller.planConfigured).toBe(true);
-                // expect(controller.config).toEqual(jasmine.objectContaining(groupData[0].config));
+                expect(controller.planConfigured).toBe(true);
+                expect(controller.config).toBeDefined();
+                expect(controller.config.planSetup.branding.planInfo.value).toEqual('');
             });
         });
 
         describe('updatePlan:', function () {
             it('should update the selected plan and refresh accordingly on success', function () {
-                controller.selectedGroup = groupData[1];
+                controller.selectedGroup = getGroupData()[1];
 
                 controller.updatePlan();
 
                 expect(rootScope.updatingPlan).toBe(true);
 
-                deferredConfigService.resolve(groupData[1]);
+                deferredConfigService.resolve(getGroupData()[1]);
                 _timeout.flush();
 
                 expect(NotificationService.displaySuccess).toHaveBeenCalled();
@@ -166,7 +158,7 @@
             });
 
             it('should display error notification on failure', function () {
-                controller.selectedGroup = groupData[1];
+                controller.selectedGroup = getGroupData()[1];
 
                 controller.updatePlan();
 
@@ -181,4 +173,37 @@
             });
         });
     });
+
+    function getGroupData() {
+        return [
+            {
+                _id: 'root',
+                name: 'Root',
+                config: {
+                    planSetup: {
+                        branding: {
+                            planInfo: {
+                                value: 'Plan A'
+                            }
+                        }
+                    }
+                },
+                groupId: 1
+            },
+            {
+                _id: 'bcbst',
+                name: 'BCBST',
+                config: {
+                    planSetup: {
+                        branding: {
+                            planInfo: {
+                                value: 'Plan B'
+                            }
+                        }
+                    }
+                },
+                groupId: 2
+            }
+        ];
+    }
 })();

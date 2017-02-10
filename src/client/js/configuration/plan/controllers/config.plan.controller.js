@@ -4,9 +4,9 @@
     module.exports = angular.module('bcbsa-shell.configuration.plan.controllers.ConfigPlanController', [])
         .controller('ConfigPlanCtrl', ConfigPlanCtrl);
 
-    /* jshint maxparams: 7 */
-    ConfigPlanCtrl.$inject = ['$rootScope', '$scope', '$filter', 'ConfigPlan', 'ConfigService', 'UserService', 'NotificationService'];
-    function ConfigPlanCtrl($rootScope, $scope, $filter, ConfigPlan, ConfigService, UserService, NotificationService) {
+    /* jshint maxparams: 8 */
+    ConfigPlanCtrl.$inject = ['$rootScope', '$scope', '$timeout', '$filter', 'ConfigPlan', 'ConfigService', 'UserService', 'NotificationService'];
+    function ConfigPlanCtrl($rootScope, $scope, $timeout, $filter, ConfigPlan, ConfigService, UserService, NotificationService) {
         var vm = this;
 
         init();
@@ -68,6 +68,7 @@
                 .getGroupConfig('Root')
                 .then(function (groupData) {
                     vm.loadingConfig = false;
+                    groupData.config.planSetup.branding.planInfo.value = '';
                     setupConfig(groupData.config);
                 }, function (error) {
                     vm.loadingConfig = false;
@@ -118,6 +119,8 @@
         };
 
         function setupConfig(config) {
+            vm.config = {};
+
             if (_.isEmpty(config)) {
                 vm.planConfigured = false;
                 return;
@@ -126,6 +129,10 @@
             vm.planConfigured = true;
             angular.extend(vm.config, config);
             ConfigService.cacheConfig(vm.config);
+
+            $timeout(function () {
+                $('#planTitle').focus();
+            });
         }
 
         function initGroupConfig() {
@@ -144,7 +151,6 @@
 
         function init() {
             vm.userGroups = [];
-            vm.config = {};
 
             UserService
                 .getUserGroups()
