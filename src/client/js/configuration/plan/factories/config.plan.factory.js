@@ -36,10 +36,10 @@
                     header: 'Support',
                     fields: [
                         {
-                            type: 'text',
-                            name: 'personName',
-                            title: 'Support Personnel Name',
-                            iconClass: 'fa fa-user-o fa-lg',
+                            type: 'email',
+                            name: 'personEmail',
+                            title: 'Support Personnel Email',
+                            iconClass: 'fa fa-envelope fa-lg',
                             value: ''
                         },
                         {
