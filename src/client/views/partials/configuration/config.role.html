@@ -2,9 +2,9 @@
     <h3>Role Management</h3>
 </header>
 
-<data-loading-spinner data-loading="roleCtrl.loadingRoles"></data-loading-spinner>
+<data-loading-spinner data-loading="roleCtrl.loading"></data-loading-spinner>
 
-<main class="roles-container main-content clearfix" data-ng-if="!roleCtrl.loadingRoles">
+<main class="roles-container main-content clearfix" data-ng-if="!roleCtrl.loading">
     <form name="roleForm" data-ng-submit="roleCtrl.updateRole()">
         <section class="role-list col-xs-12">
             <header class="col-xs-12 m-y-5">
@@ -18,7 +18,7 @@
                         <i class="fa fa-plus"></i></button>
                     <button class="btn btn-primary btn-xs"
                             title="Update Role"
-                            data-ng-disabled="!roleCtrl.editingRole || !roleCtrl.canModifyRoles || roleCtrl.updating">
+                            data-ng-disabled="!roleCtrl.editing || !roleCtrl.canModifyRoles || roleCtrl.updating">
                         <i class="fa fa-save"></i></button>
                     <button type="button"
                             class="btn btn-danger btn-xs"
