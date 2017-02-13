@@ -16,7 +16,10 @@
         </section>
     </div>
 </header>
-<main class="plan-container main-content">
+
+<data-loading-spinner data-loading="!configPlanCtrl.userGroups.length"></data-loading-spinner>
+
+<main class="plan-container main-content" data-ng-if="configPlanCtrl.userGroups.length">
     <form name="configForm" data-ng-submit="configPlanCtrl.updatePlan()">
         <ul class="nav nav-pills">
             <li data-ng-repeat="tab in configPlanCtrl.tabs"
@@ -32,7 +35,7 @@
                 <button class="btn btn-primary btn-xs"
                         title="Update Plan"
                         data-ng-if="configPlanCtrl.planConfigured"
-                        data-ng-disabled="!configPlanCtrl.editingConfig || configPlanCtrl.updating"><i class="fa fa-save"></i></button>
+                        data-ng-disabled="!configPlanCtrl.editing || configPlanCtrl.updating"><i class="fa fa-save"></i></button>
                 <button type="button"
                         class="btn btn-danger btn-xs"
                         title="Delete Plan"

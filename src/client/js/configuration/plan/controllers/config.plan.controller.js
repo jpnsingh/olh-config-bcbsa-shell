@@ -86,10 +86,10 @@
                     NotificationService.displaySuccess('Plan updated successfully.');
                     $rootScope.updatingPlan = false;
                     vm.addingPlanConfig = false;
-                    vm.editingConfig = false;
+                    vm.editing = false;
                 }, function (error) {
                     $rootScope.updatingPlan = false;
-                    vm.editingConfig = false;
+                    vm.editing = false;
                     vm.addingPlanConfig = false;
                     vm.error = error;
                     NotificationService.displayError('Error updating plan.');
@@ -172,7 +172,7 @@
         }
 
         $scope.$watch('configPlanCtrl.config', function (newVal, oldVal) {
-            vm.editingConfig = !_.isEmpty(oldVal) && !_.isEmpty(newVal) && (newVal !== oldVal);
+            vm.editing = !_.isEmpty(oldVal) && !_.isEmpty(newVal) && (newVal !== oldVal);
         }, true);
     }
 })();
