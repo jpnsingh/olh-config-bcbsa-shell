@@ -16,10 +16,7 @@
         </section>
     </div>
 </header>
-
-<data-loading-spinner data-loading="!configPlanCtrl.userGroups.length"></data-loading-spinner>
-
-<main class="plan-container main-content" data-ng-if="configPlanCtrl.userGroups.length">
+<main class="plan-container main-content">
     <form name="configForm" data-ng-submit="configPlanCtrl.updatePlan()">
         <ul class="nav nav-pills">
             <li data-ng-repeat="tab in configPlanCtrl.tabs"
