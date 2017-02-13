@@ -169,7 +169,7 @@
                 _timeout.flush();
 
                 expect(controller.loadingConfig).toBe(false);
-                expect(NotificationService.displayInfo).toHaveBeenCalledWith('Add a Plan Title and configure accordingly.');
+                expect(NotificationService.displayInfo).toHaveBeenCalledWith('Add a Plan Title and start configuring accordingly.');
                 expect(controller.planConfigured).toBe(true);
                 expect(controller.config).toBeDefined();
                 expect(controller.config.planSetup.branding.planInfo.value).toEqual('');

@@ -62,19 +62,7 @@
         };
 
         vm.inheritFromRoot = function () {
-            vm.loadingConfig = true;
-
-            ConfigService
-                .getGroupConfig('Root')
-                .then(function (groupData) {
-                    vm.loadingConfig = false;
-                    groupData.config.planSetup.branding.planInfo.value = '';
-                    setupConfig(groupData.config);
-                    NotificationService.displayInfo('Add a Plan Title and configure accordingly.');
-                }, function (error) {
-                    vm.loadingConfig = false;
-                    vm.error = error;
-                });
+            initGroupConfig('Root');
         };
 
         vm.updatePlan = function () {
@@ -138,13 +126,19 @@
             });
         }
 
-        function initGroupConfig() {
+        function initGroupConfig(groupName) {
             vm.loadingConfig = true;
 
             ConfigService
-                .getGroupConfig(vm.selectedGroup._id)
+                .getGroupConfig(groupName || vm.selectedGroup._id)
                 .then(function (groupData) {
                     vm.loadingConfig = false;
+
+                    if (groupName && groupName === 'Root') {
+                        groupData.config.planSetup.branding.planInfo.value = '';
+                        NotificationService.displayInfo('Add a Plan Title and start configuring accordingly.');
+                    }
+
                     setupConfig(groupData.config);
                 }, function (error) {
                     vm.loadingConfig = false;
