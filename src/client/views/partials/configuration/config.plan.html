@@ -16,7 +16,8 @@
         </section>
     </div>
 </header>
-<main class="plan-container main-content">
+<data-loading-spinner data-loading="configPlanCtrl.loadingGroups"></data-loading-spinner>
+<main class="plan-container main-content" data-ng-if="!configPlanCtrl.loadingGroups">
     <form name="configForm" data-ng-submit="configPlanCtrl.updatePlan()">
         <ul class="nav nav-pills">
             <li data-ng-repeat="tab in configPlanCtrl.tabs"
@@ -26,7 +27,7 @@
             <li class="pull-right p-t-20 p-r-10">
                 <button type="button"
                         class="btn btn-success btn-xs"
-                        title="{{configPlanCtrl.userGroupPresent && !configPlanCtrl.planConfigured ? 'Add Plan Config': 'New Plan'}}"
+                        title="{{configPlanCtrl.userGroups.length && !configPlanCtrl.planConfigured ? 'Add Plan Config': 'New Plan'}}"
                         data-ng-disabled="configPlanCtrl.updating || configPlanCtrl.addingPlanConfig"
                         data-ng-click="configPlanCtrl.newPlan()"><i class="fa fa-plus"></i></button>
                 <button class="btn btn-primary btn-xs"
@@ -36,6 +37,7 @@
                 <button type="button"
                         class="btn btn-danger btn-xs"
                         title="Delete Plan"
+                        data-ng-if="configPlanCtrl.userGroups.length"
                         data-ng-disabled="!configPlanCtrl.selectedGroup || configPlanCtrl.updating  || configPlanCtrl.addingPlanConfig"
                         data-toggle="modal"
                         data-target="#deletePlanModal"><i class="fa fa-trash"></i></button>
@@ -47,11 +49,11 @@
             <data-loading-spinner data-loading="configPlanCtrl.loadingConfig"></data-loading-spinner>
 
             <div class="col-xs-12" data-ng-if="!configPlanCtrl.loadingConfig">
-                <div class="alert alert-info" data-ng-if="!configPlanCtrl.userGroupPresent">
+                <div class="alert alert-info" data-ng-if="!configPlanCtrl.userGroups.length">
                     You have not added a Group/Plan yet. Use the add button above to add one or contact your administrator.
                 </div>
 
-                <div class="alert alert-info" data-ng-if="configPlanCtrl.userGroupPresent && !configPlanCtrl.planConfigured">
+                <div class="alert alert-info" data-ng-if="configPlanCtrl.userGroups.length && !configPlanCtrl.planConfigured">
                     Plan for this group is not configured yet. Use the add button above to configure on your own or
                     <a href="javascript:void(0)" class="alert-link" data-ng-click="configPlanCtrl.inheritFromRoot()">
                         Inherit from Root

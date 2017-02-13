@@ -23,7 +23,7 @@
         };
 
         vm.newPlan = function () {
-            if (vm.userGroupPresent && !vm.planConfigured) {
+            if (vm.userGroups.length && !vm.planConfigured) {
                 vm.addingPlanConfig = true;
                 setupConfig(new ConfigPlan());
             } else {
@@ -49,7 +49,6 @@
                     };
 
                     vm.userGroups.unshift(newUserGroup);
-                    vm.userGroupPresent = true;
                     vm.selectedGroup = vm.userGroups[0];
                     initGroupConfig();
 
@@ -97,7 +96,6 @@
                         vm.selectedGroup = vm.userGroups[0];
                         initGroupConfig();
                     } else {
-                        vm.userGroupPresent = false;
                         vm.selectedGroup = undefined;
                     }
 
@@ -148,19 +146,20 @@
 
         function init() {
             vm.userGroups = [];
+            vm.loadingGroups = true;
 
             UserService
                 .getUserGroups()
                 .then(function (data) {
+                    vm.loadingGroups = false;
+
                     if (!_.isEmpty(data.groups)) {
-                        vm.userGroupPresent = true;
                         vm.userGroups = $filter('orderBy')(data.groups, 'groupId');
                         vm.selectedGroup = vm.userGroups[0];
                         initGroupConfig();
-                    } else {
-                        vm.userGroupPresent = false;
                     }
                 }, function (error) {
+                    vm.loadingGroups = false;
                     vm.error = error;
                 });
         }

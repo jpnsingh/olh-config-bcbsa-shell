@@ -117,7 +117,7 @@
 
         describe('newPlan:', function () {
             it('should allow config setup if the selected user group doesn\'t have a config setup', function () {
-                controller.userGroupPresent = true;
+                controller.userGroups = getGroupData();
                 controller.planConfigured = false;
 
                 controller.newPlan();
@@ -129,7 +129,7 @@
             });
 
             it('should allow the group/plan addition via a modal otherwise', function () {
-                controller.userGroupPresent = true;
+                controller.userGroups = getGroupData();
                 controller.planConfigured = true;
 
                 controller.newPlan();
