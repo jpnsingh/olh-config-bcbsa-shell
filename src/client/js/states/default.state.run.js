@@ -16,6 +16,10 @@
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState/*, toParams, fromState, fromParams*/) {
             $rootScope.title = 'BCBSA Shell | ' + toState.data.docTitle;
+
+            if ($('#bcbsa-navbar-top').attr('aria-expanded') === 'true') {
+                $('#nav-toggle').click();
+            }
         });
 
         $rootScope.$on('$stateChangeError', console.log.bind(console));
