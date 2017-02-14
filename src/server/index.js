@@ -11,7 +11,7 @@
         port = process.env.PORT || 3000,
         secret = process.env.SECRET || 'bcbsa-shell-app-secret';
 
-    router.use(favicon('.build/web/images/favicon.png'));
+    router.use(favicon('.build/web/images/favicon.ico'));
 
     app.use(express.static('.build/web'));
     app.use(bodyParser.json({limit: '50mb'}));
