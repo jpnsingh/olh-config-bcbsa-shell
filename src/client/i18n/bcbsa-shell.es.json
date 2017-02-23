@@ -1,0 +1,20 @@
+{
+  "login": {
+    "loginLegend": "es-Login",
+    "usernameLabel": "es-Username",
+    "passwordLabel": "es-Password",
+    "loginButtonText": "es-Login",
+    "loggingInButtonText": "es- Logging in...",
+    "registerButtonText": "es-Register"
+  },
+  "register": {
+    "legend": "es-Register",
+    "firstNameLabel": "es-First Name",
+    "lastNameLabel": "es-Last Name",
+    "usernameLabel": "es-Username",
+    "passwordLabel": "es-Password",
+    "registerBtnText": "es-Register",
+    "registeringBtnText": "es- Registering...",
+    "cancelBtnText": "es-Cancel"
+  }
+}
