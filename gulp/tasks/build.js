@@ -9,6 +9,7 @@
             'lint',
             'clean',
             'less', 'styles', 'images', 'libs', 'templates',
+            'i18n',
             'babelify',
             'browserify',
             callback

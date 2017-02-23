@@ -1,0 +1,10 @@
+{
+  "login": {
+    "loginLegend": "Login",
+    "userNameLabel": "Username",
+    "passwordLabel": "Password",
+    "loginButtonText": "Login",
+    "loggingInButtonText": " Logging in...",
+    "registerButtonText": "Register"
+  }
+}

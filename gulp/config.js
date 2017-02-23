@@ -39,6 +39,7 @@
             paths: {
                 test: './test',
                 src: {
+                    i18n: './src/client/i18n/' + config.app + '.*.json',
                     js: './src/client/js/**/*.js',
                     libs: ['public/lib/**/*', 'libs/**/*'],
                     images: 'images/**/*',
@@ -51,6 +52,7 @@
                 },
                 dest: {
                     root: build.root,
+                    i18n: build.webPath + '/i18n',
                     js: build.webPath + '/js',
                     libs: build.webPath + '/libs',
                     images: build.webPath + '/images',
