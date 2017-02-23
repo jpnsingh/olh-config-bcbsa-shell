@@ -1,10 +1,20 @@
 {
   "login": {
     "loginLegend": "Login",
-    "userNameLabel": "Username",
+    "usernameLabel": "Username",
     "passwordLabel": "Password",
     "loginButtonText": "Login",
     "loggingInButtonText": " Logging in...",
     "registerButtonText": "Register"
+  },
+  "register": {
+    "legend": "Register",
+    "firstNameLabel": "First Name",
+    "lastNameLabel": "Last Name",
+    "usernameLabel": "Username",
+    "passwordLabel": "Password",
+    "registerBtnText": "Register",
+    "registeringBtnText": " Registering...",
+    "cancelBtnText": "Cancel"
   }
 }
