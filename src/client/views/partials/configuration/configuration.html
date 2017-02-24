@@ -5,7 +5,7 @@
                 <ul class="nav nav-sidebar">
                     <li data-ng-repeat="nav in configCtrl.sidebar"
                         data-ui-sref-active="{active: nav.activeState}">
-                        <a data-ui-sref="{{nav.state}}">{{nav.title}}</a>
+                        <a data-ui-sref="{{nav.state}}" title="{{nav.title | translate}}">{{nav.title | translate}}</a>
                     </li>
                 </ul>
             </aside>

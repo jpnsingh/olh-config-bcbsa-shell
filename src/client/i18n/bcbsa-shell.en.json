@@ -28,5 +28,13 @@
   },
   "dashboard": {
     "header": "Blue Cross Blue Shield Association"
+  },
+  "config": {
+    "sidebar": {
+      "roleManagementLabel": "Role Management",
+      "userManagementLabel": "User Management",
+      "planManagementLabel": "Plan Management",
+      "reportsLabel": "Reports"
+    }
   }
 }
