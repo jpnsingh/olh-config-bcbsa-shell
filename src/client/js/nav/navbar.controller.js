@@ -15,37 +15,37 @@
         vm.nav = {
             top: {
                 header: {
-                    label: 'navbar.header',
+                    label: 'navbar.top.header',
                     stateRef: 'dashboard'
                 },
                 links: {
                     left: [
-                        {label: 'navbar.configurationText', stateRef: 'configuration.role', activeState: 'configuration'}
+                        {label: 'navbar.top.configurationText', stateRef: 'configuration.role', activeState: 'configuration'}
                     ],
                     right: [
                         {
-                            label: 'navbar.userProfileText',
+                            label: 'navbar.top.userMenu.profileText',
                             icon: {cls: 'fa fa-user fa-lg'},
                             userMenu: true,
                             list: [
                                 {
-                                    label: 'navbar.aboutText',
+                                    label: 'navbar.top.userMenu.aboutText',
                                     stateRef: 'about'
                                 },
                                 {
-                                    label: 'navbar.helpText',
+                                    label: 'navbar.top.userMenu.helpText',
                                     stateRef: 'help'
                                 },
                                 {
                                     divider: true
                                 },
                                 {
-                                    label: 'navbar.settingsText',
+                                    label: 'navbar.top.userMenu.settingsText',
                                     stateRef: 'settings.profile',
                                     icon: {cls: 'fa fa-cogs fa-lg'}
                                 },
                                 {
-                                    label: 'navbar.logoutText',
+                                    label: 'navbar.top.userMenu.logoutText',
                                     stateRef: 'logout',
                                     icon: {cls: 'fa fa-sign-out fa-lg'}
                                 }

@@ -18,13 +18,20 @@
     "cancelBtnText": "Cancel"
   },
   "navbar": {
-    "header": "Blue Cross Blue Shield Association",
-    "configurationText": "Configuration",
-    "userProfileText": "User profile and more",
-    "aboutText": "About",
-    "helpText": "Help",
-    "settingsText": "Settings",
-    "logoutText": "Logout"
+    "top": {
+      "header": "Blue Cross Blue Shield Association",
+      "configurationText": "Configuration",
+      "userMenu": {
+        "profileText": "User profile and more",
+        "aboutText": "About",
+        "helpText": "Help",
+        "settingsText": "Settings",
+        "logoutText": "Logout"
+      }
+    },
+    "bottom": {
+      "citation": "Onlife Health Inc. All rights reserved."
+    }
   },
   "dashboard": {
     "header": "Blue Cross Blue Shield Association"
