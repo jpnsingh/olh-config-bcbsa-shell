@@ -15,37 +15,37 @@
         vm.nav = {
             top: {
                 header: {
-                    label: 'Blue Cross Blue Shield',
+                    label: 'navbar.header',
                     stateRef: 'dashboard'
                 },
                 links: {
                     left: [
-                        {label: 'Configuration', stateRef: 'configuration.role', active: 'configuration'}
+                        {label: 'navbar.configurationText', stateRef: 'configuration.role', activeState: 'configuration'}
                     ],
                     right: [
                         {
-                            label: 'User profile and more',
+                            label: 'navbar.userProfileText',
                             icon: {cls: 'fa fa-user fa-lg'},
                             userMenu: true,
                             list: [
                                 {
-                                    label: 'About',
+                                    label: 'navbar.aboutText',
                                     stateRef: 'about'
                                 },
                                 {
-                                    label: 'Help',
+                                    label: 'navbar.helpText',
                                     stateRef: 'help'
                                 },
                                 {
                                     divider: true
                                 },
                                 {
-                                    label: 'Settings',
+                                    label: 'navbar.settingsText',
                                     stateRef: 'settings.profile',
                                     icon: {cls: 'fa fa-cogs fa-lg'}
                                 },
                                 {
-                                    label: 'Logout',
+                                    label: 'navbar.logoutText',
                                     stateRef: 'logout',
                                     icon: {cls: 'fa fa-sign-out fa-lg'}
                                 }

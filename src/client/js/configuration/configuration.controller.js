@@ -9,10 +9,10 @@
         var vm = this;
 
         vm.sidebar = [
-            {title: 'Role Management', state: 'configuration.role', active: 'configuration.role'},
-            {title: 'User Management', state: 'configuration.user', active: 'configuration.user'},
-            {title: 'Plan Management', state: 'configuration.plan.setup', active: 'configuration.plan'},
-            {title: 'Reports', state: 'configuration.report', active: 'configuration.report'}
+            {title: 'Role Management', state: 'configuration.role', activeState: 'configuration.role'},
+            {title: 'User Management', state: 'configuration.user', activeState: 'configuration.user'},
+            {title: 'Plan Management', state: 'configuration.plan.setup', activeState: 'configuration.plan'},
+            {title: 'Reports', state: 'configuration.report', activeState: 'configuration.report'}
         ];
     }
 })();

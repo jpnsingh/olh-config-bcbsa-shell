@@ -16,5 +16,17 @@
     "registerBtnText": "Register",
     "registeringBtnText": " Registering...",
     "cancelBtnText": "Cancel"
+  },
+  "navbar": {
+    "header": "Blue Cross Blue Shield Association",
+    "configurationText": "Configuration",
+    "userProfileText": "User profile and more",
+    "aboutText": "About",
+    "helpText": "Help",
+    "settingsText": "Settings",
+    "logoutText": "Logout"
+  },
+  "dashboard": {
+    "header": "Blue Cross Blue Shield Association"
   }
 }

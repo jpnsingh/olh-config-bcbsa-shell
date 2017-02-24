@@ -15,7 +15,7 @@
             <a class="navbar-brand" data-ui-sref="{{navBarCtrl.nav.top.header.stateRef}}">
                 <img class="brand-logo"
                      data-ng-src="styles/images/svgs/bcbs.svg"
-                     title="{{navBarCtrl.nav.top.header.label}}"
+                     title="{{navBarCtrl.nav.top.header.label | translate}}"
                      alt="Brand">
             </a>
         </header>
@@ -24,8 +24,8 @@
             <section class="navbar-left" data-ng-if="navBarCtrl.loggedIn">
                 <ul class="nav navbar-nav">
                     <li data-ng-repeat="link in navBarCtrl.nav.top.links.left"
-                        data-ui-sref-active="{active: link.active}">
-                        <a data-ui-sref="{{link.stateRef}}" title="{{link.label}}">{{link.label}}</a>
+                        data-ui-sref-active="{active: link.activeState}">
+                        <a data-ui-sref="{{link.stateRef}}" title="{{link.label | translate}}">{{link.label | translate}}</a>
                     </li>
                 </ul>
             </section>
@@ -34,8 +34,8 @@
                 <ul class="nav navbar-nav">
                     <li data-ng-if="!link.list"
                         data-ng-repeat="link in navBarCtrl.nav.top.links.right" data-ui-sref-active="active">
-                        <a data-ui-sref="{{link.stateRef}}" title="{{link.label}}">
-                            <span data-ng-if="!link.icon">{{link.label}}</span>
+                        <a data-ui-sref="{{link.stateRef}}" title="{{link.label | translate}}">
+                            <span data-ng-if="!link.icon">{{link.label | translate}}</span>
                             <i data-ng-if="link.icon" data-ng-class="link.icon.cls"></i>
                         </a>
                     </li>
@@ -47,7 +47,7 @@
                            role="button"
                            aria-haspopup="true"
                            aria-expanded="false"
-                           title="{{link.label}}">
+                           title="{{link.label | translate}}">
                             <i data-ng-if="link.icon" data-ng-class="link.icon.cls"></i>
                             <span data-ng-if="link.userMenu">{{navBarCtrl.displayName}}</span> <span
                                 class="caret"></span>
@@ -56,9 +56,9 @@
                         <ul class="dropdown-menu">
                             <li data-ng-repeat="menu in link.list" data-ui-sref-active="active"
                                 data-ng-class="{divider: menu.divider}">
-                                <a data-ng-if="!menu.divider" data-ui-sref="{{menu.stateRef}}" title="{{menu.label}}">
+                                <a data-ng-if="!menu.divider" data-ui-sref="{{menu.stateRef}}" title="{{menu.label | translate}}">
                                     <i data-ng-if="menu.icon" data-ng-class="menu.icon.cls"></i>
-                                    <span>{{menu.label}}</span>
+                                    <span>{{menu.label | translate}}</span>
                                 </a>
                             </li>
                         </ul>

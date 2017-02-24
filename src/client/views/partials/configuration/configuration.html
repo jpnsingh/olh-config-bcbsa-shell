@@ -4,7 +4,7 @@
             <aside>
                 <ul class="nav nav-sidebar">
                     <li data-ng-repeat="nav in configCtrl.sidebar"
-                        data-ui-sref-active="{active: nav.active}">
+                        data-ui-sref-active="{active: nav.activeState}">
                         <a data-ui-sref="{{nav.state}}">{{nav.title}}</a>
                     </li>
                 </ul>
