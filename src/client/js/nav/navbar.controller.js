@@ -55,7 +55,8 @@
                 }
             },
             bottom: {
-                copyrightYear: new Date().getFullYear()
+                copyrightYear: new Date().getFullYear(),
+                citation: 'navbar.bottom.citation'
             }
         };
 
