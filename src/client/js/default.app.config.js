@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    module.exports = AppConfigFn;
+    module.exports = DefaultAppConfig;
 
-    AppConfigFn.$inject = ['$httpProvider', '$translateProvider', '$translatePartialLoaderProvider'];
-    function AppConfigFn($httpProvider, $translateProvider, $translatePartialLoaderProvider) {
+    DefaultAppConfig.$inject = ['$httpProvider', '$translateProvider', '$translatePartialLoaderProvider'];
+    function DefaultAppConfig($httpProvider, $translateProvider, $translatePartialLoaderProvider) {
         $httpProvider.interceptors.push('languageInterceptor');
 
         $translatePartialLoaderProvider
