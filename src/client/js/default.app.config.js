@@ -3,8 +3,10 @@
 
     module.exports = AppConfigFn;
 
-    AppConfigFn.$inject = ['$translateProvider', '$translatePartialLoaderProvider'];
-    function AppConfigFn($translateProvider, $translatePartialLoaderProvider) {
+    AppConfigFn.$inject = ['$httpProvider', '$translateProvider', '$translatePartialLoaderProvider'];
+    function AppConfigFn($httpProvider, $translateProvider, $translatePartialLoaderProvider) {
+        $httpProvider.interceptors.push('languageInterceptor');
+
         $translatePartialLoaderProvider
             .addPart('bcbsa-shell');
 

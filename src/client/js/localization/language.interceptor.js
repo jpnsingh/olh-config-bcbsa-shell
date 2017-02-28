@@ -4,7 +4,6 @@
     module.exports = LanguageInterceptor;
 
     LanguageInterceptor.$inject = ['languageService'];
-
     function LanguageInterceptor(languageService) {
         return {
             request: function (config) {
