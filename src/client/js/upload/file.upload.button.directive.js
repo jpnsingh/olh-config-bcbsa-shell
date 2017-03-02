@@ -14,28 +14,28 @@
                 hide: '='
             },
             templateUrl: 'templates/partials/upload/file.upload.button.html',
-            link: function ($scope/*, element, attrs, ctrl*/) {
-                $scope.test = function () {
+            link: function (scope/*, element, attrs, ctrl*/) {
+                scope.test = function () {
                     console.log('Test Function');
                 };
 
-                $scope.uploadFile = function (file) {
+                scope.uploadFile = function (file) {
                     if (!file) {
                         return;
                     }
 
-                    $scope.uploading = true;
+                    scope.uploading = true;
 
                     FileUploader
                         .uploadFile(file)
                         .then(function (data) {
-                            $scope.uploading = false;
-                            $scope.uploadModel = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
+                            scope.uploading = false;
+                            scope.uploadModel = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
                         }, function (error) {
-                            $scope.uploading = false;
+                            scope.uploading = false;
                             NotificationService.displayError(error.message);
                         }, function (progress) {
-                            $scope.uploadProgress = progress;
+                            scope.uploadProgress = progress;
                         });
                 };
             }

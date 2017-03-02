@@ -69,16 +69,23 @@
                                    data-ng-readonly="true"
                                    placeholder="{{newsFeedField.placeholder}}">
                             <span class="input-group-btn">
-                                    <button type="button"
-                                            class="btn btn-primary"
-                                            data-ngf-select="planAdditionalCtrl.uploadFeedImage($file, newsFeedField)">
-                                        <span data-ng-if="!planAdditionalCtrl.uploadingFeedImage">Upload</span>
-                                        <span data-ng-if="planAdditionalCtrl.uploadingFeedImage">
-                                            <i class="fa fa-spinner fa-pulse"></i> Uploading...
-                                            {{planAdditionalCtrl.uploadFeedImageProgress}} %
-                                        </span>
-                                    </button>
-                                </span>
+                                <button type="button"
+                                        data-ng-if="newsFeedField.value"
+                                        class="btn btn-danger"
+                                        data-ng-click="planAdditionalCtrl.clearImage(newsFeedField)">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                                <!--<data-clear-image-button data-image-model="newsFeedField"></data-clear-image-button>-->
+                                <button type="button"
+                                        class="btn btn-primary"
+                                        data-ngf-select="planAdditionalCtrl.uploadFeedImage($file, newsFeedField)">
+                                    <span data-ng-if="!planAdditionalCtrl.uploadingFeedImage">Upload</span>
+                                    <span data-ng-if="planAdditionalCtrl.uploadingFeedImage">
+                                        <i class="fa fa-spinner fa-pulse"></i> Uploading...
+                                        {{planAdditionalCtrl.uploadFeedImageProgress}} %
+                                    </span>
+                                </button>
+                            </span>
                         </div>
                     </div>
                 </div>
