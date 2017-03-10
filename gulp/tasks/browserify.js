@@ -13,7 +13,8 @@
             entries: [gulpConfig.paths.src.browserify.entry],
             debug: true
         })
-            .transform(browserifyShim).bundle()
+            .transform(browserifyShim)
+            .bundle()
             .pipe(source(config.app + '.js'))
             .pipe(gulp.dest(gulpConfig.paths.dest.js));
     });
