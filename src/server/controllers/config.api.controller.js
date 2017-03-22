@@ -12,7 +12,8 @@
 
         return {
             listGroups: listGroups,
-            groupConfig: groupConfig,
+            groupConfigById: groupConfigById,
+            groupConfigByName: groupConfigByName,
             newGroupConfig: newGroupConfig,
             saveGroupConfig: saveGroupConfig,
             deleteGroupConfig: deleteGroupConfig
@@ -35,10 +36,21 @@
             });
         }
 
-        function groupConfig(request, response, next) {
+        function groupConfigById(request, response, next) {
             var groupId = request.params.groupId,
                 query = groupId === 'Root' ? {name: 'Root'} : {_id: new ObjectID(groupId)};
 
+            getGroupConfig(query, response, next);
+        }
+
+        function groupConfigByName(request, response, next) {
+            var groupName = request.params.groupName,
+                query = {name: groupName};
+
+            getGroupConfig(query, response, next);
+        }
+
+        function getGroupConfig(query, response, next) {
             mongodbClient.connect(connectionString, function (error, db) {
                 db.collection('groups').findOne(query, function (error, groupConfig) {
                     if (error) {

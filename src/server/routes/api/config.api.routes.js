@@ -13,7 +13,11 @@
 
         configApiRouter
             .route('/:groupId')
-            .get(configApiController.groupConfig);
+            .get(configApiController.groupConfigById);
+
+        configApiRouter
+            .route('/name/:groupName')
+            .get(configApiController.groupConfigByName);
 
         configApiRouter
             .route('/')
