@@ -102,7 +102,7 @@
                                     class="btn btn-default btn-sm"
                                     data-toggle="modal"
                                     data-target="#previewModal"
-                                    data-ng-if="!planSetupCtrl.planSetup.branding.background.default && planSetupCtrl.base64BackgroundImage">
+                                    data-ng-if="!planSetupCtrl.planSetup.branding.background.default && planSetupCtrl.planSetup.branding.background.newSrc">
                                 Preview
                             </button>
                         </div>
@@ -127,7 +127,7 @@
                                     </div>
                                     <div class="modal-body text-center">
                                         <img class="bg-preview"
-                                             data-ng-src="{{planSetupCtrl.base64BackgroundImage}}">
+                                             data-ng-src="{{planSetupCtrl.planSetup.branding.background.newSrc}}">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">

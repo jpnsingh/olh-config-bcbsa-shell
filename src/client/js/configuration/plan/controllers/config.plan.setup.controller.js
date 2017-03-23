@@ -28,7 +28,7 @@
                 .then(function (data) {
                     vm.uploadingLogo = false;
                     vm.base64Logo = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
-                    model.src = vm.base64Logo;
+                    model.src = data.file.base64String;
                 }, function (error) {
                     vm.uploadingLogo = false;
                     NotificationService.displayError(error.message);
@@ -50,7 +50,7 @@
                     vm.uploadingBackgroundImage = false;
                     vm.backgroundImage = data.file;
                     vm.base64BackgroundImage = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
-                    model.newSrc = vm.base64BackgroundImage;
+                    model.newSrc = data.file.base64String;
                 }, function (error) {
                     vm.uploadingBackgroundImage = false;
                     NotificationService.displayError(error.message);
