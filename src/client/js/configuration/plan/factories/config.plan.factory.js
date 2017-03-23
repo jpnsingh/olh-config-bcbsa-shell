@@ -17,9 +17,9 @@
                     },
                     colorTheme: {
                         themes: [
-                            {id: 'red', name: 'Red'},
+                            {id: 'orange', name: 'Orange'},
                             {id: 'green', name: 'Green'},
-                            {id: 'blue', name: 'Blue'}
+                            {id: 'gray', name: 'Gray'}
                         ],
                         selected: ''
                     },
