@@ -91,7 +91,7 @@
                             <button type="button"
                                     class="btn btn-default btn-sm m-l-20"
                                     data-ng-if="!planSetupCtrl.planSetup.branding.background.default"
-                                    data-ngf-select="planSetupCtrl.uploadBackgroundImage($file)">
+                                    data-ngf-select="planSetupCtrl.uploadBackgroundImage($file, planSetupCtrl.planSetup.branding.background)">
                                 <span data-ng-if="!planSetupCtrl.uploadingBackgroundImage">Upload</span>
                                 <span data-ng-if="planSetupCtrl.uploadingBackgroundImage">
                                         <i class="fa fa-spinner fa-pulse"></i> Uploading...

@@ -37,7 +37,7 @@
                 });
         };
 
-        vm.uploadBackgroundImage = function (file) {
+        vm.uploadBackgroundImage = function (file, model) {
             if (!file) {
                 return;
             }
@@ -50,6 +50,7 @@
                     vm.uploadingBackgroundImage = false;
                     vm.backgroundImage = data.file;
                     vm.base64BackgroundImage = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
+                    model.newSrc = vm.base64BackgroundImage;
                 }, function (error) {
                     vm.uploadingBackgroundImage = false;
                     NotificationService.displayError(error.message);
