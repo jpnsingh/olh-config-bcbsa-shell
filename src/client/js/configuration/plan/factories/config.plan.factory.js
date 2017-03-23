@@ -91,30 +91,6 @@
                 header: 'Feature Info',
                 appPool: []
             };
-
-            this.tabs = [
-                {
-                    order: 1,
-                    title: 'Plan Setup',
-                    state: 'configuration.plan.setup'
-                },
-                {
-                    order: 2,
-                    title: 'Plan Additional',
-                    state: 'configuration.plan.additional'
-                },
-                {
-                    order: 3,
-                    title: 'Feature Pool',
-                    state: 'configuration.plan.featurePool'
-                },
-                {
-                    order: 4,
-                    title: 'Feature Assignment',
-                    state: 'configuration.plan.featureAssignment'
-                }
-            ];
-
         };
 
         return ConfigPlan;
