@@ -2,7 +2,7 @@
     'use strict';
 
     module.exports = angular.module('bcbsa-shell.upload.directives.fileUploadButtonDirective', [])
-        .directive('fileUploadButton', UploadButtonDirective);
+        .directive('imageUpload', UploadButtonDirective);
 
     UploadButtonDirective.$inject = ['FileUploader', 'NotificationService'];
     function UploadButtonDirective(FileUploader, NotificationService) {
@@ -13,7 +13,7 @@
                 fileModel: '=',
                 hide: '='
             },
-            templateUrl: 'templates/partials/upload/file.upload.button.html',
+            templateUrl: 'templates/partials/upload/image.upload.html',
             link: link
         };
 
