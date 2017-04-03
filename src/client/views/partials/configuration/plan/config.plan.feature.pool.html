@@ -30,27 +30,8 @@
                                    data-ng-model="appField.value">
                         </div>
 
-                        <div class="input-group" data-ng-if="appField.type === 'image'">
-                            <input type="text"
-                                   class="form-control"
-                                   id="{{appkey}}"
-                                   name="{{appKey}}"
-                                   data-ng-model="appField.value"
-                                   data-ng-readonly="true"
-                                   placeholder="{{appField.placeholder}}">
-                            <span class="input-group-btn">
-                                    <data-clear-image-button data-image-model="appField"></data-clear-image-button>
-                                    <button type="button"
-                                            class="btn btn-primary"
-                                            data-ngf-select="featurePoolCtrl.uploadAppImage($file, appField)">
-                                        <span data-ng-if="!featurePoolCtrl.uploadingAppImage">Upload</span>
-                                        <span data-ng-if="featurePoolCtrl.uploadingAppImage">
-                                            <i class="fa fa-spinner fa-pulse"></i> Uploading...
-                                            {{featurePoolCtrl.uploadAppImageProgress}} %
-                                        </span>
-                                    </button>
-                                </span>
-                        </div>
+                        <data-image-upload data-ng-if="appField.type === 'image'"
+                                           data-file-model="appField"></data-image-upload>
                     </div>
                 </div>
             </fieldset>

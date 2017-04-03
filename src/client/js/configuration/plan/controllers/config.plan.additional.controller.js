@@ -4,8 +4,8 @@
     module.exports = angular.module('bcsba-shell.configuration.plan.controllers.planAdditionalController', [])
         .controller('PlanAdditionalCtrl', PlanAdditionalCtrl);
 
-    PlanAdditionalCtrl.$inject = ['ConfigService', 'FileUploader', 'NewsFeed', 'Insight', 'NotificationService'];
-    function PlanAdditionalCtrl(ConfigService, FileUploader, NewsFeed, Insight, NotificationService) {
+    PlanAdditionalCtrl.$inject = ['ConfigService', 'NewsFeed', 'Insight'];
+    function PlanAdditionalCtrl(ConfigService, NewsFeed, Insight) {
         var vm = this;
 
         init();
@@ -28,29 +28,6 @@
         vm.deleteInsight = function () {
             _.remove(vm.planAdditional.insight.list, vm.selectedInsight);
             initInsight();
-        };
-
-        vm.uploadFeedImage = function (file, model) {
-            if (!file) {
-                return;
-            }
-
-            vm.uploadingFeedImage = true;
-
-            FileUploader
-                .uploadFile(file)
-                .then(function (data) {
-                    vm.uploadingFeedImage = false;
-                    vm.feedImage = data.file;
-                    vm.base64FeedImage = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
-                    model.value = vm.feedImage.originalFilename;
-                    model.src = vm.base64FeedImage;
-                }, function (error) {
-                    vm.uploadingFeedImage = false;
-                    NotificationService.displayError(error.message);
-                }, function (progress) {
-                    vm.uploadFeedImageProgress = progress;
-                });
         };
 
         function init() {

@@ -141,40 +141,5 @@
             expect(controller.featurePool.appPool.length).toBe(0);
             expect(controller.selected).toBeUndefined();
         });
-
-        describe('uploadAppImage:', function () {
-            it('should not return if no file is passed in', function () {
-                controller.uploadAppImage();
-
-                expect(controller.uploadingAppImage).not.toBeDefined();
-            });
-
-            it('should invoke FileUploader if a file and model is passed in', function () {
-                controller.uploadAppImage(testFile, testModel);
-
-                expect(controller.uploadingAppImage).toBe(true);
-                expect(FileUploader.uploadFile).toHaveBeenCalled();
-
-                defer.resolve(fileUploadResponse);
-                _timeout.flush();
-
-                expect(controller.uploadingAppImage).toBe(false);
-                expect(controller.base64AppImage).toBe('data:image/png;base64,imageBase64String...');
-                expect(testModel.src).toBe('data:image/png;base64,imageBase64String...');
-            });
-
-            it('should handle the error accordingly when FileUploader promise is rejected', function () {
-                controller.uploadAppImage(testFile, testModel);
-
-                expect(controller.uploadingAppImage).toBe(true);
-                expect(FileUploader.uploadFile).toHaveBeenCalled();
-
-                defer.reject({message: 'Error Uploading file.'});
-                _timeout.flush();
-
-                expect(controller.uploadingAppImage).toBe(false);
-                expect(NotificationService.displayError).toHaveBeenCalledWith('Error Uploading file.');
-            });
-        });
     });
 })();
