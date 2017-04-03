@@ -1,17 +1,17 @@
 (function () {
     'use strict';
 
-    module.exports = angular.module('bcbsa-shell.directives.clearImageButton', [])
-        .directive('clearImageButton', clearImageButtonDirective);
+    module.exports = angular.module('bcbsa-shell.directives.imageClear', [])
+        .directive('imageClear', imageClearDirective);
 
-    function clearImageButtonDirective() {
+    function imageClearDirective() {
         return {
             restrict: 'EA',
             replace: true,
             scope: {
                 imageModel: '='
             },
-            templateUrl: 'templates/partials/shared/clear.image.button.html',
+            templateUrl: 'templates/partials/shared/image.clear.html',
             link: link
         };
 
