@@ -54,9 +54,6 @@
                                        data-ng-model="planSetupCtrl.planSetup.branding.background.default"
                                        data-ng-value="true">
                                 Use Default
-                                <small>
-                                    <cite>{{planSetupCtrl.planSetup.branding.background.defaultUrl}}</cite>
-                                </small>
                             </label>
                         </div>
                         <div class="radio">
@@ -74,10 +71,11 @@
                         <div class="col-xs-3">
                             <button type="button"
                                     class="btn btn-default"
+                                    title="Preview"
                                     data-toggle="modal"
                                     data-target="#previewModal"
                                     data-ng-if="!planSetupCtrl.planSetup.branding.background.default && planSetupCtrl.planSetup.branding.background.src">
-                                Preview
+                                <i class="fa fa-file-image-o"></i>
                             </button>
                         </div>
 
