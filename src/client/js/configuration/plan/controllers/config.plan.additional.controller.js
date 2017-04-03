@@ -30,11 +30,6 @@
             initInsight();
         };
 
-        vm.clearImage = function (model) {
-            model.value = '';
-            model.src = '';
-        };
-
         vm.uploadFeedImage = function (file, model) {
             if (!file) {
                 return;
