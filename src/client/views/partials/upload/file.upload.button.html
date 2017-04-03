@@ -1,10 +1,21 @@
-<button type="button"
-        data-ng-if="!hide"
-        data-ngf-select="uploadFile($file)"
-        data-ng-init="test()">
-    <span data-ng-if="uploading">
-        <i class="fa fa-spinner fa-pulse"></i> Uploading...
-        {{uploadProgress}} %
+<div class="input-group">
+    <input type="text"
+           class="form-control"
+           name="image-upload"
+           data-ng-model="fileModel.value"
+           data-ng-readonly="true"
+           placeholder="Upload Image">
+    <span class="input-group-btn">
+        <data-clear-image-button data-image-model="fileModel"></data-clear-image-button>
+        <button type="button"
+                class="btn btn-primary"
+                data-ng-show="!hide"
+                data-ngf-select="uploadFile($file)">
+            <span data-ng-if="uploading">
+                <i class="fa fa-spinner fa-pulse"></i> Uploading...
+                {{uploadProgress}} %
+            </span>
+            <span data-ng-if="!uploading">Upload</span>
+        </button>
     </span>
-    <span data-ng-if="!uploading">Upload</span>
-</button>
+</div>

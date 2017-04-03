@@ -5,7 +5,7 @@
         </header>
         <fieldset class="fieldset well form-group col-xs-12" data-ng-disabled="updatingPlan">
             <div class="row">
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-12 col-sm-4">
                     <div class="form-group">
                         <label for="planTitle">Plan Information</label>
                         <input type="text"
@@ -18,25 +18,13 @@
                                autofocus>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6">
-                    <div class="form-group col-xs-6 p-x-0">
-                        <label>Logo</label><br>
-
-                        <!--<data-file-upload-button class="btn btn-default"-->
-                        <!--data-file-model="planSetupCtrl.base64Logo"-->
-                        <!--data-hide="false"></data-file-upload-button>-->
-
-                        <button type="button"
-                                class="btn btn-default"
-                                data-ngf-select="planSetupCtrl.uploadLogo($file, planSetupCtrl.planSetup.branding.logo)">
-                            <span data-ng-if="!planSetupCtrl.uploadingLogo">Upload</span>
-                            <span data-ng-if="planSetupCtrl.uploadingLogo">
-                                    <i class="fa fa-spinner fa-pulse"></i> Uploading...
-                                    {{planSetupCtrl.uploadLogoProgress}} %
-                                </span>
-                        </button>
+                <div class="col-xs-12 col-sm-8">
+                    <div class="form-group col-xs-8 p-x-0">
+                        <label class="control-label">Logo</label>
+                        <data-file-upload-button data-file-model="planSetupCtrl.planSetup.branding.logo"
+                                                 data-hide="false"></data-file-upload-button>
                     </div>
-                    <div class="col-xs-6" data-ng-if="planSetupCtrl.planSetup.branding.logo.src">
+                    <div class="col-xs-4" data-ng-if="planSetupCtrl.planSetup.branding.logo.src">
                         <img class="img-circle logo-preview"
                              data-ng-src="{{planSetupCtrl.planSetup.branding.logo.src}}">
                     </div>

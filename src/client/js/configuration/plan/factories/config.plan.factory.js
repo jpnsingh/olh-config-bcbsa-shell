@@ -24,12 +24,14 @@
                         selected: ''
                     },
                     logo: {
-                        src: ''
+                        src: '',
+                        value: ''
                     },
                     background: {
-                        default: null,
+                        default: true,
                         defaultSrc: '',
-                        newSrc: ''
+                        src: '',
+                        value: ''
                     }
                 },
                 support: {
