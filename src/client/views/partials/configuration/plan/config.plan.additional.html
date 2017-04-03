@@ -69,13 +69,7 @@
                                    data-ng-readonly="true"
                                    placeholder="{{newsFeedField.placeholder}}">
                             <span class="input-group-btn">
-                                <button type="button"
-                                        data-ng-if="newsFeedField.value"
-                                        class="btn btn-danger"
-                                        data-ng-click="planAdditionalCtrl.clearImage(newsFeedField)">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                                <!--<data-clear-image-button data-image-model="newsFeedField"></data-clear-image-button>-->
+                                <data-clear-image-button data-image-model="newsFeedField"></data-clear-image-button>
                                 <button type="button"
                                         class="btn btn-primary"
                                         data-ngf-select="planAdditionalCtrl.uploadFeedImage($file, newsFeedField)">
