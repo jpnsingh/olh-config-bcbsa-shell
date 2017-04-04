@@ -11,7 +11,7 @@
         };
 
         function dbConnectionString() {
-            return config.db.hostUrl + '/' + config.db.dbName;
+            return config.db.hostUrl + '/' + config.db.name;
         }
     }
 })();

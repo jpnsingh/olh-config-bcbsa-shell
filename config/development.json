@@ -1,7 +1,11 @@
 {
   "web": {
-    "protocol": "http",
-    "host": "localhost",
-    "port": 8090
+    "PROTOCOL": "http",
+    "HOST": "localhost",
+    "PORT": 8090
+  },
+  "db": {
+    "hostUrl": "mongodb://localhost:27017",
+    "name": "bcbsa-shell-dev"
   }
 }

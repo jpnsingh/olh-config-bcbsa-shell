@@ -12,6 +12,6 @@
     });
 
     function formWebUriFromConfig() {
-        return config.web.protocol + '://' + config.web.host + ':' + config.web.port
+        return config.web.PROTOCOL + '://' + config.web.HOST + ':' + config.web.PORT
     }
 })();

@@ -1,13 +1,4 @@
 {
   "app": "bcbsa-shell",
-  "SECRET": "bcbsa-shell-secret-dev",
-  "web": {
-    "PROTOCOL": "http",
-    "HOST": "localhost",
-    "PORT": 8090
-  },
-  "db": {
-    "hostUrl": "mongodb://localhost:27017",
-    "dbName": "bcbsa-shell-dev"
-  }
+  "SECRET": "bcbsa-shell-secret-dev"
 }
