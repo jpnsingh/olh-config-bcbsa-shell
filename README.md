@@ -40,17 +40,17 @@ In order to import the master data for starting up the application run following
 ###### The json files i.e. roles.json and groups.json can be located under db directory in the root of the app)
 ###### Open the terminal and navigate to db directory before running these commands`
     
-    ```
+    
     mongoimport --db bcbsa-shell-dev --collection roles --file roles.json
     
     mongoimport --db bcbsa-shell-dev --collection groups --file groups.json
-    ```
+    
 
 In case if the modified data needs to be backed up further in future do following:
 
-    ```
-    - mongoexport --db bcbsa-shell-dev --collection roles --out roles.json
     
-    - mongoexport --db bcbsa-shell-dev --collection groups -q "{name: 'Root'}" --out groups.json
-    ```
+    mongoexport --db bcbsa-shell-dev --collection roles --out roles.json
+    
+    mongoexport --db bcbsa-shell-dev --collection groups -q "{name: 'Root'}" --out groups.json
+    
 
