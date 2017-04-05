@@ -37,8 +37,8 @@
 ## MongoDB
 
 In order to import the master data for starting up the application run following commands:
-###### The json files i.e. roles.json and groups.json can be located under db directory in the root of the app)
-###### Open the terminal and navigate to db directory before running these commands`
+###### The json files i.e. roles.json and groups.json can be located under db directory in the root of the app
+###### Open the terminal and navigate to db directory before running these commands
     
     
     mongoimport --db bcbsa-shell-dev --collection roles --file roles.json
