@@ -1,0 +1,3 @@
+{"_id":{"$oid":"58908bfc7e361dc1ebfa30cc"},"id":"PlanAdmin","name":"Plan Admin","description":"Plan Level Administrator","createdAt":{"$date":"2017-01-29T19:29:30.056Z"},"updatedAt":{"$date":"2017-02-09T11:25:47.722Z"},"updatedBy":"jpn","priority":3.0}
+{"_id":{"$oid":"58908c0f7e361dc1ebfa30cd"},"id":"BCBSAAdmin","name":"BCBSA Admin","description":"Blue Cross Blue Shield Association Admin","createdAt":{"$date":"2017-01-29T19:30:22.582Z"},"updatedAt":{"$date":"2017-02-09T11:25:56.810Z"},"updatedBy":"jpn","priority":2.0}
+{"_id":{"$oid":"58908c277e361dc1ebfa30ce"},"id":"SuperUser","name":"Super User","description":"Super Duper User","createdAt":{"$date":"2017-01-29T19:30:46.709Z"},"updatedAt":{"$date":"2017-02-09T11:46:56.699Z"},"updatedBy":"jpn","priority":1.0}
