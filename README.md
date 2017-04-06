@@ -45,9 +45,8 @@
     
     mongoimport --db bcbsa-shell-dev --collection groups --file groups.json
     ```
-    
-###### The json files i.e. "roles.json" and "groups.json" can be located under db directory in the root of the application
-###### Open the terminal and navigate to the db directory before running these commands
+    ###### The json files i.e. "roles.json" and "groups.json" can be located under db directory in the root of the application
+    ###### Open the terminal and navigate to the db directory before running these commands
 
 2. In case if the modified data needs to be backed up further in future do following:
    
