@@ -5,7 +5,7 @@
         .controller('HelloWorldCtrl', HelloWorldCtrl);
 
     function HelloWorldCtrl() {
-        var vm = this;
+        let vm = this;
 
         vm.message = 'Hello World from Angular Controller';
     }
