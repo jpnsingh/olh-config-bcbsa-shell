@@ -2,7 +2,7 @@
 
 import {FileUploaderService} from '../../../../src/client/js/upload/file.upload.service';
 
-describe('FileUploader:', () => {
+describe('FileUploaderService:', () => {
     let q,
         deferred,
         Upload,

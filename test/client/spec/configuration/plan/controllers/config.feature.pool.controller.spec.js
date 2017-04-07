@@ -7,9 +7,7 @@
             defer,
             _timeout,
             ConfigService,
-            FileUploader,
             App,
-            NotificationService,
             controller,
             cachedConfig = {
                 featurePool: {
@@ -101,21 +99,11 @@
                 getCachedConfig: jasmine.createSpy('getCachedConfig').and.returnValue(cachedConfig)
             };
 
-            FileUploader = {
-                uploadFile: jasmine.createSpy('uploadFile').and.returnValue(defer.promise)
-            };
-
             App = _App_;
-            NotificationService = {
-                displayError: jasmine.createSpy('displayError'),
-                displaySuccess: jasmine.createSpy('displaySuccess')
-            };
             controller = $controller('FeaturePoolCtrl', {
                 $scope: scope,
                 ConfigService: ConfigService,
-                FileUploader: FileUploader,
-                App: App,
-                NotificationService: NotificationService
+                App: App
             });
         }));
 

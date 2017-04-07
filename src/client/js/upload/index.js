@@ -7,4 +7,4 @@ module.exports = angular
         'ngFileUpload',
         require('./image.upload.directive.js').name
     ])
-    .service('FileUploader', FileUploaderService);
+    .service('FileUploaderService', FileUploaderService);

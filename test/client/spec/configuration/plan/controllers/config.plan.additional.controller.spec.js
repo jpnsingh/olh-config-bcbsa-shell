@@ -7,10 +7,8 @@
             defer,
             _timeout,
             ConfigService,
-            FileUploader,
             NewsFeed,
             Insight,
-            NotificationService,
             controller,
             cachedConfig = {
                 planAdditional: {
@@ -100,23 +98,13 @@
                 getCachedConfig: jasmine.createSpy().and.returnValue(cachedConfig)
             };
 
-            FileUploader = {
-                uploadFile: jasmine.createSpy('uploadFile').and.returnValue(defer.promise)
-            };
-
             NewsFeed = _NewsFeed_;
             Insight = _Insight_;
-            NotificationService = {
-                displayError: jasmine.createSpy(),
-                displaySuccess: jasmine.createSpy()
-            };
             controller = $controller('PlanAdditionalCtrl', {
                 $scope: scope,
                 ConfigService: ConfigService,
-                FileUploader: FileUploader,
                 NewsFeed: NewsFeed,
-                Insight: Insight,
-                NotificationService: NotificationService
+                Insight: Insight
             });
         }));
 

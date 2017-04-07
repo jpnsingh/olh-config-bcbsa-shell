@@ -7,8 +7,6 @@
             defer,
             _timeout,
             ConfigService,
-            FileUploader,
-            NotificationService,
             controller,
             cachedConfig = {
                 planSetup: {
@@ -54,20 +52,9 @@
                 getConfigurableLanguages: jasmine.createSpy().and.returnValue(languages)
             };
 
-            FileUploader = {
-                uploadFile: jasmine.createSpy('uploadFile').and.returnValue(defer.promise)
-            };
-
-            NotificationService = {
-                displayError: jasmine.createSpy(),
-                displaySuccess: jasmine.createSpy()
-            };
-
             controller = $controller('PlanSetupCtrl', {
                 $scope: scope,
-                ConfigService: ConfigService,
-                FileUploader: FileUploader,
-                NotificationService: NotificationService
+                ConfigService: ConfigService
             });
         }));
 
