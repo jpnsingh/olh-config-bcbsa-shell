@@ -29,14 +29,14 @@ module.exports = function (config) {
             'src/client/js/**/*.js',
 
             // Tests
-            'test/client/spec/js/**/*.js'
+            'test/client/spec/**/*.js'
         ],
 
         exclude: [],
 
         preprocessors: {
             'src/client/js/**/*.js': ['browserify'],
-            'test/client/spec/js/**/*.js': ['browserify']
+            'test/client/spec/**/*.js': ['browserify']
         },
 
         reporters: [

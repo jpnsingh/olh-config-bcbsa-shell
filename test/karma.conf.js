@@ -27,7 +27,7 @@
                 'src/client/js/**/*.js',
 
                 // Tests
-                'test/client/spec/js/**/*.js',
+                'test/client/spec/**/*.js',
 
                 'src/client/views/**/*.html',
 
@@ -38,7 +38,7 @@
 
             preprocessors: {
                 'src/client/js/**/*.js': ['browserify'],
-                'test/client/spec/js/**/*.js': ['browserify'],
+                'test/client/spec/**/*.js': ['browserify'],
                 'src/client/views/**/*.html': ['ng-html2js']
             },
 

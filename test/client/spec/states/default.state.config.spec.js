@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var DefaultStateConfig = require('../../../../../src/client/js/states/default.state.config');
+    var DefaultStateConfig = require('../../../../src/client/js/states/default.state.config');
 
     describe('DefaultStateConfig', function () {
         var $urlMatcherFactoryProvider,

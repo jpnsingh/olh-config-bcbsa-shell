@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var DefaultStateRun = require('../../../../../src/client/js/states/default.state.run');
+    var DefaultStateRun = require('../../../../src/client/js/states/default.state.run');
 
     describe('DefaultStateRun', function () {
         var $rootScope,

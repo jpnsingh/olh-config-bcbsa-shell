@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var AuthStateConfig = require('../../../../../src/client/js/auth/auth.state.config');
+    var AuthStateConfig = require('../../../../src/client/js/auth/auth.state.config');
 
     describe('AuthStateConfig', function () {
         var $stateProvider,
