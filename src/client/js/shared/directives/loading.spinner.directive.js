@@ -1,18 +1,15 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = angular.module('bcbsa-shell.directives.spinner', [])
-        .directive('loadingSpinner', loadingSpinnerDirective);
+export function LoadingSpinnerDirective() {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            loading: '=',
+            size: '@'
+        },
+        templateUrl: 'templates/partials/shared/loading.spinner.html'
+    };
+}
 
-    function loadingSpinnerDirective() {
-        return {
-            restrict: 'E',
-            replace: true,
-            scope: {
-                loading: '=',
-                size: '@'
-            },
-            templateUrl: 'templates/partials/shared/loading.spinner.html'
-        };
-    }
-})();
+LoadingSpinnerDirective.$inject = [];

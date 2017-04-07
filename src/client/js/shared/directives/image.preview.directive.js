@@ -1,17 +1,14 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = angular.module('bcbsa-shell.directives.imagePreview', [])
-        .directive('imagePreview', imagePreviewDirective);
+export function ImagePreviewDirective() {
+    return {
+        restrict: 'EA',
+        replace: true,
+        scope: {
+            previewModel: '='
+        },
+        templateUrl: 'templates/partials/shared/image.preview.html'
+    };
+}
 
-    function imagePreviewDirective() {
-        return {
-            restrict: 'EA',
-            replace: true,
-            scope: {
-                previewModel: '='
-            },
-            templateUrl: 'templates/partials/shared/image.preview.html'
-        };
-    }
-})();
+ImagePreviewDirective.$inject = [];
