@@ -7,7 +7,7 @@
 
     module.exports = gulp.task('clean', function () {
         return gulp
-            .src(gulpConfig.paths.dest.root, {read: false})
+            .src([gulpConfig.paths.dest.root, gulpConfig.paths.dest.transpiled], {read: false})
             .pipe(rimraf());
     });
 })();
