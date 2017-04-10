@@ -1,11 +1,13 @@
 (function () {
     'use strict';
 
-    xdescribe('RoleCtrl:', function () {
+    describe('RoleCtrl:', function () {
         var rootScope,
             scope,
             q,
-            defer,
+            deferList,
+            deferUpdate,
+            deferDelete,
             timeout,
             filter,
             auth,
@@ -13,6 +15,13 @@
             Role,
             RoleService,
             NotificationService,
+            controller,
+            getRoles = () => {
+                return [
+                    {_id: 'SuperUser', id: 'SuperUser', priority: 1},
+                    {_id: 'PlanAdmin', id: 'PlanAdmin', priority: 2}
+                ]
+            },
             superUser = {
                 firstName: 'Super',
                 lastName: 'User',
@@ -24,28 +33,26 @@
                     getRoles()[0],
                 ]
             },
-            adminUser = {
-                firstName: 'Admin',
-                lastName: 'Admin',
-                auth: {
-                    userName: 'admin',
-                    password: 'admin'
-                },
-                roles: [
-                    getRoles()[1]
-                ]
+            resolveRoles = () => {
+                deferList.resolve({roles: getRoles()});
+                timeout.flush();
             },
-            controller;
+            rejectRoles = () => {
+                deferList.reject({error: 'Error'});
+                timeout.flush();
+            };
 
         beforeEach(angular.mock.module('bcbsa-shell.config.role.roleFactory'));
         beforeEach(angular.mock.module('bcbsa-shell.config.role.controllers.roleController'));
 
-        beforeEach(inject(function ($rootScope, $q, $timeout, $filter, _Role_, $controller) {
+        beforeEach(inject(($rootScope, $q, $timeout, $filter, _Role_, $controller) => {
             rootScope = $rootScope;
             scope = rootScope.$new();
 
             q = $q;
-            defer = q.defer();
+            deferList = q.defer();
+            deferUpdate = q.defer();
+            deferDelete = q.defer();
             timeout = $timeout;
             filter = $filter;
 
@@ -57,9 +64,9 @@
 
             Role = _Role_;
             RoleService = {
-                listRoles: jasmine.createSpy('listRoles').and.returnValue(defer.promise),
-                updateRole: jasmine.createSpy('updateRole').and.returnValue(defer.promise),
-                deleteRole: jasmine.createSpy('deleteRole').and.returnValue(defer.promise)
+                listRoles: jasmine.createSpy('listRoles').and.returnValue(deferList.promise),
+                updateRole: jasmine.createSpy('updateRole').and.returnValue(deferUpdate.promise),
+                deleteRole: jasmine.createSpy('deleteRole').and.returnValue(deferDelete.promise)
             };
 
             NotificationService = {
@@ -78,71 +85,117 @@
             });
         }));
 
-        it('should set canModifyRoles flag to true if current user is Super User', function () {
+        it('should set canModifyRoles flag to true if current user is Super User', () => {
             expect(controller.canModifyRoles).toBe(true);
         });
 
-        it('should initialize roles', function () {
+        it('should initialize roles accordingly when role service responds with success', function () {
             expect(controller.loading).toBe(true);
-
             expect(RoleService.listRoles).toHaveBeenCalled();
 
-            defer.resolve({data: getRoles()});
-            timeout.flush();
+            resolveRoles();
 
             expect(controller.loading).toBe(false);
             expect(controller.roles).toBeDefined();
             expect(controller.selected).toBeDefined();
         });
 
+        it('should not initialize roles when role service responds with error', function () {
+            expect(controller.loading).toBe(true);
+            expect(RoleService.listRoles).toHaveBeenCalled();
+
+            rejectRoles();
+
+            expect(controller.loading).toBe(false);
+            expect(controller.error).toBeDefined();
+            expect(controller.selected).not.toBeDefined();
+        });
+
         describe('addRole:', function () {
-            it('should add a new Role and make that selected', function () {
-                controller.roles = getRoles();
+            it('should add a new Role and make that selected', () => {
+                resolveRoles();
+
                 controller.addRole();
 
                 expect(controller.roles.length).toBe(3);
                 expect(controller.selected).toEqual(new Role('').name('').description(''));
-
-                // controller.deleteRole();
             });
         });
 
         describe('deleteRole:', function () {
-            it('should delete the selected Role and reinitialize the selection', function () {
-                console.log('ddd');
-                controller.roles = getRoles();
-                console.log(controller.roles);
-                controller.selected = controller.roles[0];
+            it('should delete the selected Role and reinitialize the selection accordingly', () => {
+                resolveRoles();
 
                 controller.deleteRole();
 
                 expect(controller.updating).toBe(true);
-
-                defer.resolve({success: {deleted: 1}});
-                timeout.flush();
-
                 expect(RoleService.deleteRole).toHaveBeenCalledWith('SuperUser');
 
-                expect(NotificationService.displaySuccess).toHaveBeenCalled();
-                expect(controller.updating).toBe(false);
+                deferDelete.resolve({success: {deleted: 1}});
+                timeout.flush();
 
+                expect(NotificationService.displaySuccess).toHaveBeenCalledWith('Role deleted successfully.');
+                expect(controller.updating).toBe(false);
                 expect(controller.roles.length).toBe(1);
                 expect(controller.selected).toEqual(getRoles()[1]);
+            });
+
+            it('should handle the error accordingly', () => {
+                resolveRoles();
+
+                controller.deleteRole();
+
+                expect(controller.updating).toBe(true);
+                expect(RoleService.deleteRole).toHaveBeenCalledWith('SuperUser');
+
+                deferDelete.reject({error: 'Error'});
+                timeout.flush();
+
+                expect(NotificationService.displayError).toHaveBeenCalledWith('Error deleting Role.');
+                expect(controller.updating).toBe(false);
+                expect(controller.error).toBeDefined();
+                expect(controller.roles.length).toBe(2);
+                expect(controller.selected).toEqual(getRoles()[0]);
             });
         });
 
         describe('updateRole:', function () {
+            it('should update the selected Role accordingly', () => {
+                resolveRoles();
 
+                controller.updateRole();
+
+                expect(controller.updating).toBe(true);
+                expect(RoleService.updateRole).toHaveBeenCalledWith(controller.selected);
+
+                deferUpdate.resolve({success: {deleted: 1}});
+                timeout.flush();
+
+                expect(NotificationService.displaySuccess).toHaveBeenCalledWith('Role updated successfully.');
+                expect(controller.updating).toBe(false);
+                expect(controller.editing).toBe(false);
+                expect(controller.roles.length).toBe(2);
+                expect(controller.selected).toEqual(getRoles()[0]);
+            });
+
+            it('should handle the error accordingly', () => {
+                resolveRoles();
+
+                controller.updateRole();
+
+                expect(controller.updating).toBe(true);
+                expect(RoleService.updateRole).toHaveBeenCalledWith(controller.selected);
+
+                deferUpdate.reject({error: 'Error updating'});
+                timeout.flush();
+
+                expect(NotificationService.displayError).toHaveBeenCalledWith('Error updating Role.');
+                expect(controller.updating).toBe(false);
+                expect(controller.editing).toBe(false);
+                expect(controller.error).toBeDefined();
+                expect(controller.roles.length).toBe(2);
+                expect(controller.selected).toEqual(getRoles()[0]);
+            });
         });
     });
-
-    function getRoles() {
-        var superUserRole = {_id: 'SuperUser', id: 'SuperUser'},
-            nonSuperUserRole = {_id: 'PlanAdmin', id: 'PlanAdmin'};
-
-        return [
-            superUserRole,
-            nonSuperUserRole
-        ]
-    }
 })();
