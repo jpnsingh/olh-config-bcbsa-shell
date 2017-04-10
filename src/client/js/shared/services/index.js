@@ -1,7 +1,7 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = angular.module('bcbsa-shell.shared.services',
-        []
-    ).service('NotificationService', require('./notification.service.js'));
-})();
+import {NotificationService} from './notification.service';
+
+module.exports = angular
+    .module('bcbsa-shell.shared.services', [])
+    .service('NotificationService', NotificationService);
