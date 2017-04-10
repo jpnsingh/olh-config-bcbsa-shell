@@ -30,7 +30,7 @@
 
         self.deleteRole = function (roleId) {
             return $http
-                .delete('api/role/:roleId'.replace(':roleId', roleId))
+                .delete(`api/role/${roleId}`)
                 .then(function (response) {
                     return response.data;
                 }, function (response) {
@@ -40,7 +40,7 @@
 
         self.updateRole = function (role) {
             return $http
-                .put('api/role/:roleId'.replace(':roleId', role._id ? role._id : 'new'), {
+                .put(`api/role/${role._id || 'new'}`, {
                     role: role,
                     userName: auth.currentUser().auth.userName
                 })

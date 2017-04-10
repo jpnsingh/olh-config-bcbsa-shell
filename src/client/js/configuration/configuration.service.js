@@ -31,7 +31,7 @@
 
         function getGroupConfig(groupId) {
             return $http
-                .get('api/config/:groupId'.replace(':groupId', groupId))
+                .get(`api/config/${groupId}`)
                 .then(function (response) {
                     return response.data.groupConfig;
                 }, function (response) {
@@ -62,7 +62,7 @@
 
         function updateConfig(config, groupId) {
             return $http
-                .post('api/config/:groupId'.replace(':groupId', groupId || 'root'), {
+                .post(`api/config/${groupId}`, {
                     config: config,
                     userName: auth.currentUser().auth.userName
                 }, {})
@@ -75,7 +75,7 @@
 
         function deleteGroupConfig(groupId) {
             return $http
-                .delete('api/config/:groupId'.replace(':groupId', groupId))
+                .delete(`api/config/${groupId}`)
                 .then(function (response) {
                     return response.data;
                 }, function (response) {

@@ -20,7 +20,7 @@
 
         self.getUserGroups = function () {
             return $http
-                .get('api/user/:userId/groups'.replace(':userId', auth.currentUser()._id))
+                .get(`api/user/${auth.currentUser()._id}/groups`)
                 .then(function (response) {
                     return response.data;
                 }, function (response) {
@@ -30,7 +30,7 @@
 
         self.deleteUser = function (userId) {
             return $http
-                .delete('api/user/:userId'.replace(':userId', userId))
+                .delete(`api/user/${userId}`)
                 .then(function (response) {
                     return response.data;
                 }, function (response) {
@@ -40,7 +40,7 @@
 
         self.updateUser = function (user) {
             return $http
-                .put('api/user/:userId'.replace(':userId', user._id ? user._id : 'new'), {
+                .put(`api/user/${user._id || 'new'}`, {
                     user: user,
                     userName: auth.currentUser().auth.userName
                 })
