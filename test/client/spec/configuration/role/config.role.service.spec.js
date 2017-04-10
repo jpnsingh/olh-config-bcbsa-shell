@@ -129,12 +129,26 @@
         });
 
         describe('updateRole:', function () {
-            it('should update the role with the passed in roleId', function () {
+            it('should update the role with the passed in role._id', function () {
                 let role = {_id: '123abc', id: 'SuperUser', name: 'Super User', description: 'Superrrr User'};
 
                 _roleService.updateRole(role);
 
                 expect(_http.put).toHaveBeenCalledWith('api/role/123abc', {role: role, userName: 'TestUser'});
+
+                _deferred.resolve({success: {updated: 1}});
+
+                _timeout.flush();
+
+                expect(_deferred.promise).toResolveWith({success: {updated: 1}});
+            });
+
+            it('should call for new role creation if the passed in role is newly created one', function () {
+                let role = {id: 'NewRole', name: 'New Role', description: 'New Role'};
+
+                _roleService.updateRole(role);
+
+                expect(_http.put).toHaveBeenCalledWith('api/role/new', {role: role, userName: 'TestUser'});
 
                 _deferred.resolve({success: {updated: 1}});
 
