@@ -12,7 +12,7 @@ export function ImageUploadDirective(FileUploaderService, NotificationService) {
     };
 
     directiveDefinitionObject.link = (scope/*, element, attrs, ctrl*/) => {
-        scope.uploadFile = function (file) {
+        scope.uploadImage = function (file) {
             if (!file) {
                 return;
             }
