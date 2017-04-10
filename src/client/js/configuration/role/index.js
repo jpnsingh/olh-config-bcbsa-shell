@@ -3,8 +3,8 @@
 
     module.exports = angular
         .module('bcsba-shell.configuration.role', [
-            require('./role.factory').name,
-            require('./role.service').name,
-            require('./role.controller').name
+            require('./config.role.factory').name,
+            require('./config.role.service').name,
+            require('./config.role.controller').name
         ]).config(require('./config.role.state.config'));
 })();
