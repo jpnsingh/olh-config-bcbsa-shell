@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    module.exports = angular.module('bcbsa-shell.user.services', [])
+    module.exports = angular.module('bcbsa-shell.user.services.userFactory', [])
         .factory('User', User);
 
     function User() {

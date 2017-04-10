@@ -5,8 +5,8 @@
         .controller('UserCtrl', UserCtrl);
 
     /* jshint maxparams:8 */
-    UserCtrl.$inject = ['$scope', '$timeout', 'auth', 'User', 'UserService', 'RoleService', 'ConfigService', 'NotificationService'];
-    function UserCtrl($scope, $timeout, auth, User, UserService, RoleService, ConfigService, NotificationService) {
+    UserCtrl.$inject = ['$scope', 'auth', 'User', 'UserService', 'RoleService', 'ConfigService', 'NotificationService'];
+    function UserCtrl($scope, auth, User, UserService, RoleService, ConfigService, NotificationService) {
         var vm = this;
 
         init();
@@ -33,39 +33,35 @@
         vm.deleteUser = function () {
             vm.updating = true;
 
-            $timeout(function () {
-                UserService
-                    .deleteUser(vm.selected._id)
-                    .then(function () {
-                        NotificationService.displaySuccess('User deleted successfully.');
-                        vm.updating = false;
-                        _.remove(vm.users, vm.selected);
-                        initSelection();
-                    }, function (error) {
-                        vm.updating = false;
-                        vm.error = error;
-                        NotificationService.displayError('Error deleting User.');
-                    });
-            }, 1000);
+            UserService
+                .deleteUser(vm.selected._id)
+                .then(function () {
+                    NotificationService.displaySuccess('User deleted successfully.');
+                    vm.updating = false;
+                    _.remove(vm.users, vm.selected);
+                    initSelection();
+                }, function (error) {
+                    vm.updating = false;
+                    vm.error = error;
+                    NotificationService.displayError('Error deleting User.');
+                });
         };
 
         vm.updateUser = function () {
             vm.updating = true;
 
-            $timeout(function () {
-                UserService
-                    .updateUser(vm.selected)
-                    .then(function () {
-                        NotificationService.displaySuccess('User updated successfully.');
-                        vm.updating = false;
-                        vm.editingUser = false;
-                    }, function (error) {
-                        vm.updating = false;
-                        vm.editingUser = false;
-                        vm.error = error;
-                        NotificationService.displayError('Error updating User.');
-                    });
-            }, 1000);
+            UserService
+                .updateUser(vm.selected)
+                .then(function () {
+                    NotificationService.displaySuccess('User updated successfully.');
+                    vm.updating = false;
+                    vm.editingUser = false;
+                }, function (error) {
+                    vm.updating = false;
+                    vm.editingUser = false;
+                    vm.error = error;
+                    NotificationService.displayError('Error updating User.');
+                });
         };
 
         function initSelection() {
