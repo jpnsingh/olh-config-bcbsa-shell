@@ -71,7 +71,7 @@
         function buildErrorList(errors) {
             var html = '<ul>';
             for (error of errors) {
-                html += '<li>' + error + '</li>';
+                html += `<li>${error}</li>`;
             }
             return html += '</ul>';
         }
