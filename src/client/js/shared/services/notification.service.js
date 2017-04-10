@@ -70,9 +70,9 @@
 
         function buildErrorList(errors) {
             var html = '<ul>';
-            errors.forEach(function (error) {
+            for (error of errors) {
                 html += '<li>' + error + '</li>';
-            });
+            }
             return html += '</ul>';
         }
 
