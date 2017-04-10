@@ -25,17 +25,6 @@
                     'content-type': 'image/png'
                 },
                 name: 'testFile'
-            },
-            testModel = {
-                src: ''
-            },
-            fileUploadResponse = {
-                file: {
-                    headers: {
-                        'content-type': 'image/png'
-                    },
-                    base64String: 'imageBase64String...'
-                }
             };
 
         beforeEach(angular.mock.module('bcsba-shell.configuration.plan.controllers.planSetupController'));
