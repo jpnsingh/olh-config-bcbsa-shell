@@ -1,74 +1,65 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = angular.module('bcbsa-shell.auth.services.authService', [
-        'ui.router'
-    ]).factory('auth', auth);
-
-    auth.$inject = ['$q', '$rootScope', '$http', '$window', '$state'];
-    function auth($q, $rootScope, $http, $window, $state) {
-        var authService = {};
-
-        authService.clear = clear;
-        authService.storeUser = storeUser;
-        authService.currentUser = currentUser;
-        authService.isAuthenticated = isAuthenticated;
-        authService.logout = logout;
-        authService.register = register;
-        authService.login = login;
-
-        return authService;
-
-        function clear() {
-            $window.sessionStorage.user = JSON.stringify({});
-        }
-
-        function storeUser(user) {
-            $window.sessionStorage.user = user ? JSON.stringify(user) : {};
-            $rootScope.$broadcast('loginEvent', user);
-            return user;
-        }
-
-        function currentUser() {
-            return !_.isEmpty($window.sessionStorage.user) ? JSON.parse($window.sessionStorage.user) : {};
-        }
-
-        function isAuthenticated() {
-            return !_.isEmpty(currentUser());
-        }
-
-        function logout() {
-            clear();
-            $state.go('login');
-        }
-
-        function failureEvent(name) {
-            console.log('Failed to ' + name);
-            clear();
-            $rootScope.$broadcast('authenticationFailed');
-        }
-
-        function register(user) {
-            return $http
-                .post('/api/auth/register', user, {})
-                .then(function (response) {
-                    return storeUser(response.data.user);
-                }, function (response) {
-                    failureEvent('register');
-                    return $q.reject(response.data.error);
-                });
-        }
-
-        function login(userName, password) {
-            var user = {userName: userName, password: password};
-            return $http
-                .post('/api/auth/login', user, {})
-                .then(function (response) {
-                    return storeUser(response.data.user);
-                }, function (response) {
-                    failureEvent('login');
-                    return $q.reject(response.data.error);
-                });
-        }
+export class auth {
+    constructor($q, $rootScope, $http, $window, $state) {
+        this.$q = $q;
+        this.$rootScope = $rootScope;
+        this.$http = $http;
+        this.$window = $window;
+        this.$state = $state;
     }
-})();
+
+    clear() {
+        this.$window.sessionStorage.user = JSON.stringify({});
+    }
+
+    storeUser(user) {
+        this.$window.sessionStorage.user = user ? JSON.stringify(user) : {};
+        this.$rootScope.$broadcast('loginEvent', user);
+        return user;
+    }
+
+    currentUser() {
+        return !_.isEmpty(this.$window.sessionStorage.user) ? JSON.parse(this.$window.sessionStorage.user) : {};
+    }
+
+    isAuthenticated() {
+        return !_.isEmpty(this.currentUser());
+    }
+
+    logout() {
+        this.clear();
+        this.$state.go('login');
+    }
+
+    failureEvent(name) {
+        console.log('Failed to ' + name);
+        this.clear();
+        this.$rootScope.$broadcast('authenticationFailed');
+    }
+
+    register(user) {
+        return this.$http
+            .post('/api/auth/register', user, {})
+            .then(response => {
+                return this.storeUser(response.data.user);
+            }, response => {
+                this.failureEvent('register');
+                return this.$q.reject(response.data.error);
+            });
+    }
+
+    login(userName, password) {
+        let user = {userName: userName, password: password};
+        return this.$http
+            .post('/api/auth/login', user, {})
+            .then(response => {
+                return this.storeUser(response.data.user);
+            }, response => {
+                this.failureEvent('login');
+                return this.$q.reject(response.data.error);
+            });
+    }
+}
+
+auth.$inject = ['$q', '$rootScope', '$http', '$window', '$state'];

@@ -1,7 +1,7 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = angular.module('bcbsa-shell.auth.services', [
-        require('./auth.service').name
-    ]);
-})();
+import {auth} from './auth.service';
+
+module.exports = angular
+    .module('bcbsa-shell.auth.services', [])
+    .service('auth', auth);
