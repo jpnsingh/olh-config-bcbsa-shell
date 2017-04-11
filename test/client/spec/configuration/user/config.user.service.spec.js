@@ -1,5 +1,7 @@
 'use strict';
 
+import {UserService} from '../../../../../src/client/js/configuration/user/config.user.service';
+
 describe('UserService:', () => {
     let _q,
         _deferred,
@@ -37,9 +39,8 @@ describe('UserService:', () => {
 
     beforeEach(angular.mock.module('ui.router'));
     beforeEach(angular.mock.module('bcbsa-shell.auth'));
-    beforeEach(angular.mock.module('bcbsa-shell.config.user.services.userService'));
 
-    beforeEach(inject(function ($q, $rootScope, $http, auth, $timeout, UserService) {
+    beforeEach(inject(function ($q, $rootScope, $http, auth, $timeout) {
         _q = $q;
         _deferred = _q.defer();
 
@@ -62,7 +63,7 @@ describe('UserService:', () => {
 
         _timeout = $timeout;
 
-        _userService = UserService;
+        _userService = new UserService(_http, _auth);
     }));
 
     describe('getUsers:', () => {
