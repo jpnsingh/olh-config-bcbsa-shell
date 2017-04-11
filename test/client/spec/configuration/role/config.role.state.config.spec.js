@@ -1,24 +1,22 @@
-(function () {
-    'use strict';
+'use strict';
 
-    var ConfigRoleStateConfig = require('../../../../../src/client/js/configuration/role/config.role.state.config');
+import {ConfigRoleStateConfig} from '../../../../../src/client/js/configuration/role/config.role.state.config';
 
-    describe('ConfigRoleStateConfig', function () {
-        var $stateProvider,
-            config;
+describe('ConfigRoleStateConfig', () => {
+    var $stateProvider,
+        config;
 
-        beforeEach(function () {
-            $stateProvider = jasmine.createSpyObj('$stateProvider', ['state']);
-            $stateProvider.state.and.returnValue($stateProvider);
-            config = ConfigRoleStateConfig($stateProvider);
-        });
+    beforeEach(() => {
+        $stateProvider = jasmine.createSpyObj('$stateProvider', ['state']);
+        $stateProvider.state.and.returnValue($stateProvider);
+        config = ConfigRoleStateConfig($stateProvider);
+    });
 
-        describe('when initializing', function () {
-            it('should do the needful', function () {
-                expect($stateProvider.state).toHaveBeenCalled();
-                expect($stateProvider.state.calls.count()).toBe(1);
-                expect($stateProvider.state.calls.argsFor(0)[0].name).toBe('configuration.role');
-            });
+    describe('when initializing', () => {
+        it('should do the needful', () => {
+            expect($stateProvider.state).toHaveBeenCalled();
+            expect($stateProvider.state.calls.count()).toBe(1);
+            expect($stateProvider.state.calls.argsFor(0)[0].name).toBe('configuration.role');
         });
     });
-})();
+});

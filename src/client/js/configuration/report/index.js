@@ -1,7 +1,7 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = angular
-        .module('bcsba-shell.configuration.report', [])
-        .config(require('./config.report.state.config'));
-})();
+import {ConfigReportStateConfig} from './config.report.state.config';
+
+module.exports = angular
+    .module('bcsba-shell.configuration.report', [])
+    .config(ConfigReportStateConfig);
