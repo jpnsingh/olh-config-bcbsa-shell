@@ -1,20 +1,17 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = DefaultAppConfig;
+export function DefaultAppConfig($httpProvider, $translateProvider, $translatePartialLoaderProvider) {
+    $httpProvider.interceptors.push('languageInterceptor');
 
-    DefaultAppConfig.$inject = ['$httpProvider', '$translateProvider', '$translatePartialLoaderProvider'];
-    function DefaultAppConfig($httpProvider, $translateProvider, $translatePartialLoaderProvider) {
-        $httpProvider.interceptors.push('languageInterceptor');
+    $translatePartialLoaderProvider
+        .addPart('bcbsa-shell');
 
-        $translatePartialLoaderProvider
-            .addPart('bcbsa-shell');
+    $translateProvider
+        .useLoader('$translatePartialLoader', {
+            urlTemplate: '/i18n/{part}.{lang}.json'
+        })
+        .preferredLanguage('en')
+        .fallbackLanguage('en');
+}
 
-        $translateProvider
-            .useLoader('$translatePartialLoader', {
-                urlTemplate: '/i18n/{part}.{lang}.json'
-            })
-            .preferredLanguage('en')
-            .fallbackLanguage('en');
-    }
-})();
+DefaultAppConfig.$inject = ['$httpProvider', '$translateProvider', '$translatePartialLoaderProvider'];

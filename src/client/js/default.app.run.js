@@ -1,14 +1,10 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = DefaultAppRun;
+export function DefaultAppRun($rootScope, $translate, $translatePartialLoader, languageService) {
+    $rootScope.$on('$translatePartialLoaderStructureChanged', function () {
+        $translate.refresh();
+    });
+    languageService.setLanguage();
+}
 
-    DefaultAppRun.$inject = ['$rootScope', '$translate', '$translatePartialLoader', 'languageService'];
-
-    function DefaultAppRun($rootScope, $translate, $translatePartialLoader, languageService) {
-        $rootScope.$on('$translatePartialLoaderStructureChanged', function () {
-            $translate.refresh();
-        });
-        languageService.setLanguage();
-    }
-})();
+DefaultAppRun.$inject = ['$rootScope', '$translate', '$translatePartialLoader', 'languageService'];
