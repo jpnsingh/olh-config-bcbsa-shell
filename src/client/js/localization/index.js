@@ -1,7 +1,8 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = angular.module('bcbsa-shell.localization', [])
-        .service('languageInterceptor', require('./language.interceptor'))
-        .service('languageService', require('./language.service'));
-})();
+import {LanguageService} from './language.service';
+import {LanguageInterceptor} from './language.interceptor';
+
+module.exports = angular.module('bcbsa-shell.localization', [])
+    .service('languageService', LanguageService)
+    .service('languageInterceptor', LanguageInterceptor);

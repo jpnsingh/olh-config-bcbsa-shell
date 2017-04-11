@@ -1,54 +1,52 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = LanguageService;
-
-    LanguageService.$inject = ['$injector'/*, 'session',*/];
-    function LanguageService($injector/*, session*/) {
-        var self = this,
-            languages = [
-                {
-                    label: 'English',
-                    value: 'en'
-                },
-                {
-                    label: 'Español',
-                    value: 'es'
-                },
-                {
-                    label: 'français',
-                    value: 'fr'
-                }
-            ];
-
-        self.getAvailableLanguages = function () {
-            return languages;
-        };
-
-        self.getLanguage = function () {
-            // var currentLang = session.get('lang');
-
-            var currentLang = 'en';
-
-            if (currentLang) {
-                return currentLang;
-            }
-
-            // currentLang = languages[0].value;
-            // session.set('lang', currentLang);
-            // return session.get(currentLang);
-        };
-
-        self.setLanguage = function (langCode) {
-            var lang = langCode;
-
-            if (lang) {
-                // session.set('lang', lang);
-            } else {
-                lang = self.getLanguage();
-            }
-
-            $injector.get('$translate').use(lang);
-        };
+export class LanguageService {
+    constructor($injector/*, session*/) {
+        this.$injector = $injector;
     }
-})();
+
+    getAvailableLanguages() {
+        return [
+            {
+                label: 'English',
+                value: 'en'
+            },
+            {
+                label: 'Español',
+                value: 'es'
+            },
+            {
+                label: 'français',
+                value: 'fr'
+            }
+        ];
+    }
+
+    getLanguage() {
+        // let currentLang = session.get('lang');
+
+        let currentLang = 'en';
+
+        if (currentLang) {
+            return currentLang;
+        }
+
+        // currentLang = languages[0].value;
+        // session.set('lang', currentLang);
+        // return session.get(currentLang);
+    }
+
+    setLanguage(langCode) {
+        let lang = langCode;
+
+        if (lang) {
+            // session.set('lang', lang);
+        } else {
+            lang = this.getLanguage();
+        }
+
+        this.$injector.get('$translate').use(lang);
+    }
+}
+
+LanguageService.$inject = ['$injector'/*, 'session',*/];
