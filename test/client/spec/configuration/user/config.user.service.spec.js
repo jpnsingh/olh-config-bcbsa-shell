@@ -36,7 +36,7 @@ describe('UserService:', () => {
         };
 
     beforeEach(angular.mock.module('ui.router'));
-    beforeEach(angular.mock.module('bcbsa-shell.auth.services'));
+    beforeEach(angular.mock.module('bcbsa-shell.auth'));
     beforeEach(angular.mock.module('bcbsa-shell.config.user.services.userService'));
 
     beforeEach(inject(function ($q, $rootScope, $http, auth, $timeout, UserService) {

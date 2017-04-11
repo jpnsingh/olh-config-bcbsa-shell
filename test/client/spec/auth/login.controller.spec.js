@@ -9,7 +9,8 @@ describe('LoginCtrl', () => {
         _auth,
         _controller;
 
-    beforeEach(angular.mock.module('bcbsa-shell.auth.controllers'));
+    beforeEach(angular.mock.module('ui.router'));
+    beforeEach(angular.mock.module('bcbsa-shell.auth'));
 
     beforeEach(inject(($rootScope, $q, $timeout, $controller) => {
         _scope = $rootScope.$new();

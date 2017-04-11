@@ -10,7 +10,8 @@ describe('RegisterCtrl', () => {
         _auth,
         _controller;
 
-    beforeEach(angular.mock.module('bcbsa-shell.auth.controllers'));
+    beforeEach(angular.mock.module('ui.router'));
+    beforeEach(angular.mock.module('bcbsa-shell.auth'));
 
     beforeEach(inject(function ($rootScope, $q, $controller) {
         _scope = $rootScope.$new();

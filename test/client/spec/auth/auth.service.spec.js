@@ -21,7 +21,7 @@ describe('auth service:', () => {
         };
 
     beforeEach(angular.mock.module('ui.router'));
-    beforeEach(angular.mock.module('bcbsa-shell.auth.services'));
+    beforeEach(angular.mock.module('bcbsa-shell.auth'));
 
     beforeEach(inject(($q, $rootScope, $http, $window, $state, $timeout, auth) => {
         _q = $q;
