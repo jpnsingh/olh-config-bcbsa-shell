@@ -1,9 +1,11 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = angular.module('bcbsa-shell.navigation', [
-        require('./navbar.controller').name,
-        require('./navbar.top.directive').name,
-        require('./navbar.bottom.directive').name
-    ]);
-})();
+import {NavTopDirective} from './navbar.top.directive';
+import {NavBottomDirective} from './navbar.bottom.directive';
+import {NavBarCtrl} from './navbar.controller';
+
+module.exports = angular
+    .module('bcbsa-shell.navigation', [])
+    .controller('NavBarCtrl', NavBarCtrl)
+    .directive('navbarTop', NavTopDirective)
+    .directive('navbarBottom', NavBottomDirective);

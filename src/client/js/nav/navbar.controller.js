@@ -1,18 +1,17 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = angular.module('bcbsa-shell.navigation.controllers.navBarController', [])
-        .controller('NavBarCtrl', NavBarCtrl);
+export class NavBarCtrl {
+    constructor($window) {
+        this.$window = $window;
+        this.init();
+    }
 
-    NavBarCtrl.$inject = ['$window'];
-    function NavBarCtrl($window) {
-        var vm = this;
+    init() {
+        this.user = !_.isEmpty(this.$window.sessionStorage.user) ? JSON.parse(this.$window.sessionStorage.user) : {};
+        this.loggedIn = !_.isEmpty(this.user);
+        this.displayName = this.loggedIn ? this.displayName(this.user) : '';
 
-        vm.user = !_.isEmpty($window.sessionStorage.user) ? JSON.parse($window.sessionStorage.user) : {};
-        vm.loggedIn = !_.isEmpty(vm.user);
-        vm.displayName = vm.loggedIn ? displayName(vm.user) : '';
-
-        vm.nav = {
+        this.nav = {
             top: {
                 header: {
                     label: 'navbar.top.header',
@@ -59,22 +58,24 @@
                 citation: 'navbar.bottom.citation'
             }
         };
-
-        function displayName(user) {
-            var name = '';
-
-            if (user.lastName) {
-                name += user.lastName;
-                if (user.firstName) {
-                    name += ', ' + user.firstName;
-                }
-            } else if (user.firstName) {
-                name += user.firstName;
-            } else {
-                name += user.auth.userName;
-            }
-
-            return name;
-        }
     }
-})();
+
+    displayName(user) {
+        let name = '';
+
+        if (user.lastName) {
+            name += user.lastName;
+            if (user.firstName) {
+                name += ', ' + user.firstName;
+            }
+        } else if (user.firstName) {
+            name += user.firstName;
+        } else {
+            name += user.auth.userName;
+        }
+
+        return name;
+    }
+}
+
+NavBarCtrl.$inject = ['$window'];
