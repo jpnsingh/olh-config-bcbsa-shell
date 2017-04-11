@@ -1,10 +1,12 @@
 'use strict';
 
 import {ConfigRoleStateConfig} from './config.role.state.config';
+import {RoleService} from './config.role.service';
 
 module.exports = angular
-    .module('bcsba-shell.configuration.role', [
+    .module('bcbsa-shell.configuration.role', [
         require('./config.role.factory').name,
-        require('./config.role.service').name,
         require('./config.role.controller').name
-    ]).config(ConfigRoleStateConfig);
+    ])
+    .config(ConfigRoleStateConfig)
+    .service('RoleService', RoleService);

@@ -23,7 +23,7 @@ describe('RoleService:', () => {
 
     beforeEach(angular.mock.module('ui.router'));
     beforeEach(angular.mock.module('bcbsa-shell.auth'));
-    beforeEach(angular.mock.module('bcbsa-shell.config.role.roleService'));
+    beforeEach(angular.mock.module('bcbsa-shell.configuration.role'));
 
     beforeEach(inject(($q, $rootScope, $http, auth, $timeout, RoleService) => {
         _q = $q;
