@@ -1,7 +1,9 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = angular.module('bcbsa-shell.states', [])
-        .config(require('./default.state.config'))
-        .run(require('./default.state.run'));
-})();
+import {DefaultStateConfig} from './default.state.config';
+import {DefaultStateRun} from './default.state.run';
+
+module.exports = angular
+    .module('bcbsa-shell.states', [])
+    .config(DefaultStateConfig)
+    .run(DefaultStateRun);

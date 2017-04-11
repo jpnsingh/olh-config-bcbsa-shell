@@ -1,31 +1,28 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = defaultStateRun;
+export function DefaultStateRun($rootScope, $state, auth) {
+    $rootScope.$on('$stateChangeStart', function (event, toState/*, toParams, fromState, fromParams*/) {
+        if (toState.name === 'login' || toState.name === 'register') return;
 
-    defaultStateRun.$inject = ['$rootScope', '$state', 'auth'];
-    function defaultStateRun($rootScope, $state, auth) {
-        $rootScope.$on('$stateChangeStart', function (event, toState/*, toParams, fromState, fromParams*/) {
-            if (toState.name === 'login' || toState.name === 'register') return;
+        if (!auth.isAuthenticated()) {
+            event.preventDefault(); // stop current execution
+            auth.logout();
+        }
+    });
 
-            if (!auth.isAuthenticated()) {
-                event.preventDefault(); // stop current execution
-                auth.logout();
-            }
-        });
+    $rootScope.$on('$stateChangeSuccess', function (event, toState/*, toParams, fromState, fromParams*/) {
+        $rootScope.title = 'BCBSA Shell | ' + toState.data.docTitle;
 
-        $rootScope.$on('$stateChangeSuccess', function (event, toState/*, toParams, fromState, fromParams*/) {
-            $rootScope.title = 'BCBSA Shell | ' + toState.data.docTitle;
+        if ($('#bcbsa-navbar-top').attr('aria-expanded') === 'true') {
+            $('#nav-toggle').click();
+        }
+    });
 
-            if ($('#bcbsa-navbar-top').attr('aria-expanded') === 'true') {
-                $('#nav-toggle').click();
-            }
-        });
+    $rootScope.$on('$stateChangeError', console.log.bind(console));
 
-        $rootScope.$on('$stateChangeError', console.log.bind(console));
+    $rootScope.$on('$stateNotFound', function (/*event, unfoundState, fromState, fromParams*/) {
+        $state.go('404');
+    });
+}
 
-        $rootScope.$on('$stateNotFound', function (/*event, unfoundState, fromState, fromParams*/) {
-            $state.go('404');
-        });
-    }
-})();
+DefaultStateRun.$inject = ['$rootScope', '$state', 'auth'];
