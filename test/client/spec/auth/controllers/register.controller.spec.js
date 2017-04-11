@@ -1,80 +1,70 @@
-(function () {
-    'use strict';
+'use strict';
 
-    describe('RegisterCtrl', function () {
-        var _scope,
-            _q,
-            _deferred,
-            _state,
-            _auth,
-            _controller;
+describe('RegisterCtrl', () => {
+    let _scope,
+        _q,
+        _deferred,
+        _user,
+        _response,
+        _state,
+        _auth,
+        _controller;
 
-        beforeEach(angular.mock.module('bcbsa-shell.auth.controllers.registerController'));
+    beforeEach(angular.mock.module('bcbsa-shell.auth.controllers'));
 
-        beforeEach(inject(function ($rootScope, $q, $controller) {
-            _scope = $rootScope.$new();
-            _q = $q;
-            _deferred = _q.defer();
-            _state = {
-                go: function () {
-                }
-            };
-            spyOn(_state, 'go').and.callThrough();
+    beforeEach(inject(function ($rootScope, $q, $controller) {
+        _scope = $rootScope.$new();
+        _q = $q;
+        _deferred = _q.defer();
+        _user = {auth: {userName: 'test', password: 'pwd'}, firstName: 'First', lastName: 'Last'};
+        _response = {
+            user: _user
+        };
+        _state = {
+            go: angular.noop
+        };
+        spyOn(_state, 'go').and.callThrough();
 
-            _auth = {
-                register: function () {
-                }
-            };
-            spyOn(_auth, 'register').and.returnValue(_deferred.promise);
+        _auth = {
+            register: angular.noop
+        };
+        spyOn(_auth, 'register').and.returnValue(_deferred.promise);
 
-            _controller = $controller('RegisterCtrl as registerCtrl', {
-                $scope: _scope,
-                $state: _state,
-                auth: _auth
-            });
-        }));
+        _controller = $controller('RegisterCtrl as registerCtrl', {
+            $scope: _scope,
+            $state: _state,
+            auth: _auth
+        });
+    }));
 
-        it('should invoke auth register and handle accordingly on success', inject(function ($timeout) {
-            var user = {
-                userName: 'admin',
-                password: 'admin'
-            };
-            _controller.user = user;
+    it('should invoke auth register and handle accordingly on success', inject(($timeout) => {
+        _controller.user = _user;
 
-            expect(_controller.register).toBeDefined();
+        _controller.register();
 
-            _controller.register();
+        expect(_controller.registering).toBeTruthy();
+        expect(_auth.register).toHaveBeenCalledWith(_user);
 
-            expect(_controller.registering).toBeTruthy();
-            expect(_auth.register).toHaveBeenCalledWith(user);
+        _deferred.resolve(_response);
+        $timeout.flush();
 
-            _deferred.resolve();
-            $timeout.flush();
+        expect(_controller.registering).toBeFalsy();
 
-            expect(_controller.registering).toBeFalsy();
+        expect(_state.go).toHaveBeenCalledWith('dashboard');
+    }));
 
-            expect(_state.go).toHaveBeenCalledWith('dashboard');
-        }));
+    it('should invoke auth register handle accordingly on error', inject(($timeout) => {
+        _controller.user = _user;
 
-        it('should invoke auth register handle accordingly on error', inject(function ($timeout) {
-            var user = {
-                userName: 'admin',
-                password: 'admin'
-            };
-            _controller.user = user;
+        _controller.register();
 
-            expect(_controller.register).toBeDefined();
+        expect(_controller.registering).toBeTruthy();
+        expect(_auth.register).toHaveBeenCalledWith(_user);
 
-            _controller.register();
+        _deferred.reject({message: 'error'});
+        $timeout.flush();
 
-            expect(_controller.registering).toBeTruthy();
-            expect(_auth.register).toHaveBeenCalledWith(user);
-
-            _deferred.reject({message: 'error'});
-            $timeout.flush();
-
-            expect(_controller.registering).toBeFalsy();
-            expect(_controller.error).toEqual({message: 'error'});
-        }));
-    });
-})();
+        expect(_controller.registering).toBeFalsy();
+        expect(_controller.error).toEqual({message: 'error'});
+    }));
+});

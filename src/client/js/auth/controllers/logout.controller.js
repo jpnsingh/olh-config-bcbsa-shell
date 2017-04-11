@@ -1,10 +1,14 @@
-(function () {
-    'use strict';
-    module.exports = angular.module('bcbsa-shell.auth.controllers.logoutController', [])
-        .controller('LogoutCtrl', LogoutCtrl);
+'use strict';
 
-    LogoutCtrl.$inject = ['auth'];
-    function LogoutCtrl(auth) {
-        auth.logout();
+export class LogoutCtrl {
+    constructor(auth) {
+        this.auth = auth;
+        this.logout();
     }
-})();
+
+    logout() {
+        this.auth.logout();
+    }
+}
+
+LogoutCtrl.$inject = ['auth'];

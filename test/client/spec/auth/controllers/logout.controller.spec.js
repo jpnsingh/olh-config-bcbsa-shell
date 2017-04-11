@@ -1,25 +1,23 @@
-(function () {
-    'use strict';
+'use strict';
 
-    describe('LogoutCtrl', function () {
-        var _scope,
-            _auth,
-            _controller;
+describe('LogoutCtrl', () => {
+    let _scope,
+        _auth,
+        _controller;
 
-        beforeEach(angular.mock.module('bcbsa-shell.auth.controllers.logoutController'));
+    beforeEach(angular.mock.module('bcbsa-shell.auth.controllers'));
 
-        beforeEach(inject(function ($rootScope, $controller) {
-            _scope = $rootScope.$new();
+    beforeEach(inject(($rootScope, $controller) => {
+        _scope = $rootScope.$new();
 
-            _auth = jasmine.createSpyObj('auth', ['logout']);
-            _controller = $controller('LogoutCtrl as logoutCtrl', {
-                $scope: _scope,
-                auth: _auth
-            });
-        }));
-
-        it('should invoke auth logout', function () {
-            expect(_auth.logout).toHaveBeenCalled();
+        _auth = jasmine.createSpyObj('auth', ['logout']);
+        _controller = $controller('LogoutCtrl as logoutCtrl', {
+            $scope: _scope,
+            auth: _auth
         });
+    }));
+
+    it('should invoke auth logout', () => {
+        expect(_auth.logout).toHaveBeenCalled();
     });
-})();
+});

@@ -1,26 +1,26 @@
-(function () {
-    'use strict';
-    module.exports = angular.module('bcbsa-shell.auth.controllers.registerController', [])
-        .controller('RegisterCtrl', RegisterCtrl);
+'use strict';
 
-    RegisterCtrl.$inject = ['$state', 'auth'];
-    function RegisterCtrl($state, auth) {
-        var vm = this;
-
-        vm.register = register;
-
-        function register() {
-            vm.registering = true;
-
-            auth
-                .register(vm.user)
-                .then(function () {
-                    vm.registering = false;
-                    $state.go('dashboard');
-                }, function (error) {
-                    vm.registering = false;
-                    vm.error = error;
-                });
-        }
+export class RegisterCtrl {
+    constructor($state, auth) {
+        this.$state = $state;
+        this.auth = auth;
     }
-})();
+
+    register() {
+        this.registering = true;
+
+        this.auth
+            .register(this.user)
+            .then(user => {
+                this.registering = false;
+                if (user) {
+                    this.$state.go('dashboard');
+                }
+            }, error => {
+                this.registering = false;
+                this.error = error;
+            });
+    }
+}
+
+RegisterCtrl.$inject = ['$state', 'auth'];
