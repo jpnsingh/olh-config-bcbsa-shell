@@ -72,9 +72,9 @@
                 name: 'testFile'
             };
 
-        beforeEach(angular.mock.module('bcsba-shell.configuration.plan.factories.newsFeedFactory'));
-        beforeEach(angular.mock.module('bcsba-shell.configuration.plan.factories.insightFactory'));
-        beforeEach(angular.mock.module('bcsba-shell.configuration.plan.controllers.planAdditionalController'));
+        beforeEach(angular.mock.module('bcbsa-shell.configuration.plan.factories.newsFeedFactory'));
+        beforeEach(angular.mock.module('bcbsa-shell.configuration.plan.factories.insightFactory'));
+        beforeEach(angular.mock.module('bcbsa-shell.configuration.plan.controllers.planAdditionalController'));
 
         beforeEach(inject(function ($rootScope, $q, $timeout, _NewsFeed_, _Insight_, $controller) {
             scope = $rootScope.$new();

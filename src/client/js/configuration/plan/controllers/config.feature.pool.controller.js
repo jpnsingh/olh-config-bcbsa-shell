@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    module.exports = angular.module('bcsba-shell.configuration.plan.controllers.featurePoolController', [])
+    module.exports = angular.module('bcbsa-shell.configuration.plan.controllers.featurePoolController', [])
         .controller('FeaturePoolCtrl', FeaturePoolCtrl);
 
     FeaturePoolCtrl.$inject = ['ConfigService', 'App'];

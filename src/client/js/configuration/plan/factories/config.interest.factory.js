@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    module.exports = angular.module('bcsba-shell.configuration.plan.factories.interestFactory', [])
+    module.exports = angular.module('bcbsa-shell.configuration.plan.factories.interestFactory', [])
         .factory('Interest', InterestFactory);
 
     InterestFactory.$inject = [];

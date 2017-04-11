@@ -63,7 +63,7 @@
                 }
             };
 
-        beforeEach(angular.mock.module('bcsba-shell.configuration.plan.controllers.featureAssignmentController'));
+        beforeEach(angular.mock.module('bcbsa-shell.configuration.plan.controllers.featureAssignmentController'));
 
         beforeEach(inject(function ($rootScope, $controller) {
             scope = $rootScope.$new();

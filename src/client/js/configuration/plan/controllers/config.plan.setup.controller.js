@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    module.exports = angular.module('bcsba-shell.configuration.plan.controllers.planSetupController', [])
+    module.exports = angular.module('bcbsa-shell.configuration.plan.controllers.planSetupController', [])
         .controller('PlanSetupCtrl', PlanSetupCtrl);
 
     PlanSetupCtrl.$inject = ['ConfigService'];

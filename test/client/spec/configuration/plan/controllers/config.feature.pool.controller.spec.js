@@ -74,8 +74,8 @@
             };
 
         beforeEach(angular.mock.module('bcbsa-shell.shared.fieldFactory'));
-        beforeEach(angular.mock.module('bcsba-shell.configuration.plan.factories.appFactory'));
-        beforeEach(angular.mock.module('bcsba-shell.configuration.plan.controllers.featurePoolController'));
+        beforeEach(angular.mock.module('bcbsa-shell.configuration.plan.factories.appFactory'));
+        beforeEach(angular.mock.module('bcbsa-shell.configuration.plan.controllers.featurePoolController'));
 
         beforeEach(inject(function ($rootScope, $q, $timeout, _App_, $controller) {
             scope = $rootScope.$new();

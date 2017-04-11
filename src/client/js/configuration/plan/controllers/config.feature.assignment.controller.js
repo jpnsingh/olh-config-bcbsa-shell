@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    module.exports = angular.module('bcsba-shell.configuration.plan.controllers.featureAssignmentController', [])
+    module.exports = angular.module('bcbsa-shell.configuration.plan.controllers.featureAssignmentController', [])
         .controller('FeatureAssignmentCtrl', FeatureAssignmentCtrl);
 
     FeatureAssignmentCtrl.$inject = ['ConfigService'];
