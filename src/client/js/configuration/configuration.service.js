@@ -1,94 +1,83 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = angular.module('bcbsa-shell.configuration.services.configurationService', [])
-        .factory('ConfigService', ConfigService);
-
-    ConfigService.$inject = ['$q', '$http', 'auth'];
-    function ConfigService($q, $http, auth) {
-        var self = this;
-
-        return {
-            listGroups: listGroups,
-            getGroupConfig: getGroupConfig,
-            cacheConfig: cacheConfig,
-            getCachedConfig: getCachedConfig,
-            newGroupConfig: newGroupConfig,
-            updateConfig: updateConfig,
-            deleteGroupConfig: deleteGroupConfig,
-            getConfigurableLanguages: getConfigurableLanguages
-        };
-
-        function listGroups() {
-            return $http
-                .get('api/config/list')
-                .then(function (response) {
-                    return response.data;
-                }, function (response) {
-                    return response.data.error;
-                });
-        }
-
-        function getGroupConfig(groupId) {
-            return $http
-                .get(`api/config/${groupId}`)
-                .then(function (response) {
-                    return response.data.groupConfig;
-                }, function (response) {
-                    return response.data.error;
-                });
-        }
-
-        function cacheConfig(config) {
-            self.config = config;
-        }
-
-        function getCachedConfig() {
-            return self.config;
-        }
-
-        function newGroupConfig(planConfig) {
-            return $http
-                .post('api/config/', {
-                    config: planConfig,
-                    userName: auth.currentUser().auth.userName
-                }, {})
-                .then(function (response) {
-                    return response.data.group;
-                }, function (response) {
-                    return $q.reject(response.data.error);
-                });
-        }
-
-        function updateConfig(config, groupId) {
-            return $http
-                .post(`api/config/${groupId}`, {
-                    config: config,
-                    userName: auth.currentUser().auth.userName
-                }, {})
-                .then(function (response) {
-                    return response.data.group;
-                }, function (response) {
-                    return response.error;
-                });
-        }
-
-        function deleteGroupConfig(groupId) {
-            return $http
-                .delete(`api/config/${groupId}`)
-                .then(function (response) {
-                    return response.data;
-                }, function (response) {
-                    return response.error;
-                });
-        }
-
-        function getConfigurableLanguages() {
-            return [
-                {id: 'english', value: 'English'},
-                {id: 'spanish', value: 'Spanish'},
-                {id: 'french', value: 'French'}
-            ];
-        }
+export class ConfigService {
+    constructor($q, $http, auth) {
+        this.$q = $q;
+        this.$http = $http;
+        this.auth = auth;
     }
-})();
+
+    listGroups() {
+        return this.$http
+            .get('api/config/list')
+            .then(function (response) {
+                return response.data;
+            }, function (response) {
+                return response.data.error;
+            });
+    }
+
+    getGroupConfig(groupId) {
+        return this.$http
+            .get(`api/config/${groupId}`)
+            .then(function (response) {
+                return response.data.groupConfig;
+            }, function (response) {
+                return response.data.error;
+            });
+    }
+
+    cacheConfig(config) {
+        this.config = config;
+    }
+
+    getCachedConfig() {
+        return this.config;
+    }
+
+    newGroupConfig(planConfig) {
+        return this.$http
+            .post('api/config/', {
+                config: planConfig,
+                userName: this.auth.currentUser().auth.userName
+            }, {})
+            .then(function (response) {
+                return response.data.group;
+            }, function (response) {
+                return this.$q.reject(response.data.error);
+            });
+    }
+
+    updateConfig(config, groupId) {
+        return this.$http
+            .post(`api/config/${groupId}`, {
+                config: config,
+                userName: this.auth.currentUser().auth.userName
+            }, {})
+            .then(function (response) {
+                return response.data.group;
+            }, function (response) {
+                return response.error;
+            });
+    }
+
+    deleteGroupConfig(groupId) {
+        return this.$http
+            .delete(`api/config/${groupId}`)
+            .then(function (response) {
+                return response.data;
+            }, function (response) {
+                return response.error;
+            });
+    }
+
+    getConfigurableLanguages() {
+        return [
+            {id: 'english', value: 'English'},
+            {id: 'spanish', value: 'Spanish'},
+            {id: 'french', value: 'French'}
+        ];
+    }
+}
+
+ConfigService.$inject = ['$q', '$http', 'auth'];

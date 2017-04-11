@@ -1,23 +1,16 @@
-(function () {
-    'use strict';
+'use strict';
 
-    describe('ConfigCtrl:', function () {
-        var rootScope,
-            scope,
-            controller;
+import {ConfigCtrl} from '../../../../src/client/js/configuration/configuration.controller';
 
-        beforeEach(angular.mock.module('bcbsa-shell.configuration.controllers.ConfigurationController'));
+describe('ConfigCtrl:', () => {
+    let controller;
 
-        beforeEach(inject(function ($rootScope, $q, $timeout, $controller) {
-            rootScope = $rootScope;
-            scope = rootScope.$new();
-            controller = $controller('ConfigCtrl as configCtrl', {
-                $scope: scope
-            });
-        }));
-
-        it('should have the side bar defined for config screens', function () {
-            expect(controller.sidebar).toBeDefined();
-        });
+    beforeEach(() => {
+        controller = new ConfigCtrl();
     });
-})();
+
+    it('should have the side bar defined for config screens', () => {
+        expect(controller.sidebar).toBeDefined();
+        expect(controller.sidebar.length).toBe(4);
+    });
+});

@@ -1,5 +1,7 @@
 'use strict';
 
+import {ConfigService} from '../../../../src/client/js/configuration/configuration.service';
+
 describe('ConfigService:', () => {
     let _q,
         _deferred,
@@ -35,9 +37,8 @@ describe('ConfigService:', () => {
 
     beforeEach(angular.mock.module('ui.router'));
     beforeEach(angular.mock.module('bcbsa-shell.auth'));
-    beforeEach(angular.mock.module('bcbsa-shell.configuration.services.configurationService'));
 
-    beforeEach(inject(function ($q, $rootScope, $http, auth, $timeout, ConfigService) {
+    beforeEach(inject(($q, $rootScope, $http, auth, $timeout) => {
         _q = $q;
         _deferred = _q.defer();
 
@@ -57,7 +58,7 @@ describe('ConfigService:', () => {
 
         _timeout = $timeout;
 
-        _configService = ConfigService;
+        _configService = new ConfigService(_q, _http, _auth);
     }));
 
     describe('listGroups:', () => {
@@ -135,6 +136,21 @@ describe('ConfigService:', () => {
             _timeout.flush();
 
             expect(_deferred.promise).toResolveWith(_successResponse);
+        });
+
+        it('should handle the promise rejection accordingly', () => {
+            _configService.updateConfig(_groupData.groups[1].config, 'bcbst');
+
+            expect(_http.post).toHaveBeenCalledWith('api/config/bcbst', {
+                config: _groupData.groups[1].config,
+                userName: 'TestUser'
+            }, {});
+
+            _deferred.reject(_errorResponse);
+
+            _timeout.flush();
+
+            expect(_deferred.promise).toRejectWith(_errorResponse);
         });
     });
 
