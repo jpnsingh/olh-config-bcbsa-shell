@@ -3,7 +3,7 @@
 import {ConfigReportStateConfig} from '../../../../../src/client/js/configuration/report/config.report.state.config';
 
 describe('ConfigReportStateConfig', () => {
-    var $stateProvider,
+    let $stateProvider,
         config;
 
     beforeEach(() => {

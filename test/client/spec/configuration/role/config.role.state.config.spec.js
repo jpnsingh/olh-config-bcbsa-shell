@@ -3,7 +3,7 @@
 import {ConfigRoleStateConfig} from '../../../../../src/client/js/configuration/role/config.role.state.config';
 
 describe('ConfigRoleStateConfig', () => {
-    var $stateProvider,
+    let $stateProvider,
         config;
 
     beforeEach(() => {

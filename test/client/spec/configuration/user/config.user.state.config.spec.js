@@ -3,7 +3,7 @@
 import {ConfigUserStateConfig} from '../../../../../src/client/js/configuration/user/config.user.state.config';
 
 describe('ConfigUserStateConfig', () => {
-    var $stateProvider,
+    let $stateProvider,
         config;
 
     beforeEach(() => {
