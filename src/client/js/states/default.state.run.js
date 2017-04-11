@@ -11,7 +11,7 @@ export function DefaultStateRun($rootScope, $state, auth) {
     });
 
     $rootScope.$on('$stateChangeSuccess', function (event, toState/*, toParams, fromState, fromParams*/) {
-        $rootScope.title = 'BCBSA Shell | ' + toState.data.docTitle;
+        $rootScope.title = `BCBSA Shell | ${toState.data.docTitle}`;
 
         if ($('#bcbsa-navbar-top').attr('aria-expanded') === 'true') {
             $('#nav-toggle').click();

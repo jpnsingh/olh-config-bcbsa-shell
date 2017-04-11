@@ -23,7 +23,7 @@ export function ImageUploadDirective(FileUploaderService, NotificationService) {
                 .uploadFile(file)
                 .then(function (data) {
                     scope.uploading = false;
-                    scope.fileModel.src = 'data:' + data.file.headers['content-type'] + ';base64,' + data.file.base64String;
+                    scope.fileModel.src = `data:${data.file.headers['content-type']};base64,${data.file.base64String}`;
                     scope.fileModel.value = data.file.originalFilename;
                 }, function (error) {
                     scope.uploading = false;
