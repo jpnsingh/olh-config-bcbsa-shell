@@ -73,7 +73,7 @@
                 name: 'testFile'
             };
 
-        beforeEach(angular.mock.module('bcbsa-shell.shared.fieldFactory'));
+        beforeEach(angular.mock.module('bcbsa-shell.shared.factories'));
         beforeEach(angular.mock.module('bcbsa-shell.configuration.plan.factories.appFactory'));
         beforeEach(angular.mock.module('bcbsa-shell.configuration.plan.controllers.featurePoolController'));
 

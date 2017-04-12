@@ -1,7 +1,7 @@
-(function () {
-    'use strict';
+'use strict';
 
-    module.exports = angular.module('bcbsa-shell.shared.factories', [
-        require('./field.factory.js').name
-    ]);
-})();
+import {FieldFactory} from './field.factory.js';
+
+module.exports = angular
+    .module('bcbsa-shell.shared.factories', [])
+    .factory('Field', FieldFactory);
