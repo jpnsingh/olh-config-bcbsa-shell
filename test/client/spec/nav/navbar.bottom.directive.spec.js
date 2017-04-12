@@ -32,7 +32,6 @@ describe('navbarBottom Directive:', () => {
 
     it('should render a navbar that is fixed to bottom', () => {
         compile();
-        console.log(element.text());
         expect(element.hasClass('navbar-fixed-bottom')).toBe(true);
     });
 });
