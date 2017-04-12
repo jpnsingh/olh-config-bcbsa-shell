@@ -24,12 +24,17 @@ module.exports = function (config) {
             'libs/angular-ui-router.min.js',
             'libs/jasmine-mox-matchers.min.js',
             'node_modules/bardjs/dist/bard.js',
+            'public/lib/angular-translate/angular-translate.js',
+            'public/lib/angular-translate-loader-partial/angular-translate-loader-partial.js',
 
             // Sources
             'src/client/js/**/*.js',
 
             // Tests
-            'test/client/spec/**/*.js'
+            'test/client/spec/**/*.js',
+
+            // Templates
+            '.build/web/js/bcbsa-shell.tpl.js'
         ],
 
         exclude: [],

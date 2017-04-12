@@ -22,6 +22,8 @@
                 'libs/angular-ui-router.min.js',
                 'libs/jasmine-mox-matchers.min.js',
                 'node_modules/bardjs/dist/bard.js',
+                'public/lib/angular-translate/angular-translate.js',
+                'public/lib/angular-translate-loader-partial/angular-translate-loader-partial.js',
 
                 // Sources
                 'src/client/js/**/*.js',
@@ -29,7 +31,8 @@
                 // Tests
                 'test/client/spec/**/*.js',
 
-                'src/client/views/**/*.html',
+                // Templates
+                '.build/web/js/bcbsa-shell.tpl.js',
 
                 // {pattern: 'src/client/views/**/*.html', included: false, served: true}
             ],
