@@ -41,7 +41,6 @@ describe('imagePreview Directive:', () => {
         previewModal = element.children('#previewModal');
         expect(previewModal.length).toBe(1);
         expect(previewModal.attr('role')).toBe('dialog');
-        expect(previewModal.find('#imagePreviewModalTitle').text()).toContain('Background Image Preview');
     });
 
     describe('preview modal:', () => {
