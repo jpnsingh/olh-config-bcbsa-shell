@@ -7,7 +7,7 @@ export function ImageClearDirective() {
         scope: {
             imageModel: '='
         },
-        templateUrl: 'templates/partials/shared/image.clear.html',
+        templateUrl: 'templates/partials/shared/image.clear.btn.html',
         link: link
     };
 
