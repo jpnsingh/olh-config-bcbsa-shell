@@ -14,7 +14,7 @@ export class RoleService{
             }, function (response) {
                 return response.error;
             });
-    };
+    }
 
     userRoles () {
         return this.$http
@@ -24,7 +24,7 @@ export class RoleService{
             }, function (response) {
                 return response.error;
             });
-    };
+    }
 
     deleteRole (roleId) {
         return this.$http
@@ -34,7 +34,7 @@ export class RoleService{
             }, function (response) {
                 return response.error;
             });
-    };
+    }
 
     updateRole (role) {
         return this.$http
@@ -47,7 +47,7 @@ export class RoleService{
             }, function (response) {
                 return response.error;
             });
-    };
+    }
 }
 
 RoleService.$inject = ['$http', 'auth'];
