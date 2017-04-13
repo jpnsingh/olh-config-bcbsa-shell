@@ -1,6 +1,6 @@
 'use strict';
 
-import {FileUploaderService} from '../../../../src/client/js/upload/file.upload.service';
+import {FileUploaderService} from '../../../../src/client/js/shared/file.upload.service';
 
 describe('FileUploaderService:', () => {
     let q,

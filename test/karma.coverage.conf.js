@@ -24,6 +24,7 @@ module.exports = function (config) {
             'libs/angular-ui-router.min.js',
             'libs/jasmine-mox-matchers.min.js',
             'node_modules/bardjs/dist/bard.js',
+            'public/lib/ng-file-upload/ng-file-upload.js',
             'public/lib/angular-translate/angular-translate.js',
             'public/lib/angular-translate-loader-partial/angular-translate-loader-partial.js',
 

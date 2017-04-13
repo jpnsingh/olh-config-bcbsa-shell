@@ -12,7 +12,6 @@ module.exports = angular
         require('./nav').name,
         require('./configuration').name,
         require('./localization').name,
-        require('./upload').name,
         require('./settings').name,
         require('./states').name
     ])

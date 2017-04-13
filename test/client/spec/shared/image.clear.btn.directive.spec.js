@@ -28,7 +28,6 @@ describe('imageClear Directive:', () => {
         compile();
 
         expect(element.length).toBe(1);
-        console.log(element);
         expect(element.attr('type')).toBe('button');
         expect(element.children('.fa.fa-times').length).toBe(1);
     });
