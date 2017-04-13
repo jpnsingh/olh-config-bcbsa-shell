@@ -15,7 +15,6 @@ export function ImageClearDirective() {
         scope.clear = clear;
 
         function clear(model) {
-            console.log('clearing image from directive...');
             model.value = '';
             model.src = '';
         }
